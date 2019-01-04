@@ -1,0 +1,66 @@
+.page-login {
+    width: 100%;
+    height: 100vh;
+    .page-login-content {
+        background-image: url('../../../assets/images/login/login_bg.png');
+        height: 100%;
+    }
+    img.login-img {
+        position: fixed;
+        bottom:0 ;
+        left: 0;
+    }
+    .ant-form {
+        background-color: transparent;
+        font-family: FontAwesome;
+        width: 385px;
+        height: 350px;
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        .ant-form-item {
+            margin-bottom: 30px;
+            .ant-input {
+                position: relative;
+                width: 380px;
+                height: 50px;
+                line-height: 50px;
+                padding-left: 81px;
+                border: 2px solid #1368a5;
+                border-radius: 8px!important;
+                font-family: FontAwesome;
+                font-size: 16px;
+                color: #f3f3f3;
+                background-color: transparent;
+            }
+            .login_input_icontext {
+                position: absolute;
+                left: 24px;
+                top: 20px;
+                display: inline-block;
+                border-right: 2px solid #f3f3f3;
+                color: #f3f3f3;
+                font-size: 16px;
+                padding-right: 10px;
+                height: 14px;
+                line-height: 14px;
+            }
+            .login_text_verifycode.ant-input {
+                padding-left: 25px;
+                width: 156px;
+            }
+            .login-form-button {
+                width: 380px;
+                height: 50px;
+                background-image: linear-gradient(to right, #3c51ee, #08b8fc);
+                border-radius: 8px;
+                color: #fffcfc;
+                font-size: 16px;
+                border: 0;
+            }
+        }
+    }
+}

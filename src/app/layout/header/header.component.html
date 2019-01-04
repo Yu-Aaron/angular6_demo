@@ -1,0 +1,13 @@
+<nz-header>
+  <ul class="nav navbar left-bar">
+    <li *ngFor="let item of secondLevelMenu; let i = index" class="navbar-item">
+      <a routerLink="./{{currentState}}/{{item.state}}" routerLinkActive="active">
+        <span>{{item.name}}</span>
+        <span class="navbar-border-bottom"></span>
+      </a>
+    </li>
+  </ul>
+  <div class="right-bar">
+    <a (click)="logout()">退出</a>
+  </div>
+</nz-header>

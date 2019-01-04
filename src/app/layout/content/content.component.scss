@@ -1,0 +1,10 @@
+.ant-layout-content {
+  margin: 38px 35px 60px 50px;
+  .ant-breadcrumb {
+    margin: 16px 0 38px;
+    font-size: 20px;
+    nz-breadcrumb-item:last-child {
+      color: #5d627f;
+    }
+  }
+}

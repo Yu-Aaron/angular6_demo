@@ -1,0 +1,251 @@
+{
+    "dashboard": [
+        {
+            "state": "monitor",
+            "name": "风险概况",
+            "icon": "monitoring",
+            "options": {
+                "url_state": "monitor/overview"
+            },
+            "enable": true,
+            "C05enable": true,
+            "root_enable": false,
+            "target": "RISK_PROFILE",
+            "currentState": "RISK_PROFILE"
+        },
+        {
+            "state": "security",
+            "name": "安全监控",
+            "icon": "security",
+            "options": {
+                "url_state": "security/secincident"
+            },
+            "enable": true,
+            "C05enable": true,
+            "root_enable": false,
+            "target": "SECURITY_MONITOR",
+            "currentState": "SECURITY_MONITOR"
+        },
+        {
+            "state": "asset",
+            "name": "资产管理",
+            "icon": "asset",
+            "options": {
+                "url_state": "asset/topology"
+            },
+            "enable": true,
+            "C05enable": true,
+            "target": "ASSET_MANAGEMENT",
+            "currentState": "ASSET_MANAGEMENT"
+        },
+        {
+            "state": "report",
+            "name": "统计报表",
+            "icon": "report",
+            "options": {
+                "url_state": "report/statistics"
+            },
+            "enable": true,
+            "C05enable": true,
+            "target": "STATISTICS_REPORT",
+            "currentState": "STATISTICS_REPORT"
+        },
+        {
+            "state": "log",
+            "name": "日志分析",
+            "icon": "log",
+            "options": {
+                "url_state": "log/runninglog"
+            },
+            "enable": true,
+            "C05enable": true,
+            "root_enable": false,
+            "target": "LOG_ANALYSIS",
+            "currentState": "LOG_ANALYSIS"
+        },
+        {
+            "state": "threat",
+            "name": "威胁特征库",
+            "icon": "threat",
+            "options": {
+                "url_state": "threat/featurelib"
+            },
+            "enable": true,
+            "C05enable": false,
+            "root_enable": false,
+            "target": "THREAT_FEATURE_LIBRARY",
+            "currentState": "THREAT_FEATURE_LIBRARY"
+        },
+        {
+            "state": "system",
+            "name": "系统设置",
+            "icon": "system",
+            "options": {
+                "url_state": "system/user"
+            },
+            "enable": true,
+            "C05enable": false,
+            "root_enable": false,
+            "target": "SYSTEM_MANAGEMENT",
+            "currentState": "SYSTEM_MANAGEMENT"
+        }
+    ],
+    "monitor": [
+        {
+            "state": "overview",
+            "name": "风险概况",
+            "icon": "",
+            "enable": true,
+            "target": "OVERVIEW",
+            "currentState": "RISK_PROFILE"
+        }
+    ],
+    "security": [
+        {
+            "state": "secincident",
+            "name": "安全事件",
+            "icon": "",
+            "enable": true,
+            "target": "SECURITY_INCIDENT",
+            "currentState": "SECURITY_MONITOR"
+        },
+        {
+            "state": "networksession",
+            "name": "网络会话",
+            "icon": "",
+            "enable": true,
+            "target": "NETWORK_SESSION",
+            "currentState": "SECURITY_MONITOR"
+        },
+        {
+            "state": "protocol",
+            "name": "协议审计",
+            "icon": "",
+            "enable": true,
+            "target": "PROTOCOL_AUDIT",
+            "currentState": "SECURITY_MONITOR"
+        },
+        {
+            "state": "flow",
+            "name": "流量分析",
+            "icon": "",
+            "enable": true,
+            "target": "FLOWDATA_ANALYSIS",
+            "currentState": "SECURITY_MONITOR"
+        }
+    ],
+    "asset": [
+        {
+            "state": "topology",
+            "name": "网络拓扑",
+            "icon": "",
+            "enable": true,
+            "target": "NETWORK_TOPOLOGY",
+            "currentState": "ASSET_MANAGEMENT"
+        },
+        {
+            "state": "securitydevice",
+            "name": "安全设备",
+            "icon": "",
+            "enable": true,
+            "target": "SECURITY_DEVICE",
+            "currentState": "ASSET_MANAGEMENT"
+        },
+        {
+            "state": "factorydevice",
+            "name": "工控设备",
+            "icon": "",
+            "enable": true,
+            "target": "FACTORY_DEVICE",
+            "currentState": "ASSET_MANAGEMENT"
+        },
+        {
+            "state": "networkdevice",
+            "name": "网络设备",
+            "icon": "",
+            "enable": true,
+            "target": "NETWORK_DEVICE",
+            "currentState": "ASSET_MANAGEMENT"
+        }
+    ],
+    "report": [
+        {
+            "state": "statistics",
+            "name": "统计报表",
+            "icon": "",
+            "enable": true,
+            "target": "STATISTICAL_STATEMENT",
+            "currentState": "STATISTICS_REPORT"
+        }
+    ],
+    "log": [
+        {
+            "state": "runninglog",
+            "name": "运行日志",
+            "icon": "",
+            "enable": true,
+            "target": "RUNNING_LOG",
+            "currentState": "LOG_ANALYSIS"
+        },
+        {
+            "state": "operate",
+            "name": "操作日志",
+            "icon": "",
+            "enable": true,
+            "target": "OPERATE_LOG",
+            "currentState": "LOG_ANALYSIS"
+        },
+        {
+            "state": "policy",
+            "name": "策略日志",
+            "icon": "",
+            "enable": true,
+            "target": "STRATEGY_LOG",
+            "currentState": "LOG_ANALYSIS"
+        }
+    ],
+    "threat": [
+        {
+            "state": "featurelib",
+            "name": "威胁特征库",
+            "icon": "",
+            "enable": true,
+            "target": "THREAT_FEATURE_LIB",
+            "currentState": "THREAT_FEATURE_LIBRARY"
+        }
+    ],
+    "system": [
+        {
+            "state": "user",
+            "name": "用户管理",
+            "icon": "",
+            "enable": true,
+            "target": "USER_MANAGEMENT",
+            "currentState": "SYSTEM_MANAGEMENT"
+        },
+        {
+            "state": "login",
+            "name": "登录设置",
+            "icon": "",
+            "enable": true,
+            "target": "LOGIN_MANAGEMENT",
+            "currentState": "SYSTEM_MANAGEMENT"
+        },
+        {
+            "state": "business",
+            "name": "业务设置",
+            "icon": "",
+            "enable": true,
+            "target": "BUSINESS_MANAGEMENT",
+            "currentState": "SYSTEM_MANAGEMENT"
+        },
+        {
+            "state": "device",
+            "name": "设备设置",
+            "icon": "",
+            "enable": true,
+            "target": "DEVICE_MANAGEMENT",
+            "currentState": "SYSTEM_MANAGEMENT"
+        }
+    ]
+}
