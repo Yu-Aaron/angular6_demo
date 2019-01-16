@@ -11,6 +11,7 @@ import zh from '@angular/common/locales/zh';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './pages/login/login.component';
+import {SseService} from './common/services/sse.service';
 
 registerLocaleData(zh);
 
@@ -28,7 +29,7 @@ registerLocaleData(zh);
         AppRoutingModule,
         NgZorroAntdModule
     ],
-    providers: [{provide: NZ_I18N, useValue: zh_CN}],
+    providers: [{provide: NZ_I18N, useValue: zh_CN}, SseService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

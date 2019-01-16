@@ -12,7 +12,6 @@ export class ContentComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.currentTitle = sessionStorage.getItem('currentTitle');
     }
 
 }

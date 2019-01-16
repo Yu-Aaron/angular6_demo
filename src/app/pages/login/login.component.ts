@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {ConfigService} from '../../common/service/config.service';
+import {ConfigService} from '../../common/services/config.service';
 import C from 'crypto-js';
 
 
@@ -13,9 +13,9 @@ import C from 'crypto-js';
 })
 export class LoginComponent implements OnInit {
     private version: string;
-    private imageData: string;
     private key: string;
-    private validateForm: FormGroup;
+    imageData: string;
+    validateForm: FormGroup;
     @Output() checkLogin = new EventEmitter();
 
 

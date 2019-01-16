@@ -224,7 +224,7 @@
             "currentState": "SYSTEM_MANAGEMENT"
         },
         {
-            "state": "login",
+            "state": "config",
             "name": "登录设置",
             "icon": "",
             "enable": true,
