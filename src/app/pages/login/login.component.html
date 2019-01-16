@@ -4,7 +4,7 @@
         <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
             <nz-form-item>
                 <nz-form-control>
-                    <nz-input-group [nzPrefix]="prefixUser">
+                    <nz-input-group>
                         <input type="text" nz-input formControlName="userName" placeholder="Username">
                         <span class="login_input_icontext">账号</span>
                     </nz-input-group>
@@ -13,7 +13,7 @@
             </nz-form-item>
             <nz-form-item>
                 <nz-form-control>
-                    <nz-input-group [nzPrefix]="prefixLock">
+                    <nz-input-group>
                         <input type="password" nz-input formControlName="password" placeholder="Password">
                         <span class="login_input_icontext">密码</span>
                     </nz-input-group>

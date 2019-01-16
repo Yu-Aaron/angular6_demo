@@ -4,7 +4,7 @@ import {SystemRoutingModule} from './system-routing.module';
 
 import {BusinessComponent} from './business/business.component';
 import {DeviceComponent} from './device/device.component';
-import {LoginConfigComponent} from './login-config/login-config.component';
+import {ConfigComponent} from './config/config.component';
 import {UserComponent} from './user/user.component';
 import {AuthGuard} from '../../shared/AuthGuard';
 
@@ -16,7 +16,7 @@ import {AuthGuard} from '../../shared/AuthGuard';
     declarations: [
         BusinessComponent,
         DeviceComponent,
-        LoginConfigComponent,
+        ConfigComponent,
         UserComponent
     ],
     providers: [
