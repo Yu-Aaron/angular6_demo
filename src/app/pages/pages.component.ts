@@ -17,9 +17,9 @@ import {CommonService} from "../common/services/common.service";
     `,
 })
 export class PagesComponent implements OnInit {
-    public secondLevelMenu: Array<any>;
-    public currentState: string;
-    public currentTitle: string;
+    secondLevelMenu: Array<any>;
+    currentState: string;
+    currentTitle: string;
 
     constructor(private commonService: CommonService) {
     }

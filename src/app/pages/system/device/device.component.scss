@@ -1,0 +1,91 @@
+.gutter-row {
+    margin-bottom: 38px;
+}
+
+/***更改第三方库默认样式***/
+:host ::ng-deep {
+    /***卡片***/
+    .ant-card-head {
+        padding: 0;
+        border: none;
+        background: #f5f6fa;
+        .ant-card-head-title {
+            font-size: 18px;
+            color: #5d627f;
+        }
+    }
+    .ant-card-body {
+        border: 1px solid #E7ECEF;
+        padding: 38px;
+        font-size: 16px;
+        color: #5d627f;
+        .ant-form-item-label {
+            text-align: left;
+        }
+    }
+    .ant-radio-group {
+        width: 100%;
+    }
+    /***警告提示***/
+    .ant-alert {
+        font-size: 12px;
+        color: #fe7743;
+        line-height: 22px;
+        padding: 0 0 0 17px;
+    }
+    .ant-alert-icon {
+        top: 4.5px;
+        left: 0;
+    }
+    .ant-alert-error,
+    .ant-alert-warning {
+        background-color: transparent;
+        border: none;
+    }
+    /***上传***/
+    nz-upload {
+        display: inline-block;
+        position: absolute;
+        top: -7px;
+        margin-left: 5px;
+        .ant-upload-list {
+            float: left;
+        }
+        .ant-upload.ant-upload-select {
+            float: right;
+        }
+    }
+    [nz-button] {
+        margin-right: 8px;
+    }
+    /***统一颜色字体***/
+    .ant-form-item, .ant-form label,
+    .ant-select, .ant-select-dropdown-menu-item, .ant-input,
+    .ant-time-picker, .ant-time-picker-input,
+    .ant-radio, .ant-radio-group, .ant-radio-wrapper,
+    .ant-upload-list-item-name {
+        color: #5d627f;
+        font-size: 16px;
+    }
+}
+
+.bullet {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: 4px;
+    border-radius: 50%;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+}
+
+.bullet-online {
+    background-color: #6bc24e;
+}
+
+.bullet-offline {
+    background-image: linear-gradient(#FFB340 0, #FF9900 100%);
+}
+
+

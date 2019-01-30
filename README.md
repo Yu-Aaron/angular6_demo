@@ -1,3 +1,7 @@
+### 2019-01-29 moment.js 安装使用
+
+npm install moment@2.8.4 --save  安装2.8.4版本
+
 # Web
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.1.
@@ -22,6 +26,6 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## Further helpff
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

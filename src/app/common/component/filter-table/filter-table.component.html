@@ -1,0 +1,52 @@
+<!-- 过滤条件 -->
+<div>
+  <form nz-form class="searchFilterForm ant-advanced-search-form" [formGroup]="validateForm">
+    <!-- 时间过滤 -->
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="8">
+        <nz-form-item nzFlex>
+          <nz-form-label [nzFor]="timeValue" [nzSpan]="4">时间</nz-form-label>
+          <nz-form-control>
+            <nz-select style="width: 200px;" [(ngModel)]="timeValue" formControlName="timeValue" (ngModelChange)="timeOptionSelect()">
+              <nz-option *ngFor="let option of timeValueData" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="8" *ngIf="rangePickerFlag">
+        <nz-form-item>
+          <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired>时间范围</nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-range-picker formControlName="rangePicker" [(ngModel)]="advancedSearchTimeRange" (ngModelChange)="onSearchTimeChange($event)" nzShowTime></nz-range-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="rangePickerFlag ? 8 : 16" *ngIf="filterFlag" class="filterSearchButton">
+        <button nz-button nzType="primary" class="margin-left-40" (click)="filterFlag = !filterFlag; filterTableFlag = !filterTableFlag; filterCondition()">过滤条件</button>
+      </div>
+    </div>
+    <!-- 其他过滤方式 -->
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="8" *ngFor="let control of controlArray">
+        <nz-form-item nzFlex>
+          <nz-form-label [nzSpan]="4" [nzFor]="control.name">{{control.label}}</nz-form-label>
+          <nz-form-control>
+            <nz-select style="width: 200px;" [ngModel]="control.value" [formControlName]="control.name" *ngIf="control.type === 'select'">
+              <nz-option *ngFor="let option of control.selectValueData" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+            </nz-select>
+            <input *ngIf="control.type === 'input'" style="width:200px;" nz-input placeholder="placeholder" [formControlName]="control.name" [attr.id]="'field'+control.index">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row>
+      <div nz-col [nzSpan]="24" style="text-align: right;">
+          <nz-form-item>
+            <nz-form-control>
+              <button nz-button nzType="primary" (click)="submitForm()">更新</button>
+            </nz-form-control>
+          </nz-form-item>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,3 +1,84 @@
-<p>
-  secincident works!
-</p>
+<div class="security_incident_content">
+  <div class="content_filter">
+    <!-- 过滤条件 -->
+    <app-filter-table *ngIf="filterFlag" [timeValueData]="filterConditionData.timeValueData" [controlArray]="filterConditionData.controlArray" [filterFlag]="filterFlag" (filterTable)="filterButton($event)" (searchFilterTable)="searchFilterTable($event)"></app-filter-table>
+    <div class="float_left">
+      <button nz-button nzType="primary" class="margin-right-40" (click)="searchData()">刷新</button>
+      <nz-dropdown [nzTrigger]="'click'">
+        <button nz-button nz-dropdown nzType="primary">更多操作<i nz-icon type="down"></i></button>
+        <ul nz-menu>
+          <li nz-menu-item *ngFor="let item of items" (click)="filterData()" [nzSelected]="item.select" [nzDisabled]="item.disabled">
+            <a>{{item.value}}</a>
+          </li>
+        </ul>
+      </nz-dropdown>
+    </div>
+    <div class="float_right content_filter_right" nzCompact>
+        <form [formGroup]="formModel" novalidate>
+            <i nz-icon type="search" *ngIf="!filterFlag"></i>
+            <nz-input-group nzSearch [nzSuffix]="suffixButton" style="width: 63%;" *ngIf="!filterFlag">
+              <input type="text" nz-input placeholder="input search text" formControlName="query">
+            </nz-input-group>
+            <ng-template #suffixButton>
+              <button nz-button nzType="primary" nzSearch (click)="searchData()">搜索</button>
+            </ng-template>
+            <button nz-button nzType="primary" style="width: 25%"  class="margin-left-40" (click)="filterFlag = !filterFlag;" *ngIf="!filterFlag">过滤条件</button>
+        </form>
+    </div>
+  </div>
+  <div class="content_table">
+    <nz-table
+      #basicTable
+      [nzData]="dataSet"
+      [nzShowQuickJumper]="true"
+      [nzTotal]="tableTotalData"
+      [nzFrontPagination]="false"
+      [(nzPageIndex)]="pageIndex"
+      [(nzPageSize)]="pageSize"
+      (nzPageIndexChange)="pageIndexChange()"
+      (nzPageSizeChange)="searchData(true)"
+      [nzLoading]="loading"
+      [nzShowTotal]="totalTemplate"
+      >
+      <thead (nzSortChange)="sort($event)" nzSingleSort>
+        <tr>
+          <th>状态(已读/未读)</th>
+          <th>处理方式</th>
+          <th>风险等级</th>
+          <th nzShowSort nzSortKey="timestamp">日期</th>
+          <th>起源</th>
+          <th>保护终端</th>
+          <th>目标</th>
+          <th>协议</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>
+              <span class="status ng-hide" *ngIf="data.status == 'NEW'">未读</span>
+              <span *ngIf="data.status != 'NEW'">已读</span>
+          </td>
+          <td>
+              {{data.level}}
+          </td>
+          <td>{{data.riskLevel}}</td>
+          <td>{{data.timestamp | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+          <td>{{data.sourceName}}</td>
+          <td>{{data.deviceName}}</td>
+          <td>{{data.destinationName}}</td>
+          <td>{{data.appLayerProtocol}}</td>
+          <td>
+              <a href="#" class="btn_checkDetails">查看</a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <ng-template #totalTemplate let-total>
+        <span>共 {{tableTotalData}} 个事件，</span>
+        <span>每页展示{{pageSize}}个事件，</span>
+        <span>共{{pageTotalNumber}}页</span>
+    </ng-template>
+  </div>
+</div>
+

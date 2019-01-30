@@ -5,7 +5,7 @@ import {PagesRoutingModule} from './pages-routing.module';
 import {PagesComponent} from './pages.component';
 import {HeaderComponent} from '../layout/header/header.component';
 import {FooterComponent} from '../layout/footer/footer.component';
-import {AsideComponent} from '../layout/aside/aside.component';
+import {NavComponent} from '../layout/nav/nav.component';
 import {ContentComponent} from '../layout/content/content.component';
 import {TransformTitlePipe} from '../common/pipe/transformTitle.pipe';
 
@@ -16,7 +16,7 @@ import {TransformTitlePipe} from '../common/pipe/transformTitle.pipe';
     ],
     declarations: [
         PagesComponent,
-        AsideComponent,
+        NavComponent,
         HeaderComponent,
         ContentComponent,
         FooterComponent,
@@ -24,7 +24,7 @@ import {TransformTitlePipe} from '../common/pipe/transformTitle.pipe';
     ],
     exports: [
         PagesComponent,
-        AsideComponent,
+        NavComponent,
         HeaderComponent,
         ContentComponent,
         FooterComponent

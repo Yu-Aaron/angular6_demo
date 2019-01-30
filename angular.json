@@ -32,10 +32,12 @@
               }
             ],
             "styles": [
-              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/moment/moment.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -67,7 +69,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "web:build"
+            "browserTarget": "web:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {

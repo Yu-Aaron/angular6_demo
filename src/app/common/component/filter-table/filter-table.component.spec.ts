@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AsideComponent } from './aside.component';
+import { FilterTableComponent } from './filter-table.component';
 
-describe('AsideComponent', () => {
-  let component: AsideComponent;
-  let fixture: ComponentFixture<AsideComponent>;
+describe('FilterTableComponent', () => {
+  let component: FilterTableComponent;
+  let fixture: ComponentFixture<FilterTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AsideComponent ]
+      declarations: [ FilterTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AsideComponent);
+    fixture = TestBed.createComponent(FilterTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

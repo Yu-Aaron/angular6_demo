@@ -7,20 +7,26 @@ import {DeviceComponent} from './device/device.component';
 import {ConfigComponent} from './config/config.component';
 import {UserComponent} from './user/user.component';
 import {AuthGuard} from '../../shared/AuthGuard';
+import {SharedModule} from '../../shared/shared.module';
+import {ModalComponent} from './device/modal.component';
+import {DevicePipe} from '../../common/pipe/device.pipe';
 
 @NgModule({
     imports: [
         CommonModule,
+        SharedModule,
         SystemRoutingModule
     ],
     declarations: [
         BusinessComponent,
         DeviceComponent,
         ConfigComponent,
-        UserComponent
+        UserComponent,
+        ModalComponent,
+        DevicePipe
     ],
     providers: [
-        AuthGuard
+        AuthGuard,
     ]
 })
 export class SystemModule {

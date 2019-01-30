@@ -3,7 +3,7 @@
         {
             "state": "monitor",
             "name": "风险概况",
-            "icon": "monitoring",
+            "icon": "desktop",
             "options": {
                 "url_state": "monitor/overview"
             },
@@ -16,7 +16,7 @@
         {
             "state": "security",
             "name": "安全监控",
-            "icon": "security",
+            "icon": "safety-certificate",
             "options": {
                 "url_state": "security/secincident"
             },
@@ -29,7 +29,7 @@
         {
             "state": "asset",
             "name": "资产管理",
-            "icon": "asset",
+            "icon": "credit-card",
             "options": {
                 "url_state": "asset/topology"
             },
@@ -41,7 +41,7 @@
         {
             "state": "report",
             "name": "统计报表",
-            "icon": "report",
+            "icon": "global",
             "options": {
                 "url_state": "report/statistics"
             },
@@ -53,7 +53,7 @@
         {
             "state": "log",
             "name": "日志分析",
-            "icon": "log",
+            "icon": "bar-chart",
             "options": {
                 "url_state": "log/runninglog"
             },
@@ -66,7 +66,7 @@
         {
             "state": "threat",
             "name": "威胁特征库",
-            "icon": "threat",
+            "icon": "read",
             "options": {
                 "url_state": "threat/featurelib"
             },
@@ -79,7 +79,7 @@
         {
             "state": "system",
             "name": "系统设置",
-            "icon": "system",
+            "icon": "setting",
             "options": {
                 "url_state": "system/user"
             },

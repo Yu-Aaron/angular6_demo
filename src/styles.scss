@@ -1,7 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-.ant-layout {
-  height: 100%
-}
 
 ::-webkit-scrollbar-track {
   background-color: #fff;
@@ -39,4 +36,27 @@
     background: rgba(255, 255, 255, .2);
     margin: 16px;
   }
+}
+
+body {
+  color: #5d627f!important;
+  font-size: 16px!important;
+  font-family: 'SourceHanSansCN-Regular', Helvetica, Arial, sans-serif!important;
+}
+
+.ant-layout {
+  height: 100%;
+  background: #f5f6fa!important;
+}
+.float_left {
+  float: left;
+}
+.float_right {
+  float: right;
+}
+.margin-right-40 {
+  margin-right: 40px;
+}
+.margin-left-40 {
+  margin-left: 40px;
 }

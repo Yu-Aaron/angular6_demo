@@ -8,10 +8,12 @@ import {NetworksessionComponent} from './networksession/networksession.component
 import {ProtocolComponent} from './protocol/protocol.component';
 import {AuthGuard} from '../../shared/AuthGuard';
 
+import { SharedModule } from '../../shared/shared.module'
+
 @NgModule({
     imports: [
         CommonModule,
-        SecurityRoutingModule
+        SecurityRoutingModule,SharedModule
     ],
     declarations: [
         SecincidentComponent,
@@ -21,7 +23,7 @@ import {AuthGuard} from '../../shared/AuthGuard';
     ],
     providers: [
         AuthGuard
-    ]
+    ],
 })
 export class SecurityModule {
 }

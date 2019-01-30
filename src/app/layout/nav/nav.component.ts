@@ -1,15 +1,15 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import * as moment from 'moment';
 import {AuthorizationService} from '../../common/services/authorization.service';
 import {ConfigService} from "../../common/services/config.service";
-import {error} from "util";
 
 @Component({
     selector: 'app-aside',
-    templateUrl: './aside.component.html',
-    styleUrls: ['./aside.component.scss']
+    templateUrl: './nav.component.html',
+    styleUrls: ['./nav.component.scss']
 })
-export class AsideComponent implements OnInit {
+export class NavComponent implements OnInit {
     private menuList: Object = {};
     private state: string;
     firstLevelMenu: Array<any>;
@@ -47,16 +47,13 @@ export class AsideComponent implements OnInit {
         this.secondLevelMenu.emit(this.menuList[state]);
         this.currentState.emit(state);
     }
-
     getCurrentTime() {
-        this.configService.getCurrentTime().subscribe((data) => {
-                console.log(data);
-            },
-            error => {
-                console.log(error);
+        this.configService.getCurrentTime().subscribe((data:any) => {
+                let date = new Date(moment(data).format('YYYY-MM-DD HH:mm:ss'));
+                sessionStorage.setItem('currentTime', String(date));
+            },error => {
                 if (error.status !== 200) {
                     this.router.navigate(['login']);
-
                 }
             });
 

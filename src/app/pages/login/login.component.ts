@@ -35,8 +35,7 @@ export class LoginComponent implements OnInit {
     }
 
     showVersion() {
-        this.configService.getVersion()
-            .subscribe((data: string) => this.version = data);
+        this.configService.getVersion().subscribe((data: string) => this.version = data);
     }
 
     getImage() {
@@ -68,7 +67,6 @@ export class LoginComponent implements OnInit {
             fromObject: loginInfo
         });
         this.configService.login(params).subscribe((data) => {
-            console.log(data);
             this.router.navigate(['pages/monitor/overview']);
             sessionStorage.setItem('isLogin', 'true');
         });
