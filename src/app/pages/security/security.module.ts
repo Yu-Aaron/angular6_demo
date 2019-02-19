@@ -7,19 +7,26 @@ import {FlowComponent} from './flow/flow.component';
 import {NetworksessionComponent} from './networksession/networksession.component';
 import {ProtocolComponent} from './protocol/protocol.component';
 import {AuthGuard} from '../../shared/AuthGuard';
-
-import { SharedModule } from '../../shared/shared.module'
+import {SharedModule} from '../../shared/shared.module';
+import {SecincidentDetailsComponent} from './secincident/secincident-details/secincident-details.component';
+import {EventLevelPipe, EventRiskLevelPipe, ToHexPipe, ProtocolDetailPipe} from '../../common/pipe/event-level.pipe';
 
 @NgModule({
     imports: [
         CommonModule,
-        SecurityRoutingModule,SharedModule
+        SecurityRoutingModule,
+        SharedModule
     ],
     declarations: [
         SecincidentComponent,
         FlowComponent,
         NetworksessionComponent,
-        ProtocolComponent
+        ProtocolComponent,
+        SecincidentDetailsComponent,
+        EventLevelPipe,
+        EventRiskLevelPipe,
+        ToHexPipe,
+        ProtocolDetailPipe,
     ],
     providers: [
         AuthGuard

@@ -1,0 +1,25 @@
+.content_filter {
+    overflow: hidden;
+    margin-bottom: 38px;
+    .content_filter_right {
+        position: relative;
+        .anticon-search {
+            position: absolute;
+            top: 10px;
+            z-index: 1;
+            left: 5px;
+        }
+        .ant-input-search.ant-input-search-enter-button>.ant-input {
+            padding-left: 25px;
+        }
+    }
+}
+
+/***更改第三方库默认样式***/
+:host ::ng-deep {
+    .ant-table-pagination.ant-pagination {
+        float: none;
+        text-align: center;
+    }
+}
+

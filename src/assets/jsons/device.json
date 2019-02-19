@@ -553,20 +553,19 @@
     },
     "confBackUpInfo": [
         {
-            "backupFileInfoId": 5,
+            "backupFileInfoId": 1,
             "infoType": "*********",
             "directory": "/preserve/backupinfocollectMW/MW_SYSBACKUP_20190118020448_CM1000A1U1844001111.tar.gz",
             "backupAt": "2019-01-18T02:04:48Z",
-            "deviceId": "mwsys",
             "dataType": "SYS_DATA",
             "md5sum": "5cd1faa0191a25cd6ab1654700450111"
         },
         {
-            "backupFileInfoId": 4,
+            "backupFileInfoId": 2,
             "infoType": "MW",
             "directory": "/preserve/backupinfocollectMW/MW_BUSBACKUP_20190111180001_CM1000A1U1844001111.tar.gz",
             "backupAt": "2019-01-11T18:00:01Z",
-            "deviceId": "mwbus",
+            "deviceId": "mw2",
             "dataType": "BUS_DATA",
             "md5sum": "05add2deab259822e3d406b1ccf2e6b5"
         },
@@ -575,52 +574,52 @@
             "infoType": "MW",
             "directory": "/preserve/backupinfocollectMW/MW_SYSBACKUP_20190111180000_CM1000A1U1844001111.tar.gz",
             "backupAt": "2019-01-11T18:00Z",
-            "deviceId": "mwsys",
+            "deviceId": "mw3",
             "dataType": "SYS_DATA",
             "md5sum": "f15a4f27f021bf6373abd8c90ef71969"
         },
         {
-            "backupFileInfoId": 2,
+            "backupFileInfoId": 4,
             "infoType": "MW",
             "directory": "/preserve/backupinfocollectMW/MW_BUSBACKUP_20190107082105_CM1000A1U1844001111.tar.gz",
             "backupAt": "2019-01-07T08:21:06Z",
-            "deviceId": "mwbus",
+            "deviceId": "mw4",
             "dataType": "BUS_DATA",
             "md5sum": "88492fe3f97b64f443d747bfd4888c87"
         },
         {
-            "backupFileInfoId": 1,
+            "backupFileInfoId": 5,
             "infoType": "MW",
             "directory": "/preserve/backupinfocollectMW/MW_SYSBACKUP_20190107082105_CM1000A1U1844001111.tar.gz",
             "backupAt": "2019-01-07T08:21:05Z",
-            "deviceId": "mwsys",
+            "deviceId": "mw5",
             "dataType": "SYS_DATA",
             "md5sum": "8311e877ef3a91b9d8f0a1a3367e7750"
         },
         {
-            "backupFileInfoId": 4,
+            "backupFileInfoId": 6,
             "infoType": "MW",
             "directory": "/preserve/backupinfocollectMW/MW_BUSBACKUP_20190111180001_CM1000A1U1844001111.tar.gz",
             "backupAt": "2019-01-11T18:00:01Z",
-            "deviceId": "mwbus",
+            "deviceId": "mw6",
             "dataType": "BUS_DATA",
             "md5sum": "05add2deab259822e3d406b1ccf2e6b5"
         },
         {
-            "backupFileInfoId": 3,
+            "backupFileInfoId": 7,
             "infoType": "MW",
             "directory": "/preserve/backupinfocollectMW/MW_SYSBACKUP_20190111180000_CM1000A1U1844001111.tar.gz",
             "backupAt": "2019-01-11T18:00Z",
-            "deviceId": "mwsys",
+            "deviceId": "mw7",
             "dataType": "SYS_DATA",
             "md5sum": "f15a4f27f021bf6373abd8c90ef71969"
         },
         {
-            "backupFileInfoId": 2,
+            "backupFileInfoId": 8,
             "infoType": "MW",
             "directory": "/preserve/backupinfocollectMW/MW_BUSBACKUP_20190107082105_CM1000A1U1844001111.tar.gz",
             "backupAt": "2019-01-07T08:21:06Z",
-            "deviceId": "mwbus",
+            "deviceId": "mw8",
             "dataType": "BUS_DATA",
             "md5sum": "88492fe3f97b64f443d747bfd4888c87"
         }

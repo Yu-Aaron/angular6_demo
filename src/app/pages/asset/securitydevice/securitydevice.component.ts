@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AssetService } from '../../../common/services/asset.service';
 
 @Component({
   selector: 'app-securitydevice',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SecuritydeviceComponent implements OnInit {
 
-  constructor() { }
+  constructor(public assetService: AssetService) { }
 
   ngOnInit() {
   }

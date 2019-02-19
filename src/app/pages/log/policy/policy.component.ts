@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {LogService} from "../../../common/services/log.service";
+import { Component, OnInit } from '@angular/core';
+import { LogService } from "../../../common/services/log.service";
 
 @Component({
     selector: 'app-policy',
@@ -29,7 +29,7 @@ export class PolicyComponent implements OnInit {
         this.loading = true;
         this.logService.getPolicyLogList(this.pageIndex, this.pageSize).subscribe((data: any) => {
             this.loading = false;
-            for(let item of data){
+            for (let item of data) {
                 item.checked = false;
             }
             this.dataSet = data;

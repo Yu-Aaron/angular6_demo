@@ -5,6 +5,7 @@ import {SecincidentComponent} from './secincident/secincident.component';
 import {FlowComponent} from './flow/flow.component';
 import {NetworksessionComponent} from './networksession/networksession.component';
 import {ProtocolComponent} from './protocol/protocol.component';
+import {SecincidentDetailsComponent} from './secincident/secincident-details/secincident-details.component';
 import {AuthGuard} from '../../shared/AuthGuard';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
     {path: 'flow', component: FlowComponent, canActivate: [AuthGuard]},
     {path: 'networksession', component: NetworksessionComponent, canActivate: [AuthGuard]},
     {path: 'protocol', component: ProtocolComponent, canActivate: [AuthGuard]},
+    {path: 'secincident/:eventId', component: SecincidentDetailsComponent, canActivate: [AuthGuard]},
     {path: '', redirectTo: '/pages/security/secincident'}
 ];
 

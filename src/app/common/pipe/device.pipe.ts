@@ -17,6 +17,11 @@ export class DevicePipe implements PipeTransform {
             networkInterfaceType: {
                 'FIBRE': '光口',
                 'TP': '电口'
+            },
+            convertBackType: {
+                'mwbus': '业务备份',
+                'mwsys': '系统备份',
+                undefined: '无'
             }
         };
         return data[key][value] ? data[key][value] : value;

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-    selector: 'app-modal',
+    selector: 'app-device-modal',
     template: `
         <nz-modal [(nzVisible)]="confirmModal.isVisible" 
                   [nzTitle]="confirmModal.title"
@@ -9,11 +9,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
                   [nzClosable]="confirmModal.hideFooter"
                   [nzMaskClosable]="confirmModal.hideFooter"
                   (nzOnCancel)="handleCancel()" 
-                  (nzOnOk)="handleOk()" >
+                  (nzOnOk)="handleOk()"
+                  [nzWidth]=600>
             <p *ngFor="let item of confirmModal.content">{{item}}</p>
-        </nz-modal>`,
+        </nz-modal>`
 })
-export class ModalComponent implements OnInit {
+export class DeviceModalComponent implements OnInit {
     @Input() confirmModal: any;
     @Output() closeModel = new EventEmitter();
 

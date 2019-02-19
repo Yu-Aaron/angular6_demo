@@ -35,6 +35,13 @@ export class SecincidentComponent implements OnInit {
   pageIndex = 1;
   pageTotalNumber: number;
   pageSize = 10;
+  isVisible = false;   // 模态框是否显示
+  modalTypeFlag: string;
+  exportIsVisible: boolean = false;   // 导出模态框
+  exportTypeFlag: boolean = true;   // 导出当前记录  导出全部
+  modalTitle: string; // 模态提示框的标题
+  modalContent; // 模态提示框的内容
+  exportParams = '';
   // filter-table 组件需要传的参数
   filterConditionData = {
     timeValueData : [],
@@ -85,17 +92,20 @@ export class SecincidentComponent implements OnInit {
     self = this;
     this.items = [
       {
-        disabled: true,
-        value: '标记所有未读成已读',
+        disabled: false,
+        value: 'read',
         select: false,
+        label: '标记所有未读成已读'
       },{
         disabled: false,
-        value: '清空所有事件',
-        select: true,
+        label: '清空所有事件',
+        select: false,
+        value: 'delete'
       },{
         disabled: false,
-        value: '导出全部',
+        label: '导出全部',
         select: false,
+        value: 'export'
       }
     ];
     self.params = {
@@ -123,9 +133,12 @@ export class SecincidentComponent implements OnInit {
     }
     this.loading = true;
     self.params.$skip = (this.pageIndex - 1) * self.pageSize;
+    self.exportParams = self.params.$orderby;
     this.securityService.getSecurityTableData(self.params).subscribe((data: any) => {
       self.dataSet = data;
       self.getSecurityTableTotalData(flag);
+    }, (error) => {
+      this.loading = false;
     })
   }
   // 获取表格总条数
@@ -194,6 +207,8 @@ export class SecincidentComponent implements OnInit {
       self.securityService.getSecurityTableData(self.all_payload).subscribe((data: any) => {
         self.loading = false;
         self.dataSet = data;
+      }, (error) => {
+        this.loading = false;
       })
     } else {
       self.searchData('', true);
@@ -218,6 +233,7 @@ export class SecincidentComponent implements OnInit {
     var all_payload = { ...payload };
     self.all_payload = all_payload;
     self.loading = true;
+    self.exportParams = all_payload.$orderby;
     self.securityService.getSecurityTableData(all_payload).subscribe((data: any) => {
       self.dataSet = data;
       self.securityService.getFilterData(filterParams).subscribe((data: any) => {
@@ -226,12 +242,51 @@ export class SecincidentComponent implements OnInit {
         self.pageTotalNumber = Math.ceil(self.tableTotalData / self.pageSize);
         console.log(data);
       })
+    }, (error) => {
+      this.loading = false;
     });
   }
 
   // 将过滤参数和limit skip拼接起来
   advancedSearching(payload) {
     payload['$filter'] = self.filterParameter;
+  }
+
+  // 更多操作
+  filterModalData(tag) {
+    self.isVisible = true;
+    if (tag === 'read') {
+      self.modalTitle = '标记所有未读成已读';
+      self.modalContent = '确定要标记所有未读成已读吗？';
+      self.modalTypeFlag = 'read';
+    } else if (tag === 'delete') {
+      self.modalTitle = '清除所有事件';
+      self.modalContent = '确定要清除所有事件吗？';
+      self.modalTypeFlag = 'delete';
+    } else if (tag === 'export') {
+      self.isVisible = false;
+      self.exportIsVisible = true;   // 导出模态框显示
+    }
+  }
+  // 模态框确定
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    self.filterFlag = false;
+    self.isVisible = false;
+    if (self.modalTypeFlag === 'read') {
+      self.securityService.getMarkRead().subscribe((data: any) => {
+        self.initTable(true, false);
+      })
+    } else if (self.modalTypeFlag === 'delete') {
+      self.securityService.markAllDeleted().subscribe((data: any) => {
+        self.initTable(true, false);
+      })
+    }
+  }
+  // 模态框取消
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
   }
 
   // 接受子组件传过来的信息
@@ -247,5 +302,9 @@ export class SecincidentComponent implements OnInit {
     self.filterParameter = params.params;
     self.filterTableFlag = params.filterTableFlag;
     self.getTableData();
+  }
+  // 导出模态框点击取消和ok
+  exportVisibleTriggle(msg) {
+    self.exportIsVisible = msg;
   }
 }

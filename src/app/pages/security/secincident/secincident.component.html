@@ -1,14 +1,20 @@
 <div class="security_incident_content">
   <div class="content_filter">
     <!-- 过滤条件 -->
-    <app-filter-table *ngIf="filterFlag" [timeValueData]="filterConditionData.timeValueData" [controlArray]="filterConditionData.controlArray" [filterFlag]="filterFlag" (filterTable)="filterButton($event)" (searchFilterTable)="searchFilterTable($event)"></app-filter-table>
+    <app-filter-table *ngIf="filterFlag"
+                      [timeValueData]="filterConditionData.timeValueData"
+                      [controlArray]="filterConditionData.controlArray"
+                      [showTimePicker]="true"
+                      [filterFlag]="filterFlag"
+                      (filterTable)="filterButton($event)"
+                      (searchFilterTable)="searchFilterTable($event)"></app-filter-table>
     <div class="float_left">
       <button nz-button nzType="primary" class="margin-right-40" (click)="searchData()">刷新</button>
       <nz-dropdown [nzTrigger]="'click'">
         <button nz-button nz-dropdown nzType="primary">更多操作<i nz-icon type="down"></i></button>
         <ul nz-menu>
-          <li nz-menu-item *ngFor="let item of items" (click)="filterData()" [nzSelected]="item.select" [nzDisabled]="item.disabled">
-            <a>{{item.value}}</a>
+          <li nz-menu-item *ngFor="let item of items" (click)="filterModalData(item.value)" [nzSelected]="item.select" [nzDisabled]="item.disabled">
+            <a>{{item.label}}</a>
           </li>
         </ul>
       </nz-dropdown>
@@ -16,11 +22,11 @@
     <div class="float_right content_filter_right" nzCompact>
         <form [formGroup]="formModel" novalidate>
             <i nz-icon type="search" *ngIf="!filterFlag"></i>
-            <nz-input-group nzSearch [nzSuffix]="suffixButton" style="width: 63%;" *ngIf="!filterFlag">
+            <nz-input-group nzSearch [nzSuffix]="suffixButton" style="width: 63%;" *ngIf="!filterFlag" nzSize="large">
               <input type="text" nz-input placeholder="input search text" formControlName="query">
             </nz-input-group>
             <ng-template #suffixButton>
-              <button nz-button nzType="primary" nzSearch (click)="searchData()">搜索</button>
+              <button nz-button nzType="primary" nzSearch nzSize="large" (click)="searchData()">搜索</button>
             </ng-template>
             <button nz-button nzType="primary" style="width: 25%"  class="margin-left-40" (click)="filterFlag = !filterFlag;" *ngIf="!filterFlag">过滤条件</button>
         </form>
@@ -29,6 +35,7 @@
   <div class="content_table">
     <nz-table
       #basicTable
+      nzBordered
       [nzData]="dataSet"
       [nzShowQuickJumper]="true"
       [nzTotal]="tableTotalData"
@@ -39,6 +46,7 @@
       (nzPageSizeChange)="searchData(true)"
       [nzLoading]="loading"
       [nzShowTotal]="totalTemplate"
+      [nzNoResult]="'没有数据'"
       >
       <thead (nzSortChange)="sort($event)" nzSingleSort>
         <tr>
@@ -60,16 +68,16 @@
               <span *ngIf="data.status != 'NEW'">已读</span>
           </td>
           <td>
-              {{data.level}}
+              {{data.level | eventLevel}}
           </td>
-          <td>{{data.riskLevel}}</td>
+          <td>{{data.riskLevel | eventRiskLevel}}</td>
           <td>{{data.timestamp | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
           <td>{{data.sourceName}}</td>
           <td>{{data.deviceName}}</td>
           <td>{{data.destinationName}}</td>
           <td>{{data.appLayerProtocol}}</td>
           <td>
-              <a href="#" class="btn_checkDetails">查看</a>
+              <a class="btn_checkDetails" [routerLink]="['/pages/security/secincident', data.incidentId]">查看</a>
           </td>
         </tr>
       </tbody>
@@ -80,5 +88,14 @@
         <span>共{{pageTotalNumber}}页</span>
     </ng-template>
   </div>
+  <!-- 模态弹框 -->
+  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <p>{{modalContent}}</p>
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()" class="float_left">取消</button>
+      <button nz-button nzType="primary" (click)="handleOk()">确定</button>
+    </ng-template>
+  </nz-modal>
+  <app-modal [isVisible]="exportIsVisible" (exportVisibleTriggle)="exportVisibleTriggle($event)" [exportTypeFlag]="exportTypeFlag" [exportParams]="exportParams"></app-modal>
 </div>
 

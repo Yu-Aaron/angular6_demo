@@ -1,0 +1,100 @@
+<nz-modal [(nzVisible)]="isNewDevice" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" [nzWidth]="1100">
+    <ng-template id="factory_title" #modalTitle>
+        新建工控设备
+    </ng-template>
+
+    <ng-template #modalContent>
+        <div class="modal_body" nz-row>
+            <div class="fac_device_form">
+                <div class="item_label" nz-col nzSpan="4">
+                    <span class="text_red">*</span>设备名称
+                </div>
+                <div class="item_input" nz-col nzSpan="20" >
+                    <input autofocus nz-input [(ngModel)]="device.name" (input)="validateDevice($event)">
+                    <!--<error-msg obj="device" validator="newDevice" type="'name'"></error-msg>-->
+                </div>
+                <div class="item_label" nz-col nzSpan="4">
+                    &nbsp;设备序列号
+                </div>
+                <div class="item_input" nz-col nzSpan="20" >
+                    <input nz-input [(ngModel)]="device.serialNumber" maxlength="255" (input)="serialNumberChanged()">
+                    <!--<error-msg obj="device" validator="newDevice" type="'serialNumber'"></error-msg>-->
+                </div>
+                <!-- 子网 OPTION -->
+                <div class="item_label" nz-col nzSpan="4">
+                    <span class="text_red">*</span>设备类型
+                </div>
+                <div class="item_input" nz-col nzSpan="20" >
+                    <nz-select [(ngModel)]="device.modename" (ngModelChange)="modeChange($event)">
+                        <nz-option *ngFor="let item of forms.modes" [nzValue]="item.icontype" [nzLabel]="item.modename"></nz-option>
+                    </nz-select>
+                </div>
+                <div class="item_label" nz-col nzSpan="4" *ngIf="device.modename !== 'subnet'">
+                    <span class="text_red">*</span>设备型号
+                </div>
+                <div class="item_input" nz-col nzSpan="20" *ngIf="device.modename !== 'subnet'">
+                    <input class="modename_input" nz-input placeholder="请输入设备型号名称" [(ngModel)]="device.modelname" maxlength="255" (input)="validateDevice()"  *ngIf="newModel">
+                    <nz-select class="modename_select" [(ngModel)]="device.modelname" (ngModelChange)="modelChange($event)">
+                        <nz-option *ngFor="let item of forms.models" [nzValue]="item.modelId" [nzLabel]="item.model_name + (item.model && (item.model !== item.model_name) ? ' / ' + item.model : '')"></nz-option>
+                    </nz-select>
+                </div>
+                <div class="item_label" nz-col nzSpan="4" *ngIf="device.modename !== 'subnet'">
+                    &nbsp;设备厂商
+                </div>
+                <div class="item_input" nz-col nzSpan="20" *ngIf="device.modename !== 'subnet'">
+                    <label *ngIf="!newModel">{{device.modelmake || '未知'}}</label>
+                    <input nz-input [(ngModel)]="device.modelmake" maxlength="255" *ngIf="newModel">
+                </div>
+                <div class="item_label" nz-col nzSpan="4" *ngIf="device.modename !== 'subnet'">
+                    &nbsp;备注
+                </div>
+                <div class="item_input" nz-col nzSpan="20" *ngIf="device.modename !== 'subnet'">
+                    <label *ngIf="!newModel">{{device.modelmemo || '未知'}}</label>
+                    <input nz-input [(ngModel)]="device.modelmemo" maxlength="255"  *ngIf="newModel">
+                </div>
+                <!--设备端口-->
+                <div class="" *ngIf="device.modename !== 'subnet'">
+                    <div *ngFor="let ipmac of device.ipmac;let i = index" class="">
+                        <div class="item_label" nz-col nzSpan="4"><label >&nbsp;&nbsp;设备端口 {{i+1}}</label></div>
+                        <div class="" nz-col nzSpan="20">
+                            <div class="">
+                                <label class="item_label"><span class="text_red">&#42;</span>IP地址&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <div class="factory_ipmac_input">
+                                    <input nz-input class="" type="text" [(ngModel)]="ipmac.ip" maxlength="255" (input)="validateAllIp()"/>
+                                    <!--<error-msg class="error-msg" validator="ipmac" obj="device" type="'ip'"></error-msg>-->
+                                </div>
+                            </div>
+                            <div class="">
+                                <label class="item_label">&nbsp;&nbsp;MAC地址</label>
+                                <div class="factory_ipmac_input">
+                                    <input nz-input class="" type="text" [(ngModel)]="ipmac.mac" maxlength="255" (input)="validateAllMac()"/>
+                                    <!--<error-msg class="error-msg" validator="ipmac" obj="device" type="'mac'"></error-msg>-->
+                                </div>
+                                <button nz-button nzType="primary" class="" *ngIf="index>0" (click)="removeIpMac(index); allIpMacValid();">删除</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="" *ngIf="device.modename !== 'subnet'">
+                    <div class="" nz-col nzSpan="20"></div>
+                    <button class="" nz-button nzType="primary" [disabled]="disableAddNewIp" (click)="addIpMac()">添加端口</button>
+                </div>
+                <div class="" *ngIf="device.modename == 'subnet'">
+                <label class="item_label" nz-col nzSpan="4"><span class="text_red">&#42;</span>子网地址</label>
+                <div class="" nz-col nzSpan="20">
+                    <input type="text" nz-input class="" id="new-device-ip" [(ngModel)]="device.ipmac[0].ip" (input)="validateAllIp()" maxlength="255"/>
+                    <!--<error-msg class="error-msg" validator="device.ipmac[0]" obj="device" type="'ip'"></error-msg>-->
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </ng-template>
+
+    <ng-template #modalFooter>
+        <button nz-button nzType="primary" (click)="handleCancel()">取消</button>
+        <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading" *ngIf="!device.length" [disabled]="newDevice.hasDuplicateSN || newDevice.nameError || newDevice.hasDuplicateName || newDevice.nameLengthError || !device.name || (device.modename !== 'subnet' && (newDevice.modelError || disableAddNewIp)) || newDevice.modeError || (device.modename === 'subnet' && (device.ipmac[0].ip==='' || device.ipmac[0].invalidIp || device.ipmac[0].invalidRange))||(device.needMac&&device.modename !== 'subnet'&&device.ipmac[0].mac==='')">完成</button>
+    </ng-template>
+</nz-modal>
+

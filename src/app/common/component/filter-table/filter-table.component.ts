@@ -43,14 +43,14 @@ export class FilterTableComponent implements OnInit {
       value: 'r'
     }
   ];
-  @Input()
-  timeValueData: [];
-  @Input()
-  controlArray;
-  @Input()
-  filterFlag: boolean;
+  @Input() timeValueData;
+  @Input() controlArray;
+  @Input() showTimePicker = false;
+  @Input() filterFlag: boolean;
+  @Input() isFuzzySearch: boolean; //模糊查询
   @Output() private filterTable = new EventEmitter();
   @Output() private searchFilterTable = new EventEmitter();
+
   constructor() {
     self = this;
   }
@@ -58,7 +58,7 @@ export class FilterTableComponent implements OnInit {
   ngOnInit() {
     if (!self.timeValueData.length) {
       self.timeValueData = self.timeFilterData;
-    };
+    }
     let fb = new FormBuilder();
     this.validateForm = fb.group({
       timeValue: ['n'],
@@ -124,7 +124,7 @@ export class FilterTableComponent implements OnInit {
             result += " eq " + self.validateForm.value[data.name];
         }
       }
-    })
+    });
     self.filterParameter = result;
     self.pageIndex = 1;  // 将当前页数设置为1
     self.filterTableFlag = true;

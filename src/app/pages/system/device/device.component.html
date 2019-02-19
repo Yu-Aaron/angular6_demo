@@ -1,5 +1,5 @@
 <nz-tabset [nzTabPosition]="'top'" [nzAnimated]="false">
-    <nz-tab nzTitle="基本设置" >
+    <nz-tab nzTitle="基本设置">
         <div nz-row nzGutter="38">
             <!--安全管理平台网络端口配置-->
             <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 12}" class="gutter-row">
@@ -10,7 +10,8 @@
                             <nz-form-control nzSpan="8">
                                 <nz-select [(ngModel)]="networkInterface" name="slotNum"
                                            (ngModelChange)="portInfo=networkInterface['portInfoList'][0]; changeNetPort(networkInterface['portInfoList'][0])">
-                                    <nz-option *ngFor="let item of networkInterfaces" [nzValue]="item" [nzLabel]="['networkInterface',item.slotNum] | device"></nz-option>
+                                    <nz-option *ngFor="let item of networkInterfaces" [nzValue]="item"
+                                               [nzLabel]="['networkInterface',item.slotNum] | device"></nz-option>
                                 </nz-select>
                             </nz-form-control>
                         </nz-form-item>
@@ -18,25 +19,29 @@
                             <nz-form-label nzSpan="6">端口</nz-form-label>
                             <nz-form-control nzSpan="8" *ngIf="networkInterface">
                                 <nz-select [(ngModel)]="portInfo" name="portName" (ngModelChange)="changeNetPort(portInfo)">
-                                    <nz-option *ngFor="let item of networkInterface.portInfoList" [nzValue]="item" [nzLabel]="item.portName"></nz-option>
+                                    <nz-option *ngFor="let item of networkInterface.portInfoList" [nzValue]="item"
+                                               [nzLabel]="item.portName"></nz-option>
                                 </nz-select>
                             </nz-form-control>
                         </nz-form-item>
                         <nz-form-item *ngIf="!editMode.ipaddress">
                             <nz-form-label nzSpan="6">端口类型</nz-form-label>
-                            <nz-form-control nzSpan="8">{{ ['networkInterfaceType', portInfo?.portType] | device}}</nz-form-control>
+                            <nz-form-control nzSpan="8">{{ ['networkInterfaceType', portInfo?.portType] | device}}
+                            </nz-form-control>
                         </nz-form-item>
                         <nz-form-item *ngIf="!editMode.ipaddress">
                             <nz-form-label nzSpan="6">端口状态</nz-form-label>
-                            <nz-form-control nzSpan="8"  class="bullet bullet-online" [title]="portInfo?.portStatus === 'up' ? '连接' : '未连接'"
+                            <nz-form-control nzSpan="8" class="bullet bullet-online"
+                                             [title]="portInfo?.portStatus === 'up' ? '连接' : '未连接'"
                                              [ngClass]="{'bullet-offline': portInfo?.portStatus === 'down'}"></nz-form-control>
                         </nz-form-item>
                         <nz-form-item>
                             <nz-form-label nzSpan="6">IP地址</nz-form-label>
                             <nz-form-control nzSpan="8">
                                 <ng-container *ngIf="editMode.ipaddress">
-                                    <input nz-input [(ngModel)]="editPortInfo.ipAddr" (change)="validatePlatform(editPortInfo)" name="ipAddr">
-                                    <nz-alert *ngIf="!validPlatformIP" nzType="warning" nzShowIcon nzMessage="请输入有效IP地址"></nz-alert>
+                                    <input nz-input [(ngModel)]="editPortInfo.ipAddr" (ngModelChange)="validatePlatform(editPortInfo)" name="ipAddr">
+                                    <nz-alert *ngIf="!validPlatformIP" nzType="warning" nzShowIcon
+                                              nzMessage="请输入有效IP地址"></nz-alert>
                                 </ng-container>
                                 <span *ngIf="!editMode.ipaddress">{{portInfo?.ipAddr}}</span>
                             </nz-form-control>
@@ -44,9 +49,10 @@
                         <nz-form-item>
                             <nz-form-label nzSpan="6">子网掩码</nz-form-label>
                             <nz-form-control nzSpan="8">
-                                <ng-container *ngIf="editMode.ipaddress" >
-                                    <input nz-input [(ngModel)]="editPortInfo.netMask" (change)="validatePlatform(editPortInfo)" name="netMask">
-                                    <nz-alert *ngIf="!validPlatformNetMask" nzType="warning" nzShowIcon nzMessage="请输入有效子网掩码"></nz-alert>
+                                <ng-container *ngIf="editMode.ipaddress">
+                                    <input nz-input [(ngModel)]="editPortInfo.netMask" (ngModelChange)="validatePlatform(editPortInfo)" name="netMask">
+                                    <nz-alert *ngIf="!validPlatformNetMask" nzType="warning" nzShowIcon
+                                              nzMessage="请输入有效子网掩码"></nz-alert>
                                 </ng-container>
                                 <span *ngIf="!editMode.ipaddress">{{portInfo?.netMask}}</span>
                             </nz-form-control>
@@ -54,9 +60,10 @@
                         <nz-form-item>
                             <nz-form-label nzSpan="6">默认网关</nz-form-label>
                             <nz-form-control nzSpan="8">
-                                <ng-container *ngIf="editMode.ipaddress" >
-                                    <input nz-input [(ngModel)]="editPortInfo.defaultGW" (change)="validatePlatform(editPortInfo)" name="defaultGW">
-                                    <nz-alert *ngIf="!validPlatformGateWay" nzType="warning" nzShowIcon nzMessage="请输入有效默认网关"></nz-alert>
+                                <ng-container *ngIf="editMode.ipaddress">
+                                    <input nz-input [(ngModel)]="editPortInfo.defaultGW" (ngModelChange)="validatePlatform(editPortInfo)" name="defaultGW">
+                                    <nz-alert *ngIf="!validPlatformGateWay" nzType="warning" nzShowIcon
+                                              nzMessage="请输入有效默认网关"></nz-alert>
                                 </ng-container>
                                 <span *ngIf="!editMode.ipaddress">{{portInfo?.defaultGW}}</span>
                             </nz-form-control>
@@ -64,14 +71,18 @@
                     </form>
                 </nz-card>
                 <ng-template #ipaddressTemp>
-                    <button *ngIf="!editMode.ipaddress" nz-button nzType="primary" (click)="editMode.ipaddress=true; validatePlatform(editPortInfo)">编辑</button>
+                    <button *ngIf="!editMode.ipaddress" nz-button nzType="primary"
+                            (click)="editMode.ipaddress=true; validatePlatform(editPortInfo)">编辑
+                    </button>
                     <div *ngIf="editMode.ipaddress">
                         <button nz-button nzType="primary" (click)="closeModel(false,'ipaddress')">取消</button>
-                        <button nz-button nzType="primary" (click)="confirmModal.ipaddress.isVisible=true">保存</button>
-                        <app-modal [confirmModal]="confirmModal.ipaddress" (closeModel)="closeModel($event,'ipaddress')"></app-modal>
+                        <button nz-button nzType="primary" (click)="confirmModal.ipaddress.isVisible=true"
+                                [disabled]="!validPlatformIP || !validPlatformNetMask || !validPlatformGateWay ">保存
+                        </button>
+                        <app-device-modal [confirmModal]="confirmModal.ipaddress" (closeModel)="closeModel($event,'ipaddress')"></app-device-modal>
                     </div>
-                    <app-modal [confirmModal]="confirmModal.networkInterfaceProgress"></app-modal>
-                    <app-modal [confirmModal]="confirmModal.redirectProgress"></app-modal>
+                    <app-device-modal [confirmModal]="confirmModal.networkInterfaceProgress"></app-device-modal>
+                    <app-device-modal [confirmModal]="confirmModal.redirectProgress"></app-device-modal>
                 </ng-template>
             </div>
             <!--时钟同步-->
@@ -79,20 +90,24 @@
                 <nz-card [nzBordered]="false" nzTitle="时钟同步" [nzExtra]="ntpSyncTemp">
                     <nz-radio-group [(ngModel)]="setActivateNtp" [nzDisabled]="!editMode.ntpSync">
                         <div nz-row>
-                            <label nz-col nzSpan="5" nz-radio [nzValue]="false" >手动输入时间</label>
+                            <label nz-col nzSpan="5" nz-radio [nzValue]="false">手动输入时间</label>
                             <div nz-col nzSpan="18" *ngIf="editMode.ntpSync || !setActivateNtp">
                                 <div nz-row class="gutter-row">
                                     <span nz-col nzSpan="4">系统时间：</span>
                                     <div *ngIf="editMode.ntpSync && !setActivateNtp">
-                                        <nz-date-picker nz-col nzSpan="12" [nzMode]="time" [(ngModel)]="serverTime" [nzAllowClear]="false" name="ntpSync" nzShowTime></nz-date-picker>
-                                        <button nz-col nzSpan="4" nz-button nzType="primary" (click)="serverTime=localTime;">导入本机时间</button>
+                                        <nz-date-picker nz-col nzSpan="12" [nzMode]="time" [(ngModel)]="serverTime"
+                                                        [nzAllowClear]="false" name="ntpSync"
+                                                        nzShowTime></nz-date-picker>
+                                        <button nz-col nzSpan="4" nz-button nzType="primary"
+                                                (click)="serverTime=localTime;">导入本机时间
+                                        </button>
                                     </div>
                                     <span *ngIf="!editMode.ntpSync || setActivateNtp" nz-col nzSpan="14">{{serverTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
                                 </div>
                                 <div nz-row class="gutter-row">
                                     <span nz-col nzSpan="4">本机时间：</span>
                                     <span nz-col nzSpan="8">{{localTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
-                                    <nz-alert nz-col nzSpan="12" nzType="warning" nzShowIcon nzMessage="手动更改系统时间会导致安全管理平台重启"></nz-alert>
+                                    <nz-alert *ngIf="editMode.ntpSync" nz-col nzSpan="12" nzType="warning" nzShowIcon nzMessage="手动更改系统时间会导致安全管理平台重启"></nz-alert>
                                 </div>
                             </div>
                         </div>
@@ -102,15 +117,15 @@
                                 <span nz-col nzSpan="5">服务器IP地址:</span>
                                 <div nz-col nzSpan="19">
                                     <div *ngIf="editMode.ntpSync">
-                                        <input nz-input [(ngModel)]="ntpIpEnter" name="ntpIp">
-                                        <nz-alert nzType="error" nzMessage="请输入合法IP地址" nzShowIcon></nz-alert>
+                                        <input nz-input name="ntpIp" [(ngModel)]="ntpIpEnter" appValidator="ip" #name="ngModel"
+                                               (ngModelChange)="isDisabled=name.invalid && name.dirty">
+                                        <nz-alert *ngIf="name.invalid && name.dirty" nzType="error" nzMessage="请输入合法IP地址" nzShowIcon></nz-alert>
                                         <nz-alert nzType="warning" nzShowIcon nzMessage="当系统时间和NTP 服务器时间相差较大时，可能会导致安全管理平台重启"></nz-alert>
                                     </div>
                                     <span *ngIf="!editMode.ntpSync">{{ntpIp}}</span>
                                 </div>
                             </div>
                         </div>
-
                     </nz-radio-group>
                 </nz-card>
                 <ng-template #ntpSyncTemp>
@@ -118,8 +133,8 @@
                     </button>
                     <div *ngIf="editMode.ntpSync">
                         <button nz-button nzType="primary" (click)="closeModel(false,'ntpSync')">取消</button>
-                        <button nz-button nzType="primary" (click)="confirmModal.ntpSync.isVisible=true">保存</button>
-                        <app-modal [confirmModal]="confirmModal.ntpSync" (closeModel)="closeModel($event,'ntpSync')"></app-modal>
+                        <button nz-button nzType="primary" (click)="confirmModal.ntpSync.isVisible=true" [disabled]="isDisabled">保存</button>
+                        <app-device-modal [confirmModal]="confirmModal.ntpSync" (closeModel)="closeModel($event,'ntpSync')"></app-device-modal>
                     </div>
                 </ng-template>
             </div>
@@ -136,7 +151,8 @@
                                 <span *ngIf="!editMode.scheduleDelete">
                                     {{logDeletionData === '-1' ? "永久" : logDeletionData + "天"}}
                                 </span>
-                                <nz-select *ngIf="editMode.scheduleDelete" [(ngModel)]="logDeletionData" name="logDeletionData" >
+                                <nz-select *ngIf="editMode.scheduleDelete" [(ngModel)]="logDeletionData"
+                                           name="logDeletionData">
                                     <nz-option nzValue="-1" nzLabel="永久"></nz-option>
                                     <nz-option nzDisabled nzLabel="--------"></nz-option>
                                     <nz-option nzValue="90" nzLabel="90天"></nz-option>
@@ -149,7 +165,8 @@
                             <nz-form-label nzSpan="5">每天删除时间</nz-form-label>
                             <nz-form-control nzSpan="12">
                                 <ng-container *ngIf="editMode.scheduleDelete">
-                                    <nz-time-picker [(ngModel)]="logDeletionTime" [nzAllowEmpty]="false" nzFormat="HH:mm" name="logDeletionTime"></nz-time-picker>
+                                    <nz-time-picker [(ngModel)]="logDeletionTime" [nzAllowEmpty]="false"
+                                                    nzFormat="HH:mm" name="logDeletionTime"></nz-time-picker>
                                 </ng-container>
                                 <span *ngIf="!editMode.scheduleDelete">{{logDeletionTime | date: 'HH:mm'}}</span>
                             </nz-form-control>
@@ -157,7 +174,9 @@
                     </form>
                 </nz-card>
                 <ng-template #scheduleDeleteTemp>
-                    <button *ngIf="!editMode.scheduleDelete" nz-button nzType="primary" (click)="editMode.scheduleDelete=true">编辑</button>
+                    <button *ngIf="!editMode.scheduleDelete" nz-button nzType="primary"
+                            (click)="editMode.scheduleDelete=true">编辑
+                    </button>
                     <div *ngIf="editMode.scheduleDelete">
                         <button nz-button nzType="primary" (click)="cancelScheduleDelete()">取消</button>
                         <button nz-button nzType="primary" (click)="changeScheduleDelete()">保存</button>
@@ -170,12 +189,14 @@
                     设置储存空间上限为
                     <span *ngIf="!editMode.storage">{{storageStrategyTmp}}</span>
                     <span *ngIf="editMode.storage">
-                        <nz-input-number [(ngModel)]="storageStrategyTmp" [nzMin]="60" [nzMax]="90" [nzStep]="1"></nz-input-number>
+                        <nz-input-number [(ngModel)]="storageStrategyTmp" [nzMin]="60" [nzMax]="90"
+                                         [nzStep]="1"></nz-input-number>
                     </span>
                     %，超过上限系统将会报警。
                 </nz-card>
                 <ng-template #storageTemp>
-                    <button *ngIf="!editMode.storage" nz-button nzType="primary" (click)="editMode.storage=true">编辑</button>
+                    <button *ngIf="!editMode.storage" nz-button nzType="primary" (click)="editMode.storage=true">编辑
+                    </button>
                     <div *ngIf="editMode.storage">
                         <button nz-button nzType="primary" (click)="cancelStorageStatus()">取消</button>
                         <button nz-button nzType="primary" (click)="changeStorageStatus()">保存</button>
@@ -191,8 +212,8 @@
                 <span>安全管理平台关机或重启后，会导致所有当前用户退出，请确保重要信息已经保存备份。</span>
                 <button nz-button nzType="primary" (click)="confirmModal['shutdown'].isVisible=true">关机</button>
                 <button nz-button nzType="primary" (click)="confirmModal['restart'].isVisible=true">重启</button>
-                <app-modal [confirmModal]="confirmModal['shutdown']" (closeModel)="closeModel($event, 'shutdown')"></app-modal>
-                <app-modal [confirmModal]="confirmModal['restart']" (closeModel)="closeModel($event, 'restart')"></app-modal>
+                <app-device-modal [confirmModal]="confirmModal['shutdown']" (closeModel)="closeModel($event, 'shutdown')"></app-device-modal>
+                <app-device-modal [confirmModal]="confirmModal['restart']" (closeModel)="closeModel($event, 'restart')"></app-device-modal>
             </nz-card>
         </div>
         <!--恢复原厂设置-->
@@ -200,89 +221,103 @@
             <nz-card [nzBordered]="false" nzTitle="恢复原厂设置">
                 <span>恢复原厂设置，会删除所有已经部署的策略和网络审计规则，停止当前的学习，并清除以往学习历史。</span>
                 <button nz-button nzType="primary" (click)="confirmModal['reset'].isVisible=true">恢复原厂设置</button>
-                <app-modal [confirmModal]="confirmModal['reset']" (closeModel)="closeModel($event, 'reset')"></app-modal>
+                <app-device-modal [confirmModal]="confirmModal['reset']" (closeModel)="closeModel($event, 'reset')"></app-device-modal>
             </nz-card>
         </div>
     </nz-tab>
-    <nz-tab nzTitle="系统升级" nz-row>
+    <nz-tab nzTitle="系统升级" nz-row (nzClick)="getUpgradeInfo()">
         <!--系统升级-->
         <div nz-col nzSpan="24" class="gutter-row">
             <nz-card [nzBordered]="false" nzTitle="系统升级">
                 <nz-alert nz-col nzSpan="24" class="gutter-row" nzType="warning" nzShowIcon
                           nzMessage="系统只支持升级到较新版本，系统升级过程会清除当前系统数据，此动作将无法还原，请确认升级操作。"></nz-alert>
-                <img nz-col nzSpan="24" class="upgrade-logo gutter-row" src="../../assets/images/logo/update-image.png" style="width:148px"/>
+                <img nz-col nzSpan="24" class="upgrade-logo gutter-row" src="../../assets/images/logo/update-image.png"
+                     style="width:148px"/>
                 <span nz-col nzSpan="24" class="gutter-row">产品序列号 : {{system['serialNumber']}}</span>
                 <span nz-col nzSpan="24" class="gutter-row">系统版本号 : V3.0 </span>
-                <span nz-col nzSpan="24" class="gutter-row">上次更新 : {{system['lastUpgrade'] | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+                <span *ngIf="system['lastUpgrade']" nz-col nzSpan="24" class="gutter-row">上次更新 : {{system['lastUpgrade'] | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+                <span *ngIf="!system['lastUpgrade']" nz-col nzSpan="24" class="gutter-row">上次更新 : 未知</span>
                 <div nz-col nzSpan="24" class="gutter-row">
-                    <span >升级包文件 :</span>
-                    <nz-upload nzAction="/api/v2.0/files/console/uploadimage" (nzChange)="handleChange($event)">
+                    <span>升级包文件 :</span>
+                    <nz-upload nzAction="/api/v2.0/files/console/uploadimage"
+                               [(nzFileList)]="fileList" (nzChange)="upLoadFile($event)">
                         <button nz-button nzType="primary" [disabled]="isDPIUpgrading">浏览</button>
-                        <nz-alert nzType="error" *ngIf="uploadImageFail" nzShowIcon style="float: right"
-                                  [nzMessage]="uploadImageFail ? uploadImageFail : '上传失败，请重新上传。'"></nz-alert>
                     </nz-upload>
+                    <nz-alert nzType="error" *ngIf="fileList.length && uploadImageFail" nzShowIcon style="display: inline-block"
+                              [nzMessage]="uploadImageFail ? uploadImageFail : '上传失败，请重新上传。'"></nz-alert>
                     <span *ngIf="isDPIUpgrading">(安全设备升级中，无法升级监管平台)</span>
                 </div>
-                <div nz-col nzSpan="24" >
+                <div nz-col nzSpan="24">
                     <button nz-button nzType="primary" [disabled]="!uploadImageSuccess" (click)="confirmModal['showUpgrade'].isVisible=true">开始升级</button>
-                    <app-modal [confirmModal]="confirmModal['showUpgrade']" (closeModel)="closeModel($event, 'showUpgrade')"></app-modal>
-                    <app-modal [confirmModal]="confirmModal['confirmUpgrade']"></app-modal>
+                    <app-device-modal [confirmModal]="confirmModal['showUpgrade']" (closeModel)="closeModel($event, 'showUpgrade')"></app-device-modal>
+                    <app-device-modal [confirmModal]="confirmModal['confirmUpgrade']"></app-device-modal>
+                    <app-device-modal [confirmModal]="confirmModal['upgradeSuccess']"></app-device-modal>
                 </div>
             </nz-card>
         </div>
     </nz-tab>
-    <nz-tab nzTitle="系统备份" nz-row>
-        <!--安全管理平台配置备份-->
-        <div nz-col nzSpan="24" class="gutter-row">
-            <nz-card nz-row [nzBordered]="false" nzTitle="安全管理平台配置备份">
-                <span nz-col nzSpan="2">自动备份</span>
-                <nz-switch nz-col nzSpan="3" [ngModel]="isSwitchOn" nzCheckedChildren="开启" nzUnCheckedChildren="关闭" (ngModelChange)="switchBackUpStrategy($event)"></nz-switch>
-                <nz-alert nz-col nzSpan="8" *ngIf="isSwitchOn" nzType="warning" nzMessage="开启自动备份后系统每周六凌晨2点整（北京时间）执行一次自动备份" nzShowIcon></nz-alert>
-                <div nz-col nzSpan="2" [nzOffset]="isSwitchOn ? 9 : 17" >
-                    <button nz-button nzType="primary" (click)="confirmModal['doConfBackUp'].isVisible=true">手动备份</button>
-                    <app-modal [confirmModal]="confirmModal['doConfBackUp']" (closeModel)="closeModel($event, 'doConfBackUp')"></app-modal>
-                </div>
-            </nz-card>
-        </div>
-        <!--安全管理平台备份文件-->
-        <div nz-col nzSpan="24" class="gutter-row">
-            <nz-card [nzBordered]="false" [nzTitle]="titleTemp" [nzExtra]="deleteBackUpFilesTemp">
-                <nz-table #confBackUpInfoTable
-                          [nzData]="confBackUpInfo"
-                          [nzPageSize] = 4
-                          (nzCurrentPageDataChange)="currentPageDataChange($event)"
-                          (nzPageIndexChange)="refreshStatus()"
-                          (nzPageSizeChange)="refreshStatus()">
-                    <thead>
+    <nz-tab nzTitle="系统备份" nz-row (nzClick)="initBackUp()" class="mySpin">
+        <nz-spin [nzSpinning]="isBackUp" nzTip='备份处理中……' [nzSize]="'large'">
+            <!--安全管理平台配置备份-->
+            <div nz-col nzSpan="24" class="gutter-row">
+                <nz-card nz-row [nzBordered]="false" nzTitle="安全管理平台配置备份">
+                    <span nz-col nzSpan="2">自动备份</span>
+                    <nz-switch nz-col nzSpan="3" [ngModel]="isSwitchOn" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"
+                               (ngModelChange)="switchBackUpStrategy($event)"></nz-switch>
+                    <nz-alert nz-col nzSpan="8" *ngIf="isSwitchOn" nzType="warning"
+                              nzMessage="开启自动备份后系统每周六凌晨2点整（北京时间）执行一次自动备份" nzShowIcon></nz-alert>
+                    <div nz-col nzSpan="2" [nzOffset]="isSwitchOn ? 9 : 17">
+                        <button nz-button nzType="primary" (click)="confirmModal['doConfBackUp'].isVisible=true">手动备份
+                        </button>
+                        <app-device-modal [confirmModal]="confirmModal['doConfBackUp']" (closeModel)="closeModel($event, 'doConfBackUp')"></app-device-modal>
+                    </div>
+                </nz-card>
+            </div>
+            <!--安全管理平台备份文件-->
+            <div nz-col nzSpan="24" class="gutter-row">
+                <nz-card [nzBordered]="false" [nzTitle]="titleTemp" [nzExtra]="deleteBackUpFilesTemp">
+                    <nz-table #confBackUpInfoTable nzBordered
+                              [nzLoading]="loading"
+                              [nzData]="confBackUpInfo"
+                              [nzTotal]="confBackUpCount"
+                              [nzPageSize]="pageSize"
+                              [(nzPageIndex)]="pageIndex"
+                              [nzFrontPagination]="false"
+                              (nzPageIndexChange)="pageIndexChange()"
+                              [nzShowQuickJumper]="true"
+                              [nzShowTotal]="totalTemplate">
+                        <thead>
                         <tr>
-                            <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
+                            <th nzShowCheckbox [(nzChecked)]="allChecked" (nzCheckedChange)="checkAll($event)"></th>
                             <th>备份文件类型</th>
                             <th>最近备份时间</th>
                             <th>备份文件</th>
-                            <th>操作</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let file of confBackUpInfoTable.data">
-                        <td nzShowCheckbox [(nzChecked)]="file.checked" [nzDisabled]="file.disabled" (nzCheckedChange)="refreshStatus()"></td>
-                        <td>{{file.deviceId  || '无'}}</td>
-                        <td>{{(file.backupAt | date:'yyyy-MM-dd HH:mm:ss') || '无'}}</td>
-                        <td>{{file.directory || '无'}}</td>
-                        <td>
-                            <a >删除</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </nz-table>
-            </nz-card>
-            <ng-template #titleTemp>
-                <span>安全管理平台备份文件</span>
-                <nz-alert nzType="warning" nzMessage="注意：每种类型备份文件最多只保留5个，更早的文件会被自动删除" nzShowIcon></nz-alert>
-            </ng-template>
-            <ng-template #deleteBackUpFilesTemp>
-                <button nz-button nzType="primary" (click)="confirmModal.deleteBackUpFiles.isVisible=true">批量删除</button>
-                <app-modal [confirmModal]="confirmModal.deleteBackUpFiles" (closeModel)="$event && deleteBackUpFiles()"></app-modal>
-            </ng-template>
-        </div>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let file of confBackUpInfoTable.data">
+                            <td nzShowCheckbox [(nzChecked)]="file.checked" (nzCheckedChange)="refreshStatus()"></td>
+                            <td>{{['convertBackType', file.deviceId] | device}}</td>
+                            <td>{{(file.backupAt | date:'yyyy-MM-dd HH:mm:ss') || '无'}}</td>
+                            <td>{{file.directory || '无'}}</td>
+                        </tr>
+                        </tbody>
+                    </nz-table>
+                    <ng-template #totalTemplate>
+                        <span>共 {{confBackUpCount}} 条，</span>
+                        <span>每页展示 {{pageSize}} 条，</span>
+                        <span>共 {{pageTotalNumber}} 页</span>
+                    </ng-template>
+                </nz-card>
+                <ng-template #titleTemp>
+                    <span>安全管理平台备份文件</span>
+                    <nz-alert nzType="warning" nzMessage="注意：每种类型备份文件最多只保留5个，更早的文件会被自动删除" nzShowIcon></nz-alert>
+                </ng-template>
+                <ng-template #deleteBackUpFilesTemp>
+                    <button nz-button nzType="primary" (click)="confirmModal.deleteBackUpFiles.isVisible=true">批量删除</button>
+                    <app-device-modal [confirmModal]="confirmModal.deleteBackUpFiles" (closeModel)="$event && deleteBackUpFiles()"></app-device-modal>
+                </ng-template>
+            </div>
+        </nz-spin>
     </nz-tab>
 </nz-tabset>

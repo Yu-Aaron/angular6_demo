@@ -9,6 +9,7 @@ import {NavComponent} from '../layout/nav/nav.component';
 import {ContentComponent} from '../layout/content/content.component';
 import {TransformTitlePipe} from '../common/pipe/transformTitle.pipe';
 
+
 @NgModule({
     imports: [
         SharedModule,
@@ -20,7 +21,7 @@ import {TransformTitlePipe} from '../common/pipe/transformTitle.pipe';
         HeaderComponent,
         ContentComponent,
         FooterComponent,
-        TransformTitlePipe
+        TransformTitlePipe,
     ],
     exports: [
         PagesComponent,

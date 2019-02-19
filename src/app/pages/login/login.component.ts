@@ -4,6 +4,7 @@ import {HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {ConfigService} from '../../common/services/config.service';
 import C from 'crypto-js';
+import {SseService} from '../../common/services/sse.service';
 
 
 @Component({
@@ -19,7 +20,10 @@ export class LoginComponent implements OnInit {
     @Output() checkLogin = new EventEmitter();
 
 
-    constructor(private configService: ConfigService, private fb: FormBuilder, private router: Router,) {
+    constructor(private configService: ConfigService,
+                private sseService: SseService,
+                private fb: FormBuilder,
+                private router: Router,) {
     }
 
     ngOnInit() {
@@ -67,8 +71,10 @@ export class LoginComponent implements OnInit {
             fromObject: loginInfo
         });
         this.configService.login(params).subscribe((data) => {
-            this.router.navigate(['pages/monitor/overview']);
-            sessionStorage.setItem('isLogin', 'true');
+            if (data['success']) {
+                this.router.navigate(['pages/monitor/overview']);
+                sessionStorage.setItem('isLogin', 'true');
+            }
         });
     }
 

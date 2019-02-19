@@ -1,3 +1,72 @@
-<p>
-  networksession works!
-</p>
+<div class="content_filter">
+    <!-- 过滤条件 -->
+    <app-filter-table *ngIf="filterFlag"
+                      [timeValueData]="filterConditionData.timeValueData"
+                      [controlArray]="filterConditionData.controlArray"
+                      [isFuzzySearch]="true"
+                      [filterFlag]="filterFlag"
+                      (filterTable)="filterButton($event)"
+                      (searchFilterTable)="searchFilterTable($event)"></app-filter-table>
+    <div class="float_left">
+        <nz-dropdown [nzTrigger]="'click'">
+            <button nz-button nz-dropdown nzType="primary" [disabled]="!selectDevice">{{selectDevice || '暂无在线的安全设备'}}
+                <i nz-icon type="down" class="float_right"></i>
+            </button>
+            <ul nz-menu>
+                <li nz-menu-item *ngFor="let item of deviceList; let i = index" (click)="changeDevice(item.name, i)" [nzSelected]="item.select">
+                    {{item.name}}
+                </li>
+            </ul>
+        </nz-dropdown>
+    </div>
+    <div class="float_right content_filter_right" nzCompact *ngIf="selectDevice">
+        <form novalidate>
+            <button *ngIf="!filterFlag" nz-button nzType="primary" (click)="filterFlag = !filterFlag;">过滤条件</button>
+        </form>
+    </div>
+</div>
+
+<nz-table nzBordered
+          #sessionTableTmp
+          [nzData]="sessionTable"
+          [nzTotal]="tableTotalData"
+          [nzShowQuickJumper]="true"
+          [nzFrontPagination]="false"
+          [(nzPageIndex)]="pageIndex"
+          [(nzPageSize)]="pageSize"
+          (nzPageIndexChange)="pageIndexChange()"
+          [nzLoading]="loading"
+          [nzShowTotal]="totalTemplate"
+>
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>源IP</th>
+        <th>源端口</th>
+        <th>目标IP</th>
+        <th>目标端口</th>
+        <th>会话协议</th>
+        <th>应用名称</th>
+        <th>连接状态</th>
+        <th>策略引用</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ss of sessionTableTmp.data; let i =index">
+        <td>{{i + 1 }}</td>
+        <td>{{ss.sourceIp}}</td>
+        <td>{{ss.sourcePort}}</td>
+        <td>{{ss.targetIp}}</td>
+        <td>{{ss.targetPort}}</td>
+        <td>{{ss.sessionProtocol}}</td>
+        <td>{{ss.applicationName==='modbus-tcp'?'Modbus-TCP':ss.applicationName}}</td>
+        <td>{{ss.connectionState}}</td>
+        <td>{{ss.strategyRefName}}</td>
+    </tr>
+    </tbody>
+</nz-table>
+<ng-template #totalTemplate let-total>
+    <span>共 {{tableTotalData}} 条，</span>
+    <span>每页展示 {{pageSize}} 条，</span>
+    <span>共 {{pageTotalNumber}} 页</span>
+</ng-template>

@@ -1,0 +1,204 @@
+<div class="secincident_details">
+  <button nz-button nzType="primary" class="margin-bottom-38" [routerLink]="['/pages/security/secincident']">返回</button>
+  <div class="secincident_tab">
+    <div>
+      <nz-tabset [nzTabPosition]="'top'" [nzType]="'line'" [(nzSelectedIndex)]="tabIndex" (nzSelectedIndexChange)="tabIndexChange($event)">
+          <nz-tab nzTitle="详细信息">
+            <p class="margin-bottom-38 font-size-18">安全事件详情总览</p>
+            <div class="secincident-message-content">
+              <div nz-row [nzGutter]="24">
+                  <div nz-col [nzSpan]="6" class="gutter-row">
+                    <div class="gutter-box">
+                      <span class="warning_yellow">{{detail.incident['level'] | eventLevel}}</span>
+                      <span class="level">事件等级</span>
+                      <img src="/assets/images/secincident/warning.svg" alt="">
+                      <img src="/assets/images/secincident/warning_little.svg" alt="" class="warning_little">
+                    </div>
+                  </div>
+                  <div nz-col [nzSpan]="6" class="gutter-row">
+                    <div class="gutter-box">
+                        <span class="warning_yellow color-primary">{{detail.incident['packetLength']}}  字节</span>
+                        <span class="level">事件包长度</span>
+                        <img src="/assets/images/secincident/paperclip.svg" alt="">
+                        <img src="/assets/images/secincident/paperclip_little.svg" alt="" class="warning_little">
+                    </div>
+                  </div>
+                  <div nz-col [nzSpan]="6" class="gutter-row">
+                    <div class="gutter-box">
+                        <span class="warning_yellow color-warning">{{detail.incident['zoneName'] || detail.incident['deviceName']}}</span>
+                        <span class="level">发生区域</span>
+                        <img src="/assets/images/secincident/warning.svg" alt="">
+                        <img src="/assets/images/secincident/warning_little.svg" alt="" class="warning_little">
+                    </div>
+                  </div>
+                  <div nz-col [nzSpan]="6" class="gutter-row">
+                    <div class="gutter-box">
+                        <span class="warning_yellow color-success">{{detail.incident['similarCount'] || 0}}  件</span>
+                        <span class="level">今日关联事件</span>
+                        <img src="/assets/images/secincident/warning.svg" alt="">
+                        <img src="/assets/images/secincident/warning_little.svg" alt="" class="warning_little">
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <p class="margin-bottom-38 font-size-18">安全事件详细信息</p>
+            <div class="secincident-message-content secincident-message-details">
+              <p class="message_details_header">事件内容</p>
+              <div class="message_details_content">
+                <div nz-row nzGutter="24">
+                  <div nz-col nzSpan="6">
+                      <label>处理方式： </label>
+                      <label>{{detail.incident['level'] | eventLevel}} </label>
+                  </div>
+                  <div nz-col nzSpan="6">
+                      <label>风险等级： </label>
+                      <label>{{detail.incident['riskLevel'] | eventRiskLevel}} </label>
+                  </div>
+                  <div nz-col nzSpan="6">
+                      <label>事件类别： </label>
+                      <label>安全事件 </label>
+                  </div>
+                  <div nz-col nzSpan="6">
+                      <label>发生日期： </label>
+                      <label>{{detail.incident['timestamp'] | date: 'yyyy-MM-dd'}} </label>
+                  </div>
+                  <div nz-col nzSpan="6">
+                      <label>发生时间： </label>
+                      <label>{{detail.incident['timestamp'] | date: 'HH:mm:ss'}} </label>
+                  </div>
+                </div>
+              </div>
+              <p class="message_details_header">事件协议</p>
+              <div class="message_details_content">
+                <div nz-row nzGutter="24">
+                  <div nz-col nzSpan="6">
+                    <label>网络层协议： </label>
+                    <label>{{detail.incident['protocol']==='0'?'无':detail.incident['protocol']}} </label>
+                  </div>
+                  <div nz-col nzSpan="6">
+                    <label>网络应用协议： </label>
+                    <label>{{detail.incident['appLayerProtocol']==='0'?'无':detail.incident['appLayerProtocol']}} </label>
+                  </div>
+                  <div nz-col nzSpan="6">
+                    <label>协议细节： </label>
+                    <label>{{detail.incident['protocolDetail'] | protocolDetail}} </label>
+                  </div>
+                  <div nz-col nzSpan="6">
+                    <label>备注： </label>
+                    <label>{{detail.incident['signatureMessage']}} </label>
+                  </div>
+                </div>
+              </div>
+              <p class="message_details_header">规则项</p>
+              <div class="message_details_content message_details_matched_key">
+                <div nz-row nzGutter="24">
+                  <div nz-col nzSpan="24">
+                      <label>secure： </label>
+                      <label>{{detail.incident['matchedKey']}}</label>
+                  </div>
+                </div>
+              </div>
+              <p class="message_details_header">事件内容包含（长度包含{{detail.incident['packetLength']}}）</p>
+              <div class="message_details_content">
+                <div nz-row nzGutter="24">
+                  <div nz-col nzSpan="24">
+                      <label>事件内容包含： </label>
+                      <label>{{detail.incident['packet']['hb_sliced'] | toHex}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nz-tab>
+          <nz-tab nzTitle="节点">
+            <p class="margin-bottom-38 font-size-18">节点</p>
+            <div class = "secincident-node-content">
+              <div class="secincident-node-image"></div>
+              <div class="secincident-node-message_content" nz-row nzGutter="24">
+                <div class = "secincident-node-message" nz-col [nzSpan]="8" *ngFor="let node of nodes;let nodeData of detail.nodes;let i = index">
+                  <div class="secincident-node-message_left">
+                    <div class="secincident-node-message_label">
+                        <label *ngIf="i === 0">源设备名称 : </label>
+                        <label *ngIf="node === 'dpi'">安全设备 ： </label>
+                        <label *ngIf="i === 2">目的设备名称 ： </label>
+                        <label>{{nodeData.name || '未知'}}</label>
+                    </div>
+                    <div class="secincident-node-message_label">
+                        <label>IP地址 : </label>
+                        <label *ngIf="i===0">{{detail.incident.sourceIp||'未知'}} </label>
+                        <span *ngIf="i===1">
+                            <label *ngFor="let port of detail.nodesChild">
+                              <span *ngIf="port.isMgmtPort">{{port.portIp||'未知'}}</span>
+                            </label>
+                        </span>
+                        <label *ngIf="i===2">{{detail.incident.destinationIp||'未知'}} </label>
+                    </div>
+                    <div class="secincident-node-message_label" *ngIf="node !== 'dpi'">
+                        <label>MAC地址 : </label>
+                        <label *ngIf="i===0">{{detail.incident.sourceMac||'未知'}} </label>
+                        <span *ngIf="i===1">
+                            <label *ngFor="let port of detail.nodesChild">
+                              <span *ngIf="port.isMgmtPort">{{port.mac||'未知'}}</span>
+                            </label>
+                        </span>
+                        <label *ngIf="i===2">{{detail.incident.destinationMac||'未知'}} </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nz-tab>
+          <nz-tab nzTitle="关联事件">
+            <p class="margin-bottom-38 font-size-18">关联事件列表</p>
+            <div class="content_table">
+              <nz-table
+                #detailsBasicTable
+                [nzData]="detailsDataSet"
+                [nzShowQuickJumper]="true"
+                [nzTotal]="tableTotalData"
+                [nzFrontPagination]="false"
+                [(nzPageIndex)]="pageIndex"
+                [(nzPageSize)]="pageSize"
+                (nzPageIndexChange)="pageIndexChange()"
+                [nzLoading]="loading"
+                [nzShowTotal]="totalTemplate"
+                [nzNoResult]="'没有数据'"
+                >
+                <thead (nzSortChange)="sort($event)" nzSingleSort>
+                  <tr>
+                    <th>处理方式</th>
+                    <th nzShowSort nzSortKey="timestamp">日期</th>
+                    <th>起源</th>
+                    <th>保护终端</th>
+                    <th>目标</th>
+                    <th>协议</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of detailsBasicTable.data">
+                    <td>
+                        {{data.level | eventLevel}}
+                    </td>
+                    <td>{{data.timestamp | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>{{data.sourceName}}</td>
+                    <td>{{data.deviceName}}</td>
+                    <td>{{data.destinationName}}</td>
+                    <td>{{data.appLayerProtocol}}</td>
+                    <td>
+                        <a class="btn_checkDetails" (click)="tabChangeRefresh(data.incidentId)">查看</a>
+                        <!-- [routerLink]="['/pages/security/secincident', data.incidentId]" -->
+                    </td>
+                  </tr>
+                </tbody>
+              </nz-table>
+              <ng-template #totalTemplate let-total>
+                  <span>共 {{tableTotalData}} 个事件，</span>
+                  <span>每页展示{{pageSize}}个事件，</span>
+                  <span>共{{pageTotalNumber}}页</span>
+              </ng-template>
+            </div>
+          </nz-tab>
+        </nz-tabset>
+    </div>
+  </div>
+</div>

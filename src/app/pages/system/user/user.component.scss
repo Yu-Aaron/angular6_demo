@@ -1,0 +1,47 @@
+.system_user_content {
+    header {
+        display: inline-block;
+        float: right;
+        margin-top: -68px;
+    }
+    .operation {
+        position: relative;
+        span {
+            position: absolute;
+            top:18px;
+            &:first-child {
+                left: 90px;
+            }
+            &:last-child {
+                right: 90px;;
+            }
+        }
+    }
+}
+.role_message {
+    span {
+        color: #fe7743;
+        font-size: 12px;
+    }
+}
+.user_name_warning {
+    font-size: 12px;
+    .help-msg {
+        color: #fe7743;
+        span {
+            width: 13px;
+            height: 15px;
+            display: inline-block;
+            background-image: url(/assets/images/help.png);
+            background-repeat: no-repeat;
+            background-size: 17px;
+            position: relative;
+            top: 4px;
+            margin: auto 6px;
+            margin-left: 0;
+            background-size: 12px;
+        }
+    }
+}
+
+

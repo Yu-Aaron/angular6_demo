@@ -1,3 +1,31 @@
-<p>
-  factorydevice works!
-</p>
+<div class="page-asset-factorydevice">
+    <button nz-button nzType="primary" class="fr" (click)="newDevice()">新建设备</button>
+    <nz-table #ajaxTable [nzFrontPagination]="false" [nzData]="tableData" [nzLoading]="false" [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="getAll({})" >
+        <thead (nzSortChange)="sort($event)">
+            <tr>
+                <th nzShowSort nzSortKey="name">名称</th>
+                <th nzShowSort nzSortKey="serialNumber">序列号</th>
+                <th nzShowSort nzSortKey="make">厂商</th>
+                <th>类型</th>
+                <th>型号</th>
+                <th>IP/MAC</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of tableData">
+                <td>{{data.name}}</td>
+                <td>{{data.serialNumber || "未知"}}</td>
+                <td>{{data.make}}</td>
+                <td>{{getType(data.iconType)}}</td>
+                <td>{{(data._model_name | deviceModel:data._model_name) || '未知'}}</td>
+                <td><div *ngFor="let port of data.devicePorts"><span class="inline-table-ip">{{port.portIp || "未知"}}</span><span class="inline-table-mac">{{(port.mac | uppercase) || "未知"}}</span></div></td>
+                <td><a class="view-device-detail" (click)="viewDeviceDetail(data.deviceId)">查看</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="delete-device text-red" (click)="deleteDevice(data)">删除</a></td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+<fac-new-device [isNewDevice]="isNewDevice" [models]="models" [alldevice]="alldevice" [allDeviceFull]="allDeviceFull" *ngIf="isNewDevice" (change)="newDeviceChange($event)"></fac-new-device>
+<fac-view-device [isViewDevice]="isViewDevice" [models]="models" [alldevice]="alldevice" [allDeviceFull]="allDeviceFull" [device]="device" *ngIf="isViewDevice" (change)="viewDetailChange($event)"></fac-view-device>

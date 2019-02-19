@@ -1,0 +1,123 @@
+.secincident_tab {
+    .secincident-message-content {
+        margin-bottom: 38px;
+        width: 100%;
+        background: #fff;
+        border: 1px solid #e1e7eb;
+        > div {
+          padding: 38px 0;
+          z-index: 10;
+        }
+        .gutter-row {
+          text-align: center;
+          .gutter-box {
+            position: relative;
+          }
+          .warning_yellow {
+            font-size: 24px;
+            color: #d3e667;
+            font-style: normal;
+            position: absolute;
+            left: 135px;
+          }
+          .level {
+            position: absolute;
+            left: 100px;
+            top: 45px;
+          }
+          .warning_little {
+            position: absolute;
+            left: 80px;
+            top: 47px;
+          }
+          .color-primary {
+            color: #6c84e9 !important;
+          }
+          .color-warning {
+            color: #fe7743 !important;
+          }
+          .color-success {
+            color: #6bc24e !important;
+          }
+        }
+    }
+    .secincident-message-details {
+      padding: 40px 50px;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #e1e7eb;
+      font-size: 16px;
+      color: #5d627f;
+      overflow: hidden;
+      margin-bottom: 30px;
+      .message_details_header {
+        padding-bottom: 28px;
+        border-bottom: 1px solid #e1e7eb;
+        margin-bottom: 0px;
+      }
+      .message_details_content {
+        padding: 25px 0 25px 0;
+        label {
+          font-size: 16px;
+          font-family: FontAwesome;
+        }
+        .ant-col-6 {
+          padding-left: 0px;
+          padding-bottom: 35px;
+        }
+      }
+      .message_details_matched_key {
+        padding-bottom: 60px;
+      }
+    }
+    .secincident-node-content {
+      width: 100%;
+      background: #fff;
+      padding: 40px 0px;
+      overflow: hidden;
+      border: 1px solid #e1e7eb;
+      .secincident-node-image {
+        overflow: hidden;
+        margin: 0 220px;
+        background: url("/assets/images/secincident/device_save_img.png") no-repeat 50% 50%;
+        display: block;
+        height: 113px;
+        background-size: 100% 100%;
+        div {
+          float: left;
+        }
+      }
+      .secincident_node-image_arrow {
+        width: 235px;
+        height: 110px;
+        background: url("/assets/images/secincident/device_tou.png") repeat-x 50%;
+        margin: 0 50px;
+      }
+      .secincident-node-message {
+        overflow: hidden;
+        margin-top: 40px;
+        color: #5d627f;
+        padding-left: 0px;
+        padding-right: 0px;
+        .secincident-node-message_left {
+          text-align: center
+        }
+        .secincident-node-message_right {
+          float: right;
+        }
+        .secincident-node-message_label {
+          margin-bottom: 38px;
+        }
+        label {
+          font-size: 16px;
+        }
+      }
+      .secincident-node-message_securityAreaName {
+        padding-left: 50px;
+      }
+      .secincident-node-message_content {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+      }
+    }
+}

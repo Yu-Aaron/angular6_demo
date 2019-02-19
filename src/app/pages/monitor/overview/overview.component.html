@@ -1,5 +1,5 @@
 <div nz-row nzGutter="38" class="basic-header">
-    <div nz-col [nzLg]="{span: 6}" [nzMd]="{span: 12}" class="gutter-row" *ngFor="let item of totalData">
+    <div nz-col [nzXXl]="{span: 6}" [nzLg]="{span: 12}" [nzXs]="{span: 24}" class="gutter-row" *ngFor="let item of totalData">
         <div class="card">
             <span class="card-image"
                   [ngStyle]="{'background-image': 'url(/assets/images/overview/' + item.image + ')'}"></span>
@@ -10,11 +10,9 @@
                 <div class="row description">
                     <span>{{item.todayCount}}</span> 个
                     <div class="trend" [ngStyle]="{color: item.totalCountRange >=0 ? '#6bc24e' : '#e66767'}">
-                        <i class="glyphicon"
-                           [ngClass]="{true: 'glyphicon-arrow-up', false: 'glyphicon-arrow-down'}[item.totalCountRange>=0]"></i>
-                        （
-                        <span>{{item.totalCountRange >=0 ? ' + ' : ''}}</span>
-                        <span>{{item.totalCountRange}} </span>% ）
+                        <i nz-icon [type]="item.totalCountRange>=0 ? 'arrow-up' : 'arrow-down'" theme="outline"></i>
+                        <span>（ {{item.totalCountRange >=0 ? ' + ' : ''}}</span>
+                        <span>{{item.totalCountRange}} % ）</span>
                     </div>
                 </div>
             </div>
@@ -22,19 +20,25 @@
     </div>
 </div>
 <div nz-row nzGutter="38" class="basic-body">
-    <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 12}"  class="gutter-row ">
+    <div nz-col [nzXl]="{span: 12}" [nzLg]="{span: 24}"  class="gutter-row ">
         <div class="chart">
             <span>最近24小时安全事件趋势</span>
-            <div echarts [options]="eventOption" class="echartsStyle"></div>
+            <div *ngIf="eventOption" echarts [options]="eventOption" class="echartsStyle"></div>
+            <div *ngIf="!eventOption" class="nodata">
+                <span>当前时段没有安全事件</span>
+            </div>
         </div>
     </div>
-    <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 12}"  class="gutter-row">
+    <div nz-col [nzXl]="{span: 12}" [nzLg]="{span: 24}"  class="gutter-row">
         <div class="chart">
             <span>安全设备中设备类型分布</span>
-            <div echarts [options]="deviceOption" class="echartsStyle"></div>
+            <div *ngIf="seriesData.length" echarts [options]="deviceOption" class="echartsStyle"></div>
+            <div *ngIf="!seriesData.length" class="nodata">
+                <span>当前没有安全设备</span>
+            </div>
         </div>
     </div>
-    <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 12}" class="gutter-row" *ngFor="let item of topListData">
+    <div nz-col [nzXl]="{span: 12}" [nzLg]="{span: 24}" class="gutter-row" *ngFor="let item of topListData">
         <div class="chart table">
             <span>{{item.title}}</span>
             <div nz-row class="topData" *ngIf="item?.data?.length > 0">

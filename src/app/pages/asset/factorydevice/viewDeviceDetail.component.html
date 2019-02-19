@@ -1,0 +1,110 @@
+<nz-modal [(nzVisible)]="isViewDevice" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" [nzWidth]="1100">
+    <ng-template id="factory_detail_title" #modalTitle>
+        工控设备基本信息
+    </ng-template>
+
+    <ng-template #modalContent>
+        <div class="modal_body" nz-row>
+            <div class="">
+				<div class="header-title">
+		            <span>设备规格</span>
+		            <div privilege="NETWORK_DEVICE" class="fr btn-top-pull-right-margin-back">
+		                <button nz-button nzType="primary" *ngIf="!isEdited" [disabled]="isIPEdited" (click)="editDevice()">编辑</button>
+						<button nz-button nzType="primary"  *ngIf="isEdited" (click)="editCancel()">取消</button>
+						<button nz-button nzType="primary" class="margin_left_30" *ngIf="isEdited" [disabled]="nameError || nameLengthError || modelError || hasDuplicateSN" (click)="editDone()">确认</button>
+		            </div>
+		        </div>
+		        <div class="fac-detail-bar" nz-row>
+		            <div nz-col nzSpan="8">
+		                <span class="detail-title" id="name-label"><span class="text_red" *ngIf="isEdited">&#42;</span>设备名称:</span>
+		                <span *ngIf="!isEdited" class="">{{device.name || '未知'}}</span>
+		                <input nz-input *ngIf="isEdited" [(ngModel)]="editedInfo.name" (input)="validateDevice()" size="15"/>
+		                <!--<error-msg ng-show="factorydetail.isEdited" obj="factorydetail.device" validator="factorydetail" type="'name'"></error-msg>-->
+		            </div>
+		            <div nz-col nzSpan="8" >
+		                <span class="detail-title" id="serial-number-label">设备序列号:</span>
+		                <span *ngIf="!isEdited" class="" id="serial-number-content">{{device.serialNumber || '未知'}}</span>
+		                <input nz-input *ngIf="isEdited" [(ngModel)]="editedInfo.serialNumber" (input)="validateDevice()" maxlength="255" size="15"/>
+		                <!--<error-msg ng-show="factorydetail.isEdited" validator="factorydetail" type="'serialNumber'"></error-msg>-->
+		            </div>
+		            <div nz-col ngSpan="8">
+		                <span class="detail-title">更新时间:</span>
+		                <span id="update-time-content" class="">{{(device.updatedAt | date:'yyyy-MM-dd HH:mm:ss') || '未知' }}</span>
+		            </div>
+		        </div>
+		        <div class="fac-detail-bar" nz-row *ngIf="editedInfo.iconType!=='subnet'">
+		            <div class="" nz-col nzSpan="8">
+		                <div class="">
+		                    <span class="detail-title">设备厂商:</span>
+		                    <span id="manufacturer-content" class="">{{device.make || '未知'}}</span>
+		                </div>
+		            </div>
+		            <div nz-col nzSpan="16">
+						<span class="detail-title"><span class="text_red" *ngIf="isEdited">&#42;</span>设备型号:</span>
+						<span *ngIf="!isEdited" id="model-content" class="">{{device._model_name || '未知' | deviceModel}}</span>
+						<div class="detail-content-select" nz-col nzSpan="12" *ngIf="isEdited">
+							<div class="">
+								<div class="input_stack" *ngIf="newModel">
+									<input nz-input class="" *ngIf="newModel" placeholder="请输入设备型号名称" [(ngModel)]="editedInfo._model_name" (input)="validateDevice()" maxlength="255"/>
+								</div>
+								<nz-select id="device-model-list" class="" [(ngModel)]="editedInfo.modelId" (ngModelChange)="modelChange(editedInfo.modelId)">
+									<nz-option *ngFor="let item of forms.models" [nzValue]="item.modelId" [nzLabel]="item.model_name + (item.model && (item.model !== item.model_name) ? ' / ' + item.model : '')"></nz-option>
+								</nz-select>
+							</div>
+						</div>
+		            </div>
+		        </div>
+		        <br/>
+		        <div class="header-title">
+		            <span>设备端口</span>
+		            <div privilege="NETWORK_DEVICE" class="fr btn-top-pull-right-margin-back">
+		                <button nz-button nzType="primary" id="edit-ip-button" *ngIf="!isIPEdited" [disabled]="isEdited" (click)="editIP()">编辑</button>
+						<button nz-button nzType="primary" id="edit-ip-cancel" *ngIf="isIPEdited" (click)="editIPCancel()">取消</button>
+						<button class="margin_left_30" nz-button nzType="primary" id="edit-ip-done" *ngIf="isIPEdited" [disabled]="!allIpMacValid" (click)="editIPDone()">确认</button>
+		            </div>
+		        </div>
+		        <div class="fac-detail-bar" nz-row *ngFor="let port of getPort(editedInfo.devicePorts);let i=index;">
+		            <div class="" nz-col nzSpan="8">
+						<span class="detail-title"><span class="text_red" *ngIf="isIPEdited">&#42;</span>{{ (device.iconType === 'subnet')? '子网地址:' : 'IP地址:'}}</span>
+						<div *ngIf="!isIPEdited" class="ipmac">
+							<span class="">{{ port.portIp || '未知'}} </span>
+						</div>
+						<div *ngIf="isIPEdited" class="ipmac">
+							<div>
+								<input nz-input id="ip-input-{{i}}" *ngIf="!(device.iconType === 'subnet')" [(ngModel)]="port.portIp" (input)="validateAllIp(port, i)" maxlength="255" size="15"/>
+								<input nz-input id="subnet-ip-input-{{i}}" *ngIf="device.iconType === 'subnet'" [(ngModel)]="port.portIp" (input)="validateAllIp(port, i)" maxlength="255" size="15"/>
+								<!--<error-msg id="ip-error-{{$index}}" ng-show="factorydetail.isIPEdited" obj="factorydetail.device" validator="port" type="'ip'"></error-msg>-->
+							</div>
+						</div>
+		            </div>
+		            <div class="" nz-col nzSpan="8" *ngIf="(device.iconType !== 'subnet')" >
+		                <div class="">
+		                    <span class="detail-title">MAC地址:</span>
+		                    <div *ngIf="!isIPEdited" class="ipmac">
+		                        <span class="mac-content">{{port.mac || '未知'}} </span>
+		                    </div>
+		                    <div *ngIf="isIPEdited" class="ipmac">
+		                        <div>
+		                            <input nz-input id="mac-input-{{i}}" *ngIf="isIPEdited" [(ngModel)]="port.mac" (input)="validateAllMac(port, i)" maxlength="255" size="15"/>
+		                            <!--<error-msg id="mac-error-{{$index}}" ng-show="factorydetail.isIPEdited" obj="factorydetail.device" validator="port" type="'mac'"></error-msg>-->
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="" nz-col nzSpan="4" *ngIf ="device.iconType !== 'subnet' && isIPEdited">
+		                <div *ngIf="i>0">
+		                    <button nz-button nzType="primary" id="remove-ip-mac-button-{{i}}" [disabled]="i<editedInfo.devicePorts.length-1" (click)="removeIpMac(i)">删除</button>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="" nz-row *ngIf="isIPEdited && device.iconType !== 'subnet'">
+		            <div nz-col nzSpan="16"></div>
+		            <div nz-col nzSpan="8">
+		                <button nz-button nzType="primary" [disabled]="!allIpMacValid" (click)="addIpMac()">添加端口</button>
+		            </div>
+		        </div>
+            </div>
+        </div>
+    </ng-template>
+</nz-modal>
+

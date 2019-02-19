@@ -11,8 +11,12 @@ export class OverviewService {
 
     baseUrl = 'api/v2.0';
 
-    getTodayTotal(startTime, endTime) {
+    getTodayTotal(startTime, endTime): any {
         return this.http.get(this.baseUrl + '/incidents/onedayincidentcount/groupbylevel/starttime/' + startTime + '/endtime/' + endTime);
+    }
+
+    getEventTrend(time) {
+        return this.http.get(this.baseUrl + '/incidents/onedayincidentcount/24hoursandlevel/time/' + time);
     }
 
     getDeviceTypeDistribution() {

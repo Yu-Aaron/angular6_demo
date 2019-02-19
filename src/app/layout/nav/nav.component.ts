@@ -1,8 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import * as moment from 'moment';
-import {AuthorizationService} from '../../common/services/authorization.service';
-import {ConfigService} from "../../common/services/config.service";
+import { AuthorizationService } from '../../common/services/authorization.service';
+import { ConfigService } from "../../common/services/config.service";
 
 @Component({
     selector: 'app-aside',
@@ -29,7 +29,8 @@ export class NavComponent implements OnInit {
             this.secondLevelMenu.emit(data[this.state]);
             this.currentState.emit(this.state);
         });
-        this.getCurrentTime();
+        // this.getCurrentTime();
+        this.whoAmI();
     }
 
     changeRouter() {
@@ -38,7 +39,11 @@ export class NavComponent implements OnInit {
             this.state = stateAll[2];
             if (event.url !== '/login' && event instanceof NavigationEnd) { // 当导航成功结束时执行
                 this.changeState(this.state);
-                this.currentTitle.emit(stateAll[stateAll.length - 1]);
+                if (stateAll[stateAll.length - 2] === 'secincident') {
+                    this.currentTitle.emit(stateAll[stateAll.length - 2]);
+                } else {
+                    this.currentTitle.emit(stateAll[stateAll.length - 1]);
+                }
             }
         });
     }
@@ -61,6 +66,12 @@ export class NavComponent implements OnInit {
             this.getCurrentTime();
         }, 15000);
     }
-
+    
+    whoAmI() {
+        this.configService.whoAmI().subscribe((data: any)=>{
+            console.log(data);
+            localStorage.setItem('privilege', JSON.stringify(data['targetAndActionValueFormList']));
+        })
+    }
 
 }

@@ -28,7 +28,7 @@ export class TransformTitlePipe implements PipeTransform {
             operate: '操作日志',
             policy: '策略日志',
             featurelib: '威胁特征库',
-            user: '用户管理',
+            user: '已有用户列表',
             config: '登录设置',
             business: '业务设置',
             device: '设备设置'

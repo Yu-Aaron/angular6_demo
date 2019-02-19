@@ -40,6 +40,16 @@ export class CommonService {
         return urlObj;
     }
 
+    //contains 参数拼接
+    filterFunc(q, fields) {
+        return '((' + q.split(' ').map(function (qa) {
+            return fields.map(function (field) {
+                return "contains(" + field + ",'" + qa + "')";
+            }).join(' or ');
+        }).join(') and (') + '))';
+    }
+
+    //深度copy
     deepCopy(obj){
         let o;
         switch(typeof obj){
@@ -70,12 +80,7 @@ export class CommonService {
         return o;
     }
 
-    // contains 参数拼接
-    filterFunc(q, fields) {
-        return '((' + q.split(' ').map(function (qa) {
-            return fields.map(function (field) {
-                return "contains(" + field + ",'" + qa + "')";
-            }).join(' or ');
-        }).join(') and (') + '))';
+    formatDate(date) {
+        return (date.getUTCFullYear() + "-" + (((date.getUTCMonth() + 1) > 9) ? date.getUTCMonth() + 1 : ("0" + (date.getUTCMonth() + 1))) + "-" + ((date.getUTCDate() > 9) ? date.getUTCDate() : ("0" + date.getUTCDate())) + "T" + ((date.getUTCHours() > 9) ? date.getUTCHours() : ("0" + date.getUTCHours())) + ":" + ((date.getUTCMinutes() > 9) ? date.getUTCMinutes() : ("0" + date.getUTCMinutes())) + ":" + ((date.getUTCSeconds() > 9) ? date.getUTCSeconds() : ("0" + date.getUTCSeconds())) + "Z");
     }
 }

@@ -1,0 +1,56 @@
+.panel {
+  .panel-header  {
+    font-size: 20px;
+    margin-bottom: 38px;
+    color: #434552;
+    position: relative;
+    .operate-btn {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      &.btn-confirm {
+        right: 100px;
+      }
+    }
+  }
+  .panel-body {
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e1e7eb;
+    .ant-row {
+      height: 55px;
+      line-height: 55px;
+    }
+    td.delete {
+      color: #E82344;
+      cursor: pointer;
+    }
+    &.security-setting {
+      .ant-input-number {
+        width: 60px;
+        margin-right: 4px;
+        padding: 0px 2px;
+      }
+      .ant-select {
+        width: 60px;
+      }
+    }
+  }
+}
+.warning-text {
+  font-size: 12px;
+  color: #FE7743;
+  i {
+    margin-right: 8px;
+  }
+}
+.error-text {
+  font-size: 12px;
+  color: #E82344;
+  i {
+    margin-right: 8px;
+  }
+}
+.margin-bottom-30 {
+  margin-bottom: 30px;
+}

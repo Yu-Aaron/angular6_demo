@@ -1,3 +1,35 @@
-<p>
-  flow works!
-</p>
+<form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-control>
+            <nz-input-group>
+                <input formControlName="ip" nz-input placeholder="ip" appValidator="ip">
+            </nz-input-group>
+            <nz-form-explain *ngIf="validateForm.get('ip').dirty && validateForm.get('ip').errors">
+                请输入合法的IP地址
+            </nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control>
+            <nz-input-group>
+                <input formControlName="mac" nz-input type="text" placeholder="mac" appValidator="mac">
+            </nz-input-group>
+            <nz-form-explain *ngIf="validateForm.get('mac').dirty && validateForm.get('mac').errors">Please
+                input your mac!
+            </nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control>
+            <button nz-button nzType="primary" [disabled]="!validateForm.valid">Log in</button>
+        </nz-form-control>
+    </nz-form-item>
+</form>
+<button nz-button nzType="primary" *appPrivilege="'SECURITY_INCIDENT'">Primary</button>
+
+<div>
+    <input id="name" name="name" class="form-control" required minlength="4" appValidator="ip" [(ngModel)]="ipValue" #name="ngModel" >
+
+    <div *ngIf="name.errors">please input Ip</div>
+</div>
+
