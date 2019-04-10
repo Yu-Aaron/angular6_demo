@@ -1,35 +1,38 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {SharedModule} from '../shared/shared.module';
-import {PagesRoutingModule} from './pages-routing.module';
-import {PagesComponent} from './pages.component';
-import {HeaderComponent} from '../layout/header/header.component';
-import {FooterComponent} from '../layout/footer/footer.component';
-import {NavComponent} from '../layout/nav/nav.component';
-import {ContentComponent} from '../layout/content/content.component';
-import {TransformTitlePipe} from '../common/pipe/transformTitle.pipe';
-
+import { PagesRoutingModule } from './pages-routing.module';
+import { ShareModule } from '../share/share.module';
+import { PagesComponent } from './pages.component';
+import { HeaderComponent } from '../layout/header/header.component';
+import { ContentComponent } from '../layout/content/content.component';
+import { FooterComponent } from '../layout/footer/footer.component';
+import { SliderComponent } from '../layout/slider/slider.component';
+import { MonitorComponent} from './monitor/monitor.component';
+import { TransformTitlePipe} from '../common/pipe/transformTitle.pipe';
 
 @NgModule({
-    imports: [
-        SharedModule,
-        PagesRoutingModule,
-    ],
     declarations: [
         PagesComponent,
-        NavComponent,
         HeaderComponent,
         ContentComponent,
         FooterComponent,
-        TransformTitlePipe,
+        SliderComponent,
+        MonitorComponent,
+        TransformTitlePipe
+    ],
+    imports: [
+        ShareModule,
+        CommonModule,
+        PagesRoutingModule,
     ],
     exports: [
         PagesComponent,
-        NavComponent,
         HeaderComponent,
         ContentComponent,
-        FooterComponent
+        FooterComponent,
+        SliderComponent,
+        MonitorComponent
     ]
 })
-export class PagesModule {
-}
+export class PagesModule { }

@@ -1,12 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-
+import { Component, Input, OnInit, NgModule } from '@angular/core';
+@NgModule()
 @Component({
-    selector: 'app-content',
-    templateUrl: './content.component.html',
-    styleUrls: ['./content.component.scss']
+  selector: 'app-content',
+  templateUrl: './content.component.html',
+  styleUrls: ['./content.component.scss']
 })
 export class ContentComponent implements OnInit {
-    @Input() currentTitle: string;
+    @Input() secondState: string;
 
     constructor() {
     }

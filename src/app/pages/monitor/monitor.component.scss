@@ -1,0 +1,19 @@
+:host ::ng-deep {
+  nz-card {
+    background: #0B233D;
+  }
+  .ant-card-head, .ant-card-bordered {
+    border: none;
+  }
+}
+.device {
+  nz-card {
+    min-height: 180px;
+  }
+}
+.topData {
+  nz-card {
+    margin-top: 10px;
+    min-height: 500px;
+  }
+}

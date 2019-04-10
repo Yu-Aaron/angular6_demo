@@ -1,36 +1,30 @@
-import {Component, OnInit} from '@angular/core';
-import {CommonService} from "../common/services/common.service";
-import {SseService} from '../common/services/sse.service';
-
+import { Component, OnInit, NgModule } from '@angular/core';
+@NgModule()
 @Component({
-    selector: 'app-pages',
+    selector: 'app-component',
     template: `
         <nz-layout>
-            <nz-sider>
-                <app-aside (secondLevelMenu)="secondLevelMenu=$event" (currentState)="currentState=$event" (currentTitle)="currentTitle=$event"></app-aside>
-            </nz-sider>
+            <app-header></app-header>
             <nz-layout>
-                <app-header [secondLevelMenu]="secondLevelMenu" [currentState]="currentState"></app-header>
-                <app-content [currentTitle]="currentTitle"></app-content>
-                <app-footer></app-footer>
+                <nz-sider [ngStyle]="{'width': firstState === 'monitor' ? '60px' : '160px'}">
+                    <app-slider (firstState)="firstState=$event" (secondState)="secondState=$event"></app-slider>
+                </nz-sider>
+                <nz-content>
+                    <app-content [secondState]="secondState"></app-content>
+                </nz-content>
             </nz-layout>
-            <div *ngIf="timeoutPromise" class="mySpin">
-                <nz-spin [nzSpinning]="timeoutPromise" nzTip='服务器设置部署中，请稍等...' [nzSize]="'large'"></nz-spin>
-            </div>
         </nz-layout>
     `,
 })
 export class PagesComponent implements OnInit {
-    secondLevelMenu: Array<any>;
-    currentState: string;
-    currentTitle: string;
-    timeoutPromise = false;
+    firstState: string;
+    secondState: string;
 
-    constructor(private commonService: CommonService, private sseService: SseService) {
+    constructor() {
+
     }
 
     ngOnInit(): void {
-        this.commonService.getDomain();
-        this.sseService.startSse();
+
     }
 }

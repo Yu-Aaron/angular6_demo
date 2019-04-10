@@ -1,8 +1,6 @@
-<nz-content>
-    <nz-breadcrumb>
-        <nz-breadcrumb-item>{{currentTitle | transform}}</nz-breadcrumb-item>
-    </nz-breadcrumb>
-    <div style="min-height: 360px;">
-        <router-outlet></router-outlet>
-    </div>
-</nz-content>
+<div>
+    {{secondState | transformTitle}}
+</div>
+<div class="">
+    <router-outlet></router-outlet>
+</div>

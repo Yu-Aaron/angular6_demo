@@ -1,9 +1,0 @@
-<div class="logo">
-    <img src="../../assets/images/logo/logo2.png" alt="">
-</div>
-<ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'">
-    <li nz-menu-item *ngFor="let item of firstLevelMenu" routerLink="./{{item.state}}" routerLinkActive="active">
-        <i nz-icon type="{{item.icon}}" theme="outline"></i>
-        <span class="nav-text">{{item.name}}</span>
-    </li>
-</ul>

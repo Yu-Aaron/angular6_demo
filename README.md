@@ -1,10 +1,6 @@
-### 2019-01-29 moment.js 安装使用
+# WEB
 
-npm install moment@2.8.4 --save  安装2.8.4版本
-
-# Web
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.1.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
 
 ## Development server
 
@@ -29,6 +25,3 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-## app/shared/ validator.directive.ts
-`<input formControlName="ip" nz-input placeholder="ip" appValidator="ip">`

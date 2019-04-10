@@ -1,44 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AssetRoutingModule } from './asset-routing.module';
-import { SharedModule } from '../../shared/shared.module';
 
-import {FactorydeviceComponent} from './factorydevice/factorydevice.component';
-import {NetworkdeviceComponent} from './networkdevice/networkdevice.component';
-import {SecuritydeviceComponent} from './securitydevice/securitydevice.component';
-import {TopologyComponent} from './topology/topology.component';
-import {AuthGuard} from '../../shared/AuthGuard';
-import {NgZorroAntdModule} from 'ng-zorro-antd';
-import {DeviceModelPipe} from '../../common/pipe/deviceModel.pipe';
-import {NewdeviceComponent} from './factorydevice/newdevice.component';
-import {ViewdeviceComponent} from "./factorydevice/viewDeviceDetail.component";
-import {FormsModule} from '@angular/forms';
+import { AssetRoutingModule } from './asset-routing.module';
+import { TopologyComponent } from './topology/topology.component';
+import { FactorydeviceComponent } from './factorydevice/factorydevice.component';
+import { NetworkdeviceComponent } from './networkdevice/networkdevice.component';
+import { IsActive } from '../../share/IsActive';
 
 @NgModule({
+    declarations: [TopologyComponent, FactorydeviceComponent, NetworkdeviceComponent],
     imports: [
         CommonModule,
-        AssetRoutingModule,
-        SharedModule,
-        NgZorroAntdModule,
-        FormsModule
-    ],
-    entryComponents: [
-        NewdeviceComponent,
-        ViewdeviceComponent,
-    ],
-    declarations: [
-        FactorydeviceComponent,
-        NetworkdeviceComponent,
-        SecuritydeviceComponent,
-        TopologyComponent,
-        DeviceModelPipe,
-        NewdeviceComponent,
-        ViewdeviceComponent,
+        AssetRoutingModule
     ],
     providers: [
-        AuthGuard,
-        DeviceModelPipe,
+        IsActive
     ]
 })
-export class AssetModule {
-}
+export class AssetModule { }

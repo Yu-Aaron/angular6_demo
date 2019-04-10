@@ -1,30 +1,26 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpParams} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {ConfigService} from '../../common/services/config.service';
+import {Component, EventEmitter, OnInit, Output, NgModule} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
+import {ConfigService } from '../service/config.service';
 import C from 'crypto-js';
-import {SseService} from '../../common/services/sse.service';
 
-
+@NgModule()
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
     private version: string;
+    private imageData: string;
     private key: string;
-    imageData: string;
-    validateForm: FormGroup;
+    private validateForm: FormGroup;
+    errMsg: string;
     @Output() checkLogin = new EventEmitter();
 
-
-    constructor(private configService: ConfigService,
-                private sseService: SseService,
-                private fb: FormBuilder,
-                private router: Router,) {
-    }
+    constructor( private configService: ConfigService, private fb: FormBuilder, private router: Router) { }
 
     ngOnInit() {
         this.showVersion();
@@ -39,7 +35,8 @@ export class LoginComponent implements OnInit {
     }
 
     showVersion() {
-        this.configService.getVersion().subscribe((data: string) => this.version = data);
+        this.configService.getVersion()
+            .subscribe((data: string) => this.version = data);
     }
 
     getImage() {
@@ -72,10 +69,14 @@ export class LoginComponent implements OnInit {
         });
         this.configService.login(params).subscribe((data) => {
             if (data['success']) {
-                this.router.navigate(['pages/monitor/overview']);
-                sessionStorage.setItem('isLogin', 'true');
+            console.log(data);
+            this.router.navigate(['monitor/systemrunning']);
+            sessionStorage.setItem('isLogin', 'true');
+            } else {
+                this.errMsg = data['message'];
             }
+        }, (err) => {
+            this.errMsg = err['error']['error'];
         });
     }
-
 }

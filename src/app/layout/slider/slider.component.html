@@ -1,0 +1,27 @@
+<div class="slider_bar">
+    <!--一级导航展开-->
+    <ul nz-menu class="collapse" [ngStyle]="{'left': isCollapse ? '0' : '-160px'}" (mouseleave)="isCollapse=false">
+        <li *ngFor="let item of firstLevelMenu" routerLink="./{{item.state}}" routerLinkActive="active">
+            <a>
+                <i nz-icon class="svg-top_nav_icon" [ngClass]="item.icon"></i>
+                <span class="nav-text">{{item.state | transformTitle}}</span>
+            </a>
+        </li>
+    </ul>
+    <!--一级菜单-->
+    <ul nz-menu class="first_bar" (mouseenter)="isCollapse=true">
+        <li *ngFor="let item of firstLevelMenu" routerLink="./{{item.state}}" routerLinkActive="active">
+            <span><i nz-icon class="svg-top_nav_icon" [ngClass]="item.icon"></i></span>
+        </li>
+    </ul>
+    <!--二级菜单-->
+    <ul nz-menu class="second_bar" [ngStyle]="{'display': state === 'monitor' ? 'none' : ''}">
+        <li class="title">{{state | transformTitle}}</li>
+        <li *ngFor="let item of secondLevelMenu; let i = index" class="navbar-item">
+            <a routerLink="./{{state}}/{{item.state}}" routerLinkActive="active">
+                <span>{{item.name}}</span>
+                <span class="navbar-border-bottom"></span>
+            </a>
+        </li>
+    </ul>
+</div>

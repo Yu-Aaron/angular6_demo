@@ -1,23 +1,18 @@
-import {RouterModule, Routes} from '@angular/router';
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { IsActive } from '../../share/IsActive';
 
-import {RunninglogComponent} from './runninglog/runninglog.component';
-import {OperateComponent} from './operate/operate.component';
-import {PolicyComponent} from './policy/policy.component';
-import {AuthGuard} from '../../shared/AuthGuard';
+import { OperatelogComponent } from './operatelog/operatelog.component';
+import { RunninglogComponent } from './runninglog/runninglog.component';
 
 const routes: Routes = [
-    {path: 'runninglog', component: RunninglogComponent, canActivate: [AuthGuard]},
-    {path: 'operate', component: OperateComponent, canActivate: [AuthGuard]},
-    {path: 'policy', component: PolicyComponent, canActivate: [AuthGuard]},
-    {path: '', redirectTo: '/pages/log/runninglog'}
+    {path: 'operatelog', component: OperatelogComponent, canActivate: [IsActive]},
+    {path: 'runninglog', component: RunninglogComponent, canActivate: [IsActive]},
+    {path: '', redirectTo: '/page/log/operatelog'}
 ];
 
 @NgModule({
-    exports: [RouterModule],
-    imports: [RouterModule.forChild(routes)],
-    declarations: []
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
-
-export class LogRoutingModule {
-}
+export class LogRoutingModule { }

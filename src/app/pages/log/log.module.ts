@@ -1,27 +1,19 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {LogRoutingModule} from './log-routing.module';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {OperateComponent} from './operate/operate.component';
-import {PolicyComponent} from './policy/policy.component';
-import {RunninglogComponent} from './runninglog/runninglog.component';
-import {AuthGuard} from '../../shared/AuthGuard';
-import {NgZorroAntdModule} from 'ng-zorro-antd';
+import { LogRoutingModule } from './log-routing.module';
+import { RunninglogComponent } from './runninglog/runninglog.component';
+import { OperatelogComponent } from './operatelog/operatelog.component';
+import { IsActive } from '../../share/IsActive';
 
 @NgModule({
+    declarations: [RunninglogComponent, OperatelogComponent],
     imports: [
         CommonModule,
-        NgZorroAntdModule,
         LogRoutingModule
     ],
-    declarations: [
-        OperateComponent,
-        PolicyComponent,
-        RunninglogComponent
-    ],
     providers: [
-        AuthGuard
+        IsActive
     ]
 })
-export class LogModule {
-}
+export class LogModule { }

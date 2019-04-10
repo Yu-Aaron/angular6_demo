@@ -1,0 +1,306 @@
+{
+    "dashboard": [
+        {
+            "state": "monitor",
+            "name": "设备概况",
+            "icon": "equipment_general_situation",
+            "options": {
+                "url_state": "monitor.systemrunning",
+                "reload": true
+            },
+            "enable": true,
+            "root_enable": false,
+            "target": "EQUIPMENT_GENERAL_SITUATION",
+            "currentState": "EQUIPMENT_GENERAL_SITUATION"
+        },
+        {
+            "state": "securityaudit",
+            "name": "安全审计",
+            "icon": "security_audit",
+            "options": {
+                "url_state": "securityaudit.incidentaudit",
+                "reload": true
+            },
+            "enable": true,
+            "root_enable": false,
+            "target": "SECURITY_AUDIT",
+            "currentState": "SECURITY_AUDIT"
+        },
+        {
+            "state": "strategyaudit",
+            "name": "审计策略",
+            "icon": "strategy_audit",
+            "options": {
+                "url_state": "strategyaudit.securitydomain",
+                "reload": true
+            },
+            "enable": true,
+            "root_enable": false,
+            "target": "STRATEGY_AUDIT",
+            "currentState": "STRATEGY_AUDIT"
+        },
+        {
+            "state": "asset",
+            "name": "资产管理",
+            "icon": "asset_management",
+            "options": {
+                "url_state": "asset.topology",
+                "reload": true
+            },
+            "enable": true,
+            "root_enable": false,
+            "target": "ASSET_MANAGEMENT",
+            "currentState": "ASSET_MANAGEMENT"
+        },
+        {
+            "state": "tool",
+            "name": "调试工具",
+            "icon": "debug_tool",
+            "options": {
+                "reload": true,
+                "url_state": "tool.terminal"
+            },
+            "enable": true,
+            "root_enable": false,
+            "target": "DEBUG_TOOL",
+            "currentState": "DEBUG_TOOL"
+        },
+        {
+            "state": "log",
+            "name": "系统日志",
+            "icon": "system_log",
+            "options": {
+                "url_state": "log.runninglog",
+                "reload": true
+            },
+            "enable": true,
+            "target": "SYSTEM_LOG",
+            "currentState": "SYSTEM_LOG"
+        },
+        {
+            "state": "setting",
+            "name": "系统设置",
+            "icon": "system_setting",
+            "options": {
+                "url_state": "setting.usermanagement",
+                "reload": true
+            },
+            "enable": true,
+            "target": "SYSTEM_SETTING",
+            "currentState": "SYSTEM_SETTING"
+        }
+    ],
+    "monitor": [
+        {
+            "state": "systemrunning",
+            "name": "系统运行实况",
+            "icon": "",
+            "enable": true,
+            "target": "SYSTEM_RUNNING_RESULT",
+            "currentState": "EQUIPMENT_GENERAL_SITUATION"
+        },
+        {
+            "state": "riskassessment",
+            "name": "今日风险评估",
+            "icon": "",
+            "enable": true,
+            "target": "TODAY_RISK_ASSESSMENT",
+            "currentState": "EQUIPMENT_GENERAL_SITUATION"
+        }
+    ],
+    "securityaudit": [
+        {
+            "state": "incidentaudit",
+            "name": "事件审计",
+            "icon": "",
+            "enable": true,
+            "target": "INCIDENT_AUDIT",
+            "container": false,
+            "currentState": "SECURITY_AUDIT"
+        },
+        {
+            "state": "protocolaudit",
+            "name": "协议审计",
+            "icon": "",
+            "enable": true,
+            "target": "PROTOCOL_AUDIT",
+            "container": true,
+            "currentState": "SECURITY_AUDIT"
+        },
+        {
+            "state": "flowaudit",
+            "name": "流量审计",
+            "icon": "",
+            "enable": true,
+            "target": "FLOW_AUDIT",
+            "container": false,
+            "currentState": "SECURITY_AUDIT"
+        },
+        {
+            "state": "logaudit",
+            "name": "审计日志",
+            "icon": "",
+            "enable": true,
+            "target": "LOG_AUDIT",
+            "container": false,
+            "currentState": "SECURITY_AUDIT"
+        },
+        {
+            "state": "reportaudit",
+            "name": "审计报表",
+            "icon": "",
+            "enable": true,
+            "target": "REPORT_AUDIT",
+            "currentState": "SECURITY_AUDIT"
+        }
+    ],
+    "strategyaudit": [
+        {
+            "state": "securitydomain",
+            "name": "安全域",
+            "icon": "",
+            "enable": true,
+            "target": "SECURITY_DOMAIN",
+            "currentState": "STRATEGY_AUDIT"
+        },
+        {
+            "state": "strategy",
+            "name": "策略管理",
+            "icon": "",
+            "enable": true,
+            "target": "STRATEGY_MANAGEMENT",
+            "currentState": "STRATEGY_AUDIT"
+        },
+        {
+            "state": "vul",
+            "name": "威胁特征库",
+            "icon": "",
+            "enable": true,
+            "target": "CNCVE_MANAGEMENT",
+            "currentState": "STRATEGY_AUDIT"
+        },
+        {
+            "state": "whitelist",
+            "name": "协议规则管理",
+            "icon": "",
+            "enable": true,
+            "target": "PROTOCOL_RULES_MANAGEMENT",
+            "currentState": "STRATEGY_AUDIT"
+        },
+        {
+            "state": "ipmac",
+            "name": "IP/MAC规则管理",
+            "icon": "",
+            "enable": true,
+            "target": "IP_MAC_MANAGEMENT",
+            "currentState": "STRATEGY_AUDIT"
+        },
+        {
+            "state": "maliciousdomain",
+            "name": "域名规则管理",
+            "icon": "",
+            "enable": true,
+            "target": "DOMAIN_RULES_MANAGEMENT",
+            "currentState": "STRATEGY_AUDIT"
+        }
+    ],
+    "asset": [
+        {
+            "state": "topology",
+            "name": "网络拓扑",
+            "icon": "",
+            "enable": true,
+            "options": {
+                "reload": true
+            },
+            "target": "NETWORK_TOPOLOGY",
+            "currentState": "ASSET_MANAGEMENT"
+        },
+        {
+            "state": "factorydevice",
+            "name": "工控设备列表",
+            "icon": "",
+            "enable": true,
+            "target": "INDUSTRIAL_DEVICE",
+            "currentState": "ASSET_MANAGEMENT"
+        },
+        {
+            "state": "networkdevice",
+            "name": "网络设备列表",
+            "icon": "",
+            "enable": true,
+            "target": "NETWORK_DEVICE",
+            "currentState": "ASSET_MANAGEMENT"
+        }
+    ],
+    "tool": [
+        {
+            "state": "terminal",
+            "name": "模拟终端",
+            "icon": "",
+            "enable": true,
+            "target": "ANALOG_TERMINAL",
+            "currentState": "DEBUG_TOOL"
+        },
+        {
+            "state": "capture",
+            "name": "抓包",
+            "icon": "",
+            "enable": true,
+            "target": "CAPTURE_PACKAGE",
+            "currentState": "DEBUG_TOOL"
+        }
+    ],
+    "log": [
+        {
+            "state": "runninglog",
+            "name": "系统运行日志",
+            "icon": "",
+            "enable": true,
+            "target": "SYSTEM_RUNNING_LOG",
+            "currentState": "SYSTEM_LOG"
+        },
+        {
+            "state": "operatelog",
+            "name": "系统操作日志",
+            "icon": "",
+            "enable": false,
+            "target": "SYSTEM_OPERATE_LOG",
+            "currentState": "SYSTEM_LOG"
+        }
+    ],
+    "setting": [
+        {
+            "state": "usermanagement",
+            "name": "用户管理",
+            "icon": "",
+            "enable": true,
+            "target": "USER_MANAGEMENT",
+            "currentState": "SYSTEM_SETTING"
+        },
+        {
+            "state": "loginmanagement",
+            "name": "登录设置",
+            "icon": "",
+            "enable": true,
+            "target": "LOGIN_MANAGEMENT",
+            "currentState": "SYSTEM_SETTING"
+        },
+        {
+            "state": "businessmanagement",
+            "name": "业务设置",
+            "icon": "",
+            "enable": true,
+            "target": "BUSINESS_MANAGEMENT",
+            "currentState": "SYSTEM_SETTING"
+        },
+        {
+            "state": "devicemanagement",
+            "name": "设备设置",
+            "icon": "",
+            "enable": true,
+            "target": "DEVICE_MANAGEMENT",
+            "currentState": "SYSTEM_SETTING"
+        }
+    ]
+}
