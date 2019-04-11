@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, NgModule, Input} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import { AuthorizationService } from '../../pages/service/authorization.service';
+import {AuthorizationService} from '../../common/service/authorization.service';
 
 @NgModule()
 @Component({

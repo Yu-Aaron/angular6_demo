@@ -9,9 +9,10 @@ const routes: Routes = [
         {path: 'securityaudit', loadChildren: './securityaudit/securityaudit.module#SecurityauditModule'},
         {path: 'strategyaudit', loadChildren: './strategyaudit/strategyaudit.module#StrategyauditModule'},
         {path: 'asset', loadChildren: './asset/asset.module#AssetModule'},
-        {path: 'tool', loadChildren: './tool/tool.module#ToolModule'},
-        {path: 'log', loadChildren: './log/log.module#LogModule'},
         {path: 'setting', loadChildren: './setting/setting.module#SettingModule'},
+        {path: 'user', loadChildren: './user/user.module#UserModule'},
+        {path: 'log', loadChildren: './log/log.module#LogModule'},
+        {path: '', redirectTo: 'monitor'}
     ]}
 ];
 

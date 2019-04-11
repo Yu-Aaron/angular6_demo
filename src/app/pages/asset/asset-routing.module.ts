@@ -9,7 +9,7 @@ const routes: Routes = [
     {path: 'topology', component: TopologyComponent, canActivate: [IsActive]},
     {path: 'factorydevice', component: FactorydeviceComponent, canActivate: [IsActive]},
     {path: 'networkdevice', component: NetworkdeviceComponent, canActivate: [IsActive]},
-    {path: '', redirectTo: '/page/asset/topology'}
+    {path: '', redirectTo: 'topology'}
 ];
 
 @NgModule({

@@ -2,8 +2,8 @@ import {Component, EventEmitter, OnInit, Output, NgModule} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
-import {ConfigService } from '../service/config.service';
 import C from 'crypto-js';
+import {ConfigService} from '../../common/service/config.service';
 
 @NgModule()
 @Component({
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
         this.configService.login(params).subscribe((data) => {
             if (data['success']) {
             console.log(data);
-            this.router.navigate(['monitor/systemrunning']);
+            this.router.navigate(['monitor']);
             sessionStorage.setItem('isLogin', 'true');
             } else {
                 this.errMsg = data['message'];

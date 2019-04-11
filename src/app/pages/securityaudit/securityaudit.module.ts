@@ -10,7 +10,12 @@ import { ReportauditComponent } from './reportaudit/reportaudit.component';
 import { IsActive } from '../../share/IsActive';
 
 @NgModule({
-    declarations: [IncidentauditComponent, ProtocolauditComponent, FlowauditComponent, LogauditComponent, ReportauditComponent],
+    declarations: [
+        IncidentauditComponent,
+        ProtocolauditComponent,
+        FlowauditComponent,
+        LogauditComponent,
+        ReportauditComponent],
     imports: [
         CommonModule,
         SecurityauditRoutingModule

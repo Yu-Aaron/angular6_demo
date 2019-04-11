@@ -2,14 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SettingRoutingModule } from './setting-routing.module';
-import { UsrmanagementComponent } from './usrmanagement/usrmanagement.component';
-import { LoginmanagementComponent } from './loginmanagement/loginmanagement.component';
-import { DevicemanagementComponent } from './devicemanagement/devicemanagement.component';
-import { BusinessmanagementComponent } from './businessmanagement/businessmanagement.component';
 import { IsActive } from '../../share/IsActive';
+import { BasicComponent } from './basic/basic.component';
+import { ProtocolportComponent } from './protocolport/protocolport.component';
+import { InterfaceComponent } from './interface/interface.component';
+import { ToolComponent } from './tool/tool.component';
+import { BackupupdateComponent } from './backupupdate/backupupdate.component';
+import { LoginmanagementComponent } from './loginmanagement/loginmanagement.component';
 
 @NgModule({
-    declarations: [UsrmanagementComponent, LoginmanagementComponent, DevicemanagementComponent, BusinessmanagementComponent],
+    declarations: [
+        BasicComponent,
+        ProtocolportComponent,
+        InterfaceComponent,
+        ToolComponent,
+        BackupupdateComponent,
+        LoginmanagementComponent
+    ],
     imports: [
         CommonModule,
         SettingRoutingModule

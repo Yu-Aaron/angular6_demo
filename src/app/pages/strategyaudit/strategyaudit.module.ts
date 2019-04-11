@@ -2,16 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { StrategyauditRoutingModule } from './strategyaudit-routing.module';
-import { MaliciousdomainComponent } from './maliciousdomain/maliciousdomain.component';
-import { IpmacComponent } from './ipmac/ipmac.component';
-import { WhitelistComponent } from './whitelist/whitelist.component';
-import { VulComponent } from './vul/vul.component';
 import { StrategyComponent } from './strategy/strategy.component';
 import { SecuritydomainComponent } from './securitydomain/securitydomain.component';
 import { IsActive } from '../../share/IsActive';
+import { LearningComponent} from './learning/learning.component';
+import { PolicyitemComponent } from './policyitem/policyitem.component';
 
 @NgModule({
-    declarations: [MaliciousdomainComponent, IpmacComponent, WhitelistComponent, VulComponent, StrategyComponent, SecuritydomainComponent],
+    declarations: [
+        StrategyComponent,
+        SecuritydomainComponent,
+        LearningComponent,
+        PolicyitemComponent
+    ],
     imports: [
         CommonModule,
         StrategyauditRoutingModule

@@ -6,9 +6,9 @@ import { OperatelogComponent } from './operatelog/operatelog.component';
 import { RunninglogComponent } from './runninglog/runninglog.component';
 
 const routes: Routes = [
-    {path: 'operatelog', component: OperatelogComponent, canActivate: [IsActive]},
     {path: 'runninglog', component: RunninglogComponent, canActivate: [IsActive]},
-    {path: '', redirectTo: '/page/log/operatelog'}
+    {path: 'operatelog', component: OperatelogComponent, canActivate: [IsActive]},
+    {path: '', redirectTo: 'runninglog'}
 ];
 
 @NgModule({
