@@ -1,0 +1,34 @@
+<div nz-row class="device">
+    <nz-card nz-col [nzXs]="{span: 24}" [nzMd]="{span: 10}" nzTitle="设备概况">
+        <div nz-col [nzSpan]="6">
+            <canvas id="circle1" width="150" height="118"></canvas>
+        </div>
+        <div nz-col [nzSpan]="6">
+            <canvas id="circle2" width="150" height="118"></canvas>
+        </div>
+        <div nz-col [nzSpan]="6">
+            <canvas id="circle3" width="150" height="118"></canvas>
+        </div>
+        <div nz-col [nzSpan]="6">
+            <canvas id="temp" width="150" height="118"></canvas>
+        </div>
+    </nz-card>
+    <nz-card nz-col [nzXs]="{span: 24}" [nzMd]="{span: 8}" nzTitle="接口状态">
+        <p>Card content</p>
+    </nz-card>
+    <nz-card nz-col [nzXs]="{span: 24}" [nzMd]="{span: 6}" nzTitle="工作域状态">
+        <p>Card content</p>
+    </nz-card>
+</div>
+<div nz-row class="topData" nzGutter="16">
+    <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 13}" >
+        <nz-card nzTitle="设备量Top5">
+            <p>Card content</p>
+        </nz-card>
+    </div>
+    <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 11}" >
+        <nz-card nzTitle="今日事件检测">
+            <p>Card content</p>
+        </nz-card>
+    </div>
+</div>

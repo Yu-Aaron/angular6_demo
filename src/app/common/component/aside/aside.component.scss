@@ -1,0 +1,78 @@
+.content-header {
+  background-color: rgba(9, 43, 80, 1);
+  display: flex;
+  .header-logo {
+    width: 400px;
+    img {
+      display: block;
+    }
+  }
+  .operate-right {
+    flex: 1;
+    text-align: right;
+    i,
+    img {
+      margin: 0px 20px;
+      cursor: pointer;
+    }
+    .exit-system {
+      margin-right: 20px;
+    }
+  }
+  .operate-guide {
+    position: fixed;
+    top: -70px;
+    left: 0px;
+    width: 100%;
+    height: 70px;
+    background: rgba(0, 65, 135, 0.9);
+    display: flex;
+    padding: 17px 25px;
+    line-height: 36px;
+    color: #fff;
+    transition: top 0.6s;
+    .title {
+      font-size: 18px;
+      margin-right: 10px;
+      &.debug {
+        border-left: 1px dashed #fff;
+        margin-left: 2px;
+        padding-left: 10px;
+      }
+    }
+    .guide-name {
+      padding: 5px 10px;
+      background: #005ec1;
+      cursor: pointer;
+      margin: 0px 10px;
+      border-radius: 4px;
+      height: 35px;
+      line-height: 25px;
+      display: inline-block;
+    }
+    .main {
+      &.right-0 {
+        margin-right: -10px;
+      }
+      img {
+        display: inline-block;
+      }
+    }
+    .close-guide {
+      cursor: pointer;
+      width: 150px;
+      text-align: right;
+      font-size: 16px;
+      position: absolute;
+      right: 30px;
+    }
+    &.show {
+      top: 0px;
+      transition: top 0.6s;
+    }
+  }
+}
+a {
+  color: #fff;
+}
+

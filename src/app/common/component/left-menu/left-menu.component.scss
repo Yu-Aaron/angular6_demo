@@ -1,0 +1,125 @@
+.content-leftmenu {
+  width: 60px;
+  background-color: rgba(0, 38, 73, 1);
+  height: 100%;
+  li {
+    color: #cccccc;
+    &:focus {
+      outline: none;
+    }
+  }
+  .ant-menu-dark,
+  .ant-menu-dark .ant-menu-sub {
+    background-color: rgba(0, 38, 73, 1);
+  }
+  .ant-layout .ant-layout-content {
+    background-color: rgba(0, 38, 73, 1) !important;
+    padding: 10px 0px;
+  }
+  .ant-menu-inline-collapsed {
+    width: 51px;
+  }
+  .ant-menu-inline-collapsed > .ant-menu-item,
+  .ant-menu-inline-collapsed > .ant-menu-item-group > .ant-menu-item-group-list > .ant-menu-item,
+  .ant-menu-inline-collapsed
+    > .ant-menu-item-group
+    > .ant-menu-item-group-list
+    > .ant-menu-submenu
+    > .ant-menu-submenu-title,
+  .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
+    padding: 0 !important;
+  }
+  .left_secondary_submenu {
+    position: absolute;
+    left: 60px;
+    z-index: 100;
+    width: 100px;
+    background-color: rgba(0, 47, 91, 1);
+    top: 0px;
+    height: 100%;
+    .first_child {
+      cursor: auto;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      span {
+        font-family: "微软雅黑";
+        font-weight: 400;
+        font-style: normal;
+        font-size: 16px;
+        color: #25b4f1;
+      }
+    }
+    li {
+      font-size: 14px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .sliderbar_menu {
+    position: absolute;
+    left: -160px;
+    top: 0px;
+    width: 160px;
+    z-index: 1001;
+    height: 100%;
+    li {
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .ant-menu-inline > .ant-menu-item,
+  .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-vertical-left > .ant-menu-item,
+  .ant-menu-vertical-left > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-vertical-right > .ant-menu-item,
+  .ant-menu-vertical-right > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-vertical > .ant-menu-item,
+  .ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title {
+    height: 60px !important;
+    line-height: 60px !important;
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+  }
+  .ant-menu-vertical .ant-menu-item {
+    text-overflow: inherit;
+    text-align: center;
+    padding: 0px;
+  }
+  .ant-menu.ant-menu-dark .ant-menu-item-selected,
+  .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+    color: rgb(37, 180, 241);
+    text-shadow: rgba(255, 255, 255, 0.498) 1px 1px 10px;
+  }
+  .first-menu.ant-menu-item.ant-menu-item-selected {
+    background: transparent;
+  }
+  .second-menu.ant-menu-item.ant-menu-item-selected {
+    background: #194e87;
+  }
+  .ant-menu-item .anticon {
+    margin-right: 0px;
+    font-size: 20px;
+  }
+  .ant-menu-item.ant-menu-item-selected {
+    position: relative;
+    background: transparent;
+    .menu-mask {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      line-height: 40px;
+      background: #194e87;
+      i {
+        vertical-align: text-top;
+      }
+    }
+  }
+}

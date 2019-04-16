@@ -1,0 +1,60 @@
+<form nz-form [formGroup]="validateForm">
+    <div nz-row *ngIf="showTimePicker">
+        <!-- 时间过滤 -->
+        <div nz-col [nzSpan]="20">
+            <div nz-col [nzSpan]="12">
+                <label [ngStyle]="{'color': isCollapseAdvance ? '#999': '#fff'}">时间: </label>
+                <span *ngFor="let option of timeValueData" (click)="timeOptionSelect(option.value)"
+                      class="time-option" [ngClass]="{active: this.selectedValue == option.value}">{{option.label}}
+                </span>
+            </div>
+            <div class="inline-block" *ngIf="rangePickerFlag">
+                <label [ngStyle]="{'color': isCollapseAdvance ? '#999': '#fff'}">时间范围: </label>
+                <nz-range-picker formControlName="rangePicker" [(ngModel)]="advancedSearchTimeRange"
+                                 (ngModelChange)="onSearchTimeChange($event)" nzShowTime></nz-range-picker>
+            </div>
+        </div>
+        <!-- 是否展开高级查询 -->
+        <div nz-col [nzSpan]="2" class="collapse">
+            <span (click)="isCollapseAdvance = !isCollapseAdvance" class="inline-block">
+                {{isCollapseAdvance ? '收起' : '展开'}}高级查询
+                <i nz-icon type="down" class="fr" style="line-height: 24px;"></i>
+            </span>
+        </div>
+    </div>
+    <div nz-row *ngIf="!showTimePicker || isCollapseAdvance">
+        <!-- 其他过滤方式 -->
+        <div nz-col [nzSpan]="20">
+            <div class="inline-block" style="margin-right: 15px;" *ngFor="let control of controlArray">
+                <nz-form-item nzFlex>
+                    <nz-form-label [nzFor]="control.name">{{control.label}}</nz-form-label>
+                    <nz-form-control>
+                        <nz-select *ngIf="control.type === 'select'" style="width: 130px;"
+                                   [ngModel]="control.value" [formControlName]="control.name">
+                            <nz-option *ngFor="let option of control.selectValueData" [nzLabel]="option.label"
+                                       [nzValue]="option.value"></nz-option>
+                        </nz-select>
+                        <input *ngIf="control.type === 'input'" style="width:130px;" nz-input
+                               placeholder="{{control.placeholder||''}}"
+                               [formControlName]="control.name" [attr.id]="'field'+control.index">
+                        <nz-select *ngIf="control.type === 'list_checkbox'" style="width:200px;max-height: 32px"
+                                   [(ngModel)]="control.value" nzMode="multiple" [formControlName]="control.name"
+                                   nzPlaceHolder="请选择">
+                            <nz-option *ngFor="let option of control.options"
+                                       [nzLabel]="option.name === 'NONSTANDARD' ? '其他' : option.name"
+                                       [nzValue]="option.value"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div class="search inline-block">
+                <div *ngIf="isFuzzySearchShow" class="inline-block mr-20">
+                    <label>模糊查询：</label>
+                    <nz-switch formControlName="isFuzzySearch" [(ngModel)]="isFuzzySearch" [nzSize]="small"
+                               nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
+                </div>
+                <button nz-button nzType="primary" (click)="submitForm()" class="btn-search">查询</button>
+            </div>
+        </div>
+    </div>
+</form>

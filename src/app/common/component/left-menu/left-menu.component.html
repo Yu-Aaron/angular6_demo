@@ -1,0 +1,28 @@
+<div class="content-leftmenu">
+  <nz-content>
+    <!-- 一级菜单 -->
+    <ul nz-menu [nzMode]="'vertical'" nzTheme="dark" class="left_first_submenu">
+      <li class="first-menu" nz-menu-item *ngFor="let menu of firstLevelMenus;let i = index" routerLink="./{{menu.state}}" routerLinkActive="active" [nzSelected]="menu.state === state">
+        <div class="menu-mask">
+          <span title>
+            <i nz-icon [title]="menu.name" [type]="menu.type"></i>
+          </span>
+        </div>
+      </li>
+    </ul>
+    <!-- 二级子菜单 -->
+    <ul nz-menu [nzMode]="'vertical'" nzTheme="dark" class="left_secondary_submenu" *ngIf="state !== 'home'">
+      <li class="first_child">
+        <span title>
+          <span>{{secondarySubmenuTitle}}</span>
+        </span>
+      </li>
+      <li class="second-menu" nz-menu-item nz-tooltip *ngFor="let submenu of secondarySubmenu;let i = index" routerLink="./{{state}}/{{submenu.state}}"
+        routerLinkActive="active" [nzSelected]="stateSub === submenu.state">
+        <span title>
+          <span>{{submenu.name}}</span>
+        </span>
+      </li>
+    </ul>
+  </nz-content>
+</div>

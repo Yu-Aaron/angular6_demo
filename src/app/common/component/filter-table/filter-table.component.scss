@@ -1,0 +1,52 @@
+// 重置样式
+.ant-form {
+    background: #07294E;
+    //padding: 4px 20px 8px;
+    padding: 20px;
+    line-height: 0;
+    margin-bottom: 20px;
+    .ant-form-item {
+        margin-bottom: 0;
+    }
+    .ant-form-item-label {
+        text-align: left;
+    }
+
+    // 样式调整
+    label {
+        margin-right: 10px;
+        color: #999;
+    }
+
+    .time-option {
+        display: inline-block;
+        min-width: 70px;
+        padding: 0 12px;
+        height: 34px;
+        line-height: 34px;
+        text-align: center;
+        color: #E4E4E4;
+        background: #07294E;
+        cursor: pointer;
+        &.active {
+            background: #194E87;
+        }
+    }
+    .collapse {
+        text-align: right;
+        span {
+            color: #fff;
+            font-size: 16px;
+            line-height: 20px;
+            cursor: pointer;
+        }
+    }
+    .search {
+        position: absolute;
+        line-height: 45px;
+    }
+}
+
+
+
+

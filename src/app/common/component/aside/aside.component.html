@@ -1,0 +1,40 @@
+<div class="content-header">
+  <div class="header-logo">
+    <img src="/assets/images/logo/header-logo.png" alt="" class="login-img">
+  </div>
+  <div class="operate-right">
+    <nz-dropdown [nzTrigger]="'click'">
+      <a nz-dropdown>欢迎，{{username}}<i nz-icon type="down"></i></a>
+      <ul nz-menu>
+        <li nz-menu-item (click)="changePwd()">修改密码</li>
+      </ul>
+    </nz-dropdown>
+    <nz-dropdown [nzTrigger]="'click'" [nzOverlayClassName]="'shortcut-list'" [nzPlacement]="'bottomCenter'">
+      <a nz-dropdown><i class="shortcut" title="快捷方式" nz-icon nzType="appstore" nzTheme="outline"></i></a>
+      <ul nz-menu>
+        <li *ngFor="let item of shortcutList;" routerLink="./{{item.state}}">
+          <i nz-icon [type]="item.iconType"></i>
+          <span>{{item.name}}</span>
+        </li>
+      </ul>
+    </nz-dropdown>
+    <i class="guide" title="操作指南" nz-icon nzType="paper-clip" nzTheme="outline" (click)="toggleGuide()"></i>
+    <img class="about-us" src="/assets/images/logo/about_us.svg" alt="关于" title="关于">
+    <img class="exit-system" src="/assets/images/logo/exit_system.svg" alt="退出系统" title="退出系统">
+  </div>
+  <div class="operate-guide" [ngClass]="{'show': showGuide}">
+    <span class="title">审计流程</span>
+    <div class="main" *ngFor="let data of auditProcess[0]; let i = index;" [ngClass]="{'right-0': i == 2}">
+      <span class="guide-name" [innerHTML]="data.name | inlineStyle" routerLink="./{{data.state}}"></span>
+      <img *ngIf="!(i == 2 || i == 7)" src="/assets/images/logo/arrow.png" alt="">
+    </div>
+    <div class="debug title">调试步骤</div>
+    <div class="main" *ngFor="let data of auditProcess[1]">
+      <span class="guide-name" [innerHTML]="data.name" routerLink="./{{data.state}}"></span>
+    </div>
+    <div class="close-guide" (click)="toggleGuide()">
+      <i nz-icon nzType="close" nzTheme="outline"></i>
+      关闭操作指南
+    </div>
+  </div>
+</div>

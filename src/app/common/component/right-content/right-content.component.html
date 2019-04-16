@@ -1,0 +1,6 @@
+<div class="content-right" [ngStyle]="{'left': currentState === 'home' ? '60px' : '160px'}">
+  <div class="content-title" *ngIf="currentState !== 'home'">
+    {{currentSubState | transformTitle}}
+  </div>
+  <router-outlet></router-outlet>
+</div>
