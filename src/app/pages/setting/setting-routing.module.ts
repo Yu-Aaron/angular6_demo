@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IsActive } from '../../share/IsActive';
-import {BasicComponent} from './basic/basic.component';
-import {ProtocolportComponent} from './protocolport/protocolport.component';
-import {ToolComponent} from './tool/tool.component';
-import {BackupupdateComponent} from './backupupdate/backupupdate.component';
-import { LoginmanagementComponent } from './loginmanagement/loginmanagement.component';
-import {InterfaceComponent} from './interface/interface.component';
+
+import { AuthGuard } from 'src/app/shared/AuthGuard';
+import { BasicComponent } from './basic/basic.component';
+import { ProtocolComponent } from './protocol/protocol.component';
+import { InterfaceComponent } from './interface/interface.component';
+import { DebugComponent } from './debug/debug.component';
+import { BackupComponent } from './backup/backup.component';
+import { LoginComponent } from './login/login.component';
+
 
 const routes: Routes = [
-    {path: 'basic', component: BasicComponent, canActivate: [IsActive]},
-    {path: 'protocolport', component: ProtocolportComponent, canActivate: [IsActive]},
-    {path: 'interface', component: InterfaceComponent, canActivate: [IsActive]},
-    {path: 'tool', component: ToolComponent, canActivate: [IsActive]},
-    {path: 'backupupdate', component: BackupupdateComponent, canActivate: [IsActive]},
-    {path: 'loginmanagement', component: LoginmanagementComponent, canActivate: [IsActive]},
-    {path: '', redirectTo: 'basic'}
+  { path: 'basic', component: BasicComponent, canActivate: [AuthGuard] },
+  { path: 'protocol', component: ProtocolComponent, canActivate: [AuthGuard] },
+  { path: 'interface', component: InterfaceComponent, canActivate: [AuthGuard] },
+  { path: 'debug', component: DebugComponent, canActivate: [AuthGuard] },
+  { path: 'backup', component: BackupComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/pages/setting/basic' }
 ];
 
 @NgModule({

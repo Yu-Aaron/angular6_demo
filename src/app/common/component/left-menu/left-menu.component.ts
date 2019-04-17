@@ -29,9 +29,8 @@ import {ConfigService} from '../../service/config.service';
 export class LeftMenuComponent implements OnInit {
     firstLevelMenus = [];      // 一级菜单
     secondarySubmenu = [];   // 二级子菜单
-    state: string;       // 当前菜单的路由
-    stateSub: string;
-    secondarySubmenuTitle: string;    // 二级子菜单的第一个title
+    state: string;       // 当前菜单一级路由
+    stateSub: string;  // 当前菜单二级路由
     menuList: {};
     @Output() public currentState = new EventEmitter();
     @Output() public currentSubState = new EventEmitter();
@@ -50,11 +49,6 @@ export class LeftMenuComponent implements OnInit {
             this.firstLevelMenus = data['dashboard'];
             this.menuList = data;
             this.secondarySubmenu = data[this.state];
-            this.firstLevelMenus.forEach(element => {
-                if (element['state'] === this.state) {
-                    this.secondarySubmenuTitle = element['name'];
-                }
-            });
             this.changeRouter();
             this.currentState.emit(this.state);
             this.currentSubState.emit(this.stateSub);
@@ -68,11 +62,6 @@ export class LeftMenuComponent implements OnInit {
             this.state = routerUrl[2];
             this.stateSub = routerUrl[3];
             if (event.url !== '/login' && event instanceof NavigationEnd) { // 当导航成功结束时执行
-                this.firstLevelMenus.forEach(element => {
-                    if (element['state'] === this.state) {
-                        this.secondarySubmenuTitle = element['name'];
-                    }
-                });
                 this.changeState(this.state);
                 this.currentState.emit(this.state);
                 this.currentSubState.emit(this.stateSub);

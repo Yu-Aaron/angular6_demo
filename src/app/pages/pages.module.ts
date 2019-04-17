@@ -1,38 +1,38 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
+
+import { AsideComponent } from '../common/component/aside/aside.component';
+import { LeftMenuComponent } from '../common/component/left-menu/left-menu.component';
+import { RightContentComponent } from '../common/component/right-content/right-content.component';
+import { HomepageComponent } from './home/homepage/homepage.component';
 
 import { PagesRoutingModule } from './pages-routing.module';
-import { ShareModule } from '../share/share.module';
 import { PagesComponent } from './pages.component';
-import { HeaderComponent } from '../layout/header/header.component';
-import { ContentComponent } from '../layout/content/content.component';
-import { FooterComponent } from '../layout/footer/footer.component';
-import { SliderComponent } from '../layout/slider/slider.component';
-import { MonitorComponent} from './monitor/monitor.component';
+import { InlineStylePipe } from '../common/pipe/inlineStyle.pipe';
 import { TransformTitlePipe} from '../common/pipe/transformTitle.pipe';
 
+
 @NgModule({
+    imports: [
+        PagesRoutingModule,
+        SharedModule,
+    ],
     declarations: [
         PagesComponent,
-        HeaderComponent,
-        ContentComponent,
-        FooterComponent,
-        SliderComponent,
-        MonitorComponent,
+        AsideComponent,
+        LeftMenuComponent,
+        RightContentComponent,
+        HomepageComponent,
+        InlineStylePipe,
         TransformTitlePipe
-    ],
-    imports: [
-        ShareModule,
-        CommonModule,
-        PagesRoutingModule,
     ],
     exports: [
         PagesComponent,
-        HeaderComponent,
-        ContentComponent,
-        FooterComponent,
-        SliderComponent,
-        MonitorComponent
+        AsideComponent,
+        LeftMenuComponent,
+        RightContentComponent,
+        HomepageComponent
     ]
 })
-export class PagesModule { }
+export class PagesModule {
+}

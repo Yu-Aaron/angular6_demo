@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IsActive } from '../../share/IsActive';
+import { AuthGuard } from 'src/app/shared/AuthGuard';
 
-import { FlowauditComponent } from './flowaudit/flowaudit.component';
 import { IncidentauditComponent } from './incidentaudit/incidentaudit.component';
-import { LogauditComponent } from './logaudit/logaudit.component';
+import { FlowauditComponent } from './flowaudit/flowaudit.component';
 import { ProtocolauditComponent } from './protocolaudit/protocolaudit.component';
+import { LogauditComponent } from './logaudit/logaudit.component';
 import { ReportauditComponent } from './reportaudit/reportaudit.component';
 
 const routes: Routes = [
-    {path: 'incidentaudit', component: IncidentauditComponent, canActivate: [IsActive]},
-    {path: 'flowaudit', component: FlowauditComponent, canActivate: [IsActive]},
-    {path: 'logaudit', component: LogauditComponent, canActivate: [IsActive]},
-    {path: 'protocolaudit', component: ProtocolauditComponent, canActivate: [IsActive]},
-    {path: 'reportaudit', component: ReportauditComponent, canActivate: [IsActive]},
-    {path: '', redirectTo: 'incidentaudit'}
+  { path: 'incidentaudit', component: IncidentauditComponent, canActivate: [AuthGuard] },
+  { path: 'flowaudit', component: FlowauditComponent, canActivate: [AuthGuard] },
+  { path: 'protocolaudit', component: ProtocolauditComponent, canActivate: [AuthGuard] },
+  { path: 'logaudit', component: LogauditComponent, canActivate: [AuthGuard] },
+  { path: 'reportaudit', component: ReportauditComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/pages/securityaudit/incidentaudit' }
 ];
 
 @NgModule({

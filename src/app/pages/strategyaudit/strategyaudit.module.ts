@@ -4,23 +4,23 @@ import { CommonModule } from '@angular/common';
 import { StrategyauditRoutingModule } from './strategyaudit-routing.module';
 import { StrategyComponent } from './strategy/strategy.component';
 import { SecuritydomainComponent } from './securitydomain/securitydomain.component';
-import { IsActive } from '../../share/IsActive';
-import { LearningComponent} from './learning/learning.component';
-import { PolicyitemComponent } from './policyitem/policyitem.component';
+import { LearningComponent } from './learning/learning.component';
+import { AuthGuard } from 'src/app/shared/AuthGuard';
+import { VulComponent } from './vul/vul.component';
 
 @NgModule({
     declarations: [
         StrategyComponent,
         SecuritydomainComponent,
         LearningComponent,
-        PolicyitemComponent
+        VulComponent
     ],
     imports: [
         CommonModule,
         StrategyauditRoutingModule
     ],
     providers: [
-        IsActive
+        AuthGuard
     ]
 })
 export class StrategyauditModule { }

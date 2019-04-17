@@ -2,29 +2,27 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SettingRoutingModule } from './setting-routing.module';
-import { IsActive } from '../../share/IsActive';
+import { AuthGuard } from 'src/app/shared/AuthGuard';
 import { BasicComponent } from './basic/basic.component';
-import { ProtocolportComponent } from './protocolport/protocolport.component';
+import { ProtocolComponent } from './protocol/protocol.component';
 import { InterfaceComponent } from './interface/interface.component';
-import { ToolComponent } from './tool/tool.component';
-import { BackupupdateComponent } from './backupupdate/backupupdate.component';
-import { LoginmanagementComponent } from './loginmanagement/loginmanagement.component';
+import { DebugComponent } from './debug/debug.component';
+import { BackupComponent } from './backup/backup.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     declarations: [
         BasicComponent,
-        ProtocolportComponent,
+        ProtocolComponent,
         InterfaceComponent,
-        ToolComponent,
-        BackupupdateComponent,
-        LoginmanagementComponent
+        DebugComponent,
+        BackupComponent,
+        LoginComponent
     ],
     imports: [
         CommonModule,
         SettingRoutingModule
     ],
-    providers: [
-        IsActive
-    ]
+    providers: [AuthGuard]
 })
 export class SettingModule { }

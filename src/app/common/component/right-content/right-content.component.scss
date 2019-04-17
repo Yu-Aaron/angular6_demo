@@ -1,13 +1,18 @@
 .content-right {
-    padding: 10px;
+    padding: 10px 15px;
     position: absolute;
-    left: 60px;
-    top: 0px;
-    width: 100%;
+    left: 160px;
+    top: 0;
+    width: calc(100vw - 160px);
     height: 100%;
 }
 
 .content-title {
     padding: 10px 0 15px;
     font-size: 16px;
+}
+
+.index {
+    left: 60px;
+    width: calc(100vw - 60px);
 }

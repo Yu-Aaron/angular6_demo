@@ -1,21 +1,27 @@
-<form nz-form [formGroup]="validateForm">
-    <div nz-row *ngIf="showTimePicker">
+<form nz-form [formGroup]="validateForm" class="mb-20" [ngStyle]="{'padding': showTimePicker ? '20px': '4px 20px 8px'}">
+    <div nz-row *ngIf="showTimePicker" [ngClass]="{'mb-10': isCollapseAdvance}">
+        <div *ngIf="topArray.length > 0" nz-col [nzSpan]="22" class="mb-10">
+            <label>协议: </label>
+            <nz-select style="width: 130px;" [ngModel]="switchTab" [formControlName]="switchTab">
+                <nz-option *ngFor="let option of topArray" [nzLabel]="option.display" [nzValue]="option.value"></nz-option>
+            </nz-select>
+        </div>
         <!-- 时间过滤 -->
-        <div nz-col [nzSpan]="20">
+        <div nz-col [nzSpan]="22">
             <div nz-col [nzSpan]="12">
-                <label [ngStyle]="{'color': isCollapseAdvance ? '#999': '#fff'}">时间: </label>
+                <label [ngStyle]="{'color': isCollapseAdvance ? '#fff': '#999'}">时间: </label>
                 <span *ngFor="let option of timeValueData" (click)="timeOptionSelect(option.value)"
                       class="time-option" [ngClass]="{active: this.selectedValue == option.value}">{{option.label}}
                 </span>
             </div>
             <div class="inline-block" *ngIf="rangePickerFlag">
-                <label [ngStyle]="{'color': isCollapseAdvance ? '#999': '#fff'}">时间范围: </label>
+                <label [ngStyle]="{'color': isCollapseAdvance ? '#fff': '#999'}">时间范围: </label>
                 <nz-range-picker formControlName="rangePicker" [(ngModel)]="advancedSearchTimeRange"
                                  (ngModelChange)="onSearchTimeChange($event)" nzShowTime></nz-range-picker>
             </div>
         </div>
         <!-- 是否展开高级查询 -->
-        <div nz-col [nzSpan]="2" class="collapse">
+        <div *ngIf="showAdvance" nz-col [nzSpan]="2" class="collapse">
             <span (click)="isCollapseAdvance = !isCollapseAdvance" class="inline-block">
                 {{isCollapseAdvance ? '收起' : '展开'}}高级查询
                 <i nz-icon type="down" class="fr" style="line-height: 24px;"></i>
@@ -24,7 +30,7 @@
     </div>
     <div nz-row *ngIf="!showTimePicker || isCollapseAdvance">
         <!-- 其他过滤方式 -->
-        <div nz-col [nzSpan]="20">
+        <div nz-col [nzSpan]="22">
             <div class="inline-block" style="margin-right: 15px;" *ngFor="let control of controlArray">
                 <nz-form-item nzFlex>
                     <nz-form-label [nzFor]="control.name">{{control.label}}</nz-form-label>

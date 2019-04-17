@@ -28,11 +28,14 @@ export class FilterTableComponent implements OnInit {
     advancedSearchTimeRange = ['', ''];  // 时间变量
     selectedValue = 'n';  // 默认不限时间
     CAFC = {}; // 参数拼接
+    switchTab: string;
 
     // 用户自定义
     @Input() timeValueData;  // 时间枚举值
     @Input() controlArray;   // 过滤条件可选项
+    @Input() topArray = [];
     @Input() showTimePicker = false; // 时间选择器是否显示
+    @Input() showAdvance = true; // 高级搜索是否显示
     @Input() isFuzzySearch: boolean; // 模糊查询
     @Input() isFuzzySearchShow: boolean; // 模糊查询是否显示
     @Output() private searchFilterTable = new EventEmitter();
@@ -49,6 +52,7 @@ export class FilterTableComponent implements OnInit {
         this.validateForm = fb.group({
             isFuzzySearch: self.isFuzzySearch,
             rangePicker: [[]],
+            switchTab: ''
         });
         for (let i = 0; i < this.controlArray.length; i++) {
             const obj = {

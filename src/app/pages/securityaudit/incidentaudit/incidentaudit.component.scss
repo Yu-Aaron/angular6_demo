@@ -1,0 +1,15 @@
+.dataSummary {
+  height: 83px;
+  font-size: 16px;
+  color: #D7D7D7;
+  text-align: center;
+  border: 1px dotted #2A5584;
+  div {
+    line-height: 76px;
+    margin-right: 40px;
+  }
+  .count {
+    font-size: 36px;
+    vertical-align: sub;
+  }
+}

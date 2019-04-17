@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IsActive } from '../../share/IsActive';
-import {ListComponent} from './list/list.component';
-import {GroupComponent} from './group/group.component';
+
+import { AuthGuard } from 'src/app/shared/AuthGuard';
+import { UserComponent } from './user/user.component';
+import { UsergroupComponent } from './usergroup/usergroup.component';
 
 const routes: Routes = [
-    {path: 'list', component: ListComponent, canActivate: [IsActive]},
-    {path: 'group', component: GroupComponent, canActivate: [IsActive]},
-    {path: '', redirectTo: 'list'}
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'usergroup', component: UsergroupComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/pages/user/user' }
 ];
 
 @NgModule({

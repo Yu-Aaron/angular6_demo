@@ -1,3 +1,82 @@
-<p>
-  incidentaudit works!
-</p>
+<div class="top-right">
+    <button nz-button nzType="primary" class="mr-10 btn-light">
+        <i nz-icon nzType="area-chart" nzTheme="outline" style="font-size: 18px"></i>事件统计分析
+    </button>
+    <button nz-button nzType="primary" class="mr-10">
+        <i nz-icon nzType="sync" nzTheme="outline"></i>刷新
+    </button>
+    <button nz-button nzType="primary" class="mr-10">清空全部事件</button>
+</div>
+<!-- 过滤条件 -->
+<app-filter-table [timeValueData]="filterConditionData.timeValueData"
+                  [controlArray]="filterConditionData.controlArray"
+                  [showTimePicker]="true"
+                  [isFuzzySearch]="true"
+                  (searchFilterTable)="searchFilterTable($event)">
+</app-filter-table>
+<div class="dataSummary mb-20">
+    <div *ngFor="let item of dataSummary" class="inline-block">
+        <span>{{item.name}}：</span>
+        <span class="count" [ngStyle]="{'color': item.color}">{{item.count}}</span>
+    </div>
+</div>
+<div class="mb-10">
+    <nz-dropdown [nzTrigger]="'click'">
+        <button nz-button nz-dropdown nzType="primary" class="mr-10">
+            <span>操作全部</span>
+            <i nz-icon type="down" class="fr" style="line-height: 20px; margin-left: 0"></i>
+        </button>
+        <ul nz-menu>
+            <li nz-menu-item>标记全部</li>
+            <li nz-menu-item>导出全部</li>
+            <li nz-menu-item>操作全部</li>
+        </ul>
+    </nz-dropdown>
+    <button nz-button nzType="primary" class="mr-10">标记已读</button>
+    <button nz-button nzType="primary" class="mr-10">导出</button>
+    <button nz-button nzType="primary" class="mr-10">清空</button>
+</div>
+<!-- 表格 -->
+<nz-table #tableDataTmp
+          [nzData]="tableData"
+          [nzTotal]="tableCount"
+          [nzShowQuickJumper]="true"
+          [nzFrontPagination]="false"
+          [(nzPageIndex)]="pageIndex"
+          [(nzPageSize)]="pageSize"
+          (nzPageIndexChange)="pageIndexChange()"
+          [nzLoading]="loading"
+          [nzShowTotal]="totalTemplate">
+    <thead>
+        <tr>
+            <th nzShowCheckbox [(nzChecked)]="allChecked" (nzCheckedChange)="checkAll($event)"></th>
+            <th>状态</th>
+            <th>事件名称</th>
+            <th>发生时间</th>
+            <th>规则来源</th>
+            <th>安全域</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let inc of tableDataTmp.data" (click)="clickIncRow(inc)">
+            <td nzShowCheckbox [(nzChecked)]="inc.checked" (nzCheckedChange)="refreshStatus()"></td>
+            <td class="wid-76">
+                <span *ngIf="inc.status == 'NEW'" class="status text-danger">未读</span>
+                <span *ngIf="inc.status != 'NEW'">已读</span>
+            </td>
+            <td>{{inc.incidentName}}</td>
+            <td>{{inc.timestamp | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{inc.incidentRuleType}}</td>
+            <td>{{inc.securityAreaName}}</td>
+            <td>
+                <span class="view-device-detail" ng-click="viewDetail(inc.incidentId)">查看详情</span>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+<ng-template #totalTemplate let-total>
+    <span>共 {{tableCount}} 条，</span>
+    <span>每页展示 {{pageSize}} 条，</span>
+    <span>共 {{pageTotalNumber}} 页</span>
+</ng-template>

@@ -36,6 +36,11 @@ export class ConfigService {
         return this.http.post(url, loginInfo, httpOptions);
     }
 
+    getCurrentTime() {
+        const url = `${this.baseUrl}sysbaseinfo/curtime`;
+        return this.http.get(url);
+    }
+
     whoAmI() {
         const url = `${this.baseUrl}users/whoami`;
         return this.http.get(url);

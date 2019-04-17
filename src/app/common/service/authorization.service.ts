@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '../../../../node_modules/@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthorizationService {
 
+export class AuthorizationService {
     constructor(private http: HttpClient) {
     }
 
@@ -14,3 +14,4 @@ export class AuthorizationService {
         return this.http.get(url);
     }
 }
+

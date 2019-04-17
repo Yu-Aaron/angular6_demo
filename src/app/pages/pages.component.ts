@@ -1,30 +1,26 @@
-import { Component, OnInit, NgModule } from '@angular/core';
-@NgModule()
+import {Component, OnInit} from '@angular/core';
+
 @Component({
-    selector: 'app-component',
+    selector: 'app-pages',
     template: `
+    <nz-layout>
+        <nz-header>
+            <app-aside></app-aside>
+        </nz-header>
         <nz-layout>
-            <app-header></app-header>
-            <nz-layout>
-                <nz-sider [ngStyle]="{'width': firstState === 'monitor' ? '60px' : '160px'}">
-                    <app-slider (firstState)="firstState=$event" (secondState)="secondState=$event"></app-slider>
-                </nz-sider>
-                <nz-content>
-                    <app-content [secondState]="secondState"></app-content>
-                </nz-content>
-            </nz-layout>
+            <app-left-menu (currentState)="currentState=$event" (currentSubState)="currentSubState=$event"></app-left-menu>
+            <app-right-content [currentState]="currentState" [currentSubState]="currentSubState"></app-right-content>
         </nz-layout>
+    </nz-layout>
     `,
 })
 export class PagesComponent implements OnInit {
-    firstState: string;
-    secondState: string;
+    currentState: string; // 当前一级路由
+    currentSubState: string; // 当前二级路由
 
     constructor() {
-
     }
 
     ngOnInit(): void {
-
     }
 }

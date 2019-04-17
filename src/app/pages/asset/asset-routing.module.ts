@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IsActive} from '../../share/IsActive';
+
+import { AuthGuard } from 'src/app/shared/AuthGuard';
+import { TopologyComponent } from './topology/topology.component';
 import { FactorydeviceComponent } from './factorydevice/factorydevice.component';
 import { NetworkdeviceComponent } from './networkdevice/networkdevice.component';
-import { TopologyComponent } from './topology/topology.component'
 
 const routes: Routes = [
-    {path: 'topology', component: TopologyComponent, canActivate: [IsActive]},
-    {path: 'factorydevice', component: FactorydeviceComponent, canActivate: [IsActive]},
-    {path: 'networkdevice', component: NetworkdeviceComponent, canActivate: [IsActive]},
-    {path: '', redirectTo: 'topology'}
+  { path: 'topology', component: TopologyComponent, canActivate: [AuthGuard] },
+  { path: 'factorydevice', component: FactorydeviceComponent, canActivate: [AuthGuard] },
+  { path: 'networkdevice', component: NetworkdeviceComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/pages/asset/topology' }
 ];
 
 @NgModule({

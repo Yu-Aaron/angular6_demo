@@ -1,3 +1,8 @@
-<p>
-  protocolaudit works!
-</p>
+<!-- 过滤条件 -->
+<app-filter-table [timeValueData]="filterConditionData.timeValueData"
+                  [controlArray]="filterConditionData.controlArray"
+                  [showTimePicker]="true"
+                  [showAdvance]="false"
+                  [isFuzzySearch]="true"
+                  (searchFilterTable)="searchFilterTable($event)">
+</app-filter-table>

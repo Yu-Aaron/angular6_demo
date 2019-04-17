@@ -14,7 +14,7 @@
     <ul nz-menu [nzMode]="'vertical'" nzTheme="dark" class="left_secondary_submenu" *ngIf="state !== 'home'">
       <li class="first_child">
         <span title>
-          <span>{{secondarySubmenuTitle}}</span>
+          <span>{{state | transformTitle}}</span>
         </span>
       </li>
       <li class="second-menu" nz-menu-item nz-tooltip *ngFor="let submenu of secondarySubmenu;let i = index" routerLink="./{{state}}/{{submenu.state}}"

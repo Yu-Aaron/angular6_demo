@@ -1,11 +1,12 @@
 {
     "dashboard": [
         {
-            "state": "monitor",
-            "name": "设备概况",
+            "state": "home",
+            "name": "首页",
             "icon": "equipment_general_situation",
+            "type": "home",
             "options": {
-                "url_state": "monitor.systemrunning",
+                "url_state": "home",
                 "reload": true
             },
             "enable": true,
@@ -17,6 +18,7 @@
             "state": "securityaudit",
             "name": "安全审计",
             "icon": "security_audit",
+            "type": "heat-map",
             "options": {
                 "url_state": "securityaudit.incidentaudit",
                 "reload": true
@@ -28,8 +30,9 @@
         },
         {
             "state": "strategyaudit",
-            "name": "审计策略",
+            "name": "策略管理",
             "icon": "strategy_audit",
+            "type": "folder-open",
             "options": {
                 "url_state": "strategyaudit.securitydomain",
                 "reload": true
@@ -43,6 +46,7 @@
             "state": "asset",
             "name": "资产管理",
             "icon": "asset_management",
+            "type": "appstore",
             "options": {
                 "url_state": "asset.topology",
                 "reload": true
@@ -56,8 +60,22 @@
             "state": "setting",
             "name": "配置管理",
             "icon": "system_setting",
+            "type": "setting",
             "options": {
-                "url_state": "setting.usermanagement",
+                "url_state": "setting.basic",
+                "reload": true
+            },
+            "enable": true,
+            "target": "SYSTEM_SETTING",
+            "currentState": "SYSTEM_SETTING"
+        },
+        {
+            "state": "user",
+            "name": "用户管理",
+            "icon": "debug_tool",
+            "type": "team",
+            "options": {
+                "url_state": "user.user",
                 "reload": true
             },
             "enable": true,
@@ -68,6 +86,7 @@
             "state": "log",
             "name": "日志管理",
             "icon": "system_log",
+            "type": "file-text",
             "options": {
                 "url_state": "log.runninglog",
                 "reload": true
@@ -75,28 +94,6 @@
             "enable": true,
             "target": "SYSTEM_LOG",
             "currentState": "SYSTEM_LOG"
-        },
-        {
-            "state": "user",
-            "name": "用户管理"
-        }
-    ],
-    "monitor": [
-        {
-            "state": "systemrunning",
-            "name": "系统运行实况",
-            "icon": "",
-            "enable": true,
-            "target": "SYSTEM_RUNNING_RESULT",
-            "currentState": "EQUIPMENT_GENERAL_SITUATION"
-        },
-        {
-            "state": "riskassessment",
-            "name": "今日风险评估",
-            "icon": "",
-            "enable": true,
-            "target": "TODAY_RISK_ASSESSMENT",
-            "currentState": "EQUIPMENT_GENERAL_SITUATION"
         }
     ],
     "securityaudit": [
@@ -156,19 +153,27 @@
         },
         {
             "state": "strategy",
-            "name": "审计管理",
+            "name": "审计策略",
             "icon": "",
             "enable": true,
             "target": "STRATEGY_MANAGEMENT",
             "currentState": "STRATEGY_AUDIT"
         },
         {
-            "state": "policyitem",
-            "name": "策略项"
+            "state": "vul",
+            "name": "策略项",
+            "icon": "",
+            "enable": true,
+            "target": "VUL_MANAGEMENT",
+            "currentState": "STRATEGY_AUDIT"
         },
         {
             "state": "learning",
-            "name": "智能学习"
+            "name": "智能学习",
+            "icon": "",
+            "enable": true,
+            "target": "LAERNING_MANAGEMENT",
+            "currentState": "STRATEGY_AUDIT"
         }
     ],
     "asset": [
@@ -185,7 +190,7 @@
         },
         {
             "state": "factorydevice",
-            "name": "工控设备列表",
+            "name": "工控设备",
             "icon": "",
             "enable": true,
             "target": "INDUSTRIAL_DEVICE",
@@ -193,7 +198,7 @@
         },
         {
             "state": "networkdevice",
-            "name": "网络设备列表",
+            "name": "网络设备",
             "icon": "",
             "enable": true,
             "target": "NETWORK_DEVICE",
@@ -203,37 +208,64 @@
     "setting": [
         {
             "state": "basic",
-            "name": "基础设置"
+            "name": "基础设置",
+            "enable": true,
+            "target": "BASIC_MANAGEMENT",
+            "currentState": "SYSTEM_SETTING"
         },
         {
-            "state": "protocolport",
-            "name": "协议端口"
+            "state": "protocol",
+            "name": "协议端口",
+            "enable": true,
+            "target": "PROTOCOL_MANAGEMENT",
+            "currentState": "SYSTEM_SETTING"
         },
         {
             "state": "interface",
-            "name": "接口设置"
+            "name": "接口设置",
+            "enable": true,
+            "target": "INTERFACE_MANAGEMENT",
+            "currentState": "SYSTEM_SETTING"
         },
         {
-            "state": "tool",
-            "name": "调试工具"
+            "state": "debug",
+            "name": "调试工具",
+            "enable": true,
+            "target": "DEBUG_MANAGEMENT",
+            "currentState": "SYSTEM_SETTING"
         },
         {
-            "state": "backupupdate",
-            "name": "备份升级"
+            "state": "backup",
+            "name": "备份升级",
+            "enable": true,
+            "target": "BACKUPGRADE_MANAGEMENT",
+            "currentState": "SYSTEM_SETTING"
         },
         {
-            "state": "loginmanagement",
-            "name": "登录设置"
+            "state": "login",
+            "name": "登录设置",
+            "icon": "",
+            "enable": true,
+            "target": "LOGIN_MANAGEMENT",
+            "currentState": "SYSTEM_SETTING"
         }
     ],
     "user": [
         {
-            "state": "list",
-            "name": "用户列表"
+            "state": "user",
+            "name": "用户管理",
+            "icon": "",
+            "enable": true,
+            "target": "USER_MANAGEMENT",
+            "currentState": "USER_SETTING"
         },
         {
-            "state": "group",
-            "name": "用户组"
+            "state": "usergroup",
+            "name": "用户组管理",
+            "icon": "",
+            "enable": true,
+            "target": "USERGROUP_MANAGEMENT",
+            "currentState": "USER_SETTING"
         }
     ],
     "log": [
@@ -249,7 +281,7 @@
             "state": "operatelog",
             "name": "操作日志",
             "icon": "",
-            "enable": false,
+            "enable": true,
             "target": "SYSTEM_OPERATE_LOG",
             "currentState": "SYSTEM_LOG"
         }

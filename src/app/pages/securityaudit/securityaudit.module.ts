@@ -1,27 +1,32 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {SecurityauditRoutingModule} from './securityaudit-routing.module';
+import {SharedModule} from '../../shared/shared.module';
+import {AuthGuard} from '../../shared/AuthGuard';
+import {NgxEchartsModule} from 'ngx-echarts';
 
-import { SecurityauditRoutingModule } from './securityaudit-routing.module';
-import { IncidentauditComponent } from './incidentaudit/incidentaudit.component';
-import { ProtocolauditComponent } from './protocolaudit/protocolaudit.component';
-import { FlowauditComponent } from './flowaudit/flowaudit.component';
-import { LogauditComponent } from './logaudit/logaudit.component';
-import { ReportauditComponent } from './reportaudit/reportaudit.component';
-import { IsActive } from '../../share/IsActive';
+import {IncidentauditComponent} from './incidentaudit/incidentaudit.component';
+import {FlowauditComponent} from './flowaudit/flowaudit.component';
+import {ProtocolauditComponent} from './protocolaudit/protocolaudit.component';
+import {LogauditComponent} from './logaudit/logaudit.component';
+import {ReportauditComponent} from './reportaudit/reportaudit.component';
+import {FilterTableComponent} from '../../common/component/filter-table/filter-table.component';
 
 @NgModule({
     declarations: [
         IncidentauditComponent,
-        ProtocolauditComponent,
         FlowauditComponent,
+        ProtocolauditComponent,
         LogauditComponent,
         ReportauditComponent],
     imports: [
-        CommonModule,
-        SecurityauditRoutingModule
+        SharedModule,
+        SecurityauditRoutingModule,
+        NgxEchartsModule
     ],
     providers: [
-        IsActive
+        AuthGuard,
+        FilterTableComponent
     ]
 })
-export class SecurityauditModule { }
+export class SecurityauditModule {
+}

@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { IsActive } from '../../share/IsActive';
-import { SecuritydomainComponent} from './securitydomain/securitydomain.component';
-import { StrategyComponent} from './strategy/strategy.component';
-import {LearningComponent} from './learning/learning.component';
-import {PolicyitemComponent} from './policyitem/policyitem.component';
+
+import { AuthGuard } from 'src/app/shared/AuthGuard';
+import { SecuritydomainComponent } from './securitydomain/securitydomain.component';
+import { StrategyComponent } from './strategy/strategy.component';
+import { VulComponent } from './vul/vul.component';
+import { LearningComponent } from './learning/learning.component';
+
 
 const routes: Routes = [
-    {path: 'securitydomain', component: SecuritydomainComponent, canActivate: [IsActive]},
-    {path: 'strategy', component: StrategyComponent, canActivate: [IsActive]},
-    {path: 'policyitem', component: PolicyitemComponent, canActivate: [IsActive]},
-    {path: 'learning', component: LearningComponent, canActivate: [IsActive]},
-    {path: '', redirectTo: 'securitydomain'}
+  { path: 'securitydomain', component: SecuritydomainComponent, canActivate: [AuthGuard] },
+  { path: 'strategy', component: StrategyComponent, canActivate: [AuthGuard] },
+  { path: 'vul', component: VulComponent, canActivate: [AuthGuard] },
+  { path: 'learning', component: LearningComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/pages/strategyaudit/securitydomain' }
 ];
 
 @NgModule({

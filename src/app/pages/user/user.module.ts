@@ -2,21 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
-import { IsActive } from '../../share/IsActive';
-import { ListComponent } from './list/list.component';
-import { GroupComponent } from './group/group.component';
+import { AuthGuard } from 'src/app/shared/AuthGuard';
+import { UserComponent } from './user/user.component';
+import { UsergroupComponent } from './usergroup/usergroup.component';
 
 @NgModule({
-    declarations: [
-        ListComponent,
-        GroupComponent
-    ],
-    imports: [
-        CommonModule,
-        UserRoutingModule
-    ],
-    providers: [
-        IsActive
-    ]
+  declarations: [UserComponent, UsergroupComponent],
+  imports: [
+    CommonModule,
+    UserRoutingModule
+  ],
+  providers: [AuthGuard]
 })
 export class UserModule { }
