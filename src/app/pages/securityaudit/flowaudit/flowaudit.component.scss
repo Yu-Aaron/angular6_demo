@@ -1,5 +1,7 @@
+@import '../../../../veriable.scss';
+
 .echartsStyle {
   height: 256px!important;
-  background: #0B233D;
+  background: $table-bg;
   margin: 10px 0;
 }

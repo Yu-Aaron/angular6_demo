@@ -1,6 +1,8 @@
+@import '../../../../veriable.scss';
+
 :host ::ng-deep {
   nz-card {
-    background: #0B233D;
+    background: $table-bg;
   }
   .ant-card-head, .ant-card-bordered {
     border: none;
@@ -49,7 +51,7 @@
     }
     .echartsStyle {
       height: 256px!important;
-      background: #0B233D;
+      background: $table-bg;
       margin: 10px 0;
     }
   }
