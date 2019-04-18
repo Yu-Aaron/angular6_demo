@@ -14,25 +14,47 @@
     padding:5px 10px;
     text-align: center;
   }
-}
 
-.device {
-  nz-card {
-    min-height: 180px;
+  .device-content {
+    nz-card {
+      min-height: 180px;
+      &:nth-child(3) {
+        position: absolute;
+        right: 1px;
+      }
+    }
+    ul {
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+      padding: 20px 25px;
+      list-style: none;
+      font-size: 16px;
+      .state {
+        width: 20px;
+        height: 10px;
+        border-radius: 5px;
+        margin-top: 5px;
+      }
+    }
   }
-}
 
-.topData {
-  nz-card {
-    margin-top: 10px;
-    min-height: 500px;
-  }
   .device-flow {
-    text-align: left;
+    nz-card {
+      margin-top: 10px;
+      min-height: 500px;
+    }
+    .ant-card-extra {
+      width: 85%;
+    }
+    .echartsStyle {
+      height: 256px!important;
+      background: #0B233D;
+      margin: 10px 0;
+    }
   }
-  .echartsStyle {
-    height: 256px!important;
-    background: #0B233D;
-    margin: 10px 0;
-  }
+}
+
+a {
+  color: #29C0FF;
 }

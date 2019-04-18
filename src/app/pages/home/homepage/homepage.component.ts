@@ -23,6 +23,21 @@ export class HomepageComponent implements OnInit, AfterViewInit {
         {text: '磁盘占用率', id: '#circle3', percent: 0, frontColor: '#D31C29'},
     ];
 
+    // 接口状态
+    linkState = [
+        {name: 'MGMT', state: '已连接'},
+        {name: 'GE1', state: '已连接'},
+        {name: 'GE2', state: '未连接'},
+        {name: 'GE3', state: '已连接'},
+        {name: 'GE4', state: '已关闭'},
+        {name: '聚合口A1', state: '未连接'},
+    ];
+    workState = [
+        {name: '默认安全域', state: '已连接'},
+        {name: '安全域1', state: '已关闭'},
+        {name: '安全域2', state: '已关闭'}
+    ];
+
     // 设备流程top5
     deviceType = [
         {label: '全部设备', value: 'all', active: true},

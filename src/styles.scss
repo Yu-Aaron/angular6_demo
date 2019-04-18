@@ -257,9 +257,10 @@ html, body {
   display: inline-block;
 }
 .top-right{
-  position: absolute;
+  float: right;
+  position: relative;
   right: 5px;
-  top: 10px;
+  top: -45px;
 }
 .tab-label {
   display: inline-block;

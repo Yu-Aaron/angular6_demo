@@ -145,6 +145,15 @@ export class ChartService {
             });
         });
         return {
+            legend: {
+                icon: 'circle',
+                itemWidth: 10,
+                itemHeight: 10,
+                textStyle: {
+                    color: '#BAC0C0',
+                    fontWeight: 'bold'
+                }
+            },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {

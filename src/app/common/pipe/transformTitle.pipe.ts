@@ -7,7 +7,7 @@ export class TransformTitlePipe implements PipeTransform {
 
     transform(value: string): string {
         const data = {
-            monitor: '首页',
+            home: '首页',
             securityaudit: '安全审计',
             strategyaudit: '审计策略',
             asset: '资产管理',

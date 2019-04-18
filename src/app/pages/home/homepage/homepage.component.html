@@ -1,5 +1,12 @@
-<div nz-row class="device">
-    <nz-card nz-col [nzXs]="{span: 24}" [nzMd]="{span: 10}" nzTitle="设备概况">
+<!--右上角刷新-->
+<div class="top-right">
+    <button nz-button nzType="primary" class="mr-10">
+        <i nz-icon nzType="sync" nzTheme="outline"></i>刷新
+    </button>
+</div>
+<div nz-row class="device-content">
+    <!--设备概况-->
+    <nz-card nz-col [nzXs]="{span: 24}" [nzMd]="{span: 10}" style="padding-top: 38px">
         <div nz-col [nzSpan]="6">
             <canvas id="circle1" width="150" height="118"></canvas>
         </div>
@@ -13,22 +20,35 @@
             <canvas id="temp" width="150" height="118"></canvas>
         </div>
     </nz-card>
-    <nz-card nz-col [nzXs]="{span: 24}" [nzMd]="{span: 8}" nzTitle="接口状态">
-        <p>Card content</p>
+    <!--接口状态-->
+    <nz-card nz-col [nzXs]="{span: 24}" [nzMd]="{span: 8}" nzTitle="接口状态" [nzExtra]="linkStateTemp">
+        <ul>
+            <li *ngFor="let item of linkState">
+                <span>{{item.name}}</span>
+                <div class="state" [ngStyle]="{'background': item.state === '已连接' ? '#8BF7B1': item.state === '未连接' ? '#F2A668' : '#BEBEBE'}"></div>
+            </li>
+        </ul>
+        <ng-template #linkStateTemp>
+            <a>更多<i nz-icon nzType="right" nzTheme="outline"></i></a>
+        </ng-template>
     </nz-card>
-    <nz-card nz-col [nzXs]="{span: 24}" [nzMd]="{span: 6}" nzTitle="工作域状态">
-        <p>Card content</p>
+    <!--工作域状态-->
+    <nz-card nz-col [nzXs]="{span: 24}" [nzMd]="{span: 6}" nzTitle="工作域状态" [nzExtra]="workStateTemp">
+        <ul>
+            <li *ngFor="let item of workState">
+                <span>{{item.name}}</span>
+                <div class="state" [ngStyle]="{'background': item.state === '已连接' ? '#8BF7B1': item.state === '未连接' ? '#F2A668' : '#BEBEBE'}"></div>
+            </li>
+        </ul>
+        <ng-template #workStateTemp>
+            <a>更多<i nz-icon nzType="right" nzTheme="outline"></i></a>
+        </ng-template>
     </nz-card>
 </div>
-<div nz-row class="topData" nzGutter="16">
-    <!--设备量Top5-->
-    <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 13}" >
-        <nz-card nzTitle="设备流量Top5">
-            <div class="device-flow">
-                <span class="tab-label" *ngFor="let item of deviceType; let i =index" [ngClass]="{'active': item.active}" (click)="checkDeviceType(i)">
-                    {{item.label}}
-                </span>
-            </div>
+<div nz-row class="device-flow" nzGutter="16">
+    <!--设备流量Top5-->
+    <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 13}">
+        <nz-card nzTitle="设备流量Top5" [nzExtra]="searchAllTemp">
             <div echarts [options]="flowOption" class="echartsStyle"></div>
             <!-- 表格 -->
             <nz-table #tableDataTmp
@@ -73,6 +93,14 @@
                 <span>共 {{pageTotalNumber}} 页</span>
             </ng-template>
         </nz-card>
+        <ng-template #searchAllTemp>
+            <div class="fl">
+                <span class="tab-label" *ngFor="let item of deviceType; let i =index" [ngClass]="{'active': item.active}" (click)="checkDeviceType(i)">
+                    {{item.label}}
+                </span>
+            </div>
+            <a class="fr">查看全部<i nz-icon nzType="right" nzTheme="outline"></i></a>
+        </ng-template>
     </div>
     <!--今日事件监测-->
     <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 11}" >
