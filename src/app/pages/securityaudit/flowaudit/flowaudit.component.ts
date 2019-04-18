@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ChartService} from '../../../common/service/chart.service';
 
 @Component({
     selector: 'app-flowaudit',
@@ -12,8 +13,7 @@ export class FlowauditComponent implements OnInit {
         {label: '未知设备', value: 'unkown', active: false},
         {label: '已知设备', value: 'kown', active: false}
     ];
-    flowData = [];
-    option = {};
+    flowOption = {};
 
     tableData = [];  // 表格数据
     filterParameter = null; // 过滤条件 参数
@@ -24,7 +24,7 @@ export class FlowauditComponent implements OnInit {
     tableCount = 0;
     loading: boolean;
 
-    constructor() {
+    constructor(private chartService: ChartService) {
     }
 
     ngOnInit() {
@@ -41,7 +41,6 @@ export class FlowauditComponent implements OnInit {
     }
 
     getFlowChartData() {
-        this.flowData = [];
         const data = [
             {name: 'PC1', value: [10, 13, 41, 20, 30, 20, 12], color: '#1A9BFC'},
             {name: 'AREA1', value: [22, 18, 11, 23, 20, 30, 10], color: '#99DA69'},
@@ -49,109 +48,7 @@ export class FlowauditComponent implements OnInit {
             {name: 'PC2', value: [20, 32, 21, 33, 16, 23, 12], color: '#FA704D'},
             {name: 'AREA1', value: [12, 32, 21, 14, 30, 20, 12], color: '#01BABC'},
         ];
-        data.forEach((item) => {
-            this.flowData.push({
-                type: 'line',
-                name: item.name,
-                smooth: true,
-                showSymbol: false,
-                symbolSize: 2,
-                lineStyle: {
-                    width: 1,
-                    color: item.color
-                },
-                areaStyle: {
-                    color: {
-                        type: 'linear',
-                        x: 0,
-                        y: 0,
-                        x2: 0,
-                        y2: 1,
-                        colorStops: [{offset: 0, color: item.color}, {offset: 1, color: '#1D2C45'}]
-                    },
-                    opacity: 0.2
-                },
-                data: item.value
-            });
-        });
-        this.drawFlowChart();
-    }
-
-    drawFlowChart() {
-        this.option = {
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    label: {
-                        backgroundColor: '#6a7985'
-                    }
-                }
-            },
-            grid: {
-                x: 20,
-                y: 20,
-                x2: 20,
-                y2: 20,
-                height: 220,
-                containLabel: true
-            },
-            xAxis: [
-                {
-                    type: 'category',
-                    boundaryGap: false,
-                    axisLabel: {
-                        textStyle: {
-                            color: '#BAC0C0',
-                            fontSize: 12
-                        }
-                    },
-                    splitLine: {
-                        show: true,
-                        lineStyle: {
-                            color: '#32346C',
-                            width: 1,
-                            type: 'solid'
-                        }
-                    },
-                    axisTick: {
-                        show: false
-                    },
-                    axisLine: {
-                        lineStyle: {
-                            color: '#32346C',
-                        }
-                    },
-                    data: ['1h', '2h', '3h', '4h', '5h', '6h', '7h']
-                }
-            ],
-            yAxis: [
-                {
-                    type: 'value',
-                    axisLabel: {
-                        textStyle: {
-                            color: '#BAC0C0',
-                            fontSize: 12
-                        }
-                    },
-                    splitLine: {
-                        lineStyle: {
-                            color: '#32346C',
-                            width: 1,
-                            type: 'solid'
-                        }
-                    },
-                    axisLine: {
-                        lineStyle: {
-                            color: '#32346C',
-                        }
-                    },
-                    axisTick: {
-                        show: false
-                    }
-                }
-            ],
-            series: this.flowData
-        };
+        this.flowOption = this.chartService.drawFlowChart(data);
     }
 
     checkDeviceType(i) {
