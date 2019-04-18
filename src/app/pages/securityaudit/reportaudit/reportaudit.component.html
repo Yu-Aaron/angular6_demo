@@ -1,3 +1,98 @@
-<p>
-  reportaudit works!
-</p>
+<nz-tabset>
+  <nz-tab nzTitle="日报">
+    <nz-table #dailyTable 
+              [nzData]="daily.data"
+              [nzTotal]="daily.total"
+              [nzLoading]="daily.loading"
+              [nzShowTotal]="dailyTableTpl"
+              [nzShowQuickJumper]="true"
+              [nzFrontPagination]="false"
+              [nzPageIndex]="daily.pageIndex"
+              [nzPageSize]="daily.pageSize"
+              (nzPageIndexChange)="dailyTablePageChange($event)">
+      <thead>
+        <tr>
+          <th>报告名称</th>
+          <th>报告时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of dailyTable.data">
+          <td>{{data.name}}</td>
+          <td>{{data.time}}</td>
+          <td>下载  查看详情</td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <ng-template #dailyTableTpl>
+      <span>共 {{daily.total}} 条，</span>
+      <span>每页展示 {{daily.pageSize}} 条，</span>
+      <span>共 {{daily.pages}} 页</span>
+    </ng-template>
+  </nz-tab>
+  <nz-tab nzTitle="周报">
+    <nz-table #weeklyTable 
+              [nzData]="weekly.data"
+              [nzTotal]="weekly.total"
+              [nzLoading]="weekly.loading"
+              [nzShowTotal]="weeklyTableTpl"
+              [nzShowQuickJumper]="true"
+              [nzFrontPagination]="false"
+              [nzPageIndex]="weekly.pageIndex"
+              [nzPageSize]="weekly.pageSize"
+              (nzPageIndexChange)="weeklyTablePageChange($event)">
+      <thead>
+        <tr>
+          <th>报告名称</th>
+          <th>报告时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of weeklyTable.data">
+          <td>{{data.name}}</td>
+          <td>{{data.time}}</td>
+          <td>下载  查看详情</td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <ng-template #weeklyTableTpl>
+      <span>共 {{weekly.total}} 条，</span>
+      <span>每页展示 {{weekly.pageSize}} 条，</span>
+      <span>共 {{weekly.pages}} 页</span>
+    </ng-template>
+  </nz-tab>
+  <nz-tab nzTitle="月报">
+    <nz-table #monthlyTable 
+              [nzData]="monthly.data"
+              [nzTotal]="monthly.total"
+              [nzLoading]="monthly.loading"
+              [nzShowTotal]="monthlyTableTpl"
+              [nzShowQuickJumper]="true"
+              [nzFrontPagination]="false"
+              [nzPageIndex]="monthly.pageIndex"
+              [nzPageSize]="monthly.pageSize"
+              (nzPageIndexChange)="monthlyTablePageChange($event)">
+      <thead>
+        <tr>
+          <th>报告名称</th>
+          <th>报告时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of monthlyTable.data">
+          <td>{{data.name}}</td>
+          <td>{{data.time}}</td>
+          <td>下载  查看详情</td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <ng-template #monthlyTableTpl>
+      <span>共 {{monthly.total}} 条，</span>
+      <span>每页展示 {{monthly.pageSize}} 条，</span>
+      <span>共 {{monthly.pages}} 页</span>
+    </ng-template>
+  </nz-tab>
+</nz-tabset>

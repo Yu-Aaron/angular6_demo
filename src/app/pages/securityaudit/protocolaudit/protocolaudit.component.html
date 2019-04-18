@@ -1,8 +1,18 @@
 <!-- 过滤条件 -->
-<app-filter-table [timeValueData]="filterConditionData.timeValueData"
-                  [controlArray]="filterConditionData.controlArray"
-                  [showTimePicker]="true"
-                  [showAdvance]="false"
-                  [isFuzzySearch]="true"
-                  (searchFilterTable)="searchFilterTable($event)">
-</app-filter-table>
+<div class="protocolaudit_content">
+    <app-filter-table [timeValueData]="filterConditionData.timeValueData"
+        [controlArray]="filterConditionData.controlArray"
+        [showTimePicker]="true"
+        [showAdvance]="false"
+        [isFuzzySearch]="true"
+        (searchFilterTable)="searchFilterTable($event)">
+    </app-filter-table>
+    <div class="echarts_content_data" nz-row>
+        <div class="time_bar_content" nz-col nzSpan="12">
+            <div echarts [options]="barOptions" class="time_bar"></div>
+        </div>
+        <div class="time_bar_content" nz-col nzSpan="12">
+            <div echarts [options]="barOptions" class="time_bar"></div>
+        </div>
+    </div>
+</div>

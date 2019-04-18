@@ -12,7 +12,7 @@ const routes: Routes = [
             { path: 'strategyaudit', loadChildren: './strategyaudit/strategyaudit.module#StrategyauditModule' },
             { path: 'asset', loadChildren: './asset/asset.module#AssetModule' },
             { path: 'setting', loadChildren: './setting/setting.module#SettingModule' },
-            { path: 'user', loadChildren: './user/user.module#UserModule' },
+            { path: 'usermanagement', loadChildren: './user/user.module#UserModule' },
             { path: 'log', loadChildren: './log/log.module#LogModule' },
             { path: '', redirectTo: 'home' }
         ]

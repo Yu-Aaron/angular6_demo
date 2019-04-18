@@ -70,7 +70,7 @@
             "currentState": "SYSTEM_SETTING"
         },
         {
-            "state": "user",
+            "state": "usermanagement",
             "name": "用户管理",
             "icon": "debug_tool",
             "type": "team",
@@ -250,10 +250,10 @@
             "currentState": "SYSTEM_SETTING"
         }
     ],
-    "user": [
+    "usermanagement": [
         {
             "state": "user",
-            "name": "用户管理",
+            "name": "用户",
             "icon": "",
             "enable": true,
             "target": "USER_MANAGEMENT",
@@ -261,7 +261,7 @@
         },
         {
             "state": "usergroup",
-            "name": "用户组管理",
+            "name": "用户组",
             "icon": "",
             "enable": true,
             "target": "USERGROUP_MANAGEMENT",

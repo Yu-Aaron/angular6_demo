@@ -1,1 +1,28 @@
 @import '../../../../veriable.scss';
+
+:host ::ng-deep {
+  nz-tabset {
+    .ant-tabs-bar {
+      border: none;
+      .ant-tabs-tab {
+        width: 160px;
+        text-align: center;
+        background: #2D455B;
+        font-size: 16px;
+        color: #F2F2F2;
+        margin-right: 3px;
+        &.ant-tabs-tab-active {
+          background: #0151A7;
+        }
+      }
+      .ant-tabs-ink-bar-animated {
+        height: 0px;
+      }
+    }
+    .ant-tabs-content {
+      .ant-tabs-tabpane {
+        background: #173655;
+      }
+    }
+  }
+}

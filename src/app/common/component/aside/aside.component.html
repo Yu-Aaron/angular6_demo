@@ -19,9 +19,10 @@
       </ul>
     </nz-dropdown>
     <i class="guide" title="操作指南" nz-icon nzType="paper-clip" nzTheme="outline" (click)="toggleGuide()"></i>
-    <img class="about-us" src="/assets/images/logo/about_us.svg" alt="关于" title="关于">
+    <img class="about-us" src="/assets/images/logo/about_us.svg" alt="关于" (click)="toggleAbout()" title="关于">
     <img class="exit-system" src="/assets/images/logo/exit_system.svg" alt="退出系统" title="退出系统">
   </div>
+  <!-- 操作指南 -->
   <div class="operate-guide" [ngClass]="{'show': showGuide}">
     <span class="title">审计流程</span>
     <div class="main" *ngFor="let data of auditProcess[0]; let i = index;" [ngClass]="{'right-0': i == 2}">
@@ -37,4 +38,35 @@
       关闭操作指南
     </div>
   </div>
+  <!-- 关于 -->
+  <nz-modal [(nzVisible)]="showSysInfo" 
+            nzTitle="关于"
+            nzWidth="470"
+            nzClassName="sysinfo"
+            [nzFooter]="null"
+            (nzOnOk)="toggleAbout()"
+            (nzOnCancel)="toggleAbout()">
+    <div>
+      <div nz-row>
+        <span nz-col nzSpan="8" class="text-right">产品名称：</span>
+        <span nz-col nzSpan="16" class="info-value">工业安全监测审计系统</span>
+      </div>
+      <div nz-row>
+        <span nz-col nzSpan="8" class="text-right">序列号：</span>
+        <span nz-col nzSpan="16" class="info-value">AU1000DD11911006789</span>
+      </div>
+      <div nz-row>
+        <span nz-col nzSpan="8" class="text-right">软件版本号：</span>
+        <span nz-col nzSpan="16" class="info-value">AU-3.0.0-A1000-191002</span>
+      </div>
+      <div nz-row>
+        <span nz-col nzSpan="8" class="text-right">硬件版本号：</span>
+        <span nz-col nzSpan="16" class="info-value">A1000-DIN</span>
+      </div>
+      <div nz-row>
+        <span nz-col nzSpan="8" class="text-right">设备运行时间：</span>
+        <span nz-col nzSpan="16" class="info-value">3天21小时20分钟27秒</span>
+      </div>
+    </div>
+  </nz-modal>
 </div>

@@ -8,7 +8,7 @@ import { UsergroupComponent } from './usergroup/usergroup.component';
 const routes: Routes = [
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'usergroup', component: UsergroupComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/pages/user/user' }
+  { path: '', redirectTo: '/pages/usermanagement/user' }
 ];
 
 @NgModule({

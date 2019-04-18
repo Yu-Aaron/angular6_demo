@@ -262,6 +262,9 @@ html, body {
     background: #2B639F;
   }
 }
+.text-right {
+  text-align: right;
+}
 
 /*** others ***/
 .cdk-overlay-container .shortcut-list {
@@ -269,13 +272,60 @@ html, body {
     background-color: #082748;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
     color: #fff;
     padding: 40px 20px;
+    padding-bottom: 10px;
     li {
-      width: 80px;
+      width: 30%;
       height: 70px;
+      cursor: pointer;
       background-color: #0F3C69;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+      &:hover {
+        background-color: #0151A7;
+        color: #25B4F1;
+      }
+      i {
+        font-size: 18px;
+      }
     }
   }
 }
 
+
+
+.ant-modal.sysinfo {
+  .ant-modal-content {
+    background-color: $bg-aside;
+    .anticon-close {
+      color: #fff;
+    }
+    .ant-modal-header {
+      border: none;
+      text-align: center;
+      background-color: $bg-aside;
+      .ant-modal-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #A5B2BF;
+      }
+    }
+    .ant-modal-body {
+      font-size: 16px;
+      color: #fff;
+      padding-top: 10px;
+      padding-bottom: 40px;
+      .text-right {
+        color: #46C0FF;
+      }
+      .info-value {
+        padding-left: 8px;
+      }
+    }
+  }
+}
