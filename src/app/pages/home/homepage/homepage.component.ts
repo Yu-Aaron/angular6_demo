@@ -54,6 +54,34 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     tableCount = 0;
     loading: boolean;
 
+    // 今日事件监测
+    monitorPieData = [
+        {value: 335, name: '威胁'},
+        {value: 310, name: '协议规则'},
+        {value: 234, name: 'IP/MAC'},
+        {value: 135, name: '域名规则'}
+    ];
+    monitorPieOption = {};
+    lineProgress = [
+        {name: '使用规则总数', value: 3000},
+        {name: '使用威胁总数', value: 2700},
+        {name: '使用自定义规则总数', value: 300}
+    ];
+    tabLabel = [
+        {name: '全部', value: 'all'},
+        {name: '威胁', value: '威胁'},
+        {name: '协议规则', value: '协议规则'},
+        {name: 'IP/MAC', value: 'IP/MAC'},
+        {name: '域名规则', value: '域名规则'}
+    ];
+    tabLabelContent = [
+        {text: '【发现威胁】111111111111111111111111', count: 1388},
+        {text: '【发现威胁】111111111111111111111111', count: 1388},
+        {text: '【发现威胁】111111111111111111111111', count: 1388},
+        {text: '【发现威胁】111111111111111111111111', count: 1388},
+        {text: '【发现威胁】111111111111111111111111', count: 1388},
+    ];
+
     constructor(private homeService: HomeService, private chartService: ChartService) {
     }
 
@@ -61,6 +89,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
         this.getProgressData();
         this.getFlowChartData();
         this.getFlowTable();
+        this.monitorPieOption = this.chartService.drawMonitorPie(this.monitorPieData,'28000');
     }
 
     ngAfterViewInit(): void {
@@ -113,6 +142,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
         ];
         this.flowOption = this.chartService.drawFlowChart(data);
     }
+
     checkDeviceType(i) {
         this.deviceType[i].active = true;
         this.deviceType.forEach((item, index) => {
@@ -121,6 +151,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
             }
         });
     }
+
     getFlowTable() {
         this.tableData = [{
             status: 'NEW',

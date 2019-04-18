@@ -48,7 +48,7 @@
 <div nz-row class="device-flow" nzGutter="16">
     <!--设备流量Top5-->
     <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 13}">
-        <nz-card nzTitle="设备流量Top5" [nzExtra]="searchAllTemp">
+        <nz-card nzTitle="设备流量Top5" [nzExtra]="flowTemp">
             <div echarts [options]="flowOption" class="echartsStyle"></div>
             <!-- 表格 -->
             <nz-table #tableDataTmp
@@ -93,7 +93,7 @@
                 <span>共 {{pageTotalNumber}} 页</span>
             </ng-template>
         </nz-card>
-        <ng-template #searchAllTemp>
+        <ng-template #flowTemp>
             <div class="fl">
                 <span class="tab-label" *ngFor="let item of deviceType; let i =index" [ngClass]="{'active': item.active}" (click)="checkDeviceType(i)">
                     {{item.label}}
@@ -104,8 +104,28 @@
     </div>
     <!--今日事件监测-->
     <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 11}" >
-        <nz-card nzTitle="今日事件检测">
-            <p>Card content</p>
+        <nz-card nzTitle="今日事件监测" [nzExtra]="monitorTemp">
+            <div nz-row>
+                <div nz-col [nzMd]="{span: 13}" echarts [options]="monitorPieOption" class="echartsStyle pie"></div>
+                <div nz-col [nzMd]="{span: 11}" class="right-chart">
+                    <div *ngFor="let item of lineProgress">
+                        <span>{{item.name}}</span>
+                        <p><span class="line"><span class="progress" [ngStyle]="{'width': item.value/10 + 'px'}"></span></span>{{item.value}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-title">今日命中规则个数Top10</div>
+            <nz-tabset>
+                <nz-tab [nzTitle]="label.name" *ngFor="let label of tabLabel">
+                    <div *ngFor="let item of tabLabelContent" class="label-content">
+                        <span>{{item.text}}</span>
+                        <span style="color: #46C0FF; font-size: 16px">{{item.count}}</span>
+                    </div>
+                </nz-tab>
+            </nz-tabset>
         </nz-card>
+        <ng-template #monitorTemp>
+            <a>查看全部<i nz-icon nzType="right" nzTheme="outline"></i></a>
+        </ng-template>
     </div>
 </div>

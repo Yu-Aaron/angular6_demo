@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
+
 export class ChartService {
 
     constructor() {
@@ -144,7 +145,7 @@ export class ChartService {
                 data: item.value
             });
         });
-        return {
+        const options = {
             legend: {
                 icon: 'circle',
                 itemWidth: 10,
@@ -227,6 +228,64 @@ export class ChartService {
             ],
             series: flowData
         };
+        return options;
+    }
+
+    drawMonitorPie(data, totalCount) {
+        const options = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c} ({d}%)'
+            },
+            legend: {
+                icon: 'circle',
+                orient: 'vertical',
+                x: 'left',
+                left: 20,
+                top: 30,
+                itemWidth: 10,
+                itemHeight: 10,
+                textStyle: {
+                    color: '#E5F1FF',
+                    fontWeight: 'bold',
+                    padding: [0, 0, 0, 10]
+                }
+            },
+            color: ['#FFC155', '#FF6464', '#6BB4F2', '#88E3D2'],
+            series: [
+                {
+                    type: 'pie',
+                    radius: ['60%', '70%'],
+                    center: ['60%', '42%'],
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'center',
+                            formatter: function() {
+                                return '{a|' + parseFloat(totalCount).toLocaleString() + '} \n {b|事件总数}';
+                            },
+                            borderWidth: 20,
+                            borderRadius: 4,
+                            padding: [0, -80],
+                            rich: {
+                                a: {
+                                    color: '#E4F1FF',
+                                    fontSize: 26,
+                                    lineHeight: 40,
+                                },
+                                b: {
+                                    fontSize: 16,
+                                    lineHeight: 20,
+                                    color: '#E4F1FF'
+                                },
+                            }
+                        },
+                    },
+                    data: data
+                }
+            ]
+        };
+        return options;
     }
 
 }

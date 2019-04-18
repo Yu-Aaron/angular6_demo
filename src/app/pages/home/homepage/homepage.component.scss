@@ -1,9 +1,6 @@
 @import '../../../../veriable.scss';
 
 :host ::ng-deep {
-  nz-card {
-    background: $table-bg;
-  }
   .ant-card-head, .ant-card-bordered {
     border: none;
   }
@@ -13,10 +10,35 @@
     font-weight: bold;
   }
   .ant-card-body {
-    padding:5px 10px;
-    text-align: center;
+    padding: 5px 10px;
+    color: #fff;
+  }
+  nz-card {
+    background: $table-bg;
   }
 
+  //页签
+  .ant-tabs {
+    top: -35px;
+    color: #CACACA;
+    .ant-tabs-bar {
+      border-bottom: 1px solid #DEDEDE;
+    }
+    .ant-tabs-nav {
+      float: right;
+      .ant-tabs-tab {
+        padding: 12px 2px;
+        &:hover {
+          color: #CACACA;
+        }
+      }
+      .ant-tabs-tab-active, .ant-tabs-tab-active:hover {
+        color: #5AACF9;
+      }
+    }
+  }
+
+  //设备概况
   .device-content {
     nz-card {
       min-height: 180px;
@@ -28,7 +50,6 @@
     ul {
       display: flex;
       justify-content: space-between;
-      color: #fff;
       padding: 20px 25px;
       list-style: none;
       font-size: 16px;
@@ -41,18 +62,51 @@
     }
   }
 
+  //设备流量
   .device-flow {
     nz-card {
       margin-top: 10px;
-      min-height: 500px;
+      height: 600px;
+      overflow: auto;
     }
-    .ant-card-extra {
-      width: 85%;
+    > div:nth-child(1) nz-card {
+      .ant-card-extra {
+        width: 85%;
+      }
     }
     .echartsStyle {
-      height: 256px!important;
+      height: 256px;
       background: $table-bg;
       margin: 10px 0;
+      &.pie {
+        height: 200px;
+      }
+    }
+    .right-chart {
+      color: #E5F1FF;
+      padding-top: 10px;
+      .line {
+        width: 300px;
+        height: 8px;
+        background: #EFF4FA;
+        border-radius: 5px;
+        margin-right: 10px;
+        display: -webkit-inline-box;
+        margin-top: 8px;
+      }
+      .progress {
+        @extend .line;
+        width: 100px;
+        background: #27BDFF;
+        position: relative;
+        top: -8px;
+      }
+    }
+    .label-content {
+      display: flex;
+      color: #fff;
+      justify-content: space-between;
+      margin: 10px;
     }
   }
 }
