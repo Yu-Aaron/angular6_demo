@@ -1,4 +1,4 @@
-<div class="content-leftmenu">
+<div class="content-leftmenu" [ngStyle]="{'width': state === 'home' ? '60px' : '160px'}">
   <nz-content>
     <!-- 一级菜单 -->
     <ul nz-menu [nzMode]="'vertical'" nzTheme="dark" class="left_first_submenu">

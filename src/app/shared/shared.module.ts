@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { FilterTableComponent} from '../common/component/filter-table/filter-table.component';
+import { ModalComponent } from '../common/component/modal/modal.component';
+import { NgxEchartsModule} from 'ngx-echarts';
 
 @NgModule({
     imports: [
@@ -10,16 +12,20 @@ import { FilterTableComponent} from '../common/component/filter-table/filter-tab
         FormsModule,
         ReactiveFormsModule,
         NgZorroAntdModule,
+        NgxEchartsModule
     ],
     exports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         NgZorroAntdModule,
-        FilterTableComponent
+        NgxEchartsModule,
+        FilterTableComponent,
+        ModalComponent
     ],
     declarations: [
-        FilterTableComponent
+        FilterTableComponent,
+        ModalComponent
     ]
 })
 

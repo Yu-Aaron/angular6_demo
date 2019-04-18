@@ -7,9 +7,9 @@ import {Component, OnInit} from '@angular/core';
         <nz-header>
             <app-aside></app-aside>
         </nz-header>
-        <nz-layout>
-            <app-left-menu (currentState)="currentState=$event" (currentSubState)="currentSubState=$event"></app-left-menu>
-            <app-right-content [currentState]="currentState" [currentSubState]="currentSubState"></app-right-content>
+        <nz-layout class="menu_ant-layout">
+            <app-left-menu (currentState)="currentState=$event" (currentSubState)="currentSubState=$event" class="left_menu"></app-left-menu>
+            <app-right-content [currentState]="currentState" [currentSubState]="currentSubState" class="right_content"></app-right-content>
         </nz-layout>
     </nz-layout>
     `,

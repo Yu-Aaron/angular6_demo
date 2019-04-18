@@ -1,0 +1,16 @@
+<div class="modal_content">
+  <nz-modal
+    [(nzVisible)]="isVisible"
+    (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleOk()"
+    nzClassName="modal_message_tip"
+    nzClosable="false">
+    <div class="content">
+      <img src="/assets/images/tip/message.png" alt="">
+      <div>
+        <p>{{message_content}}</p>
+        <p [ngStyle]="{'color': isSetColor}">{{message_content_tip}}</p>
+      </div>
+    </div>
+  </nz-modal>
+</div>

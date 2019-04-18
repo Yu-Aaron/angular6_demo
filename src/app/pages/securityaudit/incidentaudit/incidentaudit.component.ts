@@ -28,6 +28,8 @@ export class IncidentauditComponent implements OnInit {
         {name: '命中域名', count: 10, color: '#26BAFB'},
     ];
 
+    isVisible = false;
+
     constructor(private securityAuditService: SecurityAuditService) {
     }
 
@@ -89,6 +91,20 @@ export class IncidentauditComponent implements OnInit {
 
     }
 
+    // 清空全部事件
+    clearAllData() {
+        this.isVisible = true;
+    }
+
+    // 关闭modal弹框
+    closeModal(flag) {
+        this.isVisible = flag.isVisible;
+        // 如果点击了确定按钮，执行确定按钮的逻辑
+        if (flag.ok) {
+            alert('点击了确定按钮');
+        }
+    }
+
     checkAll(value: boolean): void {
         this.tableData.forEach(data => {
             data.checked = value;
@@ -108,5 +124,4 @@ export class IncidentauditComponent implements OnInit {
         });
         this.allChecked = this.tableData.every(value => value.checked === true);
     }
-
 }

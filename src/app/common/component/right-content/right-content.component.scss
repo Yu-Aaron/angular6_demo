@@ -1,18 +1,10 @@
 .content-right {
-    padding: 10px 15px;
-    position: absolute;
-    left: 160px;
-    top: 0;
-    width: calc(100vw - 160px);
-    height: 100%;
+    padding: 10px;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
 }
 
 .content-title {
     padding: 10px 0 15px;
     font-size: 16px;
-}
-
-.index {
-    left: 60px;
-    width: calc(100vw - 60px);
 }

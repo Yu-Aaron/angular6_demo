@@ -1,3 +1,4 @@
+<!-- 右上角操作事件 -->
 <div class="top-right">
     <button nz-button nzType="primary" class="mr-10 btn-light">
         <i nz-icon nzType="area-chart" nzTheme="outline" style="font-size: 18px"></i>事件统计分析
@@ -5,7 +6,12 @@
     <button nz-button nzType="primary" class="mr-10">
         <i nz-icon nzType="sync" nzTheme="outline"></i>刷新
     </button>
-    <button nz-button nzType="primary" class="mr-10">清空全部事件</button>
+    <button nz-button nzType="primary" class="mr-10" (click)="clearAllData()">清空全部事件</button>
+    <app-modal [isVisible]="isVisible"
+               (closeModal)="closeModal($event)"
+               [message_content]="'清空全部事件可能需要较长时间'"
+               [message_content_tip]="'您还要继续吗?'">
+    </app-modal>
 </div>
 <!-- 过滤条件 -->
 <app-filter-table [timeValueData]="filterConditionData.timeValueData"

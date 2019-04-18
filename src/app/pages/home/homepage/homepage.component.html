@@ -21,11 +21,60 @@
     </nz-card>
 </div>
 <div nz-row class="topData" nzGutter="16">
+    <!--设备量Top5-->
     <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 13}" >
-        <nz-card nzTitle="设备量Top5">
-            <p>Card content</p>
+        <nz-card nzTitle="设备流量Top5">
+            <div class="device-flow">
+                <span class="tab-label" *ngFor="let item of deviceType; let i =index" [ngClass]="{'active': item.active}" (click)="checkDeviceType(i)">
+                    {{item.label}}
+                </span>
+            </div>
+            <div echarts [options]="flowOption" class="echartsStyle"></div>
+            <!-- 表格 -->
+            <nz-table #tableDataTmp
+                      [nzData]="tableData"
+                      [nzTotal]="tableCount"
+                      [nzShowQuickJumper]="true"
+                      [nzFrontPagination]="false"
+                      [(nzPageIndex)]="pageIndex"
+                      [(nzPageSize)]="pageSize"
+                      (nzPageIndexChange)="pageIndexChange()"
+                      [nzLoading]="loading"
+                      [nzShowTotal]="totalTemplate">
+                <thead>
+                    <tr>
+                        <th>状态</th>
+                        <th>事件名称</th>
+                        <th>发生时间</th>
+                        <th>规则来源</th>
+                        <th>安全域</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let inc of tableDataTmp.data" (click)="clickIncRow(inc)">
+                        <td class="wid-76">
+                            <span *ngIf="inc.status == 'NEW'" class="status text-danger">未读</span>
+                            <span *ngIf="inc.status != 'NEW'">已读</span>
+                        </td>
+                        <td>{{inc.incidentName}}</td>
+                        <td>{{inc.timestamp | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>{{inc.incidentRuleType}}</td>
+                        <td>{{inc.securityAreaName}}</td>
+                        <td>
+                            <span class="view-device-detail" ng-click="viewDetail(inc.incidentId)">查看详情</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+            <ng-template #totalTemplate let-total>
+                <span>共 {{tableCount}} 条，</span>
+                <span>每页展示 {{pageSize}} 条，</span>
+                <span>共 {{pageTotalNumber}} 页</span>
+            </ng-template>
         </nz-card>
     </div>
+    <!--今日事件监测-->
     <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 11}" >
         <nz-card nzTitle="今日事件检测">
             <p>Card content</p>
