@@ -7,6 +7,7 @@ import { FlowauditComponent } from './flowaudit/flowaudit.component';
 import { ProtocolauditComponent } from './protocolaudit/protocolaudit.component';
 import { LogauditComponent } from './logaudit/logaudit.component';
 import { ReportauditComponent } from './reportaudit/reportaudit.component';
+import { ReportdetailComponent } from './reportaudit/reportdetail/reportdetail.component';
 
 const routes: Routes = [
   { path: 'incidentaudit', component: IncidentauditComponent, canActivate: [AuthGuard] },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'protocolaudit', component: ProtocolauditComponent, canActivate: [AuthGuard] },
   { path: 'logaudit', component: LogauditComponent, canActivate: [AuthGuard] },
   { path: 'reportaudit', component: ReportauditComponent, canActivate: [AuthGuard] },
+  { path: 'reportaudit/:id', component: ReportdetailComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/pages/securityaudit/incidentaudit' }
 ];
 

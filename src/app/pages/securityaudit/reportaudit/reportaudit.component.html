@@ -21,7 +21,16 @@
         <tr *ngFor="let data of dailyTable.data">
           <td>{{data.name}}</td>
           <td>{{data.time}}</td>
-          <td>下载  查看详情</td>
+          <td class="operate">
+            <span class="download">
+              <i nz-icon nzType="arrow-down" nzTheme="outline"></i>
+              <span>下载</span>
+            </span>
+            <span class="detail" routerLink="./1">
+              <i nz-icon nzType="search" nzTheme="outline"></i>
+              <span>查看详情</span>
+            </span>
+          </td>
         </tr>
       </tbody>
     </nz-table>
@@ -53,7 +62,16 @@
         <tr *ngFor="let data of weeklyTable.data">
           <td>{{data.name}}</td>
           <td>{{data.time}}</td>
-          <td>下载  查看详情</td>
+          <td class="operate">
+            <span class="download">
+              <i nz-icon nzType="arrow-down" nzTheme="outline"></i>
+              <span>下载</span>
+            </span>
+            <span class="detail">
+              <i nz-icon nzType="search" nzTheme="outline"></i>
+              <span>查看详情</span>
+            </span>
+          </td>
         </tr>
       </tbody>
     </nz-table>
@@ -85,7 +103,16 @@
         <tr *ngFor="let data of monthlyTable.data">
           <td>{{data.name}}</td>
           <td>{{data.time}}</td>
-          <td>下载  查看详情</td>
+          <td class="operate">
+            <span class="download">
+              <i nz-icon nzType="arrow-down" nzTheme="outline"></i>
+              <span>下载</span>
+            </span>
+            <span class="detail">
+              <i nz-icon nzType="search" nzTheme="outline"></i>
+              <span>查看详情</span>
+            </span>
+          </td>
         </tr>
       </tbody>
     </nz-table>

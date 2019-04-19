@@ -1,6 +1,8 @@
+@import '../../../../veriable.scss';
+
 // 重置样式
 .ant-form {
-    background: #07294E;
+    background: $bg-card;
     //padding: 4px 20px 8px;
     //padding: 20px;
     line-height: 0;
@@ -25,7 +27,7 @@
         line-height: 34px;
         text-align: center;
         color: #E4E4E4;
-        background: #07294E;
+        background: $bg-card;
         cursor: pointer;
         &.active {
             background: #194E87;

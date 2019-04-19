@@ -9,6 +9,7 @@ import {ProtocolauditComponent} from './protocolaudit/protocolaudit.component';
 import {LogauditComponent} from './logaudit/logaudit.component';
 import {ReportauditComponent} from './reportaudit/reportaudit.component';
 import {FilterTableComponent} from '../../common/component/filter-table/filter-table.component';
+import { ReportdetailComponent } from './reportaudit/reportdetail/reportdetail.component';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import {FilterTableComponent} from '../../common/component/filter-table/filter-t
         ProtocolauditComponent,
         LogauditComponent,
         ReportauditComponent,
+        ReportdetailComponent,
     ],
     imports: [
         SharedModule,

@@ -1,1 +1,28 @@
 @import '../../../../veriable.scss';
+
+.argument_audit_message {
+    position: absolute;
+    top: 68px;
+    left: 70px;
+    div {
+        width: 125px;
+        height: 25px;
+        background: #3582FB;
+        color: #fff;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 4px;
+    }
+    div.application_layer {
+        margin-bottom: 25px;
+    }
+}
+.refresh_content {
+    display: inline-block;
+    float: right;
+    top: 10px;
+    margin-top: -50px;
+    margin-right: -8px;
+}
+
+

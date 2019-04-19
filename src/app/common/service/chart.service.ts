@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
     providedIn: 'root'
@@ -142,7 +142,7 @@ export class ChartService {
                         y: 0,
                         x2: 0,
                         y2: 1,
-                        colorStops: [{offset: 0, color: item.color}, {offset: 1, color: '#1D2C45'}]
+                        colorStops: [{ offset: 0, color: item.color }, { offset: 1, color: '#1D2C45' }]
                     },
                     opacity: 0.2
                 },
@@ -265,7 +265,7 @@ export class ChartService {
                         normal: {
                             show: true,
                             position: 'center',
-                            formatter: function() {
+                            formatter: function () {
                                 return '{a|' + parseFloat(totalCount).toLocaleString() + '} \n {b|事件总数}';
                             },
                             borderWidth: 20,
@@ -288,6 +288,121 @@ export class ChartService {
                     data: data
                 }
             ]
+        };
+        return options;
+    }
+
+    // 柱状图
+    drawHistogram(obj) {
+        // color, gridL, gridR, gridB, xData, name, barWidth, seriesData
+        obj.gridL = obj.gridL ? obj.gridL : '3%';
+        obj.gridR = obj.gridR ? obj.gridR : '4%';
+        obj.gridB = obj.gridB ? obj.gridB : '3%';
+        obj.barWidth = obj.barWidth ? obj.barWidth : '30%';
+        let options = {
+            color: obj.color,
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: obj.gridL,
+                right: obj.gridR,
+                bottom: obj.gridB,
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: obj.xData,
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#D9D9D9'
+                        }
+                    },
+                    axisLabel: {
+                        color: '#fff'
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        color: '#fff'
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: '#E8E8E8',
+                            type: 'dashed'
+                        }
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: obj.name,
+                    type: 'bar',
+                    barWidth: obj.barWidth,
+                    data: obj.seriesData,
+                    label: {
+                        show: obj.showLabel,
+                        position: obj.labelP,
+                        color: obj.labelC
+                    }
+                }
+            ]
+        };
+
+        return options;
+    }
+
+    // 曲线图obj.type=graph / 折线图obj.type=line
+    drawLineChart(obj) {
+        let options = {
+            xAxis: {
+                type: 'category',
+                data: obj.xData,
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLabel: {
+                    color: '#fff'
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    color: '#fff'
+                }
+            },
+            series: [{
+                data: obj.seriesData,
+                type: 'line',
+                lineStyle: {
+                    color: obj.lineColor,
+                    width: obj.lineWidth || 2
+                },
+                itemStyle: {
+                    color: obj.itemColor
+                },
+                smooth: obj.type === 'graph' ? true : false
+            }]
+        };
+        return options;
+    }
+
+    drawPieChart(obj) {
+        let options = {
+
         };
         return options;
     }

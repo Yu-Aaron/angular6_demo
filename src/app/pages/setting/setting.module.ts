@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {SettingRoutingModule} from './setting-routing.module';
+import {AuthGuard} from 'src/app/shared/AuthGuard';
+import {SharedModule} from '../../shared/shared.module';
 
-import { SettingRoutingModule } from './setting-routing.module';
-import { AuthGuard } from 'src/app/shared/AuthGuard';
-import { BasicComponent } from './basic/basic.component';
-import { ProtocolComponent } from './protocol/protocol.component';
-import { InterfaceComponent } from './interface/interface.component';
-import { DebugComponent } from './debug/debug.component';
-import { BackupComponent } from './backup/backup.component';
-import { LoginComponent } from './login/login.component';
+import {BasicComponent} from './basic/basic.component';
+import {ProtocolComponent} from './protocol/protocol.component';
+import {InterfaceComponent} from './interface/interface.component';
+import {DebugComponent} from './debug/debug.component';
+import {BackupComponent} from './backup/backup.component';
+import {LoginComponent} from './login/login.component';
 
 @NgModule({
     declarations: [
@@ -20,9 +20,10 @@ import { LoginComponent } from './login/login.component';
         LoginComponent
     ],
     imports: [
-        CommonModule,
+        SharedModule,
         SettingRoutingModule
     ],
     providers: [AuthGuard]
 })
-export class SettingModule { }
+export class SettingModule {
+}

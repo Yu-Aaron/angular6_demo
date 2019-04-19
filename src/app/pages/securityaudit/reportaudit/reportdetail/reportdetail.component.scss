@@ -1,0 +1,94 @@
+@import "../../../../../veriable.scss";
+
+:host ::ng-deep {
+  .detail-title {
+    text-align: center;
+    font-size: 24px;
+    position: relative;
+    .download {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background: $tab-active;
+    }
+  }
+  nz-card {
+    color: #D7D7D7;
+    border: none;
+    background: $bg-base;
+    margin: 20px 0px;
+    .ant-card-body {
+      padding: 0px;
+      position: relative;
+    }
+    .card-type {
+      height: 54px;
+      line-height: 54px;
+      padding-left: 10px;
+      background: $bg-card;
+      .card-no {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: #0099FF;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 20px;
+        margin-right: 5px;
+      }
+      .card-title {
+        font-size: 16px;
+        color: #25B4E6;
+        font-weight: 600;
+      }
+    }
+    .count {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 90%;
+      padding-left: 150px;
+      font-size: 16px;
+      .count-total {
+        color: #C27700;
+      }
+      .count-other {
+        color: $txt-blue;
+      }
+    }
+    &.analysis {
+      .card-type {
+        position: absolute;
+        width: 100%;
+      }
+    }
+    nz-tabset {
+      .ant-tabs-bar {
+        border: none;
+        color: #999999;
+        .ant-tabs-nav-container {
+          padding-left: 150px;
+          .ant-tabs-nav-wrap {
+            .ant-tabs-nav {
+              .ant-tabs-tab {
+                height: 54px;
+                line-height: 30px;
+              }
+            }
+          }
+        }
+      }
+      .ant-tabs-content {
+        // background: #fff;
+        .ant-tabs-tabpane-active {
+          background: #fff;
+        }
+      }
+    }
+    .echarts {
+      background: $bg-base;
+    }
+    
+  }
+}

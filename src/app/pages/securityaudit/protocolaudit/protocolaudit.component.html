@@ -1,9 +1,13 @@
 <!-- 过滤条件 -->
 <div class="protocolaudit_content">
+    <div class="refresh_content">
+        <button nz-button nzType="primary" class="mr-10">
+            <i nz-icon nzType="sync" nzTheme="outline"></i>刷新
+        </button>
+    </div>
     <app-filter-table [timeValueData]="filterConditionData.timeValueData"
         [controlArray]="filterConditionData.controlArray"
         [showTimePicker]="true"
-        [showAdvance]="false"
         [isFuzzySearch]="true"
         (searchFilterTable)="searchFilterTable($event)">
     </app-filter-table>
@@ -13,6 +17,28 @@
         </div>
         <div class="time_bar_content" nz-col nzSpan="12">
             <div echarts [options]="barOptions" class="time_bar"></div>
+        </div>
+    </div>
+    <div class="agreement_audit" nz-row>
+        <div class="agreement_audit_content" nz-col nzSpan="12">
+            <div echarts [options]="treeOptions" class="tree_bar"></div>
+            <div class="argument_audit_message">
+                <div class="application_layer">
+                    <span>应用层</span>
+                </div>
+                <div class="application_layer">
+                    <span>传输层</span>
+                </div>
+                <div class="application_layer">
+                    <span>MAC子层</span>
+                </div>
+                <div class="application_layer">
+                    <span>流量值</span>
+                </div>
+                <div class="application_layer">
+                    <span>事件数</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

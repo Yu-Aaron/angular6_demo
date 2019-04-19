@@ -289,7 +289,7 @@ html, body {
       text-align: center;
       justify-content: center;
       &:hover {
-        background-color: #0151A7;
+        background-color: $tab-active;
         color: #25B4F1;
       }
       i {

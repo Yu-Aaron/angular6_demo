@@ -1,0 +1,171 @@
+<div class="detail-title">
+  <i nz-icon nzType="file-text" nzTheme="outline"></i>
+  日报：2019-04-01
+  <button class="download" nz-button nzType="primary"><i nz-icon type="download"></i>下载报表</button>
+</div>
+<nz-card class="basic">
+  <div class="card-type">
+    <span class="card-no">1</span>
+    <span class="card-title">报表概况</span>
+  </div>
+  <div nz-row class="count">
+    <div nz-col nzSpan="4">
+      <span>事件总数：</span>
+      <span class="count-total">2897</span>
+    </div>
+    <div nz-col nzSpan="4">
+      <span>发现威胁：</span>
+      <span class="count-other">2867</span>
+    </div>
+    <div nz-col nzSpan="4">
+      <span>命中协议规则：</span>
+      <span class="count-other">10</span>
+    </div>
+    <div nz-col nzSpan="4">
+      <span>发现未知设备数量：</span>
+      <span class="count-other">10</span>
+    </div>
+    <div nz-col nzSpan="4">
+      <span>IP欺骗：</span>
+      <span class="count-other">5</span>
+    </div>
+    <div nz-col nzSpan="4">
+      <span>命中域名：</span>
+      <span class="count-other">5</span>
+    </div>
+  </div>
+</nz-card>
+<nz-card class="analysis">
+  <div class="card-type">
+    <span class="card-no">2</span>
+    <span class="card-title">攻击分析</span>
+  </div>
+  <nz-tabset>
+    <nz-tab (nzSelect)="getSourceCharts()" nzTitle="攻击来源TOP10">
+      <div echarts [options]="sourceOption" class="echarts"></div>
+    </nz-tab>
+    <nz-tab (nzSelect)="getTargetCharts()" nzTitle="攻击目标TOP10">
+      <div echarts [options]="targetOption" class="echarts"></div>
+    </nz-tab>
+    <nz-tab (nzSelect)="getActionCharts()" nzTitle="主要攻击行为">
+      <div echarts [options]="actionOption" class="echarts"></div>
+    </nz-tab>
+    <nz-tab (nzSelect)="getTrendCharts()" nzTitle="攻击峰值趋势">
+      <div echarts [options]="trendOption" class="echarts"></div>
+    </nz-tab>
+  </nz-tabset>
+</nz-card>
+<nz-card>
+  <div class="card-type">
+    <span class="card-no">3</span>
+    <span class="card-title">流量分析</span>
+  </div>
+  <div nz-row>
+    <div nz-col [nzXs]="24" [nzLg]="12" echarts [options]="flowProtocolOption" class="echarts"></div>
+    <div nz-col [nzXs]="24" [nzLg]="12" echarts [options]="securityDomainProtocolOption" class="echarts"></div>
+  </div>
+</nz-card>
+<nz-card>
+  <div class="card-type">
+    <span class="card-no">4</span>
+    <span class="card-title">事件列表</span>
+  </div>
+  <nz-table #eventTable 
+            [nzData]="event.data"
+            [nzTotal]="event.total"
+            [nzLoading]="event.loading"
+            [nzShowTotal]="eventTableTpl"
+            [nzShowQuickJumper]="true"
+            [nzFrontPagination]="false"
+            [nzPageIndex]="event.pageIndex"
+            [nzPageSize]="event.pageSize"
+            (nzPageIndexChange)="eventTablePageChange($event)">
+    <thead>
+      <tr>
+        <th>事件名称</th>
+        <th>应用协议</th>
+        <th>安全域</th>
+        <th>规则来源</th>
+        <th>源IP</th>
+        <th>目的IP</th>
+        <th>时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of eventTable.data">
+        <td>{{data.name}}</td>
+        <td>{{data.protocol}}</td>
+        <td>{{data.domain}}</td>
+        <td>{{data.source}}</td>
+        <td>{{data.sourceIp}}</td>
+        <td>{{data.targetIp}}</td>
+        <td>{{data.time}}</td>
+        <td class="operate">
+          <span class="detail">
+            <i nz-icon nzType="search" nzTheme="outline"></i>
+            <span>详情</span>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <ng-template #eventTableTpl>
+    <span>共 {{event.total}} 条，</span>
+    <span>每页展示 {{event.pageSize}} 条，</span>
+    <span>共 {{event.pages}} 页</span>
+  </ng-template>
+</nz-card>
+<nz-card>
+  <div class="card-type">
+    <span class="card-no">5</span>
+    <span class="card-title">审计日志</span>
+  </div>
+  <nz-table #logTable 
+            [nzData]="log.data"
+            [nzTotal]="log.total"
+            [nzLoading]="log.loading"
+            [nzShowTotal]="logTableTpl"
+            [nzShowQuickJumper]="true"
+            [nzFrontPagination]="false"
+            [nzPageIndex]="log.pageIndex"
+            [nzPageSize]="log.pageSize"
+            (nzPageIndexChange)="logTablePageChange($event)">
+    <thead>
+      <tr>
+        <th>起始时间</th>
+        <th>源IP</th>
+        <th>目的IP</th>
+        <th>源MAC</th>
+        <th>目的MAC</th>
+        <th>源端口</th>
+        <th>目的端口</th>
+        <th>协议类型</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of logTable.data">
+        <td>{{data.time}}</td>
+        <td>{{data.sourceIp}}</td>
+        <td>{{data.targetIp}}</td>
+        <td>{{data.sourceMAC}}</td>
+        <td>{{data.targetMAC}}</td>
+        <td>{{data.sourcePort}}</td>
+        <td>{{data.targetPort}}</td>
+        <td>{{data.protocol}}</td>
+        <td class="operate">
+          <span class="detail">
+            <i nz-icon nzType="search" nzTheme="outline"></i>
+            <span>详情</span>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <ng-template #logTableTpl>
+    <span>共 {{log.total}} 条，</span>
+    <span>每页展示 {{log.pageSize}} 条，</span>
+    <span>共 {{log.pages}} 页</span>
+  </ng-template>
+</nz-card>

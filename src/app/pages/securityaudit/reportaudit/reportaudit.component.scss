@@ -12,11 +12,44 @@
         color: #F2F2F2;
         margin-right: 3px;
         &.ant-tabs-tab-active {
-          background: $tab-active;
+          background: transparent;
         }
       }
       .ant-tabs-ink-bar-animated {
-        height: 0;
+        height: 100%;
+        background: $tab-active;
+        z-index: -2;
+      }
+    }
+    .ant-tabs-content {
+      .ant-tabs-tabpane {
+        background: #173655;
+        .ant-table-tbody {
+          .ant-table-row {
+            .operate {
+              .download,
+              .detail {
+                cursor: pointer;
+                position: relative;
+                margin-right: 20px;
+                padding-left: 40px;
+                display: inline-block;
+              }
+              i {
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                line-height: 34px;
+                background: $tab-active;
+                border-radius: 50%;
+                top: 50%;
+                left: 0px;
+                transform: translateY(-50%);
+              }
+            }
+          }
+        }
       }
     }
   }
