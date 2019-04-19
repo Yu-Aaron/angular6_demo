@@ -62,17 +62,21 @@ export class FlowauditComponent implements OnInit {
 
     getAll() {
         this.tableData = [{
-            status: 'NEW',
-            incidentName: 11,
-            timestamp: new Date(),
-            incidentRuleType: 1111,
-            securityAreaName: 111
+            name: 'UX工控设备',
+            ip: '1.1.1.1',
+            Mac: '00:00:00:00:00:20',
+            output: 2,
+            input: 3,
+            percent: 2,
+            update: '2019-01-12',
         }, {
-            status: 'NEW',
-            incidentName: 11,
-            timestamp: new Date(),
-            incidentRuleType: 1111,
-            securityAreaName: 111
+            name: 'UX工控设备',
+            ip: '1.1.1.1',
+            Mac: '00:00:00:00:00:20',
+            output: 2,
+            input: 3,
+            percent: 2,
+            update: '2019-01-12',
         }];
         this.pageTotalNumber = Math.ceil(this.tableCount / this.pageSize);
     }

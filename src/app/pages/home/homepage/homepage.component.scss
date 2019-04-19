@@ -13,6 +13,9 @@
     padding: 5px 10px;
     color: #fff;
   }
+  .ant-table .ant-table-thead > tr > th {
+    font-size: 15px;
+  }
   nz-card {
     background: $table-bg;
   }
@@ -40,10 +43,14 @@
 
   //设备概况
   .device-content {
+    position: relative;
     nz-card {
       min-height: 180px;
+      &:nth-child(1) {
+        text-align: center;
+      }
       &:nth-child(3) {
-        position: absolute;
+        //position: absolute;
         right: 1px;
       }
     }

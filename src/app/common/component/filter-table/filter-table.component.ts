@@ -28,12 +28,12 @@ export class FilterTableComponent implements OnInit {
     advancedSearchTimeRange = ['', ''];  // 时间变量
     selectedValue = 'n';  // 默认不限时间
     CAFC = {}; // 参数拼接
-    switchTab: string;
+    selectedProtocol: string;
 
     // 用户自定义
     @Input() timeValueData;  // 时间枚举值
     @Input() controlArray;   // 过滤条件可选项
-    @Input() topArray = [];
+    @Input() logProtocolArray = [];
     @Input() showTimePicker = false; // 时间选择器是否显示
     @Input() showAdvance = true; // 高级搜索是否显示
     @Input() isFuzzySearch: boolean; // 模糊查询
@@ -48,11 +48,12 @@ export class FilterTableComponent implements OnInit {
         if (!self.timeValueData.length) {
             self.timeValueData = self.timeFilterData;
         }
+        this.selectedProtocol = self.logProtocolArray.length > 0 ? self.logProtocolArray[0]['value'] : '';
         const fb = new FormBuilder();
         this.validateForm = fb.group({
             isFuzzySearch: self.isFuzzySearch,
             rangePicker: [[]],
-            switchTab: ''
+            selectedProtocol: self.logProtocolArray.length > 0 ? self.logProtocolArray[0]['display'] : ''
         });
         for (let i = 0; i < this.controlArray.length; i++) {
             const obj = {

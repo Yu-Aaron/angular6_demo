@@ -1,17 +1,58 @@
 @import '../../../../veriable.scss';
 
-.dataSummary {
-  height: 83px;
-  font-size: 16px;
-  color: #D7D7D7;
-  text-align: center;
-  border: 1px dotted #2A5584;
-  div {
-    line-height: 76px;
-    margin-right: 40px;
+.incidentaudit_content {
+  position: relative;
+  .top-left {
+    position: absolute;
+    left: 100px;
+    top: -38px;
+    color: #EF122E;
+    u {
+      color: #26BAFB;
+      cursor: pointer;
+      margin: 0 5px;
+    }
+    .circle {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: #FF0000;
+      box-shadow: 0 0 5px 2px #FF0000 inset;
+      animation: shine 2s steps(4,end) infinite;
+    }
+    @keyframes shine {
+      0% {
+        transform: scale(0.5);
+        opacity: 1;
+      }
+      50% {
+        background: #FFCCCC;
+        opacity: 0.6;
+      }
+      100% {
+        transform: scale(1.5);
+        box-shadow: 0 0 5px 1px #FF6666 inset;
+        opacity: 0.6;
+        background: #FF9999;
+      }
+    }
   }
-  .count {
-    font-size: 36px;
-    vertical-align: sub;
+
+  .dataSummary {
+    height: 83px;
+    font-size: 16px;
+    color: #D7D7D7;
+    text-align: center;
+    border: 1px dotted #2A5584;
+    div {
+      line-height: 76px;
+      margin-right: 40px;
+    }
+    .count {
+      font-size: 36px;
+      vertical-align: sub;
+    }
   }
 }

@@ -89,14 +89,13 @@ export class HomepageComponent implements OnInit, AfterViewInit {
         this.getProgressData();
         this.getFlowChartData();
         this.getFlowTable();
-        this.monitorPieOption = this.chartService.drawMonitorPie(this.monitorPieData,'28000');
+        this.monitorPieOption = this.chartService.drawMonitorPie(this.monitorPieData,28000);
     }
 
     ngAfterViewInit(): void {
         this.drawOptions.forEach((item) => {
             this.chartService.drawProgress(item);
         });
-        this.chartService.drawTemp(90, '#000000', 7, true);  // 温度背景色
         this.chartService.drawTemp(10, '#50D076', 7, false); // 温度进度条
     }
 
@@ -154,17 +153,21 @@ export class HomepageComponent implements OnInit, AfterViewInit {
 
     getFlowTable() {
         this.tableData = [{
-            status: 'NEW',
-            incidentName: 11,
-            timestamp: new Date(),
-            incidentRuleType: 1111,
-            securityAreaName: 111
+            name: 'UX工控设备',
+            ip: '1.1.1.1',
+            Mac: '00:00:00:00:00:20',
+            output: 2,
+            input: 3,
+            percent: 2,
+            update: '2019-01-12',
         }, {
-            status: 'NEW',
-            incidentName: 11,
-            timestamp: new Date(),
-            incidentRuleType: 1111,
-            securityAreaName: 111
+            name: 'UX工控设备',
+            ip: '1.1.1.1',
+            Mac: '00:00:00:00:00:20',
+            output: 2,
+            input: 3,
+            percent: 2,
+            update: '2019-01-12',
         }];
         this.pageTotalNumber = Math.ceil(this.tableCount / this.pageSize);
     }

@@ -1,62 +1,68 @@
-<div class="top-right">
-    <button nz-button nzType="primary" class="mr-10">
-        <i nz-icon nzType="area-chart" nzTheme="outline" style="font-size: 18px"></i>流量统计分析
-    </button>
+<div class="flowaudit_content">
+    <nz-tabset>
+        <nz-tab nzTitle="设备流量">
+            <div class="top-right">
+                <button nz-button nzType="primary">
+                    <i nz-icon nzType="area-chart" nzTheme="outline" style="font-size: 18px"></i>流量统计分析
+                </button>
+                <span class="filter-note">默认按照流量大小排序</span>
+            </div>
+            <!-- 过滤条件 -->
+            <app-filter-table [timeValueData]="filterConditionData.timeValueData"
+                              [controlArray]="filterConditionData.controlArray"
+                              [isFuzzySearch]="true"
+                              (searchFilterTable)="searchFilterTable($event)">
+            </app-filter-table>
+            <!-- 设备类型筛选 -->
+            <div class="tab-label" *ngFor="let item of deviceType; let i =index" [ngClass]="{'active': item.active}" (click)="checkDeviceType(i)">
+                {{item.label}}
+            </div>
+            <div echarts [options]="flowOption" class="echartsStyle"></div>
+            <!-- 表格数据 -->
+            <nz-table #tableDataTmp
+                      [nzData]="tableData"
+                      [nzTotal]="tableCount"
+                      [nzShowQuickJumper]="true"
+                      [nzFrontPagination]="false"
+                      [(nzPageIndex)]="pageIndex"
+                      [(nzPageSize)]="pageSize"
+                      (nzPageIndexChange)="pageIndexChange()"
+                      [nzLoading]="loading"
+                      [nzShowTotal]="totalTemplate">
+                <thead>
+                    <tr>
+                        <th>设备名称</th>
+                        <th>IP地址</th>
+                        <th>MAC地址</th>
+                        <th>平均输入速率/小时</th>
+                        <th>平均输出速率/小时</th>
+                        <th>平均流量百分比</th>
+                        <th>更新时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of tableDataTmp.data" (click)="clickIncRow(inc)">
+                        <td>{{item.name}}</td>
+                        <td>{{item.ip}}</td>
+                        <td>{{item.Mac}}</td>
+                        <td>{{item.input}}</td>
+                        <td>{{item.output}}</td>
+                        <td>{{item.percent}}</td>
+                        <td>{{item.update | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>详情</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+            <ng-template #totalTemplate let-total>
+                <span>共 {{tableCount}} 条，</span>
+                <span>每页展示 {{pageSize}} 条，</span>
+                <span>共 {{pageTotalNumber}} 页</span>
+            </ng-template>
+        </nz-tab>
+        <nz-tab nzTitle="工控协议流量"></nz-tab>
+        <nz-tab nzTitle="安全域流量"></nz-tab>
+    </nz-tabset>
 </div>
-<!-- 过滤条件 -->
-<app-filter-table [timeValueData]="filterConditionData.timeValueData"
-                  [controlArray]="filterConditionData.controlArray"
-                  [isFuzzySearch]="true"
-                  (searchFilterTable)="searchFilterTable($event)">
-</app-filter-table>
-<!-- 设备流量 -->
-<div class="device-flow">
-    <span class="tab-label" *ngFor="let item of deviceType; let i =index" [ngClass]="{'active': item.active}" (click)="checkDeviceType(i)">
-        {{item.label}}
-    </span>
-</div>
-<div echarts [options]="flowOption" class="echartsStyle"></div>
-<!-- 表格 -->
-<nz-table #tableDataTmp
-          [nzData]="tableData"
-          [nzTotal]="tableCount"
-          [nzShowQuickJumper]="true"
-          [nzFrontPagination]="false"
-          [(nzPageIndex)]="pageIndex"
-          [(nzPageSize)]="pageSize"
-          (nzPageIndexChange)="pageIndexChange()"
-          [nzLoading]="loading"
-          [nzShowTotal]="totalTemplate">
-    <thead>
-        <tr>
-            <th>状态</th>
-            <th>事件名称</th>
-            <th>发生时间</th>
-            <th>规则来源</th>
-            <th>安全域</th>
-            <th>操作</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let inc of tableDataTmp.data" (click)="clickIncRow(inc)">
-            <td class="wid-76">
-                <span *ngIf="inc.status == 'NEW'" class="status text-danger">未读</span>
-                <span *ngIf="inc.status != 'NEW'">已读</span>
-            </td>
-            <td>{{inc.incidentName}}</td>
-            <td>{{inc.timestamp | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
-            <td>{{inc.incidentRuleType}}</td>
-            <td>{{inc.securityAreaName}}</td>
-            <td>
-                <span class="view-device-detail" ng-click="viewDetail(inc.incidentId)">查看详情</span>
-            </td>
-        </tr>
-    </tbody>
-</nz-table>
-<ng-template #totalTemplate let-total>
-    <span>共 {{tableCount}} 条，</span>
-    <span>每页展示 {{pageSize}} 条，</span>
-    <span>共 {{pageTotalNumber}} 页</span>
-</ng-template>
 
 

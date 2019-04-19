@@ -1,3 +1,47 @@
-<p>
-  operatelog works!
-</p>
+<div class="operatelog_content">
+    <!-- 过滤条件 -->
+    <app-filter-table [timeValueData]="filterConditionData.timeValueData"
+                      [controlArray]="filterConditionData.controlArray"
+                      [showTimePicker]="true"
+                      [isFuzzySearch]="true"
+                      (searchFilterTable)="searchFilterTable($event)">
+    </app-filter-table>
+    <div class="mb-10">
+        <button nz-button nzType="primary" class="mr-10"><i nz-icon nzType="download" nzTheme="outline"></i>导出</button>
+    </div>
+    <!-- 表格 -->
+    <nz-table #tableDataTmp
+              [nzData]="tableData"
+              [nzTotal]="tableCount"
+              [nzShowQuickJumper]="true"
+              [nzFrontPagination]="false"
+              [(nzPageIndex)]="pageIndex"
+              [(nzPageSize)]="pageSize"
+              (nzPageIndexChange)="pageIndexChange()"
+              [nzLoading]="loading"
+              [nzShowTotal]="totalTemplate">
+        <thead>
+        <tr>
+            <th>用户</th>
+            <th>IP</th>
+            <th>操作时间</th>
+            <th>操作记录</th>
+            <th>操作结果</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of tableDataTmp.data">
+            <td>{{item.user}}</td>
+            <td>{{item.ip}}</td>
+            <td>{{item.date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{item.record}}</td>
+            <td>{{item.result}}</td>
+        </tr>
+        </tbody>
+    </nz-table>
+    <ng-template #totalTemplate let-total>
+        <span>共 {{tableCount}} 条，</span>
+        <span>每页展示 {{pageSize}} 条，</span>
+        <span>共 {{pageTotalNumber}} 页</span>
+    </ng-template>
+</div>

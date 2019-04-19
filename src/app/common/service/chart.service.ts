@@ -30,7 +30,7 @@ export class ChartService {
 
         const canvas = document.querySelector(id),
             cxt = canvas['getContext']('2d'),
-            cWidth = canvas['width'],
+            cWidth = canvas['width'] = canvas.parentNode['clientWidth'],
             cHeight = canvas['height'] + 25;
 
         const finalRadian = sR + ((PI + (PI - sR) * 2) * percent / 100); // 红圈的终点弧度
@@ -86,36 +86,40 @@ export class ChartService {
         const PI = Math.PI, radius = r || 6;
         const canvas = document.querySelector('#temp'),
             cxt = canvas['getContext']('2d'),
-            cWidth = canvas['width'],
+            cWidth = canvas['width'] = canvas.parentNode['clientWidth'],
             cHeight = canvas['height'] + 80;
+        draw(90, '#000000', 7, true);
+        draw(tmp, color, r, isDrawText);
+        function draw(tmp, color, r, isDrawText) {
+            // 底部半圆
+            cxt.beginPath();
+            cxt.lineCap = 'round';
+            cxt.fillStyle = color;
+            cxt.arc(cWidth / 8, cHeight / 2, radius, 0, PI, false);
+            cxt.fill();
 
-        // 底部半圆
-        cxt.beginPath();
-        cxt.lineCap = 'round';
-        cxt.fillStyle = color;
-        cxt.arc(cWidth / 8, cHeight / 2, radius, 0, PI, false);
-        cxt.fill();
+            // 顶部半圆
+            cxt.beginPath();
+            cxt.arc(cWidth / 8, cHeight / 2 - tmp, radius, PI, 2 * PI, false);
+            cxt.fill();
 
-        // 顶部半圆
-        cxt.beginPath();
-        cxt.arc(cWidth / 8, cHeight / 2 - tmp, radius, PI, 2 * PI, false);
-        cxt.fill();
+            // 中间矩形温度
+            cxt.beginPath();
+            cxt.rect(cWidth / 8 - radius, cHeight / 2 - tmp, 2 * radius, tmp);
+            cxt.fill();
 
-        // 中间矩形温度
-        cxt.beginPath();
-        cxt.rect(cWidth / 8 - radius, cHeight / 2 - tmp, 2 * radius, tmp);
-        cxt.fill();
-
-        if (isDrawText) {
-            cxt.fillStyle = '#50D076';
-            cxt.font = '36px PT Sans';
-            cxt.fillText('10', cWidth / 2 - 30, cHeight / 2 - 30);
-            cxt.font = '16px PT Sans';
-            cxt.fillText('℃', cWidth / 2 + 15, cHeight / 2 - 30);
-            cxt.fillStyle = '#CACACA';
-            cxt.font = '14px PT Sans';
-            cxt.fillText('设备核心温度', cWidth / 2 - 30, cHeight / 2);
+            if (isDrawText) {
+                cxt.fillStyle = '#50D076';
+                cxt.font = '36px PT Sans';
+                cxt.fillText('10', cWidth / 2 - 30, cHeight / 2 - 30);
+                cxt.font = '16px PT Sans';
+                cxt.fillText('℃', cWidth / 2 + 15, cHeight / 2 - 30);
+                cxt.fillStyle = '#CACACA';
+                cxt.font = '14px PT Sans';
+                cxt.fillText('设备核心温度', cWidth / 2 - 30, cHeight / 2);
+            }
         }
+
     }
 
     drawFlowChart(data) {

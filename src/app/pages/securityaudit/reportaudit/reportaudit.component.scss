@@ -12,16 +12,11 @@
         color: #F2F2F2;
         margin-right: 3px;
         &.ant-tabs-tab-active {
-          background: #0151A7;
+          background: $tab-active;
         }
       }
       .ant-tabs-ink-bar-animated {
-        height: 0px;
-      }
-    }
-    .ant-tabs-content {
-      .ant-tabs-tabpane {
-        background: #173655;
+        height: 0;
       }
     }
   }

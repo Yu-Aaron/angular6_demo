@@ -1,7 +1,39 @@
 @import '../../../../veriable.scss';
 
-.echartsStyle {
-  height: 256px;
-  background: $table-bg;
-  margin: 10px 0;
+:host ::ng-deep {
+  .ant-tabs-bar {
+    border: none;
+    .ant-tabs-tab {
+      width: 160px;
+      text-align: center;
+      background: #2D455B;
+      font-size: 16px;
+      color: #F2F2F2;
+      margin-right: 3px;
+      &.ant-tabs-tab-active {
+        background: $tab-active;
+      }
+    }
+    .ant-tabs-ink-bar-animated {
+      height: 0;
+    }
+  }
+  .ant-tabs .ant-tabs-top-content {
+    position: relative;
+  }
+}
+
+.flowaudit_content{
+  .echartsStyle {
+    height: 256px;
+    background: $table-bg;
+    margin: 10px 0;
+  }
+  .filter-note {
+    position: absolute;
+    right: 10px;
+    top: 60px;
+    width: 145px;
+    color: #FFCC33;
+  }
 }

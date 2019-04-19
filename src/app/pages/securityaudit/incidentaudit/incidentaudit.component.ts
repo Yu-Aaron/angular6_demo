@@ -43,6 +43,24 @@ export class IncidentauditComponent implements OnInit {
             ]
         };
         this.getAll();
+        this.tableData = [{
+            name: '【发现威胁】GPL NETBIOS SMB-DS IPC$ unicode 共享',
+            protocol: 'modbus',
+            securityAreaName: '默认安全域',
+            typeDisplay: '威胁',
+            sourceIP: '1.1.1.1',
+            destinationIp: '1.1.1.1',
+            date: '2019-01-12',
+        }, {
+            name: '【发现威胁】GPL NETBIOS SMB-DS IPC$ unicode 共享',
+            protocol: 'modbus',
+            securityAreaName: '默认安全域',
+            typeDisplay: '威胁',
+            sourceIP: '1.1.1.1',
+            destinationIp: '1.1.1.1',
+            date: '2019-01-12',
+        }];
+        this.pageTotalNumber = Math.ceil(this.tableCount / this.pageSize);
     }
 
     getAll() {
@@ -56,19 +74,6 @@ export class IncidentauditComponent implements OnInit {
         }
         this.securityAuditService.getAll(payload).subscribe((data: any) => {
             this.tableData = data;
-            this.tableData = [{
-                status: 'NEW',
-                incidentName: 11,
-                timestamp: new Date(),
-                incidentRuleType: 1111,
-                securityAreaName: 111
-            }, {
-                status: 'NEW',
-                incidentName: 11,
-                timestamp: new Date(),
-                incidentRuleType: 1111,
-                securityAreaName: 111
-            }];
             this.pageTotalNumber = Math.ceil(this.tableCount / this.pageSize);
             this.loading = false;
         }, () => {

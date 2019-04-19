@@ -1,27 +1,18 @@
-<!--右上角刷新-->
-<div class="top-right">
-    <button nz-button nzType="primary" class="mr-10">
-        <i nz-icon nzType="sync" nzTheme="outline"></i>刷新
-    </button>
-</div>
 <div nz-row class="device-content">
+    <!--右上角刷新-->
+    <div class="top-right">
+        <button nz-button nzType="primary">
+            <i nz-icon nzType="sync" nzTheme="outline"></i>刷新
+        </button>
+    </div>
     <!--设备概况-->
-    <nz-card nz-col [nzXs]="{span: 24}" [nzMd]="{span: 10}" style="padding-top: 38px">
-        <div nz-col [nzSpan]="6">
-            <canvas id="circle1" width="150" height="118"></canvas>
-        </div>
-        <div nz-col [nzSpan]="6">
-            <canvas id="circle2" width="150" height="118"></canvas>
-        </div>
-        <div nz-col [nzSpan]="6">
-            <canvas id="circle3" width="150" height="118"></canvas>
-        </div>
-        <div nz-col [nzSpan]="6">
-            <canvas id="temp" width="150" height="118"></canvas>
+    <nz-card nz-col [nzLg]="{span: 24}" [nzXl]="{span: 10}" style="padding-top: 38px">
+        <div nz-col [nzSpan]="6" *ngFor="let item of ['circle1', 'circle2', 'circle3', 'temp']">
+            <canvas [id]="item" height="118"></canvas>
         </div>
     </nz-card>
     <!--接口状态-->
-    <nz-card nz-col [nzXs]="{span: 24}" [nzMd]="{span: 8}" nzTitle="接口状态" [nzExtra]="linkStateTemp">
+    <nz-card nz-col [nzLg]="{span: 12}" [nzXl]="{span: 8}" nzTitle="接口状态" [nzExtra]="linkStateTemp">
         <ul>
             <li *ngFor="let item of linkState">
                 <span>{{item.name}}</span>
@@ -33,7 +24,7 @@
         </ng-template>
     </nz-card>
     <!--工作域状态-->
-    <nz-card nz-col [nzXs]="{span: 24}" [nzMd]="{span: 6}" nzTitle="工作域状态" [nzExtra]="workStateTemp">
+    <nz-card nz-col [nzLg]="{span: 12}" [nzXl]="{span: 6}" nzTitle="工作域状态" [nzExtra]="workStateTemp">
         <ul>
             <li *ngFor="let item of workState">
                 <span>{{item.name}}</span>
@@ -47,7 +38,7 @@
 </div>
 <div nz-row class="device-flow" nzGutter="16">
     <!--设备流量Top5-->
-    <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 13}">
+    <div nz-col [nzLg]="{span: 24}" [nzXl]="{span: 13}">
         <nz-card nzTitle="设备流量Top5" [nzExtra]="flowTemp">
             <div echarts [options]="flowOption" class="echartsStyle"></div>
             <!-- 表格 -->
@@ -63,27 +54,26 @@
                       [nzShowTotal]="totalTemplate">
                 <thead>
                     <tr>
-                        <th>状态</th>
-                        <th>事件名称</th>
-                        <th>发生时间</th>
-                        <th>规则来源</th>
-                        <th>安全域</th>
+                        <th>设备名称</th>
+                        <th>IP地址</th>
+                        <th>MAC地址</th>
+                        <th>平均输入速率/小时</th>
+                        <th>平均输出速率/小时</th>
+                        <th>流量占比</th>
+                        <!--<th>更新时间</th>-->
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let inc of tableDataTmp.data" (click)="clickIncRow(inc)">
-                        <td class="wid-76">
-                            <span *ngIf="inc.status == 'NEW'" class="status text-danger">未读</span>
-                            <span *ngIf="inc.status != 'NEW'">已读</span>
-                        </td>
-                        <td>{{inc.incidentName}}</td>
-                        <td>{{inc.timestamp | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
-                        <td>{{inc.incidentRuleType}}</td>
-                        <td>{{inc.securityAreaName}}</td>
-                        <td>
-                            <span class="view-device-detail" ng-click="viewDetail(inc.incidentId)">查看详情</span>
-                        </td>
+                    <tr *ngFor="let item of tableDataTmp.data" (click)="clickIncRow(inc)">
+                        <td>{{item.name}}</td>
+                        <td>{{item.ip}}</td>
+                        <td>{{item.Mac}}</td>
+                        <td>{{item.input}}</td>
+                        <td>{{item.output}}</td>
+                        <td>{{item.percent}}</td>
+                        <!--<td>{{item.update | date: 'yyyy-MM-dd HH:mm:ss'}}</td>-->
+                        <td>详情</td>
                     </tr>
                 </tbody>
             </nz-table>
@@ -95,15 +85,15 @@
         </nz-card>
         <ng-template #flowTemp>
             <div class="fl">
-                <span class="tab-label" *ngFor="let item of deviceType; let i =index" [ngClass]="{'active': item.active}" (click)="checkDeviceType(i)">
-                    {{item.label}}
-                </span>
+            <span class="tab-label" *ngFor="let item of deviceType; let i =index" [ngClass]="{'active': item.active}" (click)="checkDeviceType(i)">
+                {{item.label}}
+            </span>
             </div>
             <a class="fr">查看全部<i nz-icon nzType="right" nzTheme="outline"></i></a>
         </ng-template>
     </div>
     <!--今日事件监测-->
-    <div nz-col [nzXs]="{span: 24}" [nzMd]="{span: 11}" >
+    <div nz-col [nzLg]="{span: 24}" [nzXl]="{span: 11}" >
         <nz-card nzTitle="今日事件监测" [nzExtra]="monitorTemp">
             <div nz-row>
                 <div nz-col [nzMd]="{span: 13}" echarts [options]="monitorPieOption" class="echartsStyle pie"></div>
