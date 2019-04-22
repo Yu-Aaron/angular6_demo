@@ -9,6 +9,7 @@ import {InterfaceComponent} from './interface/interface.component';
 import {DebugComponent} from './debug/debug.component';
 import {BackupComponent} from './backup/backup.component';
 import {LoginComponent} from './login/login.component';
+import {BasicPipe} from '../../common/pipe/filter.pipe';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import {LoginComponent} from './login/login.component';
         InterfaceComponent,
         DebugComponent,
         BackupComponent,
-        LoginComponent
+        LoginComponent,
+        BasicPipe
     ],
     imports: [
         SharedModule,

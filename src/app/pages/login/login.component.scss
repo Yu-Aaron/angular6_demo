@@ -1,1 +1,72 @@
 @import '../../../veriable.scss';
+
+.page-login {
+  width: 100%;
+  height: 100vh;
+  .page-login-content {
+    background-image: url('../../../assets/images/logo/background.png');
+    height: 100%;
+  }
+  .login-panel{
+    font-family: FontAwesome;
+    padding: 30px 40px 60px 40px;
+    width: 440px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px 0 rgba(13, 40, 58, 0.3);
+    position: absolute;
+    right: 350px;
+    top: 20%;
+    height: 400px;
+    .login-panel-title{
+      font-size: 24px;
+      color: #3582fb;
+      float: left;
+      font-weight: bold;
+    }
+  }
+  img.login-img {
+    position: fixed;
+    bottom:0 ;
+    left: 0;
+  }
+  .ant-form {
+    background-color: transparent;
+    font-family: FontAwesome;
+    width: 385px;
+    height: 350px;
+    .ant-form-item {
+      .ant-input {
+        position: relative;
+        width: 360px;
+        height: 30px;
+        margin-top: 20px;
+        line-height: 30px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        color: #999999;
+        background: #f4f4f4;
+        padding: 8px 14px;
+      }
+      .login_text_verifycode.ant-input {
+        padding-left: 25px;
+        width: 156px;
+      }
+      .login-form-button {
+        width: 380px;
+        height: 50px;
+        background: #3582fb;
+        border-radius: 8px;
+        color: #fffcfc;
+        font-size: 16px;
+        border: 0;
+      }
+    }
+  }
+  .login-err {
+    color: #e14f4f;
+    margin-top: 28px;
+    font-size: 14px;
+    text-align: left;
+    font-weight: bold;
+  }
+}

@@ -1,1 +1,38 @@
 @import '../../../../veriable.scss';
+
+.learning_content {
+  position: relative;
+  .new_task {
+    background: $bg-card;
+    padding: 15px;
+    margin-bottom: 15px;
+    .task_title {
+      margin-bottom: 20px;
+    }
+    label {
+      font-size: 16px;
+    }
+    .txt-gray {
+      color: #999999;
+      font-size: 14px;
+    }
+  }
+  u {
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .txt-warning{
+    color: $txt-warning;
+    font-size: 14px;
+    margin: 0 40px;
+  }
+  .txt-green {
+    color: #00CC93;
+  }
+  .txt-blue {
+    color: #25B4F1;
+  }
+  .txt-red {
+    color: #FF0D27;
+  }
+}

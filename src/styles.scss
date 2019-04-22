@@ -220,6 +220,28 @@ html, body {
 }
 
 
+/*** icon  ***/
+.anticon {
+  &.anticon-edit {
+    width: 25px;
+    height: 25px;
+    line-height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+    background: #26A08F;
+    cursor: pointer;
+  }
+  &.anticon-arrow-down, &.anticon-search {
+    @extend .anticon-edit;
+    background: #3550B9;
+  }
+  &.anticon-delete {
+    @extend .anticon-edit;
+    background: $txt-error;
+  }
+}
+
+
 /*** common ***/
 .mr-10 {
   margin-right: 10px;

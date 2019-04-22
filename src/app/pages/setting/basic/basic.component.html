@@ -1,3 +1,105 @@
-<p>
-  basic works!
-</p>
+<div class="basic_content">
+    <div class="top-right">
+        <button nz-button nzType="primary" class="mr-10">
+            <i nz-icon nzType="reload" nzTheme="outline" style="font-size: 18px"></i>恢复出厂设置
+        </button>
+        <button nz-button nzType="primary" class="mr-10 restart">
+            <i nz-icon nzType="setting" nzTheme="fill" style="font-size: 18px"></i>重启
+        </button>
+        <button nz-button nzType="primary" class="shutdown">
+            <i nz-icon nzType="poweroff" nzTheme="outline" style="font-size: 18px"></i>关机
+        </button>
+    </div>
+    <div class="basic_setting">
+        <!--资源告警阈值-->
+        <div nz-row>
+            <label nz-col [nzSpan]="5">资源告警阈值</label>
+            <div nz-col [nzSpan]="16">
+                <span *ngFor="let key of objectKeys(basicSetting['resourceAlarm'])">
+                    {{key | basicPipe }}：{{basicSetting['resourceAlarm'][key]}}
+                </span>
+            </div>
+            <div nz-col [nzSpan]="3" class="edit">
+                <i *ngIf="!isEdit['resourceAlarm']" (click)="isEdit['resourceAlarm']=true" nz-icon nzType="edit" nzTheme="outline"></i>
+                <div *ngIf="isEdit['resourceAlarm']">
+                    <button nz-button nzType="primary" class="mr-10" (click)="isEdit['resourceAlarm']=false">
+                        <i nz-icon nzType="close" nzTheme="outline"></i>取消
+                    </button>
+                    <button nz-button nzType="primary"><i nz-icon nzType="check" nzTheme="outline"></i>确定</button>
+                </div>
+            </div>
+        </div>
+        <!--时钟同步-->
+        <div nz-row>
+            <label nz-col [nzSpan]="5">时钟同步</label>
+            <div nz-col [nzSpan]="10">
+                <span>手动输入时间：</span>
+                <span>系统时间：{{basicSetting['ntp']['serverTime'] | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+                <span>本机时间：{{basicSetting['ntp']['localTime'] | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+            </div>
+            <div nz-col [nzSpan]="6" class="txt-warning">可切换NTP自动同步方式状态</div>
+            <div nz-col [nzSpan]="3" class="edit">
+                <i *ngIf="!isEdit['ntp']"  (click)="isEdit['ntp']=true" nz-icon nzType="edit" nzTheme="outline"></i>
+                <div *ngIf="isEdit['ntp']">
+                    <button nz-button nzType="primary" class="mr-10" (click)="isEdit['ntp']=false">
+                        <i nz-icon nzType="close" nzTheme="outline"></i>取消
+                    </button>
+                    <button nz-button nzType="primary"><i nz-icon nzType="check" nzTheme="outline"></i>确定</button>
+                </div>
+            </div>
+        </div>
+        <!--事件通知方式-->
+        <div nz-row>
+            <label nz-col [nzSpan]="5">事件通知方式</label>
+            <div nz-col [nzSpan]="10">
+                <span>计数和声音提示</span>
+            </div>
+            <div nz-col [nzSpan]="6" class="txt-warning">通知提示频率限制为每分钟最多一次</div>
+            <div nz-col [nzSpan]="3" class="edit">
+                <i *ngIf="!isEdit['notification']"  (click)="isEdit['notification']=true" nz-icon nzType="edit" nzTheme="outline"></i>
+                <div *ngIf="isEdit['notification']">
+                    <button nz-button nzType="primary" class="mr-10" (click)="isEdit['notification']=false">
+                        <i nz-icon nzType="close" nzTheme="outline"></i>取消
+                    </button>
+                    <button nz-button nzType="primary"><i nz-icon nzType="check" nzTheme="outline"></i>确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--开关管理-->
+    <div class="switch_management">
+        <div class="switch_title">开关管理</div>
+        <div nz-row *ngFor="let key of objectKeys(switchManagement)">
+            <label nz-col [nzSpan]="5">{{key | basicPipe}}</label>
+            <div nz-col [nzSpan]="key === 'syslog' || key === 'ssh' ? 8 : 16">状态：
+                <div *ngIf="!isEdit[key]" class="inline-block">
+                    <span [ngStyle]="{'color': switchManagement[key] ? '#60DB72' : '#FF0000'}">
+                        {{switchManagement[key] ? "开启" : "关闭"}}
+                    </span>
+                    <div *ngIf="key === 'ruleCycle'" class="cycle_time">周期：{{switchManagement['ruleCycle']['time']}}分钟</div>
+                </div>
+                <div *ngIf="isEdit[key]" class="inline-block">
+                    <nz-switch [(ngModel)]="edit[key]" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
+                    <div *ngIf="key === 'ruleCycle'" class="cycle_time">周期：
+                        <nz-select [(ngModel)]="edit['ruleCycle']['time']" name="cycle_time">
+                            <nz-option *ngFor="let item of [5, 10, 20] " [nzValue]="item" [nzLabel]="item + '分钟'"></nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+            </div>
+            <div nz-col [nzSpan]="8" class="txt-warning" [ngSwitch]="key" *ngIf="key === 'syslog' || key === 'ssh'">
+                <span *ngSwitchCase="'syslog'">只支持TCP协议的Syslog接收服务器，其他协议的接收服务器接收不到Syslog日志</span>
+                <span *ngSwitchCase="'ssh'">SSH2端口号</span>
+            </div>
+            <div nz-col [nzSpan]="3" class="edit">
+                <i *ngIf="!isEdit[key]" nz-icon nzType="edit" nzTheme="outline" (click)="isEdit[key]=true"></i>
+                <div *ngIf="isEdit[key]">
+                    <button nz-button nzType="primary" class="mr-10" (click)="cancle(key, switchManagement[key])">
+                        <i nz-icon nzType="close" nzTheme="outline"></i>取消
+                    </button>
+                    <button nz-button nzType="primary" (click)="ok(key, switchManagement[key])"><i nz-icon nzType="check" nzTheme="outline"></i>确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

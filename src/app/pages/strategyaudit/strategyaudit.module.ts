@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {SharedModule} from '../../shared/shared.module';
+import {StrategyauditRoutingModule} from './strategyaudit-routing.module';
+import {AuthGuard} from 'src/app/shared/AuthGuard';
 
-import { StrategyauditRoutingModule } from './strategyaudit-routing.module';
-import { StrategyComponent } from './strategy/strategy.component';
-import { SecuritydomainComponent } from './securitydomain/securitydomain.component';
-import { LearningComponent } from './learning/learning.component';
-import { AuthGuard } from 'src/app/shared/AuthGuard';
-import { VulComponent } from './vul/vul.component';
+import {StrategyComponent} from './strategy/strategy.component';
+import {SecuritydomainComponent} from './securitydomain/securitydomain.component';
+import {LearningComponent} from './learning/learning.component';
+import {VulComponent} from './vul/vul.component';
 
 @NgModule({
     declarations: [
@@ -16,11 +16,12 @@ import { VulComponent } from './vul/vul.component';
         VulComponent
     ],
     imports: [
-        CommonModule,
+        SharedModule,
         StrategyauditRoutingModule
     ],
     providers: [
         AuthGuard
     ]
 })
-export class StrategyauditModule { }
+export class StrategyauditModule {
+}

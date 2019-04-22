@@ -1,1 +1,11 @@
 @import '../../../../veriable.scss';
+
+.user_content {
+    .add_new_user {
+        display: inline-block;
+        float: right;
+        top: 10px;
+        margin-top: -50px;
+        margin-right: -8px;
+    }
+}

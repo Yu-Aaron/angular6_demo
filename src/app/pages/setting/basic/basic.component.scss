@@ -1,1 +1,47 @@
 @import '../../../../veriable.scss';
+
+.basic_content {
+  position: relative;
+  .top-right {
+    .restart {
+      background: #148F90;
+    }
+    .shutdown {
+      background: #B1002E;
+    }
+  }
+  .switch_management {
+    .switch_title {
+      padding: 15px 15px;
+      font-size: 16px;
+    }
+    .cycle_time {
+      display: inline-block;
+      margin-left: 200px
+    }
+  }
+  .ant-row {
+    padding: 15px 20px;
+    font-size: 16px;
+    margin-bottom: 5px;
+    background: $table-bg;
+    label {
+      color: #3EB9FF;
+    }
+    &:hover {
+      background: $bg-card;
+    }
+    .txt-warning {
+      font-size: 15px;
+      color: $txt-warning;
+      text-align: right;
+    }
+    .edit {
+      text-align: right;
+    }
+  }
+}
+
+
+
+

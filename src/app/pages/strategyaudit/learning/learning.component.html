@@ -1,3 +1,86 @@
-<p>
-  learning works!
-</p>
+<div class="learning_content">
+    <div class="top-right">
+        <span class="txt-warning">协议端口只有开启状态，智能学习才能学习到此协议</span>
+        <button nz-button nzType="primary">
+            <i nz-icon nzType="arrow-right" nzTheme="outline"></i>管理协议端口
+        </button>
+    </div>
+    <div class="new_task">
+        <div class="task_title">
+            <label>新建智能学习任务</label>
+            <span class="txt-warning">学习时长最长为7天</span>
+        </div>
+        <div nz-row>
+            <div nz-col [nzSpan]="6" class="learning_time">
+                <label class="txt-blue">学习时间: </label>
+                <span>为期</span>
+                <nz-input-number [(ngModel)]="day" [nzMin]="1" [nzMax]="10"></nz-input-number>天
+                <nz-input-number [(ngModel)]="hour" [nzMin]="1" [nzMax]="12"></nz-input-number>时
+                <nz-input-number [(ngModel)]="minus" [nzMin]="1" [nzMax]="60"></nz-input-number>分
+            </div>
+            <div nz-col [nzSpan]="6" class="start_time">
+                <label class="txt-gray">开始时间：</label>
+                <nz-range-picker nzFormat="yyyy-MM-dd HH:mm:ss"></nz-range-picker>
+            </div>
+            <div nz-col [nzSpan]="2" class="security_domain">
+                <label class="txt-blue">安全域: </label>
+                <!--<nz-select [(ngModel)]="" name="cycle_time">-->
+                    <!--<nz-option *ngFor="let item of ['默认安全域'] " [nzValue]="item" [nzLabel]="item + '分钟'"></nz-option>-->
+                <!--</nz-select>-->
+            </div>
+            <div nz-col [nzSpan]="2">
+                <button nz-button nzType="primary" class="btn-search">开始学习</button>
+            </div>
+        </div>
+    </div>
+    <div class="table">
+        <!-- 表格 -->
+        <nz-table #tableDataTmp
+                  [nzData]="tableData"
+                  [nzTotal]="tableCount"
+                  [nzShowQuickJumper]="true"
+                  [nzFrontPagination]="false"
+                  [(nzPageIndex)]="pageIndex"
+                  [(nzPageSize)]="pageSize"
+                  (nzPageIndexChange)="pageIndexChange()"
+                  [nzLoading]="loading"
+                  [nzShowTotal]="totalTemplate">
+            <thead>
+                <tr>
+                    <th>学习任务名称</th>
+                    <th>学习时长</th>
+                    <th>已知设备数</th>
+                    <th>未知设备数</th>
+                    <th>IP/MAC变更的设备数</th>
+                    <th>数据流</th>
+                    <th>安全域</th>
+                    <th>已学习的规则</th>
+                    <th>学习状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of tableDataTmp.data">
+                    <td>{{item.taskName | date: 'yyyy-MM-dd HH:mm:ss'}} 规则学习</td>
+                    <td>{{item.studyLength}} 分钟</td>
+                    <td class="txt-green"><u>{{item.kownDevices}}</u></td>
+                    <td class="txt-red"><u>{{item.unkownDevices}}</u></td>
+                    <td class="txt-blue"><u>{{item.macData}}</u></td>
+                    <td>{{item.validFlowdataCount}}</td>
+                    <td>{{item.securityAreaName}}</td>
+                    <td>{{item.learningprogress}}</td>
+                    <td>{{item.state}}</td>
+                    <td>
+                        <i nz-icon nzType="search" nzTheme="outline"></i>
+                        <i nz-icon nzType="delete" nzTheme="fill"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+        <ng-template #totalTemplate let-total>
+            <span>共 {{tableCount}} 条，</span>
+            <span>每页展示 {{pageSize}} 条，</span>
+            <span>共 {{pageTotalNumber}} 页</span>
+        </ng-template>
+    </div>
+</div>

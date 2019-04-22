@@ -1,3 +1,28 @@
-<p>
-  user works!
-</p>
+<div class="user_content">
+  <div class="add_new_user">
+    <button nz-button nzType="primary" class="mr-10">
+        <i nz-icon nzType="plus" nzTheme="outline"></i>新建用户
+    </button>
+  </div>
+  <div class="user_table">
+    <nz-table
+      #userTable [nzData]="dataSet">
+      <thead>
+        <th>用户</th>
+        <th>用户角色</th>
+        <th>用户组</th>
+        <th>用户状态</th>
+        <th>操作</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of userTable.data">
+          <td>{{data.name}}</td>
+          <td>{{data.stuffName}}</td>
+          <td>{{data.group}}</td>
+          <td>{{data.locked}}</td>
+          <td>编辑</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

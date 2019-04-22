@@ -1,7 +1,6 @@
 <div class="incidentaudit_content">
     <!-- 右上角操作事件 -->
     <div class="top-left">
-        <!--<span class="waves"></span>-->
         <span class="circle"></span>
         <span>发现新事件，可以<u><i nz-icon nzType="sync" nzTheme="outline"></i>刷新</u>查看</span>
     </div>
@@ -82,7 +81,7 @@
                 <td>{{item.sourceIP}}</td>
                 <td>{{item.destinationIp}}</td>
                 <td>{{item.date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
-                <td>详情</td>
+                <td><i nz-icon nzType="search" nzTheme="outline"></i>详情</td>
             </tr>
         </tbody>
     </nz-table>
