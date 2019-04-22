@@ -1,1 +1,64 @@
-@import '../../../../veriable.scss';
+@import "../../../../veriable.scss";
+
+:host ::ng-deep {
+  .domain {
+    position: relative;
+    .domain-operate {
+      position: absolute;
+      top: -50px;
+      right: 30px;
+      .plus {
+        background: #148F90;
+        margin-right: 20px;
+      }
+      .manage {
+        background: #0151A7;
+      }
+    }
+    .domain-table {
+      td.strategy {
+        text-decoration: underline;
+        color: #25b4f1;
+        cursor: pointer;
+      }
+      td.switch {
+        .ant-switch {
+          background: #4d6989;
+          &::after {
+            background: #9eb6d1;
+          }
+          &.ant-switch-checked {
+            background: #0151a7;
+            &::after {
+              background: #3eb9ff;
+            }
+          }
+        }
+      }
+      td.operate {
+        position: relative;
+        i {
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          top: 50%;
+          color: #fff;
+          font-size: 16px;
+          transform: translateY(-50%);
+          text-align: center;
+          line-height: 30px;
+          cursor: pointer;
+          &.edit {
+            left: 0px;
+            background: #26a08f;
+          }
+          &.delete {
+            left: 50px;
+            background: #bf0425;
+          }
+        }
+      }
+    }
+  }
+}

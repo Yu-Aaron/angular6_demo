@@ -1,3 +1,42 @@
-<p>
-  usergroup works!
-</p>
+<div class="user_content">
+    <div class="add_new_user">
+      <button nz-button nzType="primary" class="mr-10">
+          <i nz-icon nzType="plus"></i>新建用户组
+      </button>
+    </div>
+    <div class="user_table">
+      <nz-table
+        #userTable
+        [nzData]="dataSet"
+        [nzShowTotal]="userTableTotal"
+        >
+        <thead>
+          <tr>
+            <th>用户组</th>
+            <th>用户数量</th>
+            <th>创建时间</th>
+            <th>用户组状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of userTable.data">
+            <td>{{data.name}}</td>
+            <td>{{data.stuffName}}</td>
+            <td>{{data.group}}</td>
+            <td>{{data.locked ? '锁定' : '正常'}}</td>
+            <td>
+                <span (click)="addUser('编辑', '保存', item)" title="编辑" style="color:#00CC99;"><img src="../../../../assets/images/edit.svg" alt="编辑">&nbsp;编辑</span>
+                <nz-divider nzType="vertical"></nz-divider>
+                <span (click)="deleteUser(item)" title="编辑" style="color:#FF0000"><img src="../../../../assets/images/delete.svg" alt="删除">&nbsp;删除</span>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <ng-template #userTableTotal>
+        <span>共 {{total}} 条，</span>
+        <span>每页展示 {{pageSize}} 条，</span>
+        <span>共 {{pages}} 页</span>
+      </ng-template>
+    </div>
+  </div>

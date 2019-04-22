@@ -181,7 +181,10 @@ html, body {
   color: #fff;
 }
 .ant-form-item-label label {
-  color: #999;
+  color: #D8DEE3;
+}
+.ant-form-item {
+  margin-bottom: 5px;
 }
 
 
@@ -323,7 +326,7 @@ html, body {
 
 
 
-.ant-modal.sysinfo {
+.ant-modal {
   .ant-modal-content {
     background-color: $bg-aside;
     .anticon-close {
@@ -331,12 +334,28 @@ html, body {
     }
     .ant-modal-header {
       border: none;
-      text-align: center;
       background-color: $bg-aside;
+      border-bottom: 1px solid $modal-header-footer-border;
       .ant-modal-title {
-        font-size: 18px;
+        font-size: 14px;
         font-weight: 600;
-        color: #A5B2BF;
+        color: $ant-modal-title;
+      }
+    }
+    .ant-modal-footer {
+      border-top: 1px solid $modal-header-footer-border;
+      text-align: center;
+      button {
+        height: 32px;
+        line-height: 32px;
+      }
+      :last-child {
+        background: #0151A7;
+        border: none;
+      }
+      :first-child {
+        border-color: rgba(1, 81, 167, 1);
+        background-color: rgba(255, 255, 255, 0);
       }
     }
     .ant-modal-body {
@@ -349,6 +368,12 @@ html, body {
       }
       .info-value {
         padding-left: 8px;
+      }
+    }
+    .ant-form-item-control {
+      line-height: 25px;
+      .select-base, .ant-select-selection, .ant-select-dropdown, .ant-input, .ant-select-dropdown-menu-item, .ant-select-dropdown-menu-item-selected, .ant-select-dropdown-menu-item:hover {
+        border-radius: 4px !important;
       }
     }
   }

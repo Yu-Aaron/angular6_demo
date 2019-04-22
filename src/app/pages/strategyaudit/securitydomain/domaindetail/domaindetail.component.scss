@@ -1,0 +1,64 @@
+@import "../../../../../veriable.scss";
+
+:host ::ng-deep {
+  .detail {
+    .strategy {
+      height: 60px;
+      background: $bg-card;
+      font-size: 16px;
+      line-height: 60px;
+      padding: 0px 10px;
+      position: relative;
+      margin-bottom: 10px;
+      .strategy-key {
+        color: #25b4f1;
+      }
+      .operate {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 30px;
+        i {
+          width: 30px;
+          height: 30px;
+          display: inline-block;
+          border-radius: 50%;
+          line-height: 30px;
+          text-align: center;
+          font-size: 16px;
+          font-weight: 600;
+          cursor: pointer;
+          &.edit {
+            background: #26a08f;
+            margin-right: 20px;
+          }
+          &.delete {
+            background: #bf0425;
+          }
+        }
+      }
+    }
+    .ant-tabs {
+      .ant-tabs-bar {
+        border: none;
+        color: #fff;
+        .ant-tabs-nav-container {
+          .ant-tabs-tab {
+            background: #2d455b;
+            margin: 0px;
+            &.ant-tabs-tab-active {
+              background: transparent;
+              color: #fff;
+            }
+          }
+          .ant-tabs-ink-bar {
+            background: #0151a7;
+            color: #fff;
+            height: 100%;
+            z-index: -1;
+          }
+        }
+      }
+    }
+  }
+}

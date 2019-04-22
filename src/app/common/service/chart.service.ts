@@ -368,6 +368,12 @@ export class ChartService {
     // 曲线图obj.type=graph / 折线图obj.type=line
     drawLineChart(obj) {
         let options = {
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
             xAxis: {
                 type: 'category',
                 data: obj.xData,
@@ -402,7 +408,24 @@ export class ChartService {
 
     drawPieChart(obj) {
         let options = {
-
+            title: {
+                show: obj.showTitle,
+                text: obj.titleText,
+                textStyle: {
+                    color: obj.titleColor
+                },
+                padding: 40
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                orient: 'horizontal',
+                bottom: '0%',
+                data: obj.legendData
+            },
+            series: obj.seriesData
         };
         return options;
     }

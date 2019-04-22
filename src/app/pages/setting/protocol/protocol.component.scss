@@ -1,1 +1,62 @@
 @import '../../../../veriable.scss';
+
+:host ::ng-deep {
+  .protocol {
+    position: relative;
+    .ant-tabs {
+      .ant-tabs-bar {
+        border: none;
+        color: #fff;
+        .ant-tabs-tab {
+          background: #2D455B;
+          margin-right: 5px;
+          &.ant-tabs-tab-active {
+            background: transparent;
+            color: #fff;
+          }
+        }
+        .ant-tabs-ink-bar-animated {
+          height: 100%;
+          z-index: -1;
+        }
+      }
+      .ant-tabs-content {
+        color: #fff;
+        background: $table-bg;
+        padding: 10px 25px;
+        font-size: 16px;
+        .table-title {
+          height: 45px;
+          line-height: 45px;
+          color: #26BAFB;
+        }
+        .even,
+        .odd {
+          height: 45px;
+          line-height: 45px;
+          .type {
+            color: #26BAFB;
+          }
+        }
+        .odd {
+          position: absolute;
+          right: 0px;
+          top: -45px;
+        }
+      }
+    }
+    .edit {
+      position: absolute;
+      top: 0px;
+      right: 20px;
+      .tip {
+        font-style: normal;
+        color: $txt-warning;
+        margin-right: 20px;
+      }
+      button {
+        margin-left: 10px;
+      }
+    }
+  }
+}

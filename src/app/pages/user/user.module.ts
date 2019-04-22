@@ -7,9 +7,10 @@ import { UserRoutingModule } from './user-routing.module';
 import { AuthGuard } from 'src/app/shared/AuthGuard';
 import { UserComponent } from './user/user.component';
 import { UsergroupComponent } from './usergroup/usergroup.component';
+import { AddUserComponent } from './user/add-user/add-user.component';
 
 @NgModule({
-  declarations: [UserComponent, UsergroupComponent],
+  declarations: [UserComponent, UsergroupComponent, AddUserComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

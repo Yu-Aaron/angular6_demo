@@ -17,4 +17,29 @@ export class UserService {
   getUser(params) {
     return this.http.get(this.baseUrl + '/users');
   }
+
+  checkUser(userName) {
+    return this.http.get(this.baseUrl + '/users/username/' + userName);
+  }
+
+  getStrategyInfo() {
+    return this.http.get(this.baseUrl + '/strategymanagement/strategybuilders');
+  }
+
+  getRoles() {
+    return this.http.get(this.baseUrl + '/users/roles/');
+  }
+
+  createUser(user) {
+    return this.http.post(this.baseUrl + '/users', user);
+  }
+
+  editUser(user) {
+    return this.http.put(this.baseUrl + '/users', user);
+  }
+
+  deleteUser(userId) {
+    return this.http.delete(this.baseUrl + '/users/' + userId);
+  }
+
 }

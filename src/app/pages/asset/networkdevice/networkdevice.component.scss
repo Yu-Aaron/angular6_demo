@@ -1,1 +1,10 @@
 @import '../../../../veriable.scss';
+
+.network-device {
+  position: relative;
+  .add {
+    position: absolute;
+    top: -50px;
+    right: 20px;
+  }
+}

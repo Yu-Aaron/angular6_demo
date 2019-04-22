@@ -1,28 +1,58 @@
 <div class="user_content">
   <div class="add_new_user">
-    <button nz-button nzType="primary" class="mr-10">
+    <p>权限管理在用户组编辑</p>
+    <button nz-button nzType="primary" class="mr-10" (click)="addUser('新增', '新增', '')">
         <i nz-icon nzType="plus" nzTheme="outline"></i>新建用户
     </button>
   </div>
   <div class="user_table">
-    <nz-table
-      #userTable [nzData]="dataSet">
-      <thead>
+    <nz-table #userTable
+            [nzData]="listOfData"
+            [nzTotal]="total"
+            [nzShowQuickJumper]="true"
+            [nzFrontPagination]="false"
+            [(nzPageIndex)]="pageIndex"
+            [(nzPageSize)]="pageSize"
+            (nzPageIndexChange)="pageIndexChange()"
+            [nzLoading]="loading"
+            [nzShowTotal]="userTableTotal">
+    <thead>
+      <tr>
         <th>用户</th>
         <th>用户角色</th>
         <th>用户组</th>
         <th>用户状态</th>
         <th>操作</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of userTable.data">
-          <td>{{data.name}}</td>
-          <td>{{data.stuffName}}</td>
-          <td>{{data.group}}</td>
-          <td>{{data.locked}}</td>
-          <td>编辑</td>
-        </tr>
-      </tbody>
-    </nz-table>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of userTable.data">
+          <td>{{item.name}}</td>
+          <td>{{item.stuffName}}</td>
+          <td>{{item.stuffName}}</td>
+          <td>{{item.locked ? '锁定' : '正常'}}</td>
+          <td>
+            <span (click)="addUser('编辑', '保存', item)" title="编辑" style="color:#00CC99;"><img src="../../../../assets/images/edit.svg" alt="编辑">&nbsp;编辑</span>
+            <nz-divider nzType="vertical"></nz-divider>
+            <span (click)="deleteUser(item)" title="编辑" style="color:#FF0000"><img src="../../../../assets/images/delete.svg" alt="删除">&nbsp;删除</span>
+          </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <ng-template #userTableTotal>
+    <span>共 {{total}} 条，</span>
+    <span>每页展示 {{pageSize}} 条，</span>
+    <span>共 {{pages}} 页</span>
+  </ng-template>
   </div>
+  <app-add-user 
+    [isVisible]="isVisible" 
+    *ngIf="isVisible"
+    (closeModal)="closeModal($event)"
+    [modelTitle]="modelTitle"
+    [fooletrTitle]="fooletrTitle"
+    [editProperty]="editProperty"
+    [userInfo]="userInfo"
+    [editData]="editData"
+    [lockedShow]="true"></app-add-user>
 </div>

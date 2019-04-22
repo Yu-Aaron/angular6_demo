@@ -1,10 +1,64 @@
-<div>
+<div class="protocol">
   <nz-tabset>
     <nz-tab nzTitle="默认协议映射列表">
-
+      <div nz-row class="table-title">
+        <div nz-col nzSpan="12">
+          <div nz-row>
+            <div nz-col nzSpan="6">启用状态</div>
+            <div nz-col nzSpan="10">传输层协议/协议名</div>
+            <div nz-col nzSpan="6">服务端口</div>
+          </div>
+        </div>
+        <div nz-col nzSpan="12">
+          <div nz-row>
+            <div nz-col nzSpan="6">启用状态</div>
+            <div nz-col nzSpan="10">传输层协议/协议名</div>
+            <div nz-col nzSpan="6">服务端口</div>
+          </div>
+        </div>
+      </div>
+      <div nz-row *ngFor="let data of defaultProtocolList; let i = index;">
+        <ng-container *ngIf="i % 2 === 0">
+          <div class="even" nz-col nzSpan="12">
+            <div nz-row>
+              <div nz-col nzSpan="6">
+                <nz-switch [nzDisabled]="switchDisabled" [ngModel]="data.status" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
+              </div>
+              <div nz-col nzSpan="10"><span class="type">{{data.type}}</span>{{data.name}}</div>
+              <div nz-col nzSpan="6">{{data.port}}</div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="i % 2 !== 0">
+          <div class="odd" nz-col nzSpan="12">
+            <div nz-row>
+              <div nz-col nzSpan="6">
+                <nz-switch [nzDisabled]="switchDisabled" [ngModel]="data.status" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
+              </div>
+              <div nz-col nzSpan="10"><span class="type">{{data.type}}</span>{{data.name}}</div>
+              <div nz-col nzSpan="6">{{data.port}}</div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
     </nz-tab>
     <nz-tab nzTitle="私有协议映射列表">
-      
+
     </nz-tab>
   </nz-tabset>
+  <div class="edit">
+    <i class="tip">协议端口只有开启状态，智能学习才能学习到此协议</i>
+    <button *ngIf="switchDisabled" nz-button nzType="primary" (click)="switchDisabled = false;">
+      <i nz-icon nzType="edit" nzTheme="outline"></i>
+      编辑
+    </button>
+    <span *ngIf="!switchDisabled">
+      <button nz-button nzType="primary">全部开启</button>
+      <button nz-button nzType="primary">全部禁用</button>
+      <button nz-button nzType="primary" (click)="switchDisabled = true;">
+        <i nz-icon nzType="check" nzTheme="outline"></i>
+        确定
+      </button>
+    </span>
+  </div>
 </div>

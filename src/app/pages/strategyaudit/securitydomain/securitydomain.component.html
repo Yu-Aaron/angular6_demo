@@ -1,3 +1,64 @@
-<p>
-  securitydomain works!
-</p>
+<div class="domain">
+  <div class="domain-operate">
+    <button class="plus" nz-button nzType="primary" (click)="createFlag = true;">
+      <i nz-icon nzType="plus" nzTheme="outline"></i>
+      新建安全域
+    </button>
+    <button class="manage" nz-button nzType="primary">
+      <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
+      管理设备
+    </button>
+  </div>
+  <div class="domain-table">
+    <nz-table #domainTable
+              [nzData]="domain.data"
+              [nzTotal]="domain.total"
+              [nzLoading]="domain.loading"
+              [nzShowPagination]="false"
+              [nzFrontPagination]="false"
+              [nzPageIndex]="domain.pageIndex"
+              [nzPageSize]="domain.pageSize"
+              (nzPageIndexChange)="domainTablePageChange($event)">
+      <thead>
+        <tr>
+          <th>安全域名称</th>
+          <th>接口</th>
+          <th>引用策略</th>
+          <th>创建时间</th>
+          <th>开关</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of domainTable.data">
+          <td>{{data.name}}</td>
+          <td>{{data.port}}</td>
+          <td class="strategy" routerLink="./1">{{data.strategy}}</td>
+          <td>{{data.time}}</td>
+          <td class="switch">
+            <nz-switch [(ngModel)]="data.flag" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
+          </td>
+          <td class="operate">
+            <i class="edit" nz-icon nzType="edit" nzTheme="outline"></i>
+            <i class="delete" nz-icon nzType="delete" nzTheme="outline"></i>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+<div class="create-modal">
+  <nz-modal [(nzVisible)]="createFlag" 
+  nzTitle="关于"
+  nzWidth="470"
+  nzClassName="sysinfo"
+  [nzFooter]="null"
+  (nzOnOk)="toggleAbout()"
+            nzTitle="新增安全域"
+            (nzOnCancel)="toggleCreate(false)"
+            (nzOnOk)="toggleCreate(true)">
+    <div>
+      
+    </div>
+  </nz-modal>
+</div>

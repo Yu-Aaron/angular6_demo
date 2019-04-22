@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartService } from 'src/app/common/service/chart.service';
+import { trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-reportdetail',
@@ -34,6 +35,7 @@ export class ReportdetailComponent implements OnInit {
 
   ngOnInit() {
     this.getSourceCharts();
+    this.getFlowProtocolCharts();
     this.getSecurityDomainProtocolCharts();
     this.getEventTableData();
     this.getLogTableData();
@@ -66,7 +68,210 @@ export class ReportdetailComponent implements OnInit {
   }
 
   getActionCharts() {
-
+    this.actionOption = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      legend: {
+        textStyle: {
+          color: '#fff'
+        },
+        data: ['未知设备(192.168.40.10)', '未知设备(192.168.40.11)', '未知设备(192.168.40.12)', '未知设备(192.168.40.13)', '未知设备(192.168.40.14)', '未知设备(192.168.40.15)', '未知设备(192.168.40.16)', '未知设备(192.168.40.17)', '未知设备(192.168.40.18)', '未知设备(192.168.40.19)', '未知设备(192.168.40.20)']
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'value',
+        axisLine: {
+          lineStyle: {
+            color: '#999'
+          }
+        },
+      },
+      yAxis: {
+        type: 'category',
+        axisLine: {
+          lineStyle: {
+            color: '#DDD'
+          }
+        },
+        data: ['针对139端口的扫描', '域名规则', 'SMB Session Setup NTMLSSP unicode asn1 溢出尝试', 'FTP暴力破解登录尝试', '针对445端口的扫描', '木马DNS回复未分配的地址-Potentially Malicious 1.1.1.0/24']
+      },
+      series: [
+        {
+          name: '未知设备(192.168.40.10)',
+          type: 'bar',
+          stack: '总量',
+          itemStyle: {
+            color: '#24A6F0'
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'insideRight'
+            }
+          },
+          data: [130, 300, 134, 101, 102, 120]
+        },
+        {
+          name: '未知设备(192.168.40.11)',
+          type: 'bar',
+          stack: '总量',
+          itemStyle: {
+            color: '#7D9CED'
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'insideRight'
+            }
+          },
+          data: [230, 90, 134, 101, 92, 80]
+        },
+        {
+          name: '未知设备(192.168.40.12)',
+          type: 'bar',
+          stack: '总量',
+          itemStyle: {
+            color: '#BB96ED'
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'insideRight'
+            }
+          },
+          data: [230, 90, 134, 101, 92, 80]
+        },
+        {
+          name: '未知设备(192.168.40.13)',
+          type: 'bar',
+          stack: '总量',
+          itemStyle: {
+            color: '#F665B7'
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'insideRight'
+            }
+          },
+          data: [230, 90, 134, 101, 102, 120]
+        },
+        {
+          name: '未知设备(192.168.40.14)',
+          type: 'bar',
+          stack: '总量',
+          itemStyle: {
+            color: '#F9646B'
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'insideRight'
+            }
+          },
+          data: [230, 90, 134, 101, 102, 120]
+        },
+        {
+          name: '未知设备(192.168.40.15)',
+          type: 'bar',
+          stack: '总量',
+          itemStyle: {
+            color: '#F2A571'
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'insideRight'
+            }
+          },
+          data: [230, 300, 134, 101, 102, 120]
+        },
+        {
+          name: '未知设备(192.168.40.16)',
+          type: 'bar',
+          stack: '总量',
+          itemStyle: {
+            color: '#F2DD67'
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'insideRight'
+            }
+          },
+          data: [130, 300, 134, 101, 102, 120]
+        },
+        {
+          name: '未知设备(192.168.40.17)',
+          type: 'bar',
+          stack: '总量',
+          itemStyle: {
+            color: '#8FDF68'
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'insideRight'
+            }
+          },
+          data: [130, 300, 134, 101, 102, 120]
+        },
+        {
+          name: '未知设备(192.168.40.18)',
+          type: 'bar',
+          stack: '总量',
+          itemStyle: {
+            color: '#75D1BC'
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'insideRight'
+            }
+          },
+          data: [130, 300, 134, 101, 102, 120]
+        },
+        {
+          name: '未知设备(192.168.40.19)',
+          type: 'bar',
+          stack: '总量',
+          itemStyle: {
+            color: '#5DCFE3'
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'insideRight'
+            }
+          },
+          data: [130, 300, 134, 101, 102, 120]
+        },
+        {
+          name: '未知设备(192.168.40.20)',
+          type: 'bar',
+          stack: '总量',
+          itemStyle: {
+            color: '#858FFE'
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'insideRight'
+            }
+          },
+          data: [130, 300, 134, 101, 102, 120]
+        }
+      ]
+    };
   }
 
   getTrendCharts() {
@@ -82,12 +287,225 @@ export class ReportdetailComponent implements OnInit {
   }
 
   getFlowProtocolCharts() {
-
+    let flow = {
+      showTitle: true,
+      titleText: '流量协议分布双环图',
+      titleColor: '#fff',
+      legendData: ['OTHER(TCP)', 'OTHER(UDP)', 'SNMP(UDP)', 'OTHER(OTHER)'],
+      seriesData: [
+        {
+          name: 'OTHER',
+          type: 'pie',
+          radius: ['0%', '30%'],
+          avoidLabelOverlap: false,
+          label: {
+            normal: {
+              show: true,
+              position: 'outside',
+              textStyle: {
+                fontSize: '16',
+                fontWeight: 'bold'
+              }
+            },
+            emphasis: {
+              show: true,
+              textStyle: {
+                fontSize: '16',
+                fontWeight: 'bold'
+              }
+            }
+          },
+          data: [
+            {
+              value: 10,
+              name: 'TCP',
+              itemStyle: {
+                color: '#A3D6FD'
+              },
+              labelLine: {
+                normal: {
+                  show: true,
+                  length: 10,
+                  length2: 3,
+                  smooth: true
+                }
+              }
+            },
+            {
+              value: 20,
+              name: 'UDP',
+              itemStyle: {
+                color: '#8E97F9'
+              },
+              labelLine: {
+                normal: {
+                  show: true,
+                  length: 10,
+                  length2: 3,
+                  smooth: true
+                }
+              }
+            },
+            {
+              value: 100,
+              name: 'OTHER',
+              itemStyle: {
+                color: '#FA7070'
+              },
+              labelLine: {
+                normal: {
+                  show: true,
+                  length: 10,
+                  length2: 3,
+                  smooth: true
+                }
+              }
+            }
+          ]
+        },
+        {
+          name: 'other',
+          type: 'pie',
+          radius: ['40%', '55%'],
+          avoidLabelOverlap: false,
+          label: {
+            normal: {
+              show: true,
+              position: 'outside',
+              textStyle: {
+                fontSize: '16',
+                fontWeight: 'bold'
+              }
+            },
+            emphasis: {
+              show: true,
+              textStyle: {
+                fontSize: '16',
+                fontWeight: 'bold'
+              }
+            }
+          },
+          data: [
+            {
+              value: 10,
+              name: 'OTHER(TCP)',
+              itemStyle: {
+                color: '#77CDFC'
+              },
+              labelLine: {
+                normal: {
+                  show: true,
+                  length: 40,
+                  length2: 5,
+                  smooth: true
+                }
+              }
+            },
+            {
+              value: 10,
+              name: 'OTHER(UDP)',
+              itemStyle: {
+                color: '#7D88F8'
+              },
+              labelLine: {
+                normal: {
+                  show: true,
+                  length: 40,
+                  length2: 5,
+                  smooth: true
+                }
+              }
+            },
+            {
+              value: 10,
+              name: 'SNMP(UDP)',
+              itemStyle: {
+                color: '#FA709E'
+              },
+              labelLine: {
+                normal: {
+                  show: true,
+                  length: 40,
+                  length2: 5,
+                  smooth: true
+                }
+              }
+            }
+          ]
+        }
+      ]
+    };
+    this.flowProtocolOption = this.chartService.drawPieChart(flow);
   }
 
   getSecurityDomainProtocolCharts() {
     let domain = {
-
+      showTitle: true,
+      titleText: '安全工控协议分布',
+      titleColor: '#fff',
+      legendData: ['Slice'],
+      seriesData: [
+        {
+          name: 'Slice',
+          type: 'pie',
+          radius: ['0%', '50%'],
+          avoidLabelOverlap: false,
+          label: {
+            normal: {
+              show: true,
+              position: 'outside',
+              textStyle: {
+                fontSize: '16',
+                fontWeight: 'bold'
+              }
+            },
+            emphasis: {
+              show: true,
+              textStyle: {
+                fontSize: '16',
+                fontWeight: 'bold'
+              }
+            }
+          },
+          data: [
+            {
+              value: 200,
+              name: 'Slice: 3.72TB 100.0%',
+              itemStyle: {
+                color: '#77C2FC'
+              },
+              labelLine: {
+                normal: {
+                  show: true,
+                  length: 40,
+                  length2: 5,
+                  smooth: true
+                }
+              }
+            },
+            {
+              value: 0,
+              name: '',
+              itemStyle: {
+                color: '#021C33'
+              },
+              emphasis: {
+                itemStyle: {
+                  color: '#021C33'
+                }
+              },
+              labelLine: {
+                normal: {
+                  show: false
+                },
+                emphasis: {
+                  show: false
+                }
+              }
+            }
+          ]
+        }
+      ]
     };
     this.securityDomainProtocolOption = this.chartService.drawPieChart(domain);
   }

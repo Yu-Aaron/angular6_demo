@@ -1,0 +1,177 @@
+<div class="detail">
+  <div class="strategy" nz-row>
+    <div nz-col nzSpan="4">
+      <span class="strategy-key">ID：</span>
+      <span class="strategy-value">2</span>
+    </div>
+    <div nz-col nzSpan="8">
+      <span class="strategy-key">策略名称：</span>
+      <span class="strategy-value">默认策略</span>
+    </div>
+    <div nz-col nzSpan="12">
+      <span class="strategy-key">创建时间：</span>
+      <span class="strategy-value">2019/01/10 19:00:00</span>
+    </div>
+    <div class="operate">
+      <i class="edit" nz-icon nzType="edit" nzTheme="outline"></i>
+      <i class="delete" nz-icon nzType="delete" nzTheme="outline"></i>
+    </div>
+  </div>
+  <div class="tab">
+    <nz-tabset>
+      <nz-tab [nzTitle]="'威胁特征列表'">
+        <nz-table #threatTable
+                  [nzData]="threat.data"
+                  [nzTotal]="threat.total"
+                  [nzLoading]="threat.loading"
+                  [nzShowTotal]="threatTableTpl"
+                  [nzShowQuickJumper]="true"
+                  [nzFrontPagination]="false"
+                  [nzPageIndex]="threat.pageIndex"
+                  [nzPageSize]="threat.pageSize"
+                  (nzPageIndexChange)="threatTablePageChange($event)">
+          <thead>
+            <tr>
+              <th>威胁名称</th>
+              <th>服务类型分类</th>
+              <th>漏洞类型</th>
+              <th>危害等级</th>
+              <th>基本描述</th>
+              <th>特征项列表个数</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of threatTable.data">
+              <td>{{data.name}}</td>
+              <td>{{data.port}}</td>
+              <td class="strategy" routerLink="./1">{{data.strategy}}</td>
+              <td>{{data.time}}</td>
+              <td></td>
+              <td class="operate">
+                <i class="search" nz-icon nzType="search" nzTheme="outline"></i>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+        <ng-template #threatTableTpl>
+          <span>共 {{threat.total}} 条，</span>
+          <span>每页展示 {{threat.pageSize}} 条，</span>
+          <span>共 {{threat.pages}} 页</span>
+        </ng-template>
+      </nz-tab>
+      <nz-tab [nzTitle]="'协议规则列表'">
+        <nz-table #protocolTable
+                  [nzData]="protocol.data"
+                  [nzTotal]="protocol.total"
+                  [nzLoading]="protocol.loading"
+                  [nzShowTotal]="protocolTableTpl"
+                  [nzShowQuickJumper]="true"
+                  [nzFrontPagination]="false"
+                  [nzPageIndex]="protocol.pageIndex"
+                  [nzPageSize]="protocol.pageSize"
+                  (nzPageIndexChange)="protocolTablePageChange($event)">
+          <thead>
+            <tr>
+              <th>规则名称</th>
+              <th>来源</th>
+              <th>协议类型</th>
+              <th>优先级</th>
+              <th>规则描述</th>
+              <th>是否告警</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of protocolTable.data">
+              <td>{{data.name}}</td>
+              <td>{{data.port}}</td>
+              <td>{{data.strategy}}</td>
+              <td>{{data.time}}</td>
+              <td></td>
+              <td></td>
+              <td class="operate">
+                <i class="search" nz-icon nzType="search" nzTheme="outline"></i>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+        <ng-template #protocolTableTpl>
+          <span>共 {{protocol.total}} 条，</span>
+          <span>每页展示 {{protocol.pageSize}} 条，</span>
+          <span>共 {{protocol.pages}} 页</span>
+        </ng-template> 
+      </nz-tab>
+      <nz-tab [nzTitle]="'IP/MAC规则列表'">
+        <nz-table #ipmacTable
+                  [nzData]="ipmac.data"
+                  [nzTotal]="ipmac.total"
+                  [nzLoading]="ipmac.loading"
+                  [nzShowTotal]="ipmacTableTpl"
+                  [nzShowQuickJumper]="true"
+                  [nzFrontPagination]="false"
+                  [nzPageIndex]="ipmac.pageIndex"
+                  [nzPageSize]="ipmac.pageSize"
+                  (nzPageIndexChange)="ipmacTablePageChange($event)">
+          <thead>
+            <tr>
+              <th>工控设备名称</th>
+              <th>IP</th>
+              <th>MAC</th>
+              <th>优先级</th>
+              <th>策略引用次数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of ipmacTable.data">
+              <td>{{data.name}}</td>
+              <td>{{data.port}}</td>
+              <td>{{data.strategy}}</td>
+              <td>{{data.time}}</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </nz-table>
+        <ng-template #ipmacTableTpl>
+          <span>共 {{ipmac.total}} 条，</span>
+          <span>每页展示 {{ipmac.pageSize}} 条，</span>
+          <span>共 {{ipmac.pages}} 页</span>
+        </ng-template> 
+      </nz-tab>
+      <nz-tab [nzTitle]="'域名规则列表'">
+        <nz-table #domainNameTable
+                  [nzData]="domainName.data"
+                  [nzTotal]="domainName.total"
+                  [nzLoading]="domainName.loading"
+                  [nzShowTotal]="domainNameTableTpl"
+                  [nzShowQuickJumper]="true"
+                  [nzFrontPagination]="false"
+                  [nzPageIndex]="domainName.pageIndex"
+                  [nzPageSize]="domainName.pageSize"
+                  (nzPageIndexChange)="domainNameTablePageChange($event)">
+          <thead>
+            <tr>
+              <th>域名</th>
+              <th>来源</th>
+              <th>创建时间</th>
+              <th>策略引用次数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of domainNameTable.data">
+              <td>{{data.name}}</td>
+              <td>{{data.port}}</td>
+              <td>{{data.strategy}}</td>
+              <td>{{data.time}}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+        <ng-template #domainNameTableTpl>
+          <span>共 {{domainName.total}} 条，</span>
+          <span>每页展示 {{domainName.pageSize}} 条，</span>
+          <span>共 {{domainName.pages}} 页</span>
+        </ng-template> 
+      </nz-tab>
+    </nz-tabset>
+  </div>
+</div>
