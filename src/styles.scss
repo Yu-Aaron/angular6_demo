@@ -42,54 +42,55 @@ html, body {
   }
 }
 
-
 /*** modal ***/
-.modal_message_tip {
+.ant-modal {
   .ant-modal-content {
-      background-color: rgba(0, 38, 73, 1);
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.447058823529412);
-      .ant-modal-footer {
-        border-top: none;
-        .ant-btn-primary {
-          background-color: rgba(1, 81, 167, 1);
-          height: 32px;
-          width: 65px;
-          color: #FFFFFF;
-        }
-        .ant-btn-default {
-          border-color: rgba(1, 81, 167, 1);
-          background-color: rgba(255, 255, 255, 0);
-          height: 32px;
-          width: 65px;
-          color: #FFFFFF;
-        }
-      }
-      .ant-modal-body {
-        padding-bottom: 0px;
-      }
-  }
-  .content {
-    overflow: hidden;
-    img {
-        float: left;
-        width: 22px;
-        margin-right: 20px;
+    background-color: $bg-aside;
+    .anticon-close {
+      color: #fff;
     }
-    div {
-      float: left;
-      :first-child {
-        font-weight: 700;
-        font-style: normal;
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.647058823529412);
-        line-height: 22px;
+    .ant-modal-header {
+      border: none;
+      background-color: $bg-aside;
+      border-bottom: 1px solid $modal-header-footer-border;
+      .ant-modal-title {
+        font-weight: 600;
+        font-size: 18px;
+        color: $ant-modal-title;
+      }
+    }
+    .ant-modal-footer {
+      border-top: 1px solid $modal-header-footer-border;
+      text-align: center;
+      button {
+        height: 32px;
+        line-height: 32px;
       }
       :last-child {
-        font-weight: 400;
-        font-style: normal;
-        font-size: 14px;
-        color: #999999;
-        line-height: 22px;
+        background: #0151A7;
+        border: none;
+      }
+      :first-child {
+        border-color: rgba(1, 81, 167, 1);
+        background-color: rgba(255, 255, 255, 0);
+      }
+    }
+    .ant-modal-body {
+      font-size: 16px;
+      color: #fff;
+      padding-top: 10px;
+      padding-bottom: 40px;
+      .text-right {
+        color: #46C0FF;
+      }
+      .info-value {
+        padding-left: 8px;
+      }
+    }
+    .ant-form-item-control {
+      line-height: 25px;
+      .select-base, .ant-select-selection, .ant-select-dropdown, .ant-input, .ant-select-dropdown-menu-item, .ant-select-dropdown-menu-item-selected, .ant-select-dropdown-menu-item:hover {
+        border-radius: 4px !important;
       }
     }
   }
@@ -141,15 +142,29 @@ html, body {
     border: none;
   }
 }
+
+/*** pagination ***/
 .ant-table-pagination.ant-pagination {
   color: #fff;
   float: none;
   text-align: center;
-  background: $table-head;
+  //background: $table-head;
   margin: 0;
   padding: 8px;
 }
-
+.ant-pagination-item, .ant-pagination-item-active,
+.ant-pagination-options-quick-jumper input,
+.ant-pagination-item-link {
+  background-color: $bg-aside !important;
+  border-color: #0151A7 !important;
+  color: #fff !important;
+}
+.ant-pagination-item {
+  background-color: #0151A7 !important;
+  a, &:focus a, &:hover a {
+    color: #fff;
+  }
+}
 
 /*** input ***/
 .select-base {
@@ -187,7 +202,6 @@ html, body {
   margin-bottom: 5px;
 }
 
-
 /*** button ***/
 .ant-btn {
   height: 40px;
@@ -201,14 +215,13 @@ html, body {
   }
   &.btn-search {
     background: $btn-search;
-    padding: 0 30px;
+    padding: 0 20px;
     margin-left: 20px;
     &:hover, &:active, &:focus {
       background: $btn-search-hover;
     }
   }
 }
-
 
 /*** dropdown  ***/
 .ant-dropdown-menu {
@@ -221,7 +234,6 @@ html, body {
     }
   }
 }
-
 
 /*** icon  ***/
 .anticon {
@@ -243,7 +255,6 @@ html, body {
     background: $txt-error;
   }
 }
-
 
 /*** common ***/
 .mr-10 {
@@ -267,7 +278,7 @@ html, body {
 .inline-block {
   display: inline-block;
 }
-.top-right{
+.top-right {
   position: absolute;
   right: 0;
   top: -45px;
@@ -291,6 +302,21 @@ html, body {
 }
 .text-right {
   text-align: right;
+}
+.txt-error {
+  color: $txt-error;
+}
+.txt-warning {
+  color: $txt-warning;
+}
+.txt-green {
+  color: $txt-green;
+}
+.txt-blue {
+  color: $txt-blue;
+}
+.txt-gray {
+  color: $txt-gray;
 }
 
 /*** others ***/
@@ -323,57 +349,52 @@ html, body {
     }
   }
 }
-
-
-
-.ant-modal {
+.modal_message_tip {
   .ant-modal-content {
-    background-color: $bg-aside;
-    .anticon-close {
-      color: #fff;
-    }
-    .ant-modal-header {
-      border: none;
-      background-color: $bg-aside;
-      border-bottom: 1px solid $modal-header-footer-border;
-      .ant-modal-title {
-        font-size: 14px;
-        font-weight: 600;
-        color: $ant-modal-title;
-      }
-    }
+    background-color: rgba(0, 38, 73, 1);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.447058823529412);
     .ant-modal-footer {
-      border-top: 1px solid $modal-header-footer-border;
-      text-align: center;
-      button {
+      border-top: none;
+      .ant-btn-primary {
+        background-color: rgba(1, 81, 167, 1);
         height: 32px;
-        line-height: 32px;
+        width: 65px;
+        color: #FFFFFF;
       }
-      :last-child {
-        background: #0151A7;
-        border: none;
-      }
-      :first-child {
+      .ant-btn-default {
         border-color: rgba(1, 81, 167, 1);
         background-color: rgba(255, 255, 255, 0);
+        height: 32px;
+        width: 65px;
+        color: #FFFFFF;
       }
     }
     .ant-modal-body {
-      font-size: 16px;
-      color: #fff;
-      padding-top: 10px;
-      padding-bottom: 40px;
-      .text-right {
-        color: #46C0FF;
-      }
-      .info-value {
-        padding-left: 8px;
-      }
+      padding-bottom: 0px;
     }
-    .ant-form-item-control {
-      line-height: 25px;
-      .select-base, .ant-select-selection, .ant-select-dropdown, .ant-input, .ant-select-dropdown-menu-item, .ant-select-dropdown-menu-item-selected, .ant-select-dropdown-menu-item:hover {
-        border-radius: 4px !important;
+  }
+  .content {
+    overflow: hidden;
+    img {
+      float: left;
+      width: 22px;
+      margin-right: 20px;
+    }
+    div {
+      float: left;
+      :first-child {
+        font-weight: 700;
+        font-style: normal;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.647058823529412);
+        line-height: 22px;
+      }
+      :last-child {
+        font-weight: 400;
+        font-style: normal;
+        font-size: 14px;
+        color: #999999;
+        line-height: 22px;
       }
     }
   }

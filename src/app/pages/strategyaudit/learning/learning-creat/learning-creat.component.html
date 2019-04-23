@@ -1,0 +1,28 @@
+<div class="learning_create">
+    <div class="mb-20">
+        <label>新建智能学习任务</label>
+        <span class="txt-warning">学习时长最长为7天</span>
+    </div>
+    <div nz-row>
+        <div nz-col [nzSpan]="6">
+            <label class="txt-blue mr-20">学习时间: </label> 为期
+            <nz-input-number [(ngModel)]="learningNew['timestring']['days']" [nzMin]="1" [nzMax]="10"></nz-input-number>天
+            <nz-input-number [(ngModel)]="learningNew['timestring']['hour']" [nzMin]="1" [nzMax]="12"></nz-input-number>时
+            <nz-input-number [(ngModel)]="learningNew['timestring']['minute']" [nzMin]="1" [nzMax]="60"></nz-input-number>分
+        </div>
+        <div nz-col [nzSpan]="6">
+            <span class="txt-gray">开始时间：</span>
+            <nz-range-picker nzFormat="yyyy-MM-dd HH:mm:ss" [(ngModel)]="learningNew['timerange']"></nz-range-picker>
+        </div>
+        <div nz-col [nzSpan]="3">
+            <label class="txt-blue">安全域: </label>
+            <nz-select [(ngModel)]="learningNew['securityAreaId']" name="security_area">
+                <nz-option *ngFor="let securityarea of enableSecurityArea"
+                           [nzValue]="securityarea.securityAreaId" [nzLabel]="securityarea.name"></nz-option>
+            </nz-select>
+        </div>
+        <div nz-col [nzSpan]="2">
+            <button nz-button nzType="primary" class="btn-search" (click)="startLearning()">开始学习</button>
+        </div>
+    </div>
+</div>

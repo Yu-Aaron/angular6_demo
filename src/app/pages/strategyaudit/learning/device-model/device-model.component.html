@@ -1,0 +1,57 @@
+<nz-modal [(nzVisible)]="deviceModal.isVisible"
+          [nzTitle]="deviceModal.title"
+          [nzFooter]=null
+          (nzOnCancel)="handleCancel()"
+          [nzWidth]= 904>
+    <div class="operate_content mb-10" *ngIf="deviceModal.type === 'unkown' || deviceModal.type === 'ipMac'">
+        <button nz-button nzType="primary">
+            {{deviceModal.type === 'unkown' ? '全部添加到资产' : '全部更新'}}
+        </button>
+        <span>学习到 <span class="count">3</span> 个未知设备</span>
+    </div>
+    <div class="device_table">
+        <nz-table #tableDataTmp
+                  [nzData]="deviceModal.data"
+                  [nzTotal]="tableCount"
+                  [nzShowQuickJumper]="true"
+                  [nzFrontPagination]="false"
+                  [(nzPageIndex)]="pageIndex"
+                  [(nzPageSize)]="pageSize"
+                  (nzPageIndexChange)="pageIndexChange()"
+                  [nzLoading]="loading"
+                  [nzShowTotal]="totalTemplate">
+            <thead>
+            <tr>
+                <th>时间</th>
+                <th *ngIf="deviceModal.type !== 'ipMac'">设备名称</th>
+                <th>IP地址</th>
+                <th *ngIf="deviceModal.type === 'ipMac'">实际MAC</th>
+                <th *ngIf="deviceModal.type === 'ipMac'">资产MAC</th>
+                <th *ngIf="deviceModal.type !== 'kown'">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of tableDataTmp.data">
+                <td>{{item.date | date: 'yyyy-MM-dd HH:mm:ss'}} 规则学习</td>
+                <td *ngIf="deviceModal.type !== 'ipMac'">{{item.deviceName}} 分钟</td>
+                <td>{{item.ip}}</td>
+                <td *ngIf="deviceModal.type === 'ipMac'">{{item.mac}}</td>
+                <td *ngIf="deviceModal.type === 'ipMac'">{{item.assetMac}}</td>
+                <td *ngIf="deviceModal.type !== 'kown'">
+                    <button *ngIf="!item.loading" nz-button nzType="primary" (click)="item.loading = true">
+                        <i nz-icon nzType="schedule" nzTheme="outline"></i>{{deviceModal.type === 'unkown' ? '添加到资产' : '更新MAC'}}
+                    </button>
+                    <span *ngIf="item.loading" class="success">
+                     <i nz-icon nzType="check" nzTheme="outline"></i>{{deviceModal.type === 'unkown' ? '添加成功' : '更新成功'}}
+                </span>
+                </td>
+            </tr>
+            </tbody>
+        </nz-table>
+        <ng-template #totalTemplate let-total>
+            <span>共 {{tableCount}} 条，</span>
+            <span>每页展示 {{pageSize}} 条，</span>
+            <span>共 {{pageTotalNumber}} 页</span>
+        </ng-template>
+    </div>
+</nz-modal>

@@ -8,6 +8,10 @@ import { SecuritydomainComponent } from './securitydomain/securitydomain.compone
 import { LearningComponent } from './learning/learning.component';
 import { VulComponent } from './vul/vul.component';
 import { DomaindetailComponent } from './securitydomain/domaindetail/domaindetail.component';
+import { ProtocolComponent} from '../setting/protocol/protocol.component';
+import { DeviceModelComponent } from './learning/device-model/device-model.component';
+import { LearningDetailComponent } from './learning/learning-detail/learning-detail.component';
+import { LearningCreateComponent } from './learning/learning-creat/learning-create.component';
 
 @NgModule({
     declarations: [
@@ -15,11 +19,14 @@ import { DomaindetailComponent } from './securitydomain/domaindetail/domaindetai
         SecuritydomainComponent,
         LearningComponent,
         VulComponent,
-        DomaindetailComponent
+        DomaindetailComponent,
+        DeviceModelComponent,
+        LearningDetailComponent,
+        LearningCreateComponent
     ],
     imports: [
         SharedModule,
-        StrategyauditRoutingModule
+        StrategyauditRoutingModule,
     ],
     providers: [
         AuthGuard

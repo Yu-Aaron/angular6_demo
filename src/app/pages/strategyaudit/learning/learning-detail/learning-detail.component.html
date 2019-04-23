@@ -1,0 +1,81 @@
+<div class="learning_detail">
+    <div class="mb-20">智能学习任务进行中</div>
+    <div nz-row>
+        <nz-progress nz-col [nzSpan]="10" [nzPercent]="30"></nz-progress>
+        <button nz-col [nzSpan]="2" nz-button nzType="primary" class="btn-search">停止</button>
+        <button nz-col [nzSpan]="2" nz-button nzType="primary" class="btn-search btn-line">删除</button>
+    </div>
+    <div class="mb-10">
+        <label>任务名称: </label>
+        <span>{{'2019/01/10 10:10:10'}}规则学习</span>
+    </div>
+    <div nz-row class="mb-10">
+        <div nz-col [nzSpan]="4">
+            <label>开始时间: </label>
+            <span>{{learningDetail['timerange'][0] | date: 'yyyy-MM-dd HH:mm:ss' }}</span>
+        </div>
+        <div nz-col [nzSpan]="4">
+            <label>结束时间: </label>
+            <span>{{learningDetail['timerange'][1] | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+        </div>
+        <div nz-col [nzSpan]="3">
+            <label>学习时长: </label>
+            <span>{{learningDetail['timestring']['days'] + '天' + learningDetail['timestring']['hour'] + '小时' + learningDetail['timestring']['minute']+ '分'}}</span>
+        </div>
+        <div nz-col [nzSpan]="4">
+            <label>安全域: </label>
+            <span>{{enableSecurityArea[learningDetail['securityAreaId']]['name']}}</span>
+        </div>
+    </div>
+    <div nz-row class="mb-10">
+        <div nz-col [nzSpan]="4">
+            <label>数据流: </label>
+            <span>{{'29'}}</span>
+        </div>
+        <div nz-col [nzSpan]="7">
+            <label>正在活动设备数: </label>
+            <u class="txt-green inline-block mr-10" (click)="showDeviceModal('kown')">【已知设备】29</u>
+            <u class="txt-error" (click)="showDeviceModal('unkown')">【未知设备】29</u>
+        </div>
+        <div nz-col [nzSpan]="4">
+            <label>IP/MAC变更的设备数量: </label>
+            <u class="txt-blue" (click)="showDeviceModal('ipMac')">29</u>
+        </div>
+    </div>
+    <div nz-row>
+        <label class="inline-block mb-10">已学到的规则：</label>
+        <nz-table #tableDataTmp
+                  [nzData]="tableData"
+                  [nzTotal]="tableCount"
+                  [nzShowQuickJumper]="true"
+                  [nzFrontPagination]="false"
+                  [(nzPageIndex)]="pageIndex"
+                  [(nzPageSize)]="pageSize"
+                  (nzPageIndexChange)="pageIndexChange()"
+                  [nzLoading]="loading"
+                  [nzShowTotal]="totalTemplate">
+            <thead>
+            <tr>
+                <th>规则名称</th>
+                <th>规则项个数</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of totalTemplate.data">
+                <td>{{item.name}}</td>
+                <td>{{item.count}}</td>
+                <td>
+                    <i nz-icon nzType="search" nzTheme="outline"></i>
+                    <i nz-icon nzType="delete" nzTheme="fill"></i>
+                </td>
+            </tr>
+            </tbody>
+        </nz-table>
+        <ng-template #totalTemplate let-total>
+            <span>共 {{tableCount}} 条，</span>
+            <span>每页展示 {{pageSize}} 条，</span>
+            <span>共 {{pageTotalNumber}} 页</span>
+        </ng-template>
+    </div>
+</div>

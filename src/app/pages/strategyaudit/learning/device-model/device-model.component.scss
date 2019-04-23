@@ -1,0 +1,19 @@
+.operate_content {
+  display: flex;
+  justify-content: space-between;
+  span {
+    font-size: 14px;
+    padding-top: 18px;
+    .count {
+      color: #FF0026;
+    }
+  }
+}
+.device_table {
+  .success {
+    color: #04CC99;
+  }
+}
+button {
+  background: #0151A7;
+}

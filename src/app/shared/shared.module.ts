@@ -5,6 +5,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { FilterTableComponent} from '../common/component/filter-table/filter-table.component';
 import { ModalComponent } from '../common/component/modal/modal.component';
 import { NgxEchartsModule} from 'ngx-echarts';
+import {ProtocolComponent} from '../pages/setting/protocol/protocol.component';
 
 @NgModule({
     imports: [
@@ -21,11 +22,13 @@ import { NgxEchartsModule} from 'ngx-echarts';
         NgZorroAntdModule,
         NgxEchartsModule,
         FilterTableComponent,
-        ModalComponent
+        ModalComponent,
+        ProtocolComponent
     ],
     declarations: [
         FilterTableComponent,
-        ModalComponent
+        ModalComponent,
+        ProtocolComponent
     ]
 })
 
