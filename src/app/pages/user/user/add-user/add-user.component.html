@@ -6,16 +6,13 @@
   [nzContent]="modalContent"
   [nzFooter]="modalFooter"
   [nzWidth]="625">
-    <ng-template #modalTitle>
-      新增用户
-    </ng-template>
     <ng-template #modalContent>
       <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
           <nz-form-item>
             <nz-form-label [nzSpan]="6">用户名</nz-form-label>
             <nz-form-control [nzSpan]="14">
               <input nz-input type="text" formControlName="userName" *ngIf="!editProperty" [(ngModel)]="userInfo.name">
-              <span *ngIf="editProperty">{{userInfo.name}}</span>
+              <span *ngIf="editProperty" style="color: #fff">{{userInfo.name}}</span>
               <label class="user_name_warning">
                   <div class="help-msg" *ngIf="message.name"><span></span>用户名已存在</div>
               </label>
@@ -42,8 +39,8 @@
             <nz-form-label [nzSpan]="6">锁定</nz-form-label>
             <nz-form-control [nzSpan]="14">
                 <nz-radio-group [(ngModel)]="userInfo.locked" formControlName="locked">
-                  <label nz-radio nzValue="是">是</label>
-                  <label nz-radio nzValue="否">否</label>
+                  <label nz-radio nzValue="是" style="color: #fff">是</label>
+                  <label nz-radio nzValue="否" style="color: #fff">否</label>
                 </nz-radio-group>
             </nz-form-control>
           </nz-form-item>
@@ -75,6 +72,6 @@
     </ng-template>
     <ng-template #modalFooter>
       <button nz-button nzType="primary" (click)="handleCancel()">取消</button>
-      <button nz-button nzType="primary" nzSize="large" (click)="editProperty ? handleOkEdit() : handleOk()" [nzLoading]="isConfirmLoading" [disabled]="editProperty ? message.name||!message.password||!message.passwordValidate||validateForm.controls.validate_password.value!=validateForm.controls.password.value||userInfo.password==null||userInfo.name==null||userInfo.passwordValidate==null||userInfo.role=={} : message.name||!message.password||!message.passwordValidate||userInfo.password==null || validateForm.controls.validate_password.value!=validateForm.controls.password.value || userName == null || userInfo.role=={} || message.password.value != 3||message.passwordValidate.value != 3">{{fooletrTitle}}</button>
+      <button nz-button nzType="primary" (click)="editProperty ? handleOkEdit() : handleOk()" [nzLoading]="isConfirmLoading" [disabled]="editProperty ? message.name||!message.password||!message.passwordValidate||validateForm.controls.validate_password.value!=validateForm.controls.password.value||userInfo.password==null||userInfo.name==null||userInfo.passwordValidate==null||userInfo.role=={} : message.name||!message.password||!message.passwordValidate||userInfo.password==null || validateForm.controls.validate_password.value!=validateForm.controls.password.value || userName == null || userInfo.role=={} || message.password.value != 3||message.passwordValidate.value != 3">{{fooletrTitle}}</button>
     </ng-template>
   </nz-modal>

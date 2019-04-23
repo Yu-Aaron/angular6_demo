@@ -18,7 +18,7 @@
             "state": "securityaudit",
             "name": "安全审计",
             "icon": "security_audit",
-            "type": "heat-map",
+            "type": "credit-card",
             "options": {
                 "url_state": "securityaudit.incidentaudit",
                 "reload": true
@@ -73,7 +73,7 @@
             "state": "usermanagement",
             "name": "用户管理",
             "icon": "debug_tool",
-            "type": "team",
+            "type": "credit-card",
             "options": {
                 "url_state": "user.user",
                 "reload": true

@@ -248,17 +248,17 @@ export class AddUserComponent implements OnInit {
         refresh: false
       };
       self.closeModal.emit(self.transformToParent);
-    })
+    });
   }
 
 
   handleCancel(): void {
-    this.isVisible = false;
-    this.transformToParent = {
+    self.isVisible = false;
+    self.transformToParent = {
       isVisible: false,
       refresh: false
     };
-    this.closeModal.emit(this.transformToParent);
+    self.closeModal.emit(self.transformToParent);
   }
 
 }

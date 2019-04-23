@@ -1,0 +1,62 @@
+<div class="management_group">
+  <!-- <input type="text" [(ngModel)]="global"> -->
+  <div class="return_back" [routerLink]="['/pages/usermanagement/usergroup']">
+    <span>
+      <i nz-icon nzType="arrow-left" nzTheme="outline"></i>
+    </span>
+    <span>权限管理</span>
+  </div>
+  <div class="management_group_content">
+    <div class="management_header">
+      <h3>用户组： 审计组</h3>
+      <div class="header_step">
+        <div class="step_div active">
+          <span>1</span>
+          <span>菜单可视配置</span>
+        </div>
+        <div class="step_icon">
+            <i nz-icon nzType="arrow-left" nzTheme="outline" [nzRotate]="180"></i>
+        </div>
+        <div class="step_div">
+          <span>2</span>
+          <span>操作功能配置</span>
+        </div>
+        <div class="step_icon">
+            <i nz-icon nzType="arrow-left" nzTheme="outline" [nzRotate]="180"></i>
+        </div>
+        <div class="step_div">
+          <span>3</span>
+          <span>权限设置预览</span>
+        </div>
+      </div>
+    </div>
+    <div class="management_content">
+      <div class="content" *ngFor="let menu of menus; let i = index">
+        <div [ngClass]="{'content_menu_list': i % 2 === 1, 'content_menu': i % 2 === 0}">
+          <div class="menu_header">
+            <div>
+                <i nz-icon [title]="menu.name" [type]="menu.type" nzTheme="fill"></i>
+                <span>{{menu.name}}</span>
+            </div>
+            <label
+              nz-checkbox
+              [(ngModel)]="allChecked"
+              (ngModelChange)="updateAllChecked()"
+              [nzIndeterminate]="indeterminate"
+            >
+            </label>
+          </div>
+          <div class="menu_sub_content">
+            <div class="menu_subtitle" *ngFor="let sub of submenu[menu.state]">
+              <span>{{sub.name}}</span>
+              <nz-checkbox-group [(ngModel)]="checkOptionsOne" (ngModelChange)="updateSingleChecked()"></nz-checkbox-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step_next">
+        <button nz-button nzType="primary" nzSize="large" class="mr-10">下一步</button>
+    </div>
+  </div>
+</div>

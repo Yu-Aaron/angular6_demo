@@ -1,5 +1,5 @@
 <div class="content-right" [ngStyle]="{'left': currentState === 'home' ? '60px' : '160px'}">
-  <div class="content-title">
+  <div class="content-title" *ngIf="isShowTitle">
     {{currentSubState || '审计概况' | transformTitle}}
   </div>
   <router-outlet></router-outlet>

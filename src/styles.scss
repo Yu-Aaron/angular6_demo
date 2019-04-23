@@ -202,6 +202,14 @@ html, body {
   margin-bottom: 5px;
 }
 
+// checkbox
+.ant-checkbox-inner {
+  background: transparent;
+  border: 1px solid #99998F;
+  width: 14px;
+  height: 14px;
+}
+
 /*** button ***/
 .ant-btn {
   height: 40px;

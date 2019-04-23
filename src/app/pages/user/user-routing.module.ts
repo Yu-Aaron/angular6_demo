@@ -4,10 +4,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/shared/AuthGuard';
 import { UserComponent } from './user/user.component';
 import { UsergroupComponent } from './usergroup/usergroup.component';
+import { ManagementGroupComponent } from './usergroup/management-group/management-group.component';
 
 const routes: Routes = [
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'usergroup', component: UsergroupComponent, canActivate: [AuthGuard] },
+  { path: 'usergroup/:id', component: ManagementGroupComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/pages/usermanagement/user' }
 ];
 

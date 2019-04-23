@@ -1,6 +1,6 @@
 <div class="user_content">
     <div class="add_new_user">
-      <button nz-button nzType="primary" class="mr-10">
+      <button nz-button nzType="primary" class="mr-10" (click)="addUserGroup('新增', '确定', '')">
           <i nz-icon nzType="plus"></i>新建用户组
       </button>
     </div>
@@ -26,9 +26,13 @@
             <td>{{data.group}}</td>
             <td>{{data.locked ? '锁定' : '正常'}}</td>
             <td>
-                <span (click)="addUser('编辑', '保存', item)" title="编辑" style="color:#00CC99;"><img src="../../../../assets/images/edit.svg" alt="编辑">&nbsp;编辑</span>
+                <span routerLink="./management" (click)="managementUserGroup()" title="权限管理" style="color:#0151A7;">
+                  <i nz-icon [nzType]="'key'" [nzTheme]="'outline'"></i>&nbsp;权限管理
+                </span>
                 <nz-divider nzType="vertical"></nz-divider>
-                <span (click)="deleteUser(item)" title="编辑" style="color:#FF0000"><img src="../../../../assets/images/delete.svg" alt="删除">&nbsp;删除</span>
+                <span (click)="addUserGroup('编辑', '保存', data)" title="编辑" style="color:#00CC99;"><img src="../../../../assets/images/edit.svg" alt="编辑">&nbsp;编辑</span>
+                <nz-divider nzType="vertical"></nz-divider>
+                <span (click)="deleteUser(data)" title="删除" style="color:#FF0000"><img src="../../../../assets/images/delete.svg" alt="删除">&nbsp;删除</span>
             </td>
           </tr>
         </tbody>
@@ -39,4 +43,10 @@
         <span>共 {{pages}} 页</span>
       </ng-template>
     </div>
+    <app-add-user-group 
+      [isVisible]="isVisible"
+      *ngIf="isVisible"
+      (closeModal)="closeModal($event)"
+      [modelTitle]="modelTitle"
+      [fooletrTitle]="fooletrTitle"></app-add-user-group>
   </div>

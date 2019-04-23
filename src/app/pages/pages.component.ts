@@ -8,8 +8,8 @@ import {Component, OnInit} from '@angular/core';
             <app-aside></app-aside>
         </nz-header>
         <nz-layout class="menu_ant-layout">
-            <app-left-menu (currentState)="currentState=$event" (currentSubState)="currentSubState=$event" class="left_menu"></app-left-menu>
-            <app-right-content [currentState]="currentState" [currentSubState]="currentSubState" class="right_content"></app-right-content>
+            <app-left-menu (currentState)="currentState=$event" (currentSubState)="currentSubState=$event" (isShowTitle)="isShowTitle=$event" class="left_menu"></app-left-menu>
+            <app-right-content [currentState]="currentState" [currentSubState]="currentSubState" class="right_content" [isShowTitle]="isShowTitle"></app-right-content>
         </nz-layout>
     </nz-layout>
     `,

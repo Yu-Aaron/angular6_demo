@@ -1,0 +1,153 @@
+.management_group {
+    .return_back {
+        display: inline-block;
+        cursor: pointer;
+        outline: none;
+        :first-child {
+            width: 26px;
+            height: 26px;
+            display: inline-block;
+            border-radius: 13px;
+            background-color: #25B4F1;
+            text-align: center;
+            vertical-align: middle;
+            margin-right: 10px;
+            line-height: 26px;
+        }
+        :last-child {
+            font-size: 16px;
+            color: #F2F2F2;
+        }
+    }
+    .management_group_content {
+        width: 1220px;
+        margin: 20px auto 0 auto;
+        text-align: center;
+        .management_header {
+            overflow: hidden;
+            height: 50px;
+            line-height: 50px;
+            h3 {
+                color: #fff;
+                font-weight: 700;
+                float: left;
+                margin-right: 180px;
+            }
+            .header_step {
+                overflow: hidden;
+                div {
+                    float: left;
+                }
+                .step_icon {
+                    width: 30px;
+                    line-height: 50px;
+                    height: 50px;
+                    i {
+                        color: #0151A7;
+                        font-weight: 700;
+                        font-size: 18px;
+                        font-weight: bolder;
+                    }
+                }
+                .step_div {
+                    float: left;
+                    width: 180px;
+                    height: 50px;
+                    padding: 10px 20px;
+                    text-align: center;
+                    line-height: 30px;
+                    background: #173655;
+                    :first-child {
+                        width: 30px;
+                        height: 30px;
+                        display: inline-block;
+                        border-radius: 15px;
+                        margin-right: 10px;
+                        font-weight: 700;
+                        font-style: normal;
+                        font-size: 16px;
+                        background: #000000;
+                        color: #fff;
+                    }
+                    :last-child {
+                        font-size: 16px;
+                        color: #f2f2f2;
+                    }
+                }
+                .active {
+                    background: #0151A7;
+                    :first-child {
+                        background: #25B4F1;
+                    }
+                    :last-child {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        .management_content {
+            margin-top: 20px;
+            overflow: hidden;
+            .content {
+                >div {
+                    float: left;
+                    padding: 30px 15px;
+                    height: 310px;
+                    .menu_header {
+                        margin-bottom: 10px;
+                        overflow: hidden;
+                        div {
+                            float: left;
+                        }
+                        span {
+                            font-size: 16px;
+                            color: #25B4F1;
+                            font-weight: 300;
+                        }
+                        i {
+                            font-size: 18px;
+                            color: #25B4F1;
+                            margin-right: 5px;
+                        }
+                        label {
+                            float: right;
+                        }
+                    }
+                    .menu_sub_content {
+                        .menu_subtitle {
+                            height: 36px;
+                            line-height: 36px;
+                            font-size: 14px;
+                            span {
+                                float: left;
+                                margin-left: 25px;
+                            }
+                        }
+                    }
+                }
+            }
+            .content_menu {
+                width: 165px;
+
+                background: #000000;
+            }
+            .content_menu_list {
+                width: 175px;
+                background: #1D344B;
+            }
+        }
+        .step_next {
+            margin-top: 20px;
+            button {
+                width: 133px;
+                height: 40px;
+                background: #0151A7;
+                border-color: #0151A7;
+                &:hover, &:active, &:focus {
+                    background: rgba($color: #0151A7, $alpha: 0.8);
+                    border-color: rgba($color: #0151A7, $alpha: 0.8);
+                }
+            }
+        }
+    }
+}

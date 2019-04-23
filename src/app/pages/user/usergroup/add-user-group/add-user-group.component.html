@@ -1,0 +1,33 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzTitle]="modelTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  [nzWidth]="625">
+    <ng-template #modalContent>
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6">用户组名</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+              <input nz-input type="text" formControlName="userName" placeholder="请输入用户组名">
+              <span *ngIf="false" style="color: #fff"></span>
+              <label class="user_name_warning">
+                  <div class="help-msg" *ngIf="false"><span></span>用户名已存在</div>
+              </label>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6">角色备注</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <textarea formControlName="role" nz-input rows="2" placeholder="审计员：可以从设备读取业务数据，或操作业务逻辑，不具备管理设备全局运行参数的权限"></textarea>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+    </ng-template>
+    <ng-template #modalFooter>
+      <button nz-button nzType="primary" (click)="handleCancel()">取消</button>
+      <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">{{fooletrTitle}}</button>
+    </ng-template>
+  </nz-modal>

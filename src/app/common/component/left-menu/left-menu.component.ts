@@ -4,6 +4,8 @@ import {AuthorizationService} from '../../service/authorization.service';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 import * as moment from 'moment';
 import {ConfigService} from '../../service/config.service';
+import { RouteService } from '../../service/route.service';
+
 
 @Component({
     selector: 'app-left-menu',
@@ -34,11 +36,15 @@ export class LeftMenuComponent implements OnInit {
     menuList: {};
     @Output() public currentState = new EventEmitter();
     @Output() public currentSubState = new EventEmitter();
+    @Output() public isShowTitle = new EventEmitter();
+
+    sss;
 
 
     constructor(private configService: ConfigService,
                 private authorizationService: AuthorizationService,
-                private router: Router) {
+                private router: Router,
+                private routeService: RouteService) {
     }
 
     ngOnInit() {
@@ -52,8 +58,17 @@ export class LeftMenuComponent implements OnInit {
             this.changeRouter();
             this.currentState.emit(this.state);
             this.currentSubState.emit(this.stateSub);
+            this.isShowTitle.emit(true);
         });
         this.getCurrentTime();
+        this.routeService.valueUpdated.subscribe(   // 右侧不显示title 刷新页面的时候 也不显示
+            (val) => {
+                this.sss = this.routeService.getVal();
+                setTimeout(() => {
+                    this.isShowTitle.emit(false);
+                });
+            }
+        );
     }
 
     changeRouter() {
@@ -62,9 +77,15 @@ export class LeftMenuComponent implements OnInit {
             this.state = routerUrl[2];
             this.stateSub = routerUrl[3];
             if (event.url !== '/login' && event instanceof NavigationEnd) { // 当导航成功结束时执行
+                const url = event.url.split('/');
                 this.changeState(this.state);
-                this.currentState.emit(this.state);
-                this.currentSubState.emit(this.stateSub);
+                if (url[4] && url[4] === 'management') {   // 不显示右侧title
+                    this.isShowTitle.emit(false);
+                } else {
+                    this.isShowTitle.emit(true);
+                    this.currentState.emit(this.state);
+                    this.currentSubState.emit(this.stateSub);
+                }
             }
         });
     }
