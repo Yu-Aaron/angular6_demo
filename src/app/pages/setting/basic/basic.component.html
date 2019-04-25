@@ -65,10 +65,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!--开关管理-->
-    <div class="switch_management">
-        <div class="switch_title">开关管理</div>
+        <!--其他-->
         <div nz-row *ngFor="let key of objectKeys(switchManagement)">
             <label nz-col [nzSpan]="5">{{key | basicPipe}}</label>
             <div nz-col [nzSpan]="key === 'syslog' || key === 'ssh' ? 8 : 16">状态：
@@ -102,4 +99,5 @@
             </div>
         </div>
     </div>
+
 </div>

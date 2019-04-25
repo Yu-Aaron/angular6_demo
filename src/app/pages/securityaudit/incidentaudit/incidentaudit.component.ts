@@ -37,12 +37,12 @@ export class IncidentauditComponent implements OnInit {
         this.filterConditionData = {
             timeValueData: [],
             controlArray: [
-                {label: '源IP', type: 'input', name: 'sourceIp'},
-                {label: '目标IP', type: 'input', name: 'targetIp'},
-                {label: '应用名称', type: 'input', name: 'serviceApp'},
+                {label: '源IP', type: 'input', name: 'sourceIp', placeholder: '输入IP'},
+                {label: '目标IP', type: 'input', name: 'targetIp', placeholder: '输入IP'},
+                {label: '应用名称', type: 'input', name: 'serviceApp', placeholder: '应用名称'}
             ]
         };
-        this.getAll();
+        // this.getAll();
         this.tableData = [{
             name: '【发现威胁】GPL NETBIOS SMB-DS IPC$ unicode 共享',
             protocol: 'modbus',

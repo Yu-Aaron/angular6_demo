@@ -1,4 +1,4 @@
-<div nz-row class="device-content">
+<div nz-row class="device-top">
     <!--右上角刷新-->
     <div class="top-right">
         <button nz-button nzType="primary">
@@ -12,31 +12,33 @@
         </div>
     </nz-card>
     <!--接口状态-->
-    <nz-card nz-col [nzLg]="{span: 12}" [nzXl]="{span: 8}" nzTitle="接口状态" [nzExtra]="linkStateTemp">
-        <ul>
-            <li *ngFor="let item of linkState">
-                <span>{{item.name}}</span>
-                <div class="state" [ngStyle]="{'background': item.state === '已连接' ? '#8BF7B1': item.state === '未连接' ? '#F2A668' : '#BEBEBE'}"></div>
+    <nz-card nz-col [nzLg]="{span: 12}" [nzXl]="{span: 8}" nzTitle="接口状态" [nzExtra]="allPortsTemp">
+        <nz-list [nzDataSource]="allPorts"></nz-list>
+        <ul *ngIf="allPorts.length">
+            <li *ngFor="let device of allPorts">
+                <span>{{device.portName}}</span>
+                <div class="state" [ngStyle]="{'background': device.linkState === 1 ? '#8BF7B1': device.linkState === 0 ? '#F2A668' : '#BEBEBE'}"></div>
             </li>
         </ul>
-        <ng-template #linkStateTemp>
-            <a>更多<i nz-icon nzType="right" nzTheme="outline"></i></a>
+        <ng-template #allPortsTemp>
+            <a>更多...</a>
         </ng-template>
     </nz-card>
     <!--工作域状态-->
-    <nz-card nz-col [nzLg]="{span: 12}" [nzXl]="{span: 6}" nzTitle="工作域状态" [nzExtra]="workStateTemp">
-        <ul>
-            <li *ngFor="let item of workState">
-                <span>{{item.name}}</span>
-                <div class="state" [ngStyle]="{'background': item.state === '已连接' ? '#8BF7B1': item.state === '未连接' ? '#F2A668' : '#BEBEBE'}"></div>
+    <nz-card nz-col [nzLg]="{span: 12}" [nzXl]="{span: 6}" nzTitle="工作域状态" [nzExtra]="securityareaTemp">
+        <nz-list [nzDataSource]="securityarea"></nz-list>
+        <ul *ngIf="securityarea.length">
+            <li *ngFor="let device of securityarea">
+                <span>{{device.name}}</span>
+                <div class="state" [ngStyle]="{'background': device.enable  ? '#8BF7B1' : '#BEBEBE'}"></div>
             </li>
         </ul>
-        <ng-template #workStateTemp>
-            <a>更多<i nz-icon nzType="right" nzTheme="outline"></i></a>
+        <ng-template #securityareaTemp>
+            <a>更多...</a>
         </ng-template>
     </nz-card>
 </div>
-<div nz-row class="device-flow" nzGutter="16">
+<div nz-row class="device-bottom" nzGutter="16">
     <!--设备流量Top5-->
     <div nz-col [nzLg]="{span: 24}" [nzXl]="{span: 13}">
         <nz-card nzTitle="设备流量Top5" [nzExtra]="flowTemp">
@@ -89,7 +91,7 @@
                 {{item.label}}
             </span>
             </div>
-            <a class="fr">查看全部<i nz-icon nzType="right" nzTheme="outline"></i></a>
+            <a class="fr" [routerLink]="['/pages/securityaudit/flowaudit']">更多...</a>
         </ng-template>
     </div>
     <!--今日事件监测-->
@@ -100,12 +102,16 @@
                 <div nz-col [nzMd]="{span: 11}" class="right-chart">
                     <div *ngFor="let item of lineProgress">
                         <span>{{item.name}}</span>
-                        <p><span class="line"><span class="progress" [ngStyle]="{'width': item.value/10 + 'px'}"></span></span>{{item.value}}</p>
+                        <p>
+                            <span class="line">
+                                <span class="progress" [ngStyle]="{'width': item.value >3000 ? '300px' : item.value/10 + 'px'}"></span>
+                            </span>{{item.value > 3000 ? '>3000' : item.value }}
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="tab-title">今日命中规则个数Top10</div>
-            <nz-tabset>
+            <nz-tabset (nzSelectedIndexChange)="changeTab($event)">
                 <nz-tab [nzTitle]="label.name" *ngFor="let label of tabLabel">
                     <div *ngFor="let item of tabLabelContent" class="label-content">
                         <span>{{item.text}}</span>
@@ -115,7 +121,7 @@
             </nz-tabset>
         </nz-card>
         <ng-template #monitorTemp>
-            <a>查看全部<i nz-icon nzType="right" nzTheme="outline"></i></a>
+            <a [routerLink]="['/pages/securityaudit/incidentaudit/analysis']">更多...</a>
         </ng-template>
     </div>
 </div>

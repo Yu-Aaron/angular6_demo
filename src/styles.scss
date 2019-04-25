@@ -155,15 +155,21 @@ html, body {
 .ant-pagination-item, .ant-pagination-item-active,
 .ant-pagination-options-quick-jumper input,
 .ant-pagination-item-link {
-  background-color: $bg-aside !important;
+  background: $bg-aside !important;
   border-color: #0151A7 !important;
   color: #fff !important;
 }
 .ant-pagination-item {
-  background-color: #0151A7 !important;
+  background: $bg-aside !important;
   a, &:focus a, &:hover a {
     color: #fff;
   }
+}
+.ant-pagination-item-active {
+  background: #0151A7 !important;
+}
+.ant-pagination-item-ellipsis{
+  color: #0151A7!important;
 }
 
 /*** input ***/
@@ -209,6 +215,21 @@ html, body {
   width: 14px;
   height: 14px;
 }
+.ant-checkbox-group {
+  .ant-checkbox+span, .ant-checkbox-wrapper+span {
+    float: left;
+    color: #fff;
+    margin-right: 30px;
+  }
+  .ant-checkbox-wrapper {
+    width: 100%;
+    .ant-checkbox {
+      position: absolute;
+      right: 14px;
+      top: 4px;
+    }
+  }
+}
 
 /*** button ***/
 .ant-btn {
@@ -231,7 +252,7 @@ html, body {
   }
 }
 
-/*** dropdown  ***/
+/*** dropdown ***/
 .ant-dropdown-menu {
   background: #08182A;
   .ant-dropdown-menu-item {
@@ -243,7 +264,7 @@ html, body {
   }
 }
 
-/*** icon  ***/
+/*** icon ***/
 .anticon {
   &.anticon-edit {
     width: 25px;
@@ -262,6 +283,15 @@ html, body {
     @extend .anticon-edit;
     background: $txt-error;
   }
+}
+
+/*** empty-text ***/
+.ant-list-empty-text {
+  padding: 0;
+  color: #fff;
+}
+.ant-empty-normal {
+  margin: 16px 0;
 }
 
 /*** common ***/
@@ -404,6 +434,23 @@ html, body {
         color: #999999;
         line-height: 22px;
       }
+    }
+  }
+}
+
+.create-domain {
+  span.tip {
+    margin-left: 10px;
+    line-height: 32px;
+    color: $txt-tip;
+  }
+}
+
+.security-domain-enable {
+  .tip {
+    label {
+      color: #fff;
+      font-size: 16px;
     }
   }
 }

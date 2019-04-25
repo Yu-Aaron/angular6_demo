@@ -12,7 +12,8 @@
             "enable": true,
             "root_enable": false,
             "target": "EQUIPMENT_GENERAL_SITUATION",
-            "currentState": "EQUIPMENT_GENERAL_SITUATION"
+            "currentState": "EQUIPMENT_GENERAL_SITUATION",
+            "allChecked": true
         },
         {
             "state": "securityaudit",
@@ -26,7 +27,8 @@
             "enable": true,
             "root_enable": false,
             "target": "SECURITY_AUDIT",
-            "currentState": "SECURITY_AUDIT"
+            "currentState": "SECURITY_AUDIT",
+            "allChecked": false
         },
         {
             "state": "strategyaudit",
@@ -40,7 +42,8 @@
             "enable": true,
             "root_enable": false,
             "target": "STRATEGY_AUDIT",
-            "currentState": "STRATEGY_AUDIT"
+            "currentState": "STRATEGY_AUDIT",
+            "allChecked": false
         },
         {
             "state": "asset",
@@ -54,7 +57,8 @@
             "enable": true,
             "root_enable": false,
             "target": "ASSET_MANAGEMENT",
-            "currentState": "ASSET_MANAGEMENT"
+            "currentState": "ASSET_MANAGEMENT",
+            "allChecked": false
         },
         {
             "state": "setting",
@@ -67,7 +71,8 @@
             },
             "enable": true,
             "target": "SYSTEM_SETTING",
-            "currentState": "SYSTEM_SETTING"
+            "currentState": "SYSTEM_SETTING",
+            "allChecked": false
         },
         {
             "state": "usermanagement",
@@ -80,7 +85,8 @@
             },
             "enable": true,
             "target": "SYSTEM_SETTING",
-            "currentState": "SYSTEM_SETTING"
+            "currentState": "SYSTEM_SETTING",
+            "allChecked": false
         },
         {
             "state": "log",
@@ -93,7 +99,8 @@
             },
             "enable": true,
             "target": "SYSTEM_LOG",
-            "currentState": "SYSTEM_LOG"
+            "currentState": "SYSTEM_LOG",
+            "allChecked": false
         }
     ],
     "securityaudit": [
@@ -104,7 +111,14 @@
             "enable": true,
             "target": "INCIDENT_AUDIT",
             "container": false,
-            "currentState": "SECURITY_AUDIT"
+            "currentState": "SECURITY_AUDIT",
+            "checkOptionsOne": [
+                {
+                    "label": "事件审计",
+                    "value": "事件审计",
+                    "checked": true
+                }
+            ]
         },
         {
             "state": "flowaudit",
@@ -113,7 +127,14 @@
             "enable": true,
             "target": "FLOW_AUDIT",
             "container": false,
-            "currentState": "SECURITY_AUDIT"
+            "currentState": "SECURITY_AUDIT",
+            "checkOptionsOne": [
+                {
+                    "label": "流量审计",
+                    "value": "流量审计",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "protocolaudit",
@@ -122,7 +143,14 @@
             "enable": true,
             "target": "PROTOCOL_AUDIT",
             "container": true,
-            "currentState": "SECURITY_AUDIT"
+            "currentState": "SECURITY_AUDIT",
+            "checkOptionsOne": [
+                {
+                    "label": "协议审计",
+                    "value": "协议审计",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "logaudit",
@@ -131,7 +159,14 @@
             "enable": true,
             "target": "LOG_AUDIT",
             "container": false,
-            "currentState": "SECURITY_AUDIT"
+            "currentState": "SECURITY_AUDIT",
+            "checkOptionsOne": [
+                {
+                    "label": "审计日志",
+                    "value": "审计日志",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "reportaudit",
@@ -139,7 +174,14 @@
             "icon": "",
             "enable": true,
             "target": "REPORT_AUDIT",
-            "currentState": "SECURITY_AUDIT"
+            "currentState": "SECURITY_AUDIT",
+            "checkOptionsOne": [
+                {
+                    "label": "审计报表",
+                    "value": "审计报表",
+                    "checked": false
+                }
+            ]
         }
     ],
     "strategyaudit": [
@@ -149,7 +191,14 @@
             "icon": "",
             "enable": true,
             "target": "SECURITY_DOMAIN",
-            "currentState": "STRATEGY_AUDIT"
+            "currentState": "STRATEGY_AUDIT",
+            "checkOptionsOne": [
+                {
+                    "label": "安全域",
+                    "value": "安全域",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "strategy",
@@ -157,7 +206,14 @@
             "icon": "",
             "enable": true,
             "target": "STRATEGY_MANAGEMENT",
-            "currentState": "STRATEGY_AUDIT"
+            "currentState": "STRATEGY_AUDIT",
+            "checkOptionsOne": [
+                {
+                    "label": "审计策略",
+                    "value": "审计策略",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "vul",
@@ -165,7 +221,14 @@
             "icon": "",
             "enable": true,
             "target": "VUL_MANAGEMENT",
-            "currentState": "STRATEGY_AUDIT"
+            "currentState": "STRATEGY_AUDIT",
+            "checkOptionsOne": [
+                {
+                    "label": "策略项",
+                    "value": "策略项",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "learning",
@@ -173,7 +236,14 @@
             "icon": "",
             "enable": true,
             "target": "LAERNING_MANAGEMENT",
-            "currentState": "STRATEGY_AUDIT"
+            "currentState": "STRATEGY_AUDIT",
+            "checkOptionsOne": [
+                {
+                    "label": "智能学习",
+                    "value": "智能学习",
+                    "checked": false
+                }
+            ]
         }
     ],
     "asset": [
@@ -186,7 +256,14 @@
                 "reload": true
             },
             "target": "NETWORK_TOPOLOGY",
-            "currentState": "ASSET_MANAGEMENT"
+            "currentState": "ASSET_MANAGEMENT",
+            "checkOptionsOne": [
+                {
+                    "label": "网络拓扑",
+                    "value": "网络拓扑",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "factorydevice",
@@ -194,7 +271,14 @@
             "icon": "",
             "enable": true,
             "target": "INDUSTRIAL_DEVICE",
-            "currentState": "ASSET_MANAGEMENT"
+            "currentState": "ASSET_MANAGEMENT",
+            "checkOptionsOne": [
+                {
+                    "label": "工控设备",
+                    "value": "工控设备",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "networkdevice",
@@ -202,7 +286,14 @@
             "icon": "",
             "enable": true,
             "target": "NETWORK_DEVICE",
-            "currentState": "ASSET_MANAGEMENT"
+            "currentState": "ASSET_MANAGEMENT",
+            "checkOptionsOne": [
+                {
+                    "label": "网络设备",
+                    "value": "网络设备",
+                    "checked": false
+                }
+            ]
         }
     ],
     "setting": [
@@ -211,35 +302,70 @@
             "name": "基础设置",
             "enable": true,
             "target": "BASIC_MANAGEMENT",
-            "currentState": "SYSTEM_SETTING"
+            "currentState": "SYSTEM_SETTING",
+            "checkOptionsOne": [
+                {
+                    "label": "基础设置",
+                    "value": "基础设置",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "protocol",
             "name": "协议端口",
             "enable": true,
             "target": "PROTOCOL_MANAGEMENT",
-            "currentState": "SYSTEM_SETTING"
+            "currentState": "SYSTEM_SETTING",
+            "checkOptionsOne": [
+                {
+                    "label": "协议端口",
+                    "value": "协议端口",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "interface",
             "name": "接口设置",
             "enable": true,
             "target": "INTERFACE_MANAGEMENT",
-            "currentState": "SYSTEM_SETTING"
+            "currentState": "SYSTEM_SETTING",
+            "checkOptionsOne": [
+                {
+                    "label": "接口设置",
+                    "value": "接口设置",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "debug",
             "name": "调试工具",
             "enable": true,
             "target": "DEBUG_MANAGEMENT",
-            "currentState": "SYSTEM_SETTING"
+            "currentState": "SYSTEM_SETTING",
+            "checkOptionsOne": [
+                {
+                    "label": "调试工具",
+                    "value": "调试工具",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "backup",
             "name": "备份升级",
             "enable": true,
             "target": "BACKUPGRADE_MANAGEMENT",
-            "currentState": "SYSTEM_SETTING"
+            "currentState": "SYSTEM_SETTING",
+            "checkOptionsOne": [
+                {
+                    "label": "备份升级",
+                    "value": "备份升级",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "login",
@@ -247,7 +373,14 @@
             "icon": "",
             "enable": true,
             "target": "LOGIN_MANAGEMENT",
-            "currentState": "SYSTEM_SETTING"
+            "currentState": "SYSTEM_SETTING",
+            "checkOptionsOne": [
+                {
+                    "label": "登录设置",
+                    "value": "登录设置",
+                    "checked": false
+                }
+            ]
         }
     ],
     "usermanagement": [
@@ -257,7 +390,14 @@
             "icon": "",
             "enable": true,
             "target": "USER_MANAGEMENT",
-            "currentState": "USER_SETTING"
+            "currentState": "USER_SETTING",
+            "checkOptionsOne": [
+                {
+                    "label": "用户",
+                    "value": "用户",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "usergroup",
@@ -265,7 +405,14 @@
             "icon": "",
             "enable": true,
             "target": "USERGROUP_MANAGEMENT",
-            "currentState": "USER_SETTING"
+            "currentState": "USER_SETTING",
+            "checkOptionsOne": [
+                {
+                    "label": "用户组",
+                    "value": "用户组",
+                    "checked": false
+                }
+            ]
         }
     ],
     "log": [
@@ -275,7 +422,14 @@
             "icon": "",
             "enable": true,
             "target": "SYSTEM_RUNNING_LOG",
-            "currentState": "SYSTEM_LOG"
+            "currentState": "SYSTEM_LOG",
+            "checkOptionsOne": [
+                {
+                    "label": "运行日志",
+                    "value": "运行日志",
+                    "checked": false
+                }
+            ]
         },
         {
             "state": "operatelog",
@@ -283,7 +437,14 @@
             "icon": "",
             "enable": true,
             "target": "SYSTEM_OPERATE_LOG",
-            "currentState": "SYSTEM_LOG"
+            "currentState": "SYSTEM_LOG",
+            "checkOptionsOne": [
+                {
+                    "label": "操作日志",
+                    "value": "操作日志",
+                    "checked": false
+                }
+            ]
         }
     ]
 }

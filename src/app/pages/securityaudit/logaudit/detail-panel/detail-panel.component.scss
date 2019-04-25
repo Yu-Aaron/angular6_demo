@@ -1,0 +1,27 @@
+@import '../../../../../veriable.scss';
+
+.panel_middle {
+  font-size: 14px;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  background: #293C55;
+  input {
+    width: 140px;
+    margin: 0 12px;
+  }
+  label {
+    margin-left: 10px;
+  }
+  .ant-btn-primary {
+    background: $tab-active!important;
+    border-color:$tab-active!important;
+  }
+  .ant-btn-primary[disabled] {
+    background: #a1a5a9!important;
+    border-color:#a1a5a9!important;
+    color: #fff;
+  }
+}
+label {
+  color: $txt-blue;
+}

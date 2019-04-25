@@ -7,11 +7,11 @@ import { StrategyComponent } from './strategy/strategy.component';
 import { SecuritydomainComponent } from './securitydomain/securitydomain.component';
 import { LearningComponent } from './learning/learning.component';
 import { VulComponent } from './vul/vul.component';
-import { DomaindetailComponent } from './securitydomain/domaindetail/domaindetail.component';
-import { ProtocolComponent} from '../setting/protocol/protocol.component';
 import { DeviceModelComponent } from './learning/device-model/device-model.component';
 import { LearningDetailComponent } from './learning/learning-detail/learning-detail.component';
 import { LearningCreateComponent } from './learning/learning-creat/learning-create.component';
+import { StrategydetailComponent } from './strategy/strategydetail/strategydetail.component';
+import { RiskLevelPipe } from 'src/app/common/pipe/risk-level.pipe';
 
 @NgModule({
     declarations: [
@@ -19,10 +19,11 @@ import { LearningCreateComponent } from './learning/learning-creat/learning-crea
         SecuritydomainComponent,
         LearningComponent,
         VulComponent,
-        DomaindetailComponent,
         DeviceModelComponent,
         LearningDetailComponent,
-        LearningCreateComponent
+        LearningCreateComponent,
+        StrategydetailComponent,
+        RiskLevelPipe
     ],
     imports: [
         SharedModule,

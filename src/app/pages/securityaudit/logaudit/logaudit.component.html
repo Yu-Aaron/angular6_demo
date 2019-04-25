@@ -32,16 +32,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of tableDataTmp.data" (click)="clickIncRow(inc)">
-                <td>{{item.date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
-                <td>{{item.sourceIP}}</td>
-                <td>{{item.destinationIp}}</td>
-                <td>{{item.sourceMac}}</td>
-                <td>{{item.destinationMac}}</td>
-                <td>{{item.sourcePort}}</td>
-                <td>{{item.destinationIp}}</td>
-                <td>{{item.type}}</td>
-                <td><i nz-icon nzType="search" nzTheme="outline"></i>详情</td>
+            <tr *ngFor="let audit of tableDataTmp.data">
+                <td>{{audit.flowTimestampLocal | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{audit.sourceIp}}</td>
+                <td>{{audit.destinationIp}}</td>
+                <td>{{audit.sourceMac}}</td>
+                <td>{{audit.destinationMac}}</td>
+                <td>{{audit.sourcePort}}</td>
+                <td>{{audit.destinationIp}}</td>
+                <td>{{audit.protocolSourceName === 'telnet' ? 'Telnet' : audit.protocolSourceName === 'modbus' ? 'Modbus' : audit.protocolSourceName === 'profinetio' ? 'Profinetio' : (audit.protocolSourceName | uppercase) }}</td>
+                <td (click)="showDetailWindow(audit)"><i nz-icon nzType="search" nzTheme="outline"></i>详情</td>
             </tr>
         </tbody>
     </nz-table>
@@ -50,5 +50,6 @@
         <span>每页展示 {{pageSize}} 条，</span>
         <span>共 {{pageTotalNumber}} 页</span>
     </ng-template>
-
+    <!--详情-->
+    <app-detail-panel [auditDataDetail]="auditDataDetail"></app-detail-panel>
 </div>

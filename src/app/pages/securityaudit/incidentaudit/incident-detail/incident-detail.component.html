@@ -1,0 +1,73 @@
+<div class="incident_detail">
+    <div class="return_back" [routerLink]="['/pages/securityaudit/incidentaudit']">
+        <i nz-icon nzType="arrow-left" nzTheme="outline"></i>事件详情
+    </div>
+    <div class="incident_detail_content">
+        <div nz-row>
+            <div class="card_title">事件内容</div>
+            <div class="card_content">
+                <label nz-col [nzSpan]="24">事件名称：<span>{{incident.incidentName}}</span></label>
+                <label nz-col [nzSpan]="4">包长度：<span>{{incident.packetLength}}</span></label>
+                <label nz-col [nzSpan]="4">安全域：<span>{{incident.timestamp | date: 'yyyy-MM-dd HH:mm:ss'}}</span></label>
+                <label nz-col [nzSpan]="4">接口：<span>{{incident.securityAreaName}}</span></label>
+            </div>
+        </div>
+        <div nz-row>
+            <div class="card_title">事件协议</div>
+            <div class="card_content">
+                <label nz-col [nzSpan]="4">网络层协议：<span>{{incident.protocol==='0'?'无':incident.protocol}}</span></label>
+                <label nz-col [nzSpan]="4">网络应用协议：<span>{{incident.packetLength}}</span></label>
+                <label nz-col [nzSpan]="4">协议细节：<span>{{incident.appLayerProtocol==='0'?'无':incident.appLayerProtocol}}</span></label>
+                <label nz-col [nzSpan]="24">备注：</label>
+            </div>
+        </div>
+        <div nz-row>
+            <div class="card_title">规则项</div>
+            <div class="card_content">
+                <label nz-col [nzSpan]="24">规则项：<span>{{incident.matchedKey}}</span></label>
+            </div>
+        </div>
+        <div nz-row>
+            <div class="card_title">事件内容包含</div>
+            <div class="card_content">
+                <label nz-col [nzSpan]="24">包内容：<span>{{incident.packetLength}}</span></label>
+            </div>
+        </div>
+        <div nz-row [nzGutter]="12">
+            <div class="card_title">发生路径</div>
+            <div class="card_content">
+                <div nz-col [nzSpan]="6" class="occur_path">
+                    <div>
+                        <img src="../../../../assets/images/incident/device_green.svg">
+                        <div class="inline-block">
+                            <label>设备名称：<span>{{'111111'}}</span></label>
+                            <label>IP地址：<span>{{'111111'}}</span></label>
+                            <label>MAC地址：<span>{{'111111'}}</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div nz-col [nzSpan]="3" class="arrow_path">>>>>>>>>>>>></div>
+                <div nz-col [nzSpan]="6" class="occur_path">
+                    <div>
+                        <img src="../../../../assets/images/incident/secure_area.svg">
+                        <div class="inline-block">
+                            <label>安全域：<span>{{'111111'}}</span></label>
+                            <label>接口：<span>{{'111111'}}</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div nz-col [nzSpan]="3" class="arrow_path">>>>>>>>>>>>></div>
+                <div nz-col [nzSpan]="6" class="occur_path">
+                    <div>
+                        <img src="../../../../assets/images/incident/device_yellow.svg">
+                        <div class="inline-block">
+                            <label>设备名称：<span>{{'111111'}}</span></label>
+                            <label>IP地址：<span>{{'111111'}}</span></label>
+                            <label>MAC地址：<span>{{'111111'}}</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

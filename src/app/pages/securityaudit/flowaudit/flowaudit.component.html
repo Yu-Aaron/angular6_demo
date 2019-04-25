@@ -1,12 +1,7 @@
 <div class="flowaudit_content">
     <nz-tabset>
         <nz-tab nzTitle="设备流量">
-            <div class="top-right">
-                <button nz-button nzType="primary">
-                    <i nz-icon nzType="area-chart" nzTheme="outline" style="font-size: 18px"></i>流量统计分析
-                </button>
-                <span class="filter-note">默认按照流量大小排序</span>
-            </div>
+            <span class="filter-note">默认按照流量大小排序</span>
             <!-- 过滤条件 -->
             <app-filter-table [timeValueData]="filterConditionData.timeValueData"
                               [controlArray]="filterConditionData.controlArray"
@@ -19,8 +14,8 @@
             </div>
             <div echarts [options]="flowOption" class="echartsStyle"></div>
             <!-- 表格数据 -->
-            <nz-table #tableDataTmp
-                      [nzData]="tableData"
+            <nz-table #deviceTrafficTmp
+                      [nzData]="deviceTrafficList"
                       [nzTotal]="tableCount"
                       [nzShowQuickJumper]="true"
                       [nzFrontPagination]="false"
@@ -31,6 +26,7 @@
                       [nzShowTotal]="totalTemplate">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>设备名称</th>
                         <th>IP地址</th>
                         <th>MAC地址</th>
@@ -42,15 +38,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of tableDataTmp.data" (click)="clickIncRow(inc)">
-                        <td>{{item.name}}</td>
-                        <td>{{item.ip}}</td>
-                        <td>{{item.Mac}}</td>
-                        <td>{{item.input}}</td>
-                        <td>{{item.output}}</td>
-                        <td>{{item.percent}}</td>
-                        <td>{{item.update | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
-                        <td><i nz-icon nzType="search" nzTheme="outline"></i>详情</td>
+                    <tr *ngFor="let devicedata of deviceTrafficTmp.data">
+                        <td>
+                            <span class="txt-error" *ngIf="devicedata.totalBytes === 0">无流量</span>
+                        </td>
+                        <td>{{devicedata.deviceName}}</td>
+                        <td>{{devicedata.ipAddr}}</td>
+                        <td title="{{devicedata.macAddr}}">{{devicedata.macAddr}}</td>
+                        <td>{{devicedata.avgRecvSpeed}}</td>
+                        <td>{{devicedata.avgSendSpeed}}</td>
+                        <td>{{devicedata.percent * 100 | number:2}}%</td>
+                        <td title="{{devicedata.timestamp | date : 'yyyy-MM-dd HH:mm:ss'}}">{{devicedata.timestamp | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td routerLink="./detail/1"><i nz-icon nzType="search" nzTheme="outline"></i>详情</td>
                     </tr>
                 </tbody>
             </nz-table>

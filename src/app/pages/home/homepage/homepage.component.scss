@@ -42,7 +42,7 @@
   }
 
   //设备概况
-  .device-content {
+  .device-top {
     position: relative;
     nz-card {
       min-height: 180px;
@@ -70,7 +70,7 @@
   }
 
   //设备流量
-  .device-flow {
+  .device-bottom {
     nz-card {
       margin-top: 10px;
       height: 600px;

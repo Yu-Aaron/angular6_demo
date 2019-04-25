@@ -11,12 +11,14 @@ import zh from '@angular/common/locales/zh';
 import { registerLocaleData } from '@angular/common';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
+import { LoginConfigComponent } from './pages/login/login-config/login-config.component';
 
 registerLocaleData(zh);
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    LoginConfigComponent
   ],
   imports: [
     BrowserModule,

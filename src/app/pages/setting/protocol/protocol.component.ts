@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingService } from 'src/app/common/service/setting.service';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-protocol',
@@ -7,24 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProtocolComponent implements OnInit {
   defaultProtocolList = [];
+  customProtocolList = [];
   switchDisabled = true;
-  constructor() { }
+
+  constructor(
+    public settingService: SettingService,
+    public notification: NzNotificationService
+  ) { }
 
   ngOnInit() {
     this.getDefaultProtocolList();
   }
 
   getDefaultProtocolList() {
-    let list = [];
-    for (let i = 0; i < 61; i++) {
-      let item = {
-        status: i % 3 === 0 ? true : false,
-        type: i % 4 === 0 ? '【TCP】' : '【UDP】',
-        name: 'BGP' + i,
-        port: i
-      };
-      list.push(item);
-    }
-    this.defaultProtocolList = list;
+    this.settingService.getPrivateProtocols('DEFAULT').subscribe((data: any) => {
+      this.defaultProtocolList = data;
+    }, (error) => {
+      this.defaultProtocolList = [];
+    });
+  }
+
+  getCustomProtocolList() {
+    this.settingService.getPrivateProtocols('CUSTOM').subscribe((data: any) => {
+      this.customProtocolList = data;
+    }, (error) => {
+      this.customProtocolList = [];
+    });
   }
 }

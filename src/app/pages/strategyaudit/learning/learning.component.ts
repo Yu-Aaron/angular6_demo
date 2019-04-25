@@ -13,7 +13,6 @@ export class LearningComponent implements OnInit {
     tableCount = 0;
     loading: boolean;
 
-    showProtocol: boolean; // 是否显示协议端口
     showLearning: boolean; // 是否学习中
     learningDetail = {};
 

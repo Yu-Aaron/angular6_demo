@@ -1,0 +1,94 @@
+@import '../../../../../veriable.scss';
+:host ::ng-deep {
+  .ant-tabs {
+    top: -35px;
+    color: #CACACA;
+    .ant-tabs-bar {
+      border-bottom: 1px solid #DEDEDE;
+    }
+    .ant-tabs-nav {
+      float: right;
+      .ant-tabs-tab {
+        padding: 12px 2px;
+        &:hover {
+          color: #CACACA;
+        }
+      }
+      .ant-tabs-tab-active, .ant-tabs-tab-active:hover {
+        color: #5AACF9;
+      }
+    }
+  }
+}
+
+.incident_analysis {
+  .return_back {
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    padding: 10px 0 15px;
+    font-size: 16px;
+    i {
+      width: 19px;
+      height: 19px;
+      line-height: 22px;
+      margin-right: 5px;
+      border-radius: 50%;
+      background: #26BAFB;
+      color: #000;
+    }
+  }
+  .incident_analysis_content{
+    .event_monitor {
+      .echartsStyle {
+        height: 256px;
+        margin: 10px 0;
+        &.pie {
+          height: 200px;
+        }
+      }
+      .progress_content {
+        color: #E5F1FF;
+        padding: 0 20px;
+        .line {
+          width: 300px;
+          height: 8px;
+          background: #EFF4FA;
+          border-radius: 5px;
+          margin-right: 10px;
+          display: -webkit-inline-box;
+          margin-top: 8px;
+        }
+        .progress {
+          @extend .line;
+          width: 100px;
+          background: #27BDFF;
+          position: relative;
+          top: -8px;
+        }
+      }
+    }
+    .hit_rule {
+      height: 452px;
+      overflow-y: auto;
+      .label-content {
+        display: flex;
+        color: #fff;
+        justify-content: space-between;
+        margin: 10px;
+      }
+    }
+    .tab-title {
+      font-size: 16px;
+      color: #26BAFB;
+    }
+    .col_base {
+      background: $table-bg;
+      padding: 20px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+
+

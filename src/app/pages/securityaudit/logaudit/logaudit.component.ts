@@ -17,6 +17,8 @@ export class LogauditComponent implements OnInit {
     tableCount = 0;
     loading: boolean;
 
+    auditDataDetail = {};
+
     constructor() {
     }
 
@@ -33,9 +35,9 @@ export class LogauditComponent implements OnInit {
         this.filterConditionData = {
             timeValueData: [],
             controlArray: [
-                {label: '源IP', type: 'input', name: 'sourceIp'},
-                {label: '目标IP', type: 'input', name: 'targetIp'},
-                {label: '应用名称', type: 'input', name: 'serviceApp'}
+                {label: '源IP', type: 'input', name: 'sourceIp', placeholder: '输入IP'},
+                {label: '目标IP', type: 'input', name: 'targetIp', placeholder: '输入IP'},
+                {label: '应用名称', type: 'input', name: 'serviceApp', placeholder: '应用名称'}
             ],
             logProtocolArray: this.protocolOptions
         };
@@ -44,24 +46,39 @@ export class LogauditComponent implements OnInit {
 
     getAll() {
         this.tableData = [{
-            date: '2019-01-12',
-            sourceIP: '1.1.1.1',
+            flowTimestampLocal: '2019-01-12',
+            sourceIp: '1.1.1.1',
             destinationIp: '1.1.1.1',
             sourceMac: '00:00:00:00:00:20',
             destinationMac: '00:00:00:00:00:20',
-            sourcePort: 10,
-            destinationPort: 20,
-            type: '无'
+            sourcePort: 'SN54000',
+            destinationPort: '161',
+            protocolSourceName: 'telnet'
         }, {
-            date: '2019-01-12',
-            sourceIP: '1.1.1.1',
+            flowTimestampLocal: '2019-01-12',
+            sourceIp: '1.1.1.1',
             destinationIp: '1.1.1.1',
             sourceMac: '00:00:00:00:00:20',
             destinationMac: '00:00:00:00:00:20',
             sourcePort: 10,
             destinationPort: 20,
-            type: '无'
+            protocolSourceName: 'abc'
         }];
         this.pageTotalNumber = Math.ceil(this.tableCount / this.pageSize);
+    }
+
+    showDetailWindow(auditHeadInfo) {
+        const detailData = auditHeadInfo;
+        detailData.unitSize = 'B';
+        if (detailData.packetLenth && detailData.packetLenth >= 1024) {
+            detailData.packetLenth /= 1024;
+            detailData.unitSize = 'KB';
+        }
+        if (detailData.packetLenth && detailData.packetLenth >= 1024) {
+            detailData.packetLenth /= 1024;
+            detailData.unitSize = 'MB';
+        }
+        this.auditDataDetail = detailData;
+        this.auditDataDetail['isVisible'] = true;
     }
 }

@@ -5,7 +5,7 @@
         <span>发现新事件，可以<u><i nz-icon nzType="sync" nzTheme="outline"></i>刷新</u>查看</span>
     </div>
     <div class="top-right">
-        <button nz-button nzType="primary" class="mr-10">
+        <button nz-button nzType="primary" class="mr-10" routerLink="./analysis">
             <i nz-icon nzType="area-chart" nzTheme="outline" style="font-size: 18px"></i>事件统计分析
         </button>
         <button nz-button nzType="primary" class="mr-10">
@@ -38,14 +38,12 @@
                 <i nz-icon type="down" class="fr" style="line-height: 20px; margin-left: 0"></i>
             </button>
             <ul nz-menu>
-                <li nz-menu-item>标记全部</li>
                 <li nz-menu-item>导出全部</li>
-                <li nz-menu-item>操作全部</li>
+                <li nz-menu-item>清空全部</li>
             </ul>
         </nz-dropdown>
-        <button nz-button nzType="primary" class="mr-10">标记已读</button>
-        <button nz-button nzType="primary" class="mr-10"><i nz-icon nzType="download" nzTheme="outline"></i>导出</button>
         <button nz-button nzType="primary" class="mr-10">清空</button>
+        <button nz-button nzType="primary" class="mr-10"><i nz-icon nzType="download" nzTheme="outline"></i>导出</button>
     </div>
     <!-- 表格 -->
     <nz-table #tableDataTmp
@@ -81,7 +79,7 @@
                 <td>{{item.sourceIP}}</td>
                 <td>{{item.destinationIp}}</td>
                 <td>{{item.date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
-                <td><i nz-icon nzType="search" nzTheme="outline"></i>详情</td>
+                <td routerLink="./detail/1"><i nz-icon nzType="search" nzTheme="outline"></i>详情</td>
             </tr>
         </tbody>
     </nz-table>

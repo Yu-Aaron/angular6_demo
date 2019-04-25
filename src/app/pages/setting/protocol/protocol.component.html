@@ -1,6 +1,6 @@
 <div class="protocol">
   <nz-tabset>
-    <nz-tab nzTitle="默认协议映射列表">
+    <nz-tab nzTitle="默认协议映射列表" (nzSelect)="getDefaultProtocolList()">
       <div nz-row class="table-title">
         <div nz-col nzSpan="12">
           <div nz-row>
@@ -22,10 +22,10 @@
           <div class="even" nz-col nzSpan="12">
             <div nz-row>
               <div nz-col nzSpan="6">
-                <nz-switch [nzDisabled]="switchDisabled" [ngModel]="data.status" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
+                <nz-switch [nzDisabled]="switchDisabled" [ngModel]="data.disabled" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
               </div>
-              <div nz-col nzSpan="10"><span class="type">{{data.type}}</span>{{data.name}}</div>
-              <div nz-col nzSpan="6">{{data.port}}</div>
+              <div nz-col nzSpan="10"><span class="type">【{{data.protocolType}}】</span>{{data.protocolName}}</div>
+              <div nz-col nzSpan="6">{{data.protocolPort}}</div>
             </div>
           </div>
         </ng-container>
@@ -33,17 +33,30 @@
           <div class="odd" nz-col nzSpan="12">
             <div nz-row>
               <div nz-col nzSpan="6">
-                <nz-switch [nzDisabled]="switchDisabled" [ngModel]="data.status" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
+                <nz-switch [nzDisabled]="switchDisabled" [ngModel]="data.disabled" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
               </div>
-              <div nz-col nzSpan="10"><span class="type">{{data.type}}</span>{{data.name}}</div>
-              <div nz-col nzSpan="6">{{data.port}}</div>
+              <div nz-col nzSpan="10"><span class="type">【{{data.protocolType}}】</span>{{data.protocolName}}</div>
+              <div nz-col nzSpan="6">{{data.protocolPort}}</div>
             </div>
           </div>
         </ng-container>
       </div>
     </nz-tab>
-    <nz-tab nzTitle="私有协议映射列表">
-
+    <nz-tab nzTitle="私有协议映射列表" (nzSelect)="getCustomProtocolList()">
+      <nz-table #privateTable
+                [nzData]="customProtocolList"
+                [nzPageSize]="10">
+        <thead>
+          <tr>
+            <th>Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of privateTable.data">
+            <td>{{i.title}}</td>
+          </tr>
+        </tbody>
+      </nz-table>
     </nz-tab>
   </nz-tabset>
   <div class="edit">
@@ -58,6 +71,10 @@
       <button nz-button nzType="primary" (click)="switchDisabled = true;">
         <i nz-icon nzType="check" nzTheme="outline"></i>
         确定
+      </button>
+      <button nz-button nzType="primary" (click)="switchDisabled = true;">
+        <i nz-icon nzType="close" nzTheme="outline"></i>
+        取消
       </button>
     </span>
   </div>

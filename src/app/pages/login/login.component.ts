@@ -6,13 +6,17 @@ import C from 'crypto-js';
 import {ConfigService} from '../../common/service/config.service';
 
 
-@NgModule()
+// @NgModule()
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+    sysInfo = {
+        name: '工业安全监测审计系统',
+        copyright: '中科物安'
+    };
     private version: string;
     private imageData: string;
     private key: string;

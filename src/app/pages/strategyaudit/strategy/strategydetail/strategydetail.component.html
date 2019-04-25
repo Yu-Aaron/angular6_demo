@@ -1,16 +1,16 @@
 <div class="detail">
   <div class="strategy" nz-row>
-    <div nz-col nzSpan="4">
-      <span class="strategy-key">ID：</span>
-      <span class="strategy-value">2</span>
-    </div>
     <div nz-col nzSpan="8">
-      <span class="strategy-key">策略名称：</span>
-      <span class="strategy-value">默认策略</span>
+      <span class="strategy-key">ID：</span>
+      <span class="strategy-value">{{auditPolicy.auditPolicyId}}</span>
     </div>
-    <div nz-col nzSpan="12">
+    <div nz-col nzSpan="6">
+      <span class="strategy-key">策略名称：</span>
+      <span class="strategy-value">{{auditPolicy.name}}</span>
+    </div>
+    <div nz-col nzSpan="4">
       <span class="strategy-key">创建时间：</span>
-      <span class="strategy-value">2019/01/10 19:00:00</span>
+      <span class="strategy-value">{{auditPolicy.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
     </div>
     <div class="operate">
       <i class="edit" nz-icon nzType="edit" nzTheme="outline"></i>
@@ -19,17 +19,17 @@
   </div>
   <div class="tab">
     <nz-tabset>
-      <nz-tab [nzTitle]="'威胁特征列表'">
-        <nz-table #threatTable
-                  [nzData]="threat.data"
-                  [nzTotal]="threat.total"
-                  [nzLoading]="threat.loading"
-                  [nzShowTotal]="threatTableTpl"
+      <nz-tab [nzTitle]="'威胁特征列表'" (nzSelect)="getTableData('SIGNATURE', signature)">
+        <nz-table #signatureTable
+                  [nzData]="signature.data"
+                  [nzTotal]="signature.total"
+                  [nzLoading]="signature.loading"
+                  [nzShowTotal]="signatureTableTpl"
                   [nzShowQuickJumper]="true"
                   [nzFrontPagination]="false"
-                  [nzPageIndex]="threat.pageIndex"
-                  [nzPageSize]="threat.pageSize"
-                  (nzPageIndexChange)="threatTablePageChange($event)">
+                  [nzPageIndex]="signature.pageIndex"
+                  [nzPageSize]="signature.pageSize"
+                  (nzPageIndexChange)="signatureTablePageChange($event)">
           <thead>
             <tr>
               <th>威胁名称</th>
@@ -42,25 +42,26 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of threatTable.data">
+            <tr *ngFor="let data of signatureTable.data">
               <td>{{data.name}}</td>
-              <td>{{data.port}}</td>
-              <td class="strategy" routerLink="./1">{{data.strategy}}</td>
-              <td>{{data.time}}</td>
-              <td></td>
-              <td class="operate">
+              <td>{{data._serviceType}}</td>
+              <td>{{data._category}}</td>
+              <td>{{data._severity}}</td>
+              <td>{{data._description}}</td>
+              <td *ngIf="data.signatures">{{data.signatures.length}}</td>
+              <td class="operate" (click)="getSignatureDetail(data)">
                 <i class="search" nz-icon nzType="search" nzTheme="outline"></i>
               </td>
             </tr>
           </tbody>
         </nz-table>
-        <ng-template #threatTableTpl>
-          <span>共 {{threat.total}} 条，</span>
-          <span>每页展示 {{threat.pageSize}} 条，</span>
-          <span>共 {{threat.pages}} 页</span>
+        <ng-template #signatureTableTpl>
+          <span>共 {{signature.total}} 条，</span>
+          <span>每页展示 {{signature.pageSize}} 条，</span>
+          <span>共 {{signature.pages}} 页</span>
         </ng-template>
       </nz-tab>
-      <nz-tab [nzTitle]="'协议规则列表'">
+      <nz-tab [nzTitle]="'协议规则列表'" (nzSelect)="getTableData('PROTOCOL_RULE', protocol)">
         <nz-table #protocolTable
                   [nzData]="protocol.data"
                   [nzTotal]="protocol.total"
@@ -102,7 +103,7 @@
           <span>共 {{protocol.pages}} 页</span>
         </ng-template> 
       </nz-tab>
-      <nz-tab [nzTitle]="'IP/MAC规则列表'">
+      <nz-tab [nzTitle]="'IP/MAC规则列表'" (nzSelect)="getTableData('IPMAC', ipmac)">
         <nz-table #ipmacTable
                   [nzData]="ipmac.data"
                   [nzTotal]="ipmac.total"
@@ -138,7 +139,7 @@
           <span>共 {{ipmac.pages}} 页</span>
         </ng-template> 
       </nz-tab>
-      <nz-tab [nzTitle]="'域名规则列表'">
+      <nz-tab [nzTitle]="'域名规则列表'" (nzSelect)="getTableData('MALICIOUS_DOMAIN', domainName)">
         <nz-table #domainNameTable
                   [nzData]="domainName.data"
                   [nzTotal]="domainName.total"
@@ -175,3 +176,58 @@
     </nz-tabset>
   </div>
 </div>
+<nz-modal [(nzVisible)]="signatureDetail.modalFlag"
+          nzWidth="1100"
+          nzTitle="威胁详情"
+          (nzOnCancel)="signatureDetail.modalFlag = false;"
+          (nzOnOk)="signatureDetail.modalFlag = false;">
+  <div class="details">
+    <div class="info">
+      <div nz-row>
+        <div nz-col nzSpan="4">漏洞名称：</div>
+        <div nz-col nzSpan="20">{{signatureDetail.policyBlocks.name}}</div>
+      </div>
+      <div nz-row>
+        <div nz-col nzSpan="4">服务类型分类：</div>
+        <div nz-col nzSpan="20">{{signatureDetail.policyBlocks._serviceType}}</div>
+      </div>
+      <div nz-row>
+        <div nz-col nzSpan="4">漏洞类型：</div>
+        <div nz-col nzSpan="20">{{signatureDetail.policyBlocks._category}}</div>
+      </div>
+      <div nz-row>
+        <div nz-col nzSpan="4">漏洞统一编号：</div>
+        <div nz-col nzSpan="20" *ngIf="signatureDetail.policyBlocks._cve">{{signatureDetail.policyBlocks._cve}}</div>
+        <div nz-col nzSpan="20" *ngIf="!signatureDetail.policyBlocks._cve">无</div>
+      </div>
+      <div nz-row>
+        <div nz-col nzSpan="4">危害等级：</div>
+        <div nz-col nzSpan="20">{{signatureDetail.policyBlocks._severity}}</div>
+      </div>
+      <div nz-row>
+        <div nz-col nzSpan="4">基本描述</div>
+        <div nz-col nzSpan="20">{{signatureDetail.policyBlocks._description}}</div>
+      </div>
+    </div>
+    <nz-table #signatureItemTable 
+              [nzData]="signatureDetail.policyBlocks.signatures"
+              [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th>优先级</th>
+          <th>特征名称</th>
+          <th>风险等级</th>
+          <th>特征编号</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of signatureItemTable.data">
+          <td>{{$index+1}}</td>
+          <td>{{item.signame}}</td>
+          <td>{{item.riskLevel | riskLevel}}</td>
+          <td>{{item.sid}}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</nz-modal>

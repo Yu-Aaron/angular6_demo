@@ -11,7 +11,6 @@ export class RightContentComponent implements OnInit {
   @Input() currentSubState: string;
   @Input() isShowTitle: boolean;
 
-  sss;
   constructor() { }
 
   ngOnInit() {

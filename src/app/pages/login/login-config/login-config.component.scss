@@ -1,0 +1,195 @@
+@import "../../../../veriable.scss";
+
+:host ::ng-deep {
+  .page-config {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    .page-config-header {
+      position: absolute;
+      color: #18aee4;
+      font-size: 22px;
+      top: 20px;
+      left: 20px;
+      span {
+        position: absolute;
+        width: 300px;
+        top: 50%;
+        left: 165px;
+        transform: translateY(-50%);
+      }
+    }
+    .page-config-content {
+      background-image: url("../../../../assets/images/login/login_bg.jpg");
+      height: 100%;
+      .config-panel {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 1100px;
+        height: 640px;
+        padding: 65px 190px;
+        background: linear-gradient(rgba(38, 74, 165, 0.6),rgba(48, 133, 226, 0.6));
+        .ant-steps {
+          padding: 0px 20px;
+          .ant-steps-item {
+            display: flex;
+            flex-direction: column-reverse;
+            .ant-steps-item-content {
+              .ant-steps-item-title {
+                color: #c9c9c9;
+                font-size: 18px;
+                &::after {
+                  top: 60px;
+                  left: 75px;
+                  width: 223px;
+                }
+              }
+            }
+            .ant-steps-item-icon {
+              background-color: transparent;
+              border: none;
+              width: 60px;
+              height: 60px;
+              line-height: 60px;
+              font-size: 20px;
+              background: url("../../../../assets/images/config_normal.png") no-repeat center center;
+              .ant-steps-icon {
+                color: #cacac7;
+              }
+            }
+            &.ant-steps-item-finish,
+            &.ant-steps-item-process {
+              .ant-steps-item-content {
+                .ant-steps-item-title {
+                  color: #1890ff;
+                }
+              }
+              .ant-steps-item-icon {
+                background: url("../../../../assets/images/config_active.png") no-repeat center center;
+                .ant-steps-icon {
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+        .steps-content {
+          margin-top: 70px;
+          .ant-form {
+            .ant-form-item {
+              margin-bottom: 10px;
+              .ant-input {
+                width: 322px;
+                height: 32px;
+                line-height: 32px;
+                margin-left: 20px;
+                color: #CCCCCC;
+              }
+            }
+          }
+          .tip {
+            width: 100%;
+            height: 46px;
+            line-height: 46px;
+            background: #193762;
+            border-radius: 5px;
+            padding: 0px 15px;
+            color: #f7ab14;
+            margin-top: 45px;
+            margin-bottom: 30px;
+            span {
+              margin-left: 10px;
+            }
+          }
+          .systime {
+            display: flex;
+            flex-direction: column;
+            .ant-input {
+              width: 200px;
+            }
+            .ant-calendar-picker-input {
+              width: 330px;
+            }
+          }
+          .config-done {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .success-icon {
+              display: inline-block;
+              width: 54px;
+              height: 54px;
+              line-height: 54px;
+              text-align: center;
+              border-radius: 50%;
+              background: #33cc99;
+              font-size: 28px;
+              color: #306793;
+            }
+            .text {
+              font-size: 26px;
+              color: #fff;
+              margin: 15px 0px;
+            }
+            .config-info {
+              height: 40px;
+              line-height: 40px;
+              border-radius: 5px;
+              background: #193762;
+              color: #fff;
+              span {
+                margin: 0px 15px;
+              }
+            }
+          }
+          .redirect {
+            .success-icon {
+              margin-top: 30px;
+            }
+            .info {
+              margin-top: 20px;
+              span {
+                color: #FF3300;
+                font-size: 26px;
+              }
+            }
+          }
+        }
+        .steps-action {
+          display: flex;
+          justify-content: space-around;
+          margin-top: 20px;
+          button {
+            background: #1890FF;
+            color: #fff;
+            border: none;
+            &.next-0 {
+              width: 320px;
+            }
+            &.pre, &.next-1, &.done {
+              width: 160px;
+            }
+          }
+        }
+        .skip {
+          text-align: center;
+          text-decoration: underline;
+          color: #1890FF;
+          margin-top: 35px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+      }
+    }
+    .page-config-footer {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      bottom: 20px;
+      color: #fff;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <div class="network-device">
   <div class="add">
-    <button nz-button nzType="primary">
+    <button nz-button nzType="primary" routerLink="./create">
       <i nz-icon nzType="plus" nzTheme="outline"></i>
       新建网络设备
     </button>
@@ -48,7 +48,13 @@
     <span>每页展示 {{networkDevice.pageSize}} 条，</span>
     <span>共 {{networkDevice.pages}} 页</span>
   </ng-template>
-  <nz-modal>
+  <!-- <nz-modal [(nzVisible)]="showSysInfo" 
+            nzTitle="新建网络设备"
+            nzWidth="470"
+            nzClassName="sysinfo"
+            [nzFooter]="null"
+            (nzOnOk)="toggleAbout()"
+            (nzOnCancel)="toggleAbout()">
 
-  </nz-modal>
+  </nz-modal> -->
 </div>

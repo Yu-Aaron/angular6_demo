@@ -1,0 +1,67 @@
+@import '../../../../../veriable.scss';
+
+.incident_detail {
+  .return_back {
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    padding: 10px 0 15px;
+    font-size: 16px;
+    i {
+      width: 19px;
+      height: 19px;
+      line-height: 22px;
+      margin-right: 5px;
+      border-radius: 50%;
+      background: #26BAFB;
+      color: #000;
+    }
+  }
+  .incident_detail_content {
+    font-size: 16px;
+    .card_title {
+      padding: 10px 15px;
+      color: #25b4f1;
+      background: $bg-card;
+      font-weight: bold;
+    }
+    .card_content {
+      padding: 15px 20px 0;
+      label {
+        margin-bottom: 15px;
+        span {
+          color: #BCBCBC;
+        }
+      }
+      .occur_path {
+        background: #2D455B;
+        color: $txt-blue;
+        > div {
+          display: flex;
+          justify-content: space-around;
+          padding: 30px 25px;
+          img {
+            width: 78px;
+            margin: 0 20px;
+          }
+          > div {
+            margin: 20px 0 10px;
+            label {
+              display: block;
+              color: #26BAFB;
+              span {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+      .arrow_path {
+        line-height: 200px;
+        text-align: center;
+        font-weight: 800;
+        font-size: 20px;
+      }
+    }
+  }
+}

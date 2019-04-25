@@ -11,7 +11,7 @@
             <div nz-col [nzXl]="{span: 24}" [nzXXl]="{span: 12}">
                 <label [ngStyle]="{'color': isCollapseAdvance ? '#fff': '#999'}">时间: </label>
                 <span *ngFor="let option of timeValueData" (click)="timeOptionSelect(option.value)"
-                      class="time-option" [ngClass]="{active: this.selectedValue == option.value}">{{option.label}}
+                      class="time-option" [ngClass]="{active: selectedValue == option.value}">{{option.label}}
                 </span>
             </div>
             <div *ngIf="rangePickerFlag" nz-col [nzXl]="{span: 24}" [nzXXl]="{span: 12}">

@@ -1,0 +1,81 @@
+<div class="page-config">
+  <div class="page-config-header">
+    <img src="../../../assets/images/login/logo.png" alt="">
+    <span>{{sysInfo.name}}</span>
+  </div>
+  <div class="page-config-content">
+    <div class="config-panel">
+      <nz-steps [nzCurrent]="current" [nzProgressDot]="progressTemplate">
+        <nz-step nzTitle="网络配置" nzIcon="wifi"></nz-step>
+        <nz-step nzTitle="系统时间" nzIcon="calendar"></nz-step>
+        <nz-step nzTitle="配置完成" nzIcon="check"></nz-step>
+      </nz-steps>
+      <div class="steps-content">
+        <div *ngIf="current === 0">
+          <form nz-form>
+            <nz-form-item>
+              <nz-form-label nzSpan="6" for="ip">IP</nz-form-label>
+              <nz-form-control nzSpan="18">
+                <input type="text" nz-input placeholder="请输入IP地址">
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label nzSpan="6" for="mask">掩码</nz-form-label>
+              <nz-form-control nzSpan="18">
+                <input type="text" nz-input placeholder="请输入掩码">
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label nzSpan="6" for="gateway">网关</nz-form-label>
+              <nz-form-control nzSpan="18">
+                <input type="text" nz-input placeholder="请输入网关">
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+          <div class="tip">
+            <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>
+            <span>保存配置成功后，将使用新IP访问系统，若配置不正确，会导致访问失败。请确认填写正确后在保存配置。</span>
+          </div>
+        </div>
+        <div *ngIf="current === 1">
+          <nz-radio-group class="systime" [(ngModel)]="a">
+            <label nz-radio nzValue="a">
+              <span>手动配置：</span>
+              <nz-date-picker nzShowTime 
+                              nzFormat="yyyy-MM-dd HH:mm:ss"
+                              nzPlaceHolder="Select Time"></nz-date-picker>
+            </label>
+            <label nz-radio nzValue="b">
+              <span>NTP配置：</span>
+              <input type="text" nz-input placeholder="192.1.1.1">
+              <button nz-button nzType="primary">同步</button>
+            </label>
+          </nz-radio-group>
+        </div>
+        <div *ngIf="current === 2" class="config-done">
+          <div class="success-icon"><i nz-icon nzType="check" nzTheme="outline"></i></div>
+          <div class="text">配置完成</div>
+          <div class="config-info">
+            <span>IP：192.168.1.67</span>
+            <span>掩码：225.225.225.225</span>
+            <span>网关：192.168.40.25</span>
+          </div>
+        </div>
+        <div *ngIf="current === 3" class="config-done redirect">
+          <div class="success-icon"><i nz-icon nzType="check" nzTheme="outline"></i></div>
+          <div class="info">
+            系统会在 <span>{{seconds}}</span> 秒后自动网址重定向，请稍等...
+          </div>
+        </div>
+      </div>
+      <div class="steps-action">
+        <button class="pre" nz-button nzType="default" (click)="pre()" *ngIf="current === 1 || current === 2">上一步</button>
+        <button class="next-0" nz-button nzType="default" (click)="next()" *ngIf="current === 0">下一步</button>
+        <button class="next-1" nz-button nzType="default" (click)="next()" *ngIf="current === 1">下一步</button>
+        <button class="done" nz-button nzType="default" (click)="done()" *ngIf="current === 2">提交</button>
+      </div>
+      <div class="skip" *ngIf="current < 2" (click)="pre()">跳过此步骤&gt;&gt;</div>
+    </div>
+  </div>
+  <div class="page-config-footer"><span>&copy;{{sysInfo.copyright}}</span></div>
+</div>

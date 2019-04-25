@@ -17,6 +17,21 @@ export class SecurityAuditService {
         return this.http.get(this.baseUrl + '/incidents/topology/' + this.topologyId, {params: this.commonService.encodeURL(params)});
     }
 
+    // 设备流量列表
+    getDeviceTrafficList(startTime, endTime, params) {
+        const endTimeStr = this.commonService.formatDate(endTime);
+        const startTimeStr = this.commonService.formatDate(startTime);
+        params = params || {};
+
+        return this.http.get(this.baseUrl + '/auditlogs/traffic/devicetype/ic/devices/starttime/' + startTimeStr + '/endtime/' + endTimeStr, {params: this.commonService.encodeURL(params)});
+    }
+
+    getDeviceTrafficCount(startTime, endTime, params) {
+        const endTimeStr = this.commonService.formatDate(endTime);
+        const startTimeStr = this.commonService.formatDate(startTime);
+        return this.http.get(this.baseUrl + '/auditlogs/traffic/devicetype/ic/devices/count/starttime/' + startTimeStr + '/endtime/' + endTimeStr, {params: this.commonService.encodeURL(params)});
+    }
+
 
 }
 

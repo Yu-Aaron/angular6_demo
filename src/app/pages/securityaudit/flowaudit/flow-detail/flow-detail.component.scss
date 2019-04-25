@@ -1,0 +1,42 @@
+@import '../../../../../veriable.scss';
+:host ::ng-deep {
+  nz-card {
+    background: $table-bg;
+    .ant-card-head {
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    &.ant-card-bordered {
+      border: none;
+    }
+  }
+}
+
+.flow_detail {
+  .return_back {
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    padding: 10px 0 15px;
+    font-size: 16px;
+    i {
+      width: 19px;
+      height: 19px;
+      line-height: 22px;
+      margin-right: 5px;
+      border-radius: 50%;
+      background: #26BAFB;
+      color: #000;
+    }
+  }
+  .detail_title {
+    padding: 15px;
+    background: $bg-card;
+    margin-bottom: 10px;
+  }
+  .echartsStyle {
+    height: 256px;
+  }
+}

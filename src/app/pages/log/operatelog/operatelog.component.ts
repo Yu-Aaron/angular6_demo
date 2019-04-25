@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {LogService} from '../../../common/service/log.service';
 
 @Component({
     selector: 'app-operatelog',
@@ -15,36 +16,57 @@ export class OperatelogComponent implements OnInit {
     tableCount = 0;
     loading: boolean;
 
-    constructor() {
+    constructor(private logService: LogService) {
     }
 
     ngOnInit() {
         this.filterConditionData = {
             timeValueData: [],
             controlArray: [
-                {label: '源IP', type: 'input', name: 'sourceIp'},
-                {label: '目标IP', type: 'input', name: 'targetIp'},
-                {label: '应用名称', type: 'input', name: 'serviceApp'},
+                {label: '用户', type: 'input', name: 'user'},
+                {label: 'IP', type: 'input', name: 'user_ip'},
             ]
         };
-        this.getAll();
-
+        this.getOpetateLog();
     }
 
-    getAll() {
-        this.tableData = [{
-            user: 'zkwuan',
-            ip: '1.1.1.1',
-            date: '2019-01-12',
-            record: '标记事件为已读',
-            result: '成功',
-        }, {
-            user: 'zkwuan',
-            ip: '1.1.1.1',
-            date: '2019-01-12',
-            record: '标记事件为已读',
-            result: '失败',
-        }];
-        this.pageTotalNumber = Math.ceil(this.tableCount / this.pageSize);
+    getOpetateLog() {
+        this.loading = true;
+        const payload = {
+            '$skip': (this.pageIndex - 1) * this.pageSize,
+            '$limit': this.pageSize
+        };
+        if (this.filterParameter) {
+            payload['$filter'] = this.filterParameter;
+        }
+        this.logService.getOpetateLog(payload).subscribe((data: any) => {
+            this.tableData = data;
+            this.loading = false;
+        }, () => {
+            this.loading = false;
+        });
+        this.getOpetateLogCount();
+    }
+
+    getOpetateLogCount() {
+        const payload = {};
+        if (this.filterParameter) {
+            payload['$filter'] = this.filterParameter;
+        }
+        this.logService.getOpetateLogCount(payload).subscribe((data: any) => {
+            this.tableCount = data;
+            this.pageTotalNumber = Math.ceil(this.tableCount / this.pageSize);
+        });
+    }
+
+    pageIndexChange() {
+        this.getOpetateLog();
+    }
+
+    // 点击查询按钮 传过来的事件
+    searchFilterTable(params) {
+        this.pageIndex = params.pageIndex;
+        this.filterParameter = params.params;
+        this.getOpetateLog();
     }
 }

@@ -8,10 +8,16 @@ import { ProtocolauditComponent } from './protocolaudit/protocolaudit.component'
 import { LogauditComponent } from './logaudit/logaudit.component';
 import { ReportauditComponent } from './reportaudit/reportaudit.component';
 import { ReportdetailComponent } from './reportaudit/reportdetail/reportdetail.component';
+import { IncidentAnalysisComponent} from './incidentaudit/incident-analysis/incident-analysis.component';
+import { IncidentDetailComponent} from './incidentaudit/incident-detail/incident-detail.component';
+import { FlowDetailComponent} from './flowaudit/flow-detail/flow-detail.component';
 
 const routes: Routes = [
   { path: 'incidentaudit', component: IncidentauditComponent, canActivate: [AuthGuard] },
+  { path: 'incidentaudit/analysis', component: IncidentAnalysisComponent, canActivate: [AuthGuard] },
+  { path: 'incidentaudit/detail/:eventId', component: IncidentDetailComponent, canActivate: [AuthGuard] },
   { path: 'flowaudit', component: FlowauditComponent, canActivate: [AuthGuard] },
+  { path: 'flowaudit/detail/:id', component: FlowDetailComponent, canActivate: [AuthGuard] },
   { path: 'protocolaudit', component: ProtocolauditComponent, canActivate: [AuthGuard] },
   { path: 'logaudit', component: LogauditComponent, canActivate: [AuthGuard] },
   { path: 'reportaudit', component: ReportauditComponent, canActivate: [AuthGuard] },

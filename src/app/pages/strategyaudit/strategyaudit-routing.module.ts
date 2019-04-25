@@ -6,13 +6,13 @@ import { SecuritydomainComponent } from './securitydomain/securitydomain.compone
 import { StrategyComponent } from './strategy/strategy.component';
 import { VulComponent } from './vul/vul.component';
 import { LearningComponent } from './learning/learning.component';
-import { DomaindetailComponent } from './securitydomain/domaindetail/domaindetail.component';
+import { StrategydetailComponent } from './strategy/strategydetail/strategydetail.component';
 
 
 const routes: Routes = [
   { path: 'securitydomain', component: SecuritydomainComponent, canActivate: [AuthGuard] },
-  { path: 'securitydomain/:id', component: DomaindetailComponent, canActivate: [AuthGuard] },
   { path: 'strategy', component: StrategyComponent, canActivate: [AuthGuard] },
+  { path: 'strategy/:id', component: StrategydetailComponent, canActivate: [AuthGuard] },
   { path: 'vul', component: VulComponent, canActivate: [AuthGuard] },
   { path: 'learning', component: LearningComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/pages/strategyaudit/securitydomain' }

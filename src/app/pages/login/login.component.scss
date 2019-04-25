@@ -1,72 +1,109 @@
-@import '../../../veriable.scss';
+@import "../../../veriable.scss";
 
-.page-login {
-  width: 100%;
-  height: 100vh;
-  .page-login-content {
-    background-image: url('../../../assets/images/logo/background.png');
-    height: 100%;
-  }
-  .login-panel{
-    font-family: FontAwesome;
-    padding: 30px 40px 60px 40px;
-    width: 440px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 10px 0 rgba(13, 40, 58, 0.3);
-    position: absolute;
-    right: 350px;
-    top: 20%;
-    height: 400px;
-    .login-panel-title{
-      font-size: 24px;
-      color: #3582fb;
-      float: left;
-      font-weight: bold;
-    }
-  }
-  img.login-img {
-    position: fixed;
-    bottom:0 ;
-    left: 0;
-  }
-  .ant-form {
-    background-color: transparent;
-    font-family: FontAwesome;
-    width: 385px;
-    height: 350px;
-    .ant-form-item {
-      .ant-input {
-        position: relative;
-        width: 360px;
-        height: 30px;
-        margin-top: 20px;
-        line-height: 30px;
-        border: 1px solid #ddd;
-        font-size: 16px;
-        color: #999999;
-        background: #f4f4f4;
-        padding: 8px 14px;
-      }
-      .login_text_verifycode.ant-input {
-        padding-left: 25px;
-        width: 156px;
-      }
-      .login-form-button {
-        width: 380px;
-        height: 50px;
-        background: #3582fb;
-        border-radius: 8px;
-        color: #fffcfc;
-        font-size: 16px;
-        border: 0;
+:host ::ng-deep {
+  .page-login {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    .page-login-header {
+      position: absolute;
+      color: #18AEE4;
+      font-size: 22px;
+      top: 20px;
+      left: 20px;
+      span {
+        position: absolute;
+        width: 300px;
+        top: 50%;
+        left: 165px;
+        transform: translateY(-50%);
       }
     }
-  }
-  .login-err {
-    color: #e14f4f;
-    margin-top: 28px;
-    font-size: 14px;
-    text-align: left;
-    font-weight: bold;
+    .page-login-content {
+      background-image: url("../../../assets/images/login/login_bg.jpg");
+      height: 100%;
+      .login-panel {
+        font-family: FontAwesome;
+        padding: 30px 70px 60px;
+        width: 506px;
+        background: linear-gradient(rgba(38, 74, 165, 0.6), rgba(48, 133, 226, 0.6));
+        border-radius: 5px;
+        box-shadow: 0 4px 10px 0 rgba(13, 40, 58, 0.3);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: 424px;
+        .ant-form {
+          background-color: transparent;
+          font-family: FontAwesome;
+          width: 385px;
+          height: 350px;
+          .user-icon {
+            text-align: center;
+          }
+          .ant-form-item {
+            .ant-input {
+              position: relative;
+              width: 358px;
+              height: 44px;
+              margin-top: 20px;
+              line-height: 44px;
+              font-size: 14px;
+              color: #ccc;
+              background: #000;
+            }
+            i.icon-input {
+              color: #ccc;
+              position: absolute;
+              font-size: 18px;
+              top: 1px;
+              left: -4px;
+            }
+            img.icon-input {
+              position: absolute;
+              top: 1px;
+              left: -4px;
+              width: 16px;
+              height: auto;
+            }
+            .login_text_verifycode.ant-input {
+              padding-left: 25px;
+              width: 156px;
+            }
+            .verifycode-box {
+              margin-top: 15px;
+              display: inline-block;
+            }
+            .login-form-button {
+              width: 358px;
+              height: 44px;
+              background: #1891ff;
+              border-radius: 5px;
+              color: #fff;
+              font-size: 14px;
+              border: none;
+              margin-top: 24px;
+            }
+          }
+        }
+        .login-err {
+          color: #e14f4f;
+          margin-top: 28px;
+          font-size: 14px;
+          text-align: left;
+          font-weight: bold;
+          position: absolute;
+          top: -75px;
+        }
+      }
+    }
+    .page-login-footer {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      bottom: 20px;
+      color: #fff;
+    }
   }
 }

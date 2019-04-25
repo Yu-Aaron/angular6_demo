@@ -1,3 +1,75 @@
-<p>
-  devicedetail works!
-</p>
+<div class="create" *ngIf="isCreate">
+  <div class="title">
+    <i nz-icon nzType="arrow-left" nzTheme="outline"></i>
+    <span>新增网络设备</span>
+  </div>
+  <div class="title-text">填写设备信息</div>
+  <div class="device-form">
+    <form nz-form (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-label nzFor="deviceName" nzSpan="4" nzRequired>设备名称</nz-form-label>
+        <nz-form-control nzSpan="8">
+          <input type="text" nz-input name="deviceName" [(ngModel)]="device.deviceName" placeholder="输入设备名称">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="mode" nzSpan="4">设备类型</nz-form-label>
+        <nz-form-control nzSpan="8">
+          <nz-select [(ngModel)]="device.modename" name="modename" nzPlaceHolder="请选择设备类型" (ngModelChange)="modeChange()">
+            <nz-option *ngFor="let mode of forms['modes']" [nzValue]="mode" [nzLabel]="mode.modename"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="model" nzSpan="4">设备型号</nz-form-label>
+        <nz-form-control nzSpan="8">
+          <nz-select [(ngModel)]="device.modelname" name="modelname" nzPlaceHolder="请选择设备型号" (ngModelChange)="modelChange(device.modelname)">
+            <nz-option></nz-option>
+            <nz-option *ngFor="let model of models" [nzValue]="model.modelId" [nzLabel]="model.model_name"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="modelmake" nzSpan="4">设备厂商</nz-form-label>
+        <nz-form-control nzSpan="8">
+          <input type="text" name="modelmake" nz-input [(ngModel)]="device.modelmake">
+        </nz-form-control>
+      </nz-form-item>
+      <ng-container *ngIf="device.mode == 'ROUTER'">
+        <nz-form-item *ngFor="let ipmac of device.ipmac; let i = index;">
+          <nz-form-label nzFor="ipmac" nzSpan="4">设备端口 {{i + 1}}</nz-form-label>
+          <nz-form-control nzSpan="8" nz-row class="ipmac">
+            <label for="ip" nz-col nzSpan="12">
+              IP地址：
+              <input type="text" nz-input name="ip" [(ngModel)]="ipmac.ip" (ngModelChange)="validateAllIp()">
+            </label>
+            <label for="mac" nz-col nzSpan="12">
+              MAC地址：
+              <input type="text" nz-input name="mac" [(ngModel)]="ipmac.mac" (ngModelChange)="validateAllMac()">
+            </label>
+          </nz-form-control>
+          <div *ngIf="i !== 0">
+            <button nz-button nzType="primary" (click)="removeIpMac(i); newDevice.allIpMacValid();">
+              <i nz-icon nzType="delete" nzTheme="outline"></i>
+            </button>
+          </div>
+        </nz-form-item>
+      </ng-container>
+      <ng-container *ngIf="device.mode == 'ROUTER'">
+        <div class="ipmac-tip">
+          <div *ngIf="device.ipmac.length == 64">IP/MAC最多只能添加64组</div>
+          <button *ngIf="device.ipmac.length < 64" nz-button nzType="primary" nzSize="small" [disabled]="disableAddNewIp" (click)="addIpMac()">添加端口</button>
+        </div>
+      </ng-container>
+      <nz-form-item>
+        <nz-form-label nzFor="remark" nzSpan="4">备注</nz-form-label>
+        <nz-form-control nzSpan="8">
+          <textarea name="remarks" cols="100" rows="5" [(ngModel)]="device.remarks" placeholder="请输入备注"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</div>
+<div class="edit" *ngIf="!isCreate">
+  编辑
+</div>

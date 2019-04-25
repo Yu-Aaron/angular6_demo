@@ -21,22 +21,22 @@
               [nzLoading]="loading"
               [nzShowTotal]="totalTemplate">
         <thead>
-        <tr>
-            <th>用户</th>
-            <th>IP</th>
-            <th>操作时间</th>
-            <th>操作记录</th>
-            <th>操作结果</th>
-        </tr>
+            <tr>
+                <th>用户</th>
+                <th>IP</th>
+                <th>操作时间</th>
+                <th>操作记录</th>
+                <th>操作结果</th>
+            </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of tableDataTmp.data">
-            <td>{{item.user}}</td>
-            <td>{{item.ip}}</td>
-            <td>{{item.date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
-            <td>{{item.record}}</td>
-            <td>{{item.result}}</td>
-        </tr>
+            <tr *ngFor="let log of tableDataTmp.data">
+                <td>{{log.user}}</td>
+                <td>{{log.user_ip}}</td>
+                <td>{{log.timestamp | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{log.operationName}}</td>
+                <td>{{log.operationStatus}}</td>
+            </tr>
         </tbody>
     </nz-table>
     <ng-template #totalTemplate let-total>

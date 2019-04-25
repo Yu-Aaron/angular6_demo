@@ -1,0 +1,69 @@
+<nz-modal [(nzVisible)]="auditDataDetail.isVisible"
+          [nzTitle]="'详细信息'"
+          [nzOkText]=null
+          [nzCancelText]=null
+          (nzOnCancel)="handleCancel()"
+          [nzWidth]=1120>
+    <div class="panel_top">
+        <div nz-row class="mb-20">
+            <div nz-col [nzSpan]="6">
+                <label>协议类型：</label>
+                <span>{{auditDataDetail.protocolSourceName === 'telnet' ? 'Telnet' : auditDataDetail.protocolSourceName === 'modbus' ? 'Modbus' : auditDataDetail.protocolSourceName === 'profinetio' ? 'Profinetio' : (auditDataDetail.protocolSourceName | uppercase)}}</span>
+            </div>
+            <div nz-col [nzSpan]="6">
+                <label>起始时间：</label>
+                <span>{{auditDataDetail.flowTimestampLocal | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+            </div>
+        </div>
+        <div nz-row class="mb-20">
+            <div nz-col [nzSpan]="6">
+                <label>端口：</label>
+                <span>{{auditDataDetail.sourcePort}} <=> {{auditDataDetail.destinationPort}}</span>
+            </div>
+            <div nz-col [nzSpan]="8">
+                <label>IP地址：</label>
+                <span>{{auditDataDetail.sourceIp}} <=> {{auditDataDetail.destinationIp}}</span>
+            </div>
+            <div nz-col [nzSpan]="10">
+                <label>MAC地址：</label>
+                <span>{{auditDataDetail.sourceMac | uppercase }} <=> {{auditDataDetail.destinationMac | uppercase}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="panel_middle">
+        <span class="txt-error">*</span><label>设置解压密码: </label>
+        <input nz-input [(ngModel)]="fileZipPsw" class="inline-block"/>
+        <button nz-button nzType="primary" class="mr-10" [disabled]="!fileZipPsw.trim().length" (click)="exportFile(false, fileZipPsw)">
+            <i nz-icon nzType="download" nzTheme="outline"></i>导出
+        </button>
+        <span class="txt-warning">导出仅限10W条数据</span>
+    </div>
+    <div class="panel_bottom">
+        <nz-table #tableDataTmp
+                  [nzData]="auditDataDetail.listInfo"
+                  [nzTotal]="auditDataDetail.listCount"
+                  [nzShowQuickJumper]="true"
+                  [nzFrontPagination]="false"
+                  [(nzPageIndex)]="pageIndex"
+                  [(nzPageSize)]="pageSize"
+                  (nzPageIndexChange)="pageIndexChange()"
+                  [nzLoading]="loading"
+                  [nzShowTotal]="totalTemplate">
+            <thead>
+                <tr>
+                    <th *ngFor="let head of auditDataDetail.listInfoHead">{{head}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let infoRow of tableDataTmp.data">
+                    <td class="text-left min-wid-133" *ngFor="let info of infoRow">{{info}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+        <ng-template #totalTemplate let-total>
+            <span>共 {{auditDataDetail.listCount}} 条，</span>
+            <span>每页展示 {{pageSize}} 条，</span>
+            <span>共 {{pageTotalNumber}} 页</span>
+        </ng-template>
+    </div>
+</nz-modal>

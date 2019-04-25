@@ -1,12 +1,8 @@
 <div class="domain">
   <div class="domain-operate">
-    <button class="plus" nz-button nzType="primary" (click)="createFlag = true;">
+    <button class="plus" nz-button nzType="primary" (click)="showModal(true, 'create')">
       <i nz-icon nzType="plus" nzTheme="outline"></i>
       新建安全域
-    </button>
-    <button class="manage" nz-button nzType="primary">
-      <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
-      管理设备
     </button>
   </div>
   <div class="domain-table">
@@ -14,7 +10,6 @@
               [nzData]="domain.data"
               [nzTotal]="domain.total"
               [nzLoading]="domain.loading"
-              [nzShowPagination]="false"
               [nzFrontPagination]="false"
               [nzPageIndex]="domain.pageIndex"
               [nzPageSize]="domain.pageSize"
@@ -30,35 +25,100 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of domainTable.data">
+        <tr *ngFor="let data of domainTable.data; let i = index;">
           <td>{{data.name}}</td>
-          <td>{{data.port}}</td>
-          <td class="strategy" routerLink="./1">{{data.strategy}}</td>
-          <td>{{data.time}}</td>
+          <td>{{data.ports.join(', ')}}</td>
+          <td class="strategy" routerLink="/pages/strategyaudit/strategy/{{data.auditPolicyId}}">{{data._auditPolicyName}}</td>
+          <td>{{data.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
           <td class="switch">
-            <nz-switch [(ngModel)]="data.flag" nzCheckedChildren="开启" nzUnCheckedChildren="关闭"></nz-switch>
+            <nz-switch *ngIf="!data.status" [(ngModel)]="data.enable" [nzLoading]="data.loading" nzCheckedChildren="开启" nzUnCheckedChildren="关闭" (ngModelChange)="updateEnable(data, i)"></nz-switch>
           </td>
           <td class="operate">
-            <i class="edit" nz-icon nzType="edit" nzTheme="outline"></i>
-            <i class="delete" nz-icon nzType="delete" nzTheme="outline"></i>
+            <i class="edit" nz-icon nzType="edit" *ngIf="!data.enable" nzTheme="outline" (click)="showModal(true, 'edit', data)"></i>
+            <i class="delete" nz-icon nzType="delete" *ngIf="!data.enable" (click)="deleteSecurityArea(data)" nzTheme="outline"></i>
           </td>
         </tr>
       </tbody>
     </nz-table>
   </div>
 </div>
-<div class="create-modal">
-  <nz-modal [(nzVisible)]="createFlag" 
-  nzTitle="关于"
-  nzWidth="470"
-  nzClassName="sysinfo"
-  [nzFooter]="null"
-  (nzOnOk)="toggleAbout()"
-            nzTitle="新增安全域"
-            (nzOnCancel)="toggleCreate(false)"
-            (nzOnOk)="toggleCreate(true)">
+<nz-modal [(nzVisible)]="createOrEditModal.modalFlag" 
+          [nzTitle]="createOrEditModal.modalTitle"
+          nzWidth="700"
+          nzClassName="create-domain"
+          [nzFooter]="createFooter"
+          [nzOkLoading]="createOrEditModal.isOkLoading"
+          (nzOnCancel)="showModal(false)"
+          (nzOnOk)="modalDone()">
+  <div class="create-modal">
+    <form nz-form>
+      <nz-form-item>
+        <nz-form-label nzFor="securityAreaUniqueNumber" nzSpan="5" nzRequired>安全域ID</nz-form-label>
+        <nz-form-control nzSpan="10">
+          <nz-select [(ngModel)]="securityArea.securityAreaUniqueNumber" name="securityAreaUniqueNumber">
+            <nz-option *ngFor="let id of ids" [nzValue]="id" [nzLabel]="id"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="name" nzSpan="5" nzRequired>名称</nz-form-label>
+        <nz-form-control nzSpan="10">
+          <input nz-input [(ngModel)]="securityArea.name" name="name" maxlength="25" placeholder="请输入安全域名称" (ngModelChange)="validate()">
+        </nz-form-control>
+        <span class="tip">长度小于等于25个字符，且不能重复</span>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="ports" nzSpan="5" nzRequired>接口成员</nz-form-label>
+        <nz-form-control nzSpan="10">
+          <nz-select  name="ports"
+                      nzMode="multiple"
+                      nzPlaceHolder="请选择接口成员"
+                      [(ngModel)]="securityArea.ports"
+                      (ngModelChange)="validate()">
+            <nz-option *ngFor="let option of unrelatedPorts" [nzLabel]="option.id" [nzValue]="option.label"></nz-option>
+          </nz-select>
+        </nz-form-control>
+        <span class="tip">接口成员不能为空</span>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="auditPolicyId" nzSpan="5" nzRequired>审计策略</nz-form-label>
+        <nz-form-control nzSpan="10">
+          <nz-select  [(ngModel)]="securityArea.auditPolicyId" 
+                      name="securityAreaUniqueNumber" 
+                      (ngModelChange)="validate()">
+            <nz-option *ngFor="let option of auditPolicies" [nzValue]="option.auditPolicyId" [nzLabel]="option.name"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+  <ng-template #createFooter>
     <div>
-      
+      <button nz-button nzType="primary" (click)="showModal(false)">取消</button>
+      <button nz-button nzType="primary" [disabled]="disabledSubmit" (click)="modalDone()">确定</button>
     </div>
-  </nz-modal>
-</div>
+  </ng-template>
+</nz-modal>
+<nz-modal [(nzVisible)]="securityDomainEnable.modalFlag"
+          [nzTitle]="securityDomainEnable.title"
+          nzWidth="600"
+          nzClassName="security-domain-enable"
+          [nzFooter]="securityDomainEnableFooter"
+          (nzOnCancel)="closeEnableModal()"
+          (nzOnOk)="okEnableModal()">
+  <div *ngIf="securityDomainEnable.type === 'default'">
+    <div class="tip">
+      <label nz-checkbox [(ngModel)]="securityDomainEnable.confirm">开启默认安全域的同时会自动关闭以下安全域，请确定是否开启？</label>
+    </div>
+    <span>{{securityDomainEnable.securityAreaName.join(', ')}}</span>
+  </div>
+  <div *ngIf="securityDomainEnable.type === 'custom'">
+    <span>开启自定义安全域的同时会自动关闭默认安全域，请确定是否开启？</span>
+  </div>
+  <ng-template #securityDomainEnableFooter>
+    <div class="operate">
+      <button class="modal-btn" nz-button nzType="primary" *ngIf="securityDomainEnable.type === 'custom'" (click)="okEnableModal()">确定</button>
+      <button class="modal-btn" nz-button nzType="primary" *ngIf="securityDomainEnable.type === 'default'" [disabled]="!securityDomainEnable.confirm" (click)="okEnableModal()">确定</button>
+    </div>
+  </ng-template>
+</nz-modal>

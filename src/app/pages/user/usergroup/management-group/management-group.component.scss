@@ -49,6 +49,11 @@
                         font-weight: bolder;
                     }
                 }
+                .active_icon {
+                    i {
+                        color: #fff;
+                    }
+                }
                 .step_div {
                     float: left;
                     width: 180px;
@@ -85,6 +90,7 @@
                 }
             }
         }
+        // 菜单可视配置
         .management_content {
             margin-top: 20px;
             overflow: hidden;
@@ -94,7 +100,7 @@
                     padding: 30px 15px;
                     height: 310px;
                     .menu_header {
-                        margin-bottom: 10px;
+                        margin-bottom: 20px;
                         overflow: hidden;
                         div {
                             float: left;
@@ -111,6 +117,7 @@
                         }
                         label {
                             float: right;
+                            width: auto;
                         }
                     }
                     .menu_sub_content {
@@ -122,13 +129,17 @@
                                 float: left;
                                 margin-left: 25px;
                             }
+                            .checkbox_group {
+                                width: 100%;
+                                margin-left: 15px;
+                                position: relative;
+                            }
                         }
                     }
                 }
             }
             .content_menu {
                 width: 165px;
-
                 background: #000000;
             }
             .content_menu_list {
@@ -151,3 +162,63 @@
         }
     }
 }
+
+.menu_subtitle {
+    label {
+        span {
+            position: absolute;
+            right: 15px;
+            top: 4px;
+        }
+    }
+}
+
+// 操作功能配置
+.management_operation_content {
+    margin-top: 20px;
+    overflow: hidden;
+    .operation_header {
+        background: #173655;
+        height: 45px;
+        line-height: 45px;
+        padding: 0 20px;
+        span {
+            font-size: 16px;
+            color: #26BAFB;
+            text-align: left;
+        }
+    }
+    .operation_content {
+        .content_menu {
+            width: 100%;
+            background: #0B233D;
+            padding: 20px;
+        }
+        .content_menu_list {
+            width: 100%;
+            background: #07294E;
+            padding: 20px;
+        }
+        .operation_menu_content {
+            color: #fff;
+            font-size: 14px;
+            text-align: left;
+            .header {
+                font-weight: bolder;
+                font-size: 16px;
+            }
+            .menu_subtitle {
+                height: 32px;
+                line-height: 32px;
+                .ant-checkbox-wrapper {
+                    color: #fff !important;
+                    .ant-checkbox+span, .ant-checkbox-wrapper+span {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+

@@ -31,8 +31,8 @@ export class FilterTableComponent implements OnInit {
     selectedProtocol: string;
 
     // 用户自定义
-    @Input() timeValueData;  // 时间枚举值
-    @Input() controlArray;   // 过滤条件可选项
+    @Input() timeValueData = [];  // 时间枚举值
+    @Input() controlArray = [];   // 过滤条件可选项
     @Input() logProtocolArray = [];
     @Input() showTimePicker = false; // 时间选择器是否显示
     @Input() showAdvance = true; // 高级搜索是否显示
@@ -90,28 +90,29 @@ export class FilterTableComponent implements OnInit {
         self.selectedValue = timeValue;
         self.rangePickerFlag = timeValue === 'r';
         self.initTimeRange(self.selectedValue);
+        timeValue !== 'r' && this.submitForm();
     }
 
     // 初始化时间
     initTimeRange(s) {
-        sessionStorage.setItem('currentTime', String(new Date()));
+        const currentTime = sessionStorage.getItem('currentTime');
         if (s === 'n') {
             self.advancedSearchTimeRange = ['', ''];
         } else if (s === 'h') {
-            self.advancedSearchTimeRange[0] = moment(sessionStorage.getItem('currentTime')).subtract(1, 'hours').milliseconds(0).toDate();
-            self.advancedSearchTimeRange[1] = moment(sessionStorage.getItem('currentTime')).milliseconds(0).toDate();
+            self.advancedSearchTimeRange[0] = moment(currentTime).subtract(1, 'hours').milliseconds(0).toDate();
+            self.advancedSearchTimeRange[1] = moment(currentTime).milliseconds(0).toDate();
         } else if (s === 'd') {
-            self.advancedSearchTimeRange[0] = moment(sessionStorage.getItem('currentTime')).subtract(1, 'days').milliseconds(0).toDate();
-            self.advancedSearchTimeRange[1] = moment(sessionStorage.getItem('currentTime')).milliseconds(0).toDate();
+            self.advancedSearchTimeRange[0] = moment(currentTime).subtract(1, 'days').milliseconds(0).toDate();
+            self.advancedSearchTimeRange[1] = moment(currentTime).milliseconds(0).toDate();
         } else if (s === 'w') {
-            self.advancedSearchTimeRange[0] = moment(sessionStorage.getItem('currentTime')).subtract(7, 'days').milliseconds(0).toDate();
-            self.advancedSearchTimeRange[1] = moment(sessionStorage.getItem('currentTime')).milliseconds(0).toDate();
+            self.advancedSearchTimeRange[0] = moment(currentTime).subtract(7, 'days').milliseconds(0).toDate();
+            self.advancedSearchTimeRange[1] = moment(currentTime).milliseconds(0).toDate();
         } else if (s === 'm') {
-            self.advancedSearchTimeRange[0] = moment(sessionStorage.getItem('currentTime')).subtract(30, 'days').milliseconds(0).toDate();
-            self.advancedSearchTimeRange[1] = moment(sessionStorage.getItem('currentTime')).milliseconds(0).toDate();
+            self.advancedSearchTimeRange[0] = moment(currentTime).subtract(30, 'days').milliseconds(0).toDate();
+            self.advancedSearchTimeRange[1] = moment(currentTime).milliseconds(0).toDate();
         } else if (s === 'y') {
-            self.advancedSearchTimeRange[0] = moment(sessionStorage.getItem('currentTime')).subtract(1, 'years').milliseconds(0).toDate();
-            self.advancedSearchTimeRange[1] = moment(sessionStorage.getItem('currentTime')).milliseconds(0).toDate();
+            self.advancedSearchTimeRange[0] = moment(currentTime).subtract(1, 'years').milliseconds(0).toDate();
+            self.advancedSearchTimeRange[1] = moment(currentTime).milliseconds(0).toDate();
         }
     }
 
@@ -119,6 +120,7 @@ export class FilterTableComponent implements OnInit {
     onSearchTimeChange(result): void {
         console.log('onChange: ', result);
         self.advancedSearchTimeRange = result;
+        this.submitForm();
     }
 
     // 时间参数组装

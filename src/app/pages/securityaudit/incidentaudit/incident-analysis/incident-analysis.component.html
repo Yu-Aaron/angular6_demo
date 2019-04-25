@@ -1,0 +1,44 @@
+<div class="incident_analysis">
+    <div class="return_back" [routerLink]="['/pages/securityaudit/incidentaudit']">
+        <i nz-icon nzType="arrow-left" nzTheme="outline"></i>事件统计分析
+    </div>
+    <!-- 过滤条件 -->
+    <app-filter-table [showTimePicker]="true"
+                      [isFuzzySearch]="true"
+                      [showAdvance]="false"
+                      (searchFilterTable)="searchFilterTable($event)">
+    </app-filter-table>
+    <div nz-row [nzGutter]="12" class="incident_analysis_content">
+        <!--安全事件类型分布-->
+        <div nz-col [nzLg]="{span: 24}" [nzXl]="{span: 6}">
+            <div class="event_monitor col_base">
+                <div class="tab-title">安全事件类型分布</div>
+                <div echarts [options]="monitorPieOption" class="echartsStyle pie"></div>
+                <div *ngFor="let item of lineProgress" class="progress_content">
+                    <span>{{item.name}}</span>
+                    <p><span class="line"><span class="progress" [ngStyle]="{'width': item.value/10 + 'px'}"></span></span>{{item.value}}</p>
+                </div>
+            </div>
+        </div>
+        <!--命中规则个数TOP10-->
+        <div nz-col [nzLg]="{span: 24}" [nzXl]="{span: 18}">
+            <div class="hit_rule col_base">
+                <div class="tab-title">命中规则个数Top10</div>
+                <nz-tabset>
+                    <nz-tab [nzTitle]="label.name" *ngFor="let label of tabLabel">
+                        <div *ngFor="let item of tabLabelContent" class="label-content">
+                            <span>{{item.text}}</span>
+                            <span style="color: #46C0FF; font-size: 16px">{{item.count}}</span>
+                        </div>
+                    </nz-tab>
+                </nz-tabset>
+            </div>
+        </div>
+        <!--安全事件趋势-->
+        <div nz-col [nzLg]="{span: 24}" [nzXl]="{span: 24}">
+            <div class="col_base">
+                <div class="tab-title">安全事件趋势</div>
+            </div>
+        </div>
+    </div>
+</div>

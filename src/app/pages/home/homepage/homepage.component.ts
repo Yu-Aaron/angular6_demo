@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {HomeService} from '../../../common/service/home.service';
 import {ChartService} from '../../../common/service/chart.service';
+import {forkJoin} from 'rxjs';
 
 @Component({
     selector: 'app-homepage',
@@ -9,34 +10,20 @@ import {ChartService} from '../../../common/service/chart.service';
 })
 
 export class HomepageComponent implements OnInit, AfterViewInit {
-    // 设备概况
     performanceData = {
         ems: 0,
         temp: 0,
         disc: 0,
         engine: 0,
         cpu: 0
-    };
+    }; // 设备概况
     drawOptions = [
         {text: 'CPU占用率', id: '#circle1', percent: 60, frontColor: '#D6CB00'},
         {text: '内存占用率', id: '#circle2', percent: 20, frontColor: '#54D174'},
         {text: '磁盘占用率', id: '#circle3', percent: 0, frontColor: '#D31C29'},
     ];
-
-    // 接口状态
-    linkState = [
-        {name: 'MGMT', state: '已连接'},
-        {name: 'GE1', state: '已连接'},
-        {name: 'GE2', state: '未连接'},
-        {name: 'GE3', state: '已连接'},
-        {name: 'GE4', state: '已关闭'},
-        {name: '聚合口A1', state: '未连接'},
-    ];
-    workState = [
-        {name: '默认安全域', state: '已连接'},
-        {name: '安全域1', state: '已关闭'},
-        {name: '安全域2', state: '已关闭'}
-    ];
+    allPorts = [];   // 接口状态
+    securityarea = [];  // 安全域工作状态
 
     // 设备流程top5
     deviceType = [
@@ -56,16 +43,16 @@ export class HomepageComponent implements OnInit, AfterViewInit {
 
     // 今日事件监测
     monitorPieData = [
-        {value: 335, name: '威胁'},
-        {value: 310, name: '协议规则'},
-        {value: 234, name: 'IP/MAC'},
-        {value: 135, name: '域名规则'}
+        {name: '威胁', value: 0},
+        {name: '协议规则', value: 0},
+        {name: 'IP/MAC', value: 0},
+        {name: '域名规则', value: 0}
     ];
     monitorPieOption = {};
     lineProgress = [
-        {name: '使用规则总数', value: 3000},
-        {name: '使用威胁总数', value: 2700},
-        {name: '使用自定义规则总数', value: 300}
+        {name: '使用规则总数', value: 0},
+        {name: '使用威胁总数', value: 0},
+        {name: '使用自定义规则总数', value: 0}
     ];
     tabLabel = [
         {name: '全部', value: 'all'},
@@ -79,19 +66,24 @@ export class HomepageComponent implements OnInit, AfterViewInit {
         {text: '【发现威胁】111111111111111111111111', count: 1388},
         {text: '【发现威胁】111111111111111111111111', count: 1388},
         {text: '【发现威胁】111111111111111111111111', count: 1388},
-        {text: '【发现威胁】111111111111111111111111', count: 1388},
     ];
+    protocolTop = [];
+    signatureTop = [];
+    customTop = [];
+
 
     constructor(private homeService: HomeService, private chartService: ChartService) {
     }
 
     ngOnInit() {
         this.getProgressData();
+        this.getAllPorts();
+        this.getAllSecurityarea();
         this.getFlowChartData();
         this.getFlowTable();
-        this.monitorPieOption = this.chartService.drawMonitorPie(this.monitorPieData,28000);
+        this.getBaseTotal();
+        this.getActionTotal();
     }
-
     ngAfterViewInit(): void {
         this.drawOptions.forEach((item) => {
             this.chartService.drawProgress(item);
@@ -130,6 +122,29 @@ export class HomepageComponent implements OnInit, AfterViewInit {
         });
     }
 
+    // 接口状态
+    getAllPorts() {
+        const params = {
+            '$skip': 0,
+            '$limit': 10,
+            '$orderby': 'portName'
+        };
+        this.homeService.getAllPorts(params).subscribe((data: any) => {
+            this.allPorts = data;
+        });
+    }
+
+    // 安全域工作状态
+    getAllSecurityarea() {
+        const params = {
+            '$skip': 0,
+            '$limit': 10,
+        };
+        this.homeService.getAllSecurityarea(params).subscribe((data: any) => {
+            this.securityarea = data;
+        });
+    }
+
     // 设备流量top5
     getFlowChartData() {
         const data = [
@@ -141,7 +156,6 @@ export class HomepageComponent implements OnInit, AfterViewInit {
         ];
         this.flowOption = this.chartService.drawFlowChart(data);
     }
-
     checkDeviceType(i) {
         this.deviceType[i].active = true;
         this.deviceType.forEach((item, index) => {
@@ -150,7 +164,6 @@ export class HomepageComponent implements OnInit, AfterViewInit {
             }
         });
     }
-
     getFlowTable() {
         this.tableData = [{
             name: 'UX工控设备',
@@ -170,6 +183,52 @@ export class HomepageComponent implements OnInit, AfterViewInit {
             update: '2019-01-12',
         }];
         this.pageTotalNumber = Math.ceil(this.tableCount / this.pageSize);
+    }
+
+    // 今日事件监测
+    createParams() {
+        const payload = {};
+        const date1 = new Date();
+        const date2 = new Date(date1);
+        date2.setHours(0, 0, 0, 0);
+
+        payload['endtime'] = date1.toISOString().slice(0, date1.toISOString().length - 5) + 'Z';
+        payload['starttime'] = date2.toISOString().slice(0, date2.toISOString().length - 5) + 'Z';
+        return payload;
+    }
+    getActionTotal() {
+        const payload = this.createParams();
+        this.homeService.getActionTotal(payload).subscribe((data: any) => {
+            this.monitorPieData[0]['value'] = data.signatureCount; // 威胁
+            this.monitorPieData[0]['value'] = data.protocolCount; // 协议规则
+            this.monitorPieData[0]['value'] = data.ipMacCount; // IP/MAC
+            this.monitorPieData[0]['value'] = data.domainCount; // 域名规则
+            const totalCountAction = data.ipMacCount + data.domainCount + data.protocolCount + data.signatureCount;
+            this.monitorPieOption = this.chartService.drawMonitorPie(this.monitorPieData, totalCountAction);
+        }, () => {
+            this.monitorPieOption = this.chartService.drawMonitorPie(this.monitorPieData, 0);
+        });
+    }
+    getBaseTotal() {
+        this.homeService.getBaseTotal().subscribe((data: any) => {
+            this.lineProgress[0]['value'] = data.protocolCount;  // 使用规则总数
+            this.lineProgress[1]['value'] = data.signatureCount;  // 使用威胁总数
+            this.lineProgress[2]['value'] = data.totalCount;  // 使用自定义规则总数
+        });
+    }
+    getRuleTop() {
+        const payload = this.createParams();
+        forkJoin([
+            this.homeService.getProtocolFlow(payload),
+            this.homeService.getSignatureCount(payload),
+            this.homeService.getCustomTop(payload)]).subscribe((data: any) => {
+            this.protocolTop = data[0];
+            this.signatureTop = data[1];
+            this.customTop = data[2];
+        });
+    }
+    changeTab(event) {
+        console.log(event);
     }
 
 }

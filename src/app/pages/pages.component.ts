@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CommonService} from '../common/service/common.service';
 
 @Component({
     selector: 'app-pages',
@@ -18,9 +19,10 @@ export class PagesComponent implements OnInit {
     currentState: string; // 当前一级路由
     currentSubState: string; // 当前二级路由
 
-    constructor() {
+    constructor(private commonService: CommonService) {
     }
 
     ngOnInit(): void {
+        this.commonService.getDomain();
     }
 }

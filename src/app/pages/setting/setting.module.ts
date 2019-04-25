@@ -9,6 +9,7 @@ import {DebugComponent} from './debug/debug.component';
 import {BackupComponent} from './backup/backup.component';
 import {LoginComponent} from './login/login.component';
 import {BasicPipe} from '../../common/pipe/filter.pipe';
+import {ProtocolComponent} from './protocol/protocol.component';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import {BasicPipe} from '../../common/pipe/filter.pipe';
         DebugComponent,
         BackupComponent,
         LoginComponent,
+        ProtocolComponent,
         BasicPipe
     ],
     imports: [

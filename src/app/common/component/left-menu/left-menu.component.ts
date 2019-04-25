@@ -1,11 +1,11 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
-import {AuthorizationService} from '../../service/authorization.service';
-import {trigger, state, style, animate, transition} from '@angular/animations';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { AuthorizationService } from '../../service/authorization.service';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import * as moment from 'moment';
-import {ConfigService} from '../../service/config.service';
+import { ConfigService } from '../../service/config.service';
 import { RouteService } from '../../service/route.service';
-
+import { CommonService } from '../../service/common.service';
 
 @Component({
     selector: 'app-left-menu',
@@ -42,9 +42,10 @@ export class LeftMenuComponent implements OnInit {
 
 
     constructor(private configService: ConfigService,
-                private authorizationService: AuthorizationService,
-                private router: Router,
-                private routeService: RouteService) {
+        private authorizationService: AuthorizationService,
+        private router: Router,
+        private routeService: RouteService,
+        private commonService: CommonService) {
     }
 
     ngOnInit() {
@@ -69,6 +70,7 @@ export class LeftMenuComponent implements OnInit {
                 });
             }
         );
+        this.commonService.getDomain();
     }
 
     changeRouter() {
@@ -79,7 +81,7 @@ export class LeftMenuComponent implements OnInit {
             if (event.url !== '/login' && event instanceof NavigationEnd) { // 当导航成功结束时执行
                 const url = event.url.split('/');
                 this.changeState(this.state);
-                if (url[4] && url[4] === 'management') {   // 不显示右侧title
+                if (url[4] && ['management', 'analysis', 'detail'].indexOf(url[4]) > -1) {   // 不显示右侧title
                     this.isShowTitle.emit(false);
                 } else {
                     this.isShowTitle.emit(true);
