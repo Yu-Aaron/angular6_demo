@@ -37,18 +37,19 @@
             <span>保存配置成功后，将使用新IP访问系统，若配置不正确，会导致访问失败。请确认填写正确后在保存配置。</span>
           </div>
         </div>
-        <div *ngIf="current === 1">
-          <nz-radio-group class="systime" [(ngModel)]="a">
-            <label nz-radio nzValue="a">
-              <span>手动配置：</span>
+        <div *ngIf="current === 1" class="systime-config">
+          <nz-radio-group class="systime" [(ngModel)]="systime">
+            <label nz-radio nzValue="manual">
+              <span class="label-text">手动配置：</span>
               <nz-date-picker nzShowTime 
                               nzFormat="yyyy-MM-dd HH:mm:ss"
-                              nzPlaceHolder="Select Time"></nz-date-picker>
+                              nzPlaceHolder="请选择日期和时间"
+                              [nzDisabled]="systime === 'ntp'"></nz-date-picker>
             </label>
-            <label nz-radio nzValue="b">
-              <span>NTP配置：</span>
-              <input type="text" nz-input placeholder="192.1.1.1">
-              <button nz-button nzType="primary">同步</button>
+            <label nz-radio nzValue="ntp">
+              <span class="label-text ntp">NTP配置：</span>
+              <input type="text" [disabled]="systime === 'manual'" nz-input placeholder="192.1.1.1">
+              <button nz-button [disabled]="systime === 'manual'" nzType="primary">同步</button>
             </label>
           </nz-radio-group>
         </div>
@@ -74,7 +75,7 @@
         <button class="next-1" nz-button nzType="default" (click)="next()" *ngIf="current === 1">下一步</button>
         <button class="done" nz-button nzType="default" (click)="done()" *ngIf="current === 2">提交</button>
       </div>
-      <div class="skip" *ngIf="current < 2" (click)="pre()">跳过此步骤&gt;&gt;</div>
+      <div class="skip" *ngIf="current < 2" (click)="next()">跳过此步骤&gt;&gt;</div>
     </div>
   </div>
   <div class="page-config-footer"><span>&copy;{{sysInfo.copyright}}</span></div>

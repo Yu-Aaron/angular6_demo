@@ -48,12 +48,20 @@
                 [nzPageSize]="10">
         <thead>
           <tr>
-            <th>Title</th>
+            <th>启用状态</th>
+            <th>传输层协议</th>
+            <th>协议名称</th>
+            <th>服务端口</th>
+            <th>操作</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let i of privateTable.data">
-            <td>{{i.title}}</td>
+            <td>{{i.disabled}}</td>
+            <td>{{i.protocolType}}</td>
+            <td>{{i.protocolName}}</td>
+            <td>{{i.protocolPort}}</td>
+            <td>删除</td>
           </tr>
         </tbody>
       </nz-table>

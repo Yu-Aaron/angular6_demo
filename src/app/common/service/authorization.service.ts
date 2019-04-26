@@ -6,12 +6,18 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class AuthorizationService {
+    baseUrl = 'api/v2.0';
+
     constructor(private http: HttpClient) {
     }
 
     getMenu() {
         const url = `assets/json/conf.json`;
         return this.http.get(url);
+    }
+
+    logout() {
+        return this.http.post(this.baseUrl + '/logout', null);
     }
 }
 

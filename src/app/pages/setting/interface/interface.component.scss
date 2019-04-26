@@ -1,1 +1,86 @@
 @import '../../../../veriable.scss';
+
+.interface_content {
+    margin-top: 20px;
+    margin-left: 20px;
+    position: relative;
+    // 管理接口
+    .management_interface {
+        overflow: hidden;
+        .management_interface_left {
+            float: left;
+            display: inline-block;
+            margin-right: 50px;
+            font-size: 16px;
+            color: #3EB9FF;
+        }
+        .management_interface_right {
+            float: left;
+            width: 85%;
+            >div {
+                margin-bottom: 20px;
+                span {
+                    color: #fff;
+                }
+                .filed {
+                    color: rgb(219, 71, 71);
+                }
+                .success {
+                    color: rgb(101, 193, 57)
+                }
+                .close {
+                    color: #B3B3B3;
+                }
+            }
+        }
+        .edit_btn {
+            position: absolute;
+            right: 20px;
+            top: 0px;
+            background: #00CC99;
+            border-color: none;
+            height: 36px;
+            line-height: 36px;
+            i {
+                width: auto;
+                height: auto;
+                border-radius: 0;
+                background: transparent;
+            }
+            span {
+                margin-left: 0px;
+            }
+        }
+        .ant-btn>.anticon+span, .ant-btn>span+.anticon {
+            margin-left: 0px;
+        }
+    }
+    // 业务接口
+    .business_interface {
+        margin-top: 20px;
+        p {
+            font-size: 16px;
+            color: #3EB9FF;
+            margin-bottom: 20px;
+        }
+    }
+    // 聚合接口
+    .aggregate_interface {
+        margin-top: 20px;
+        p {
+            font-size: 16px;
+            color: #3EB9FF;
+            margin-bottom: 20px;
+            display: inline-block
+        }
+        .right_aggregate {
+            display: inline-block;
+            float: right;
+            margin-top: -5px;
+            span {
+                color: #FFCC33;
+                margin-right: 10px;
+            }
+        }
+    }
+}

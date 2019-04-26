@@ -1,3 +1,116 @@
-<p>
-  interface works!
-</p>
+<div class="interface_content">
+  <!-- 管理接口 -->
+  <div class="management_interface" >
+    <div class="management_interface_left">管理接口</div>
+    <div class="management_interface_right" nz-row>
+      <div *ngFor="let item of management_interface" nz-col [nzSpan]="item.wrap ? 8 : 4">
+        <span>{{item.label}}&nbsp;:</span>&nbsp;&nbsp;
+        <span *ngIf="item.label !== '链接状态'">{{item.value}}</span>
+        <span *ngIf="item.label === '链接状态'" [ngClass]="{'filed': item.value === '未连接', 'success': item.value === '已连接', 'close': item.value === '关闭'}">{{item.value}}</span>
+      </div>
+    </div>
+    <button nz-button nzType="primary" class="edit_btn"><i nz-icon nzType="edit" nzTheme="outline"></i>编辑</button>
+  </div>
+  <!-- 业务接口 -->
+  <div class="business_interface">
+    <p>业务接口</p>
+    <div class="business_table">
+      <nz-table #businessTable
+              [nzData]="listOfData"
+              [nzTotal]="total"
+              [nzShowQuickJumper]="true"
+              [nzFrontPagination]="false"
+              [(nzPageIndex)]="pageIndex"
+              [(nzPageSize)]="pageSize"
+              (nzPageIndexChange)="pageIndexChange()"
+              [nzLoading]="loading"
+              [nzShowTotal]="businessTableTotal">
+      <thead>
+        <tr>
+          <th>接口名称</th>
+          <th>接口状态</th>
+          <th>发送报文数</th>
+          <th>发送丢包数</th>
+          <th>发送错包数</th>
+          <th>接收报文数</th>
+          <th>接收丢包数</th>
+          <th>接收错包数</th>
+          <th>清除接口报文统计</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of businessTable.data">
+          <td>{{item.portName}}</td>
+          <td>{{item.linkState}}</td>
+          <td>{{item.txTotalTmp}}</td>
+          <td>{{item.txDroppedTmp}}</td>
+          <td>{{item.txErrosTmp}}</td>
+          <td>{{item.rxTotalTmp}}</td>
+          <td>{{item.rxDroppedTmp}}</td>
+          <td>{{item.txErrosTmp}}</td>
+          <td>清除</td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <ng-template #businessTableTotal>
+      <span>共 {{total}} 条，</span>
+      <span>每页展示 {{pageSize}} 条，</span>
+      <span>共 {{pages}} 页</span>
+    </ng-template>
+    </div>
+  </div>
+  <!-- 聚合接口 -->
+  <div class="aggregate_interface">
+    <p>聚合接口</p>
+    <div class="right_aggregate">
+      <span>聚合接口使用中不可编辑</span>
+      <button nz-button nzType="primary" class="edit_btn"><i nz-icon nzType="plus" nzTheme="outline"></i>新增聚合接口</button>
+    </div>
+    <div class="business_table">
+      <nz-table #businessTable
+              [nzData]="listOfData"
+              [nzTotal]="total"
+              [nzShowQuickJumper]="true"
+              [nzFrontPagination]="false"
+              [(nzPageIndex)]="pageIndex"
+              [(nzPageSize)]="pageSize"
+              (nzPageIndexChange)="pageIndexChange()"
+              [nzLoading]="loading"
+              [nzShowTotal]="businessTableTotal">
+      <thead>
+        <tr>
+          <th>接口名称</th>
+          <th>接口状态</th>
+          <th>发送报文数</th>
+          <th>发送丢包数</th>
+          <th>发送错包数</th>
+          <th>接收报文数</th>
+          <th>接收丢包数</th>
+          <th>接收错包数</th>
+          <th>接口描述</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of businessTable.data">
+          <td>{{item.portName}}</td>
+          <td>{{item.linkState}}</td>
+          <td>{{item.txTotalTmp}}</td>
+          <td>{{item.txDroppedTmp}}</td>
+          <td>{{item.txErrosTmp}}</td>
+          <td>{{item.rxTotalTmp}}</td>
+          <td>{{item.rxDroppedTmp}}</td>
+          <td>{{item.txErrosTmp}}</td>
+          <td>{{item.txErrosTmp}}</td>
+          <td>清除</td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <ng-template #businessTableTotal>
+      <span>共 {{total}} 条，</span>
+      <span>每页展示 {{pageSize}} 条，</span>
+      <span>共 {{pages}} 页</span>
+    </ng-template>
+    </div>
+  </div>
+</div>

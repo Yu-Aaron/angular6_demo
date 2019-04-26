@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthorizationService } from '../../service/authorization.service';
 
 @Component({
   selector: 'app-aside',
@@ -29,7 +30,9 @@ export class AsideComponent implements OnInit {
     { name: '安全域', iconType: 'plus', state: 'strategyaudit/securitydomain' }
   ];
 
-  constructor() { }
+  constructor(
+    public authService: AuthorizationService
+  ) { }
 
   ngOnInit() {
   }
@@ -44,6 +47,14 @@ export class AsideComponent implements OnInit {
 
   toggleAbout() {
     this.showSysInfo = !this.showSysInfo;
+  }
+
+  logout() {
+    this.authService.logout().subscribe((data: any) => {
+      if (data) {
+        console.log(data);
+      }
+    });
   }
 
 }

@@ -1,3 +1,39 @@
-<p>
-  backup works!
-</p>
+<div class="backup_upgrade_content">
+  <div>
+    <div class="backup_left">
+        <button nz-button nzType="primary" class="backup_btn">从本地备份恢复</button>
+        <button nz-button nzType="primary" class="backup_add_btn"><i nz-icon nzType="plus" nzTheme="outline"></i>新建备份</button>
+    </div>
+    <div class="backup_right">
+      <span>最多保留5条备份记录</span>
+    </div>
+  </div>
+  <div class="backup_table">
+    <nz-table #businessTable
+      [nzData]="listOfData"
+      [nzShowQuickJumper]="true"
+      [nzLoading]="loading">
+      <thead>
+        <tr>
+          <th>备份序号</th>
+          <th>备份名称</th>
+          <th>备份时间</th>
+          <th>操作用户</th>
+          <th>备注</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of businessTable.data">
+          <td>{{item.portName}}</td>
+          <td>{{item.linkState}}</td>
+          <td>{{item.txTotalTmp}}</td>
+          <td>{{item.txDroppedTmp}}</td>
+          <td>{{item.txErrosTmp}}</td>
+          <td>{{item.rxTotalTmp}}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <div class="upgrade_package"></div>
+</div>

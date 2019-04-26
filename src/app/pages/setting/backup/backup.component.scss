@@ -1,1 +1,39 @@
 @import '../../../../veriable.scss';
+
+.backup_upgrade_content {
+    >div {
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+    .backup_left {
+        float: left;
+        button {
+            margin-right: 10px;
+        }
+        .backup_btn {
+            background: #0151A7;
+            border-color: #0151A7;
+            &:hover, &:active, &:focus {
+                background: #014690;
+                border-color: #014690;
+            }
+        }
+        .backup_add_btn {
+            background: #148F90;
+            border-color: #148F90;
+            &:hover, &:active, &:focus {
+                background: #10787D;
+                border-color: #10787D;
+            }
+        }
+    }
+    .backup_right {
+        float: right;
+        span {
+            color: #FF9933;
+        }
+    }
+    .backup_table {
+        margin-bottom: 20px;
+    }
+}

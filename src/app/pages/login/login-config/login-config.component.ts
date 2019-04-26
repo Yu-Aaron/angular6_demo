@@ -12,6 +12,7 @@ export class LoginConfigComponent implements OnInit {
   };
   current = 0;
   seconds = 10;
+  systime = 'manual';
 
   constructor() { }
 
@@ -25,7 +26,7 @@ export class LoginConfigComponent implements OnInit {
   next() {
     this.current += 1;
   }
-  
+
   done() {
     this.current = 3;
     let _this = this;

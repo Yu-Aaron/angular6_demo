@@ -6,12 +6,18 @@ import { CommonService } from './common.service';
   providedIn: 'root'
 })
 export class SettingService {
-  baseUrl = 'api/v2.0/';
 
   constructor(
-    public http: HttpClient,
+    private http: HttpClient,
     public commonService: CommonService
   ) { }
+
+  baseUrl = '/api/v2.0';
+  // 接口设置
+  getBusinessData() {
+    return this.http.get(this.baseUrl + '/systemsetting/mgt/port');
+  }
+
 
   /*******协议端口开始********/
   // 获取协议映射列表 DEFAULT默认 CUSTOM私有

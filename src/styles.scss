@@ -255,7 +255,12 @@ html, body {
   }
 }
 
-/*** dropdown ***/
+.ant-btn>.anticon+span, .ant-btn>span+.anticon {
+  margin-left: 0px;
+}
+
+
+/*** dropdown  ***/
 .ant-dropdown-menu {
   background: #08182A;
   .ant-dropdown-menu-item {

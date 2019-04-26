@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BackupComponent implements OnInit {
 
+  loading: boolean;
+  listOfData = [];   // 备份数据
+
   constructor() { }
 
   ngOnInit() {
