@@ -1,8 +1,14 @@
 <div class="logaudit_content">
+    <div class="top-right">
+        <button nz-button nzType="primary" class="mr-10" (click)="refresh()">
+            <i nz-icon nzType="sync" nzTheme="outline"></i>刷新
+        </button>
+    </div>
     <!-- 过滤条件 -->
     <app-filter-table [timeValueData]="filterConditionData.timeValueData"
                       [controlArray]="filterConditionData.controlArray"
-                      [logProtocolArray]="filterConditionData.logProtocolArray"
+                      [protocolOptions]="protocolOptions"
+                      [showProtocol]="true"
                       [showTimePicker]="true"
                       [isFuzzySearch]="true"
                       (searchFilterTable)="searchFilterTable($event)">
@@ -20,26 +26,26 @@
               [nzShowTotal]="totalTemplate">
         <thead>
             <tr>
-                <th>起始时间</th>
-                <th>源IP</th>
-                <th>目的IP</th>
-                <th>源MAC</th>
-                <th>目的MAC</th>
-                <th>源端口</th>
-                <th>目的端口</th>
-                <th>协议类型</th>
+                <th nzShowSort nzSortKey="packetTimestamp" >起始时间</th>
+                <th nzShowSort nzSortKey="sourceIp" *ngIf="supportIpAndPort(filter)">源IP</th>
+                <th nzShowSort nzSortKey="destinationIp" *ngIf="supportIpAndPort(filter)">目的IP</th>
+                <th nzShowSort nzSortKey="sourceMac">源MAC</th>
+                <th nzShowSort nzSortKey="destinationMac">目的MAC</th>
+                <th nzShowSort nzSortKey="sourcePort" *ngIf="supportIpAndPort(filter)">源端口</th>
+                <th nzShowSort nzSortKey="destinationPort" *ngIf="supportIpAndPort(filter)">目的端口</th>
+                <th nzShowSort nzSortKey="protocolSourceName">协议类型</th>
                 <th>操作</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let audit of tableDataTmp.data">
-                <td>{{audit.flowTimestampLocal | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
-                <td>{{audit.sourceIp}}</td>
-                <td>{{audit.destinationIp}}</td>
+                <td>{{audit.packetTimestamp | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td *ngIf="supportIpAndPort(filter)">{{supportIpAndPort(audit.protocolSourceName) ? audit.sourceIp : ""}}</td>
+                <td *ngIf="supportIpAndPort(filter)">{{supportIpAndPort(audit.protocolSourceName) ? audit.destinationIp: ""}}</td>
                 <td>{{audit.sourceMac}}</td>
                 <td>{{audit.destinationMac}}</td>
-                <td>{{audit.sourcePort}}</td>
-                <td>{{audit.destinationIp}}</td>
+                <td *ngIf="supportIpAndPort(filter)">{{supportIpAndPort(audit.protocolSourceName) ? audit.sourcePort : ""}}</td>
+                <td *ngIf="supportIpAndPort(filter)">{{supportIpAndPort(audit.protocolSourceName)? audit.destinationPort : ""}}</td>
                 <td>{{audit.protocolSourceName === 'telnet' ? 'Telnet' : audit.protocolSourceName === 'modbus' ? 'Modbus' : audit.protocolSourceName === 'profinetio' ? 'Profinetio' : (audit.protocolSourceName | uppercase) }}</td>
                 <td (click)="showDetailWindow(audit)"><i nz-icon nzType="search" nzTheme="outline"></i>详情</td>
             </tr>

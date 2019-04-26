@@ -3,6 +3,7 @@
           [nzOkText]=null
           [nzCancelText]=null
           (nzOnCancel)="handleCancel()"
+          (nzAfterOpen)="initData()"
           [nzWidth]=1120>
     <div class="panel_top">
         <div nz-row class="mb-20">
@@ -16,11 +17,11 @@
             </div>
         </div>
         <div nz-row class="mb-20">
-            <div nz-col [nzSpan]="6">
+            <div nz-col [nzSpan]="6" *ngIf="supportIpAndPort(auditDataDetail.protocolSourceName)">
                 <label>端口：</label>
                 <span>{{auditDataDetail.sourcePort}} <=> {{auditDataDetail.destinationPort}}</span>
             </div>
-            <div nz-col [nzSpan]="8">
+            <div nz-col [nzSpan]="8" *ngIf="supportIpAndPort(auditDataDetail.protocolSourceName)">
                 <label>IP地址：</label>
                 <span>{{auditDataDetail.sourceIp}} <=> {{auditDataDetail.destinationIp}}</span>
             </div>
@@ -33,15 +34,15 @@
     <div class="panel_middle">
         <span class="txt-error">*</span><label>设置解压密码: </label>
         <input nz-input [(ngModel)]="fileZipPsw" class="inline-block"/>
-        <button nz-button nzType="primary" class="mr-10" [disabled]="!fileZipPsw.trim().length" (click)="exportFile(false, fileZipPsw)">
+        <button nz-button nzType="primary" class="mr-10" [disabled]="!trim(fileZipPsw).length" (click)="exportFile(auditDataDetail.flowdataHeadId)">
             <i nz-icon nzType="download" nzTheme="outline"></i>导出
         </button>
         <span class="txt-warning">导出仅限10W条数据</span>
     </div>
     <div class="panel_bottom">
         <nz-table #tableDataTmp
-                  [nzData]="auditDataDetail.listInfo"
-                  [nzTotal]="auditDataDetail.listCount"
+                  [nzData]="listInfo"
+                  [nzTotal]="totalCount"
                   [nzShowQuickJumper]="true"
                   [nzFrontPagination]="false"
                   [(nzPageIndex)]="pageIndex"
@@ -51,7 +52,7 @@
                   [nzShowTotal]="totalTemplate">
             <thead>
                 <tr>
-                    <th *ngFor="let head of auditDataDetail.listInfoHead">{{head}}</th>
+                    <th *ngFor="let head of listInfoHead">{{head}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,7 +62,7 @@
             </tbody>
         </nz-table>
         <ng-template #totalTemplate let-total>
-            <span>共 {{auditDataDetail.listCount}} 条，</span>
+            <span>共 {{totalCount}} 条，</span>
             <span>每页展示 {{pageSize}} 条，</span>
             <span>共 {{pageTotalNumber}} 页</span>
         </ng-template>

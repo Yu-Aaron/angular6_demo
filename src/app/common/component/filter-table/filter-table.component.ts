@@ -28,12 +28,13 @@ export class FilterTableComponent implements OnInit {
     advancedSearchTimeRange = ['', ''];  // 时间变量
     selectedValue = 'n';  // 默认不限时间
     CAFC = {}; // 参数拼接
-    selectedProtocol: string;
+    selectedProtocol = ''; // 审计协议默认值
 
     // 用户自定义
     @Input() timeValueData = [];  // 时间枚举值
     @Input() controlArray = [];   // 过滤条件可选项
-    @Input() logProtocolArray = [];
+    @Input() protocolOptions = [];   // 过滤条件可选项
+    @Input() showProtocol = false; // 审计协议是否显示
     @Input() showTimePicker = false; // 时间选择器是否显示
     @Input() showAdvance = true; // 高级搜索是否显示
     @Input() isFuzzySearch: boolean; // 模糊查询
@@ -48,12 +49,12 @@ export class FilterTableComponent implements OnInit {
         if (!self.timeValueData.length) {
             self.timeValueData = self.timeFilterData;
         }
-        this.selectedProtocol = self.logProtocolArray.length > 0 ? self.logProtocolArray[0]['value'] : '';
+        this.selectedProtocol = this.showProtocol && this.protocolOptions[0]['value'];
         const fb = new FormBuilder();
         this.validateForm = fb.group({
             isFuzzySearch: self.isFuzzySearch,
             rangePicker: [[]],
-            selectedProtocol: self.logProtocolArray.length > 0 ? self.logProtocolArray[0]['display'] : ''
+            selectedProtocol: this.showProtocol ? this.protocolOptions[0]['value'] : ''
         });
         for (let i = 0; i < this.controlArray.length; i++) {
             const obj = {
@@ -137,6 +138,11 @@ export class FilterTableComponent implements OnInit {
         return {'start': start, 'end': end};
     }
 
+    // 审计协议更改
+    modelChange() {
+        this.submitForm();
+    }
+
     // 点击更新按钮触发
     submitForm(): void {
         let result = '';
@@ -146,6 +152,11 @@ export class FilterTableComponent implements OnInit {
                 const genTimeRange = self.genDateFilter(self.advancedSearchTimeRange);
                 result += '(' + 'timestamp' + ' ge \'' + genTimeRange.start + (genTimeRange.end ? ('\' and ' + 'timestamp' + ' le \'' + genTimeRange.end + '\')') : '\')');
             }
+        }
+        // 协议处理
+        if (this.showProtocol && self.selectedProtocol !== 'normal') {
+            result += result && ' and ' ;
+            result += 'contains(protocolSourceName, "' + self.selectedProtocol + '")';
         }
         self.controlArray.forEach(function (data) {
             // input 处理
@@ -174,7 +185,7 @@ export class FilterTableComponent implements OnInit {
                 }
             }
             // list_checkbox 处理
-            if (data.type === 'list_checkbox' && data.value !== []) {
+            if (data.type === 'list_checkbox' && data.options.length && data.value !== []) {
                 let checklistNum = 0;
                 for (let i = 0; i < data.value.length; i++) {
                     const isDataType = data.filter === 'profinetio' && data.name === 'dataType';
@@ -227,6 +238,7 @@ export class FilterTableComponent implements OnInit {
         const filterParams = {
             params: self.filterParameter,
             pageIndex: self.pageIndex,
+            protocol: self.selectedProtocol
         };
         console.log(filterParams);
         self.searchFilterTable.emit(filterParams);

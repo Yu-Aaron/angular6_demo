@@ -1,9 +1,9 @@
 <form nz-form [formGroup]="validateForm" class="mb-20" [ngStyle]="{'padding': showTimePicker ? '20px': '4px 20px 8px'}">
     <div nz-row *ngIf="showTimePicker" [ngClass]="{'mb-10': isCollapseAdvance}">
-        <div *ngIf="logProtocolArray.length > 0" nz-col [nzMd]="{span: 20}" [nzXXl]="{span: 22}" class="mb-10">
+        <div *ngIf="showProtocol" nz-col [nzMd]="{span: 20}" [nzXXl]="{span: 22}" class="mb-10">
             <label>协议: </label>
-            <nz-select style="width: 130px;" [(ngModel)]="selectedProtocol" formControlName="selectedProtocol">
-                <nz-option *ngFor="let option of logProtocolArray" [nzLabel]="option.display" [nzValue]="option.value"></nz-option>
+            <nz-select style="width: 130px;" [(ngModel)]="selectedProtocol" (ngModelChange)="modelChange()" formControlName="selectedProtocol">
+                <nz-option *ngFor="let option of protocolOptions" [nzLabel]="option.display" [nzValue]="option.value"></nz-option>
             </nz-select>
         </div>
         <!-- 时间过滤 -->
