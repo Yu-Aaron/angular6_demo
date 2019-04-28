@@ -2,4 +2,12 @@
 
 .logaudit_content {
   position: relative;
+  .protocol_filter {
+    background: $bg-card;
+    padding: 15px 20px 0;
+    label {
+      color: #999;
+      margin-right: 10px;
+    }
+  }
 }

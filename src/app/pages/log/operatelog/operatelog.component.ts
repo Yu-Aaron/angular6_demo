@@ -23,19 +23,24 @@ export class OperatelogComponent implements OnInit {
         this.filterConditionData = {
             timeValueData: [],
             controlArray: [
-                {label: '用户', type: 'input', name: 'user'},
-                {label: 'IP', type: 'input', name: 'user_ip'},
+                {label: '用户', type: 'input', name: 'user', placeholder: '输入用户'},
+                {label: 'IP', type: 'input', name: 'user_ip', placeholder: '输入IP'},
             ]
         };
-        this.getOpetateLog();
+        this.getOpetateLog({});
     }
 
-    getOpetateLog() {
+    getOpetateLog(params) {
         this.loading = true;
         const payload = {
             '$skip': (this.pageIndex - 1) * this.pageSize,
             '$limit': this.pageSize
         };
+        if (!params['$orderby'] || params['$orderby'] === '') {
+            payload['$orderby'] = 'timestamp desc';
+        } else {
+            payload['$orderby'] += ', timestamp desc';
+        }
         if (this.filterParameter) {
             payload['$filter'] = this.filterParameter;
         }
@@ -49,7 +54,7 @@ export class OperatelogComponent implements OnInit {
     }
 
     getOpetateLogCount() {
-        const payload = {};
+        let payload = {};
         if (this.filterParameter) {
             payload['$filter'] = this.filterParameter;
         }
@@ -60,13 +65,13 @@ export class OperatelogComponent implements OnInit {
     }
 
     pageIndexChange() {
-        this.getOpetateLog();
+        this.getOpetateLog({});
     }
 
     // 点击查询按钮 传过来的事件
     searchFilterTable(params) {
         this.pageIndex = params.pageIndex;
         this.filterParameter = params.params;
-        this.getOpetateLog();
+        this.getOpetateLog({});
     }
 }

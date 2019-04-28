@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SecurityAuditService} from '../../../common/service/securityAudit.service';
+import {CommonService} from '../../../common/service/common.service';
 
 @Component({
     selector: 'app-logaudit',
@@ -29,7 +30,7 @@ export class LogauditComponent implements OnInit {
             { label: '最近6个月', type: 'link', value: 's' },
             { label: '自定义', type: 'ower_link', value: 'r' }
         ],
-        controlArray: [],
+        controlArray: []
     }; // 过滤条件 可选项
     filterParameter = null; // 过滤条件 参数
     fields = ['protocolSourceName', 'sourceIp', 'sourcePort', 'destinationIp', 'destinationPort', 'sourceMac', 'destinationMac'];
@@ -41,6 +42,7 @@ export class LogauditComponent implements OnInit {
         { display: 'SMTP', value: 'smtp', type: 'normal' },
         { display: 'Telnet', value: 'telnet', type: 'normal' },
         { display: 'SNMP', value: 'snmp', type: 'normal' },
+        { display: '-----------', value: '', type: 'disabled' }
     ]; // 协议枚举值
     factoryProtocolOptions = [
         {display: 'Modbus', value: 'modbus', type: 'factory'},
@@ -58,6 +60,15 @@ export class LogauditComponent implements OnInit {
         {display: 'EnipIo', value: 'enipio', type: 'factory'},
         {display: 'OPCUA', value: 'opcua', type: 'factory'}
     ];
+    controlArray = [
+        {label: '源IP', type: 'input', name: 'sourceIp', placeholder: '输入源IP'},
+        {label: '目标IP', type: 'input', name: 'targetIp', placeholder: '输入目标IP'},
+        {label: '源MAC', type: 'input', name: 'sourceMac', placeholder: '输入源Mac'},
+        {label: '目标MAC', type: 'input', name: 'destinationMac', placeholder: '输入目标Mac'},
+        {label: '源端口', type: 'input', name: 'sourcePort', placeholder: '输入源端口'},
+        {label: '目标端口', type: 'input', name: 'destinationPort', placeholder: '输入目标端口'}
+    ];
+    filterProtocolOptions = [];
     msOption: any = {
         modbus: {func: []},
         opcda: {opc: []},
@@ -77,8 +88,10 @@ export class LogauditComponent implements OnInit {
         focas: {command: []},
         sip: {method: []}
     };
+    hasAdvanceSearch: boolean;  // 是否使用高级查询
+    payload = {};  // 过滤参数拼接
 
-    constructor(private securityAuditService: SecurityAuditService) {
+    constructor(private securityAuditService: SecurityAuditService, private commonService: CommonService) {
     }
 
     ngOnInit() {
@@ -103,26 +116,38 @@ export class LogauditComponent implements OnInit {
             destinationPort: 20,
             protocolSourceName: 'http'
         }];
-        this.filterConditionData['protocolOptions'] = this.protocolOptions;
+        this.filterConditionData['controlArray'] = this.commonService.deepCopy(this.controlArray);
+        this.filterProtocolOptions = this.protocolOptions.concat(this.factoryProtocolOptions);
         this.protocol = this.protocolOptions[0]['value'];
+        this.getLogAudit({});
     }
 
     // 审计日志列表
     getLogAudit(params) {
-        // this.loading = true;
-        let hasAdvanceSearch = this.filterParameter !== '';
-        let payload = {
+        this.loading = true;
+        this.payload = {
             '$skip': (this.pageIndex - 1) * this.pageSize,
             '$limit': this.pageSize,
         };
         if (!params['$orderby'] || params['$orderby'] === '') {
-            payload['$orderby'] = 'packetTimestamp desc';
+            this.payload['$orderby'] = 'packetTimestamp desc';
         }
         if (this.filterParameter) {
-            payload['$filter'] = this.filterParameter;
-            payload['$groupby'] = ['sourceMac', 'destinationMac', 'sourceIp', 'sourcePort', 'destinationIp', 'destinationPort', 'protocolType', 'protocolTypeName', 'protocolSourceName', 'dpiIp', 'dpiPort', 'boxId', 'deviceId'];
+            this.filterParameter = this.filterParameter.replace(/timestamp/g, 'packetTimestamp');
+            this.payload['$filter'] = this.filterParameter;
         }
-        this.securityAuditService.getLogAudit(payload, this.protocol, hasAdvanceSearch).subscribe((listData: any) => {
+        if (this.protocol !== 'normal') {
+            if (this.hasAdvanceSearch) {
+                this.payload['$groupby'] = ['sourceMac', 'destinationMac', 'sourceIp', 'sourcePort', 'destinationIp', 'destinationPort', 'protocolType', 'protocolTypeName', 'protocolSourceName', 'dpiIp', 'dpiPort', 'boxId', 'deviceId'];
+            }
+            if (this.filterParameter) {
+                this.payload['$filter'] += ' and (contains(protocolSourceName,\'' + this.protocol + '\'))';
+            } else {
+                this.payload['$filter'] = '(contains(protocolSourceName,\'' + this.protocol + '\'))';
+            }
+        }
+        this.securityAuditService.getLogAudit(this.payload, this.protocol, this.hasAdvanceSearch).subscribe((listData: any) => {
+            this.loading = false;
             this.tableData = listData;
             this.tableData.map((item) => {
                 if (item.protocolSourceName === 'goose' || item.protocolSourceName === 'sv') {
@@ -133,18 +158,15 @@ export class LogauditComponent implements OnInit {
                 // item.getDetails = this.getDetails;
                 return item;
             });
-
+        }, () => {
+            this.loading = false;
         });
         this.getLogAuditCount();
     }
 
     getLogAuditCount() {
-        const payload = {};
-        let hasAdvanceSearch = this.filterParameter !== '';
-        if (this.filterParameter) {
-            payload['$filter'] = this.filterParameter;
-        }
-        this.securityAuditService.getLogAuditCount(payload, this.protocol, hasAdvanceSearch).subscribe((data: any) => {
+        const params = this.payload['$filter'] || {};
+        this.securityAuditService.getLogAuditCount(params, this.protocol, this.hasAdvanceSearch).subscribe((data: any) => {
             this.tableCount = data;
             this.pageTotalNumber = Math.ceil(this.tableCount / this.pageSize);
         });
@@ -169,6 +191,7 @@ export class LogauditComponent implements OnInit {
 
     // 切换协议
     changeProtocol() {
+        this.hasAdvanceSearch = false;
         this.setConfig(this.protocol);
     }
 
@@ -291,19 +314,12 @@ export class LogauditComponent implements OnInit {
                 this.msOption.sip['init'] = true;
             });
         }
-        this.filterConditionData.controlArray = [
-            {label: '源IP', type: 'input', name: 'sourceIp', placeholder: '输入源IP'},
-            {label: '目标IP', type: 'input', name: 'targetIp', placeholder: '输入目标IP'},
-            {label: '源Mac', type: 'input', name: 'sourceMac', placeholder: '输入源Mac'},
-            {label: '目标MAC', type: 'input', name: 'destinationMac', placeholder: '输入目标Mac'},
-            {label: '源端口', type: 'input', name: 'sourcePort', placeholder: '输入源端口'},
-            {label: '目标端口', type: 'input', name: 'destinationPort', placeholder: '输入目标端口'}
-        ];
+        this.filterConditionData['controlArray'] = this.commonService.deepCopy(this.controlArray);
         if (c === 'modbus') {
             this.fields = ['protocolSourceName', 'sourceIp', 'sourcePort', 'destinationIp', 'destinationPort', 'sourceMac', 'destinationMac', 'func', 'startAddr', 'endAddr'];
             this.filterConditionData.controlArray.push({'label': '功能码', 'type': 'list_checkbox', 'name': 'func', 'options': this.msOption.modbus.func, 'filter': c});
-            this.filterConditionData.controlArray.push({'label': '起始地址', 'type': 'input','name': 'startAddr', });
-            this.filterConditionData.controlArray.push({'label': '终止地址', 'type': 'input','name': 'endAddr', });
+            this.filterConditionData.controlArray.push({'label': '起始地址', 'type': 'input', 'name': 'startAddr'});
+            this.filterConditionData.controlArray.push({'label': '终止地址', 'type': 'input', 'name': 'endAddr'});
         }
         if (c === 'opcda') {
             this.fields = ['protocolSourceName', 'sourceIp', 'sourcePort', 'destinationIp', 'destinationPort', 'sourceMac', 'destinationMac', 'opInt', 'opCode'];
@@ -437,12 +453,8 @@ export class LogauditComponent implements OnInit {
     searchFilterTable(params) {
         this.pageIndex = params.pageIndex;
         this.filterParameter = params.params;
-        this.protocol = params.protocol;
-        if (this.protocol) {
-            this.changeProtocol();
-        } else {
-            this.getLogAudit({});
-        }
+        this.hasAdvanceSearch = true;
+        this.getLogAudit({});
     }
 
     // 刷新

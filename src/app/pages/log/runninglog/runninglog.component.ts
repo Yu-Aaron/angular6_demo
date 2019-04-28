@@ -25,7 +25,7 @@ export class RunninglogComponent implements OnInit {
             timeValueData: [],
             controlArray: [
                 {label: '事件等级', type: 'select', name: 'level', selectValueData: [{value: -1, label: '信息和警告'}, {value: 'WARN', label: '警告'}, {value: 'INFO', label: '信息'}]},
-                {label: '内容', type: 'input', name: 'content'},
+                {label: '内容', type: 'input', name: 'content', placeholder: '输入内容'},
             ]
         };
         this.getRunningLog();
@@ -33,7 +33,7 @@ export class RunninglogComponent implements OnInit {
 
     getRunningLog() {
         this.loading = true;
-        const payload = {
+        let payload = {
             '$skip': (this.pageIndex - 1) * this.pageSize,
             '$limit': this.pageSize
         };

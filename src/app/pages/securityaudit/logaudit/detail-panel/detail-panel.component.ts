@@ -16,9 +16,9 @@ export class DetailPanelComponent implements OnInit {
     protocolType = '';
     totalCount = 0;
     pageIndex = 1;
-    pageSize = 10;
+    pageSize = 8;
     pageTotalNumber = 0;
-    loading: boolean;
+    loading = false;
 
     constructor(private securityAuditService: SecurityAuditService) {
     }
@@ -27,22 +27,31 @@ export class DetailPanelComponent implements OnInit {
     }
 
     initData() {
+        this.protocolType = this.auditDataDetail['protocolSourceName'] && this.auditDataDetail['protocolSourceName'].toLowerCase();
         this.getAll({});
         this.getCount();
         this.getTableHeads();
-        this.protocolType = this.auditDataDetail['protocolSourceName'] && this.auditDataDetail['protocolSourceName'].toLowerCase();
     }
 
     getAll(params) {
         // if (!params['$orderby'] || params['$orderby'] === '') {
         //     params['$orderby'] = 'packetTimestamp desc';
         // }
-        this.securityAuditService.getDetails(params, this.auditDataDetail['flowdataHeadId'], this.protocolType).subscribe((data: any) => {
+        this.loading = true;
+        let payload = {
+            '$skip': (this.pageIndex - 1) * this.pageSize,
+            '$limit': this.pageSize,
+        };
+        console.log(this.protocolType);
+        this.securityAuditService.getDetails(payload, this.auditDataDetail['flowdataHeadId'], this.protocolType).subscribe((data: any) => {
+            this.loading = false;
             if (data.length) {
                 this.auditDataDetail['listInfo'] = this.getTableDatas(data, this.protocolType);
             } else {
                 this.auditDataDetail['listInfo'] = [];
             }
+        }, () => {
+            this.loading = false;
         });
     }
 

@@ -1,11 +1,5 @@
 <form nz-form [formGroup]="validateForm" class="mb-20" [ngStyle]="{'padding': showTimePicker ? '20px': '4px 20px 8px'}">
     <div nz-row *ngIf="showTimePicker" [ngClass]="{'mb-10': isCollapseAdvance}">
-        <div *ngIf="showProtocol" nz-col [nzMd]="{span: 20}" [nzXXl]="{span: 22}" class="mb-10">
-            <label>协议: </label>
-            <nz-select style="width: 130px;" [(ngModel)]="selectedProtocol" (ngModelChange)="modelChange()" formControlName="selectedProtocol">
-                <nz-option *ngFor="let option of protocolOptions" [nzLabel]="option.display" [nzValue]="option.value"></nz-option>
-            </nz-select>
-        </div>
         <!-- 时间过滤 -->
         <div nz-col [nzMd]="{span: 20}" [nzXXl]="{span: 22}">
             <div nz-col [nzXl]="{span: 24}" [nzXXl]="{span: 12}">
@@ -30,8 +24,8 @@
     </div>
     <div nz-row *ngIf="!showTimePicker || isCollapseAdvance">
         <!-- 其他过滤方式 -->
-        <div nz-col [nzMd]="{span: 24}">
-            <div class="inline-block" style="margin-right: 15px;" *ngFor="let control of controlArray">
+        <div nz-col [nzMd]="{span: 24}" class="filter_others">
+            <div style="margin-right: 15px;" *ngFor="let control of controlArray">
                 <nz-form-item nzFlex>
                     <nz-form-label [nzFor]="control.name">{{control.label}}</nz-form-label>
                     <nz-form-control>
@@ -53,7 +47,7 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
-            <div class="search inline-block">
+            <div class="search">
                 <div *ngIf="isFuzzySearchShow" class="inline-block mr-20">
                     <label>模糊查询：</label>
                     <nz-switch formControlName="isFuzzySearch" [(ngModel)]="isFuzzySearch" [nzSize]="small"

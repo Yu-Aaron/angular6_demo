@@ -4,15 +4,19 @@
             <i nz-icon nzType="sync" nzTheme="outline"></i>刷新
         </button>
     </div>
-    <!-- 过滤条件 -->
-    <app-filter-table [timeValueData]="filterConditionData.timeValueData"
-                      [controlArray]="filterConditionData.controlArray"
-                      [protocolOptions]="protocolOptions"
-                      [showProtocol]="true"
-                      [showTimePicker]="true"
-                      [isFuzzySearch]="true"
-                      (searchFilterTable)="searchFilterTable($event)">
-    </app-filter-table>
+        <!-- 过滤条件 -->
+        <div class="protocol_filter">
+            <label>协议: </label>
+            <nz-select style="width: 130px;" [(ngModel)]="protocol" (ngModelChange)="changeProtocol()">
+                <nz-option *ngFor="let option of filterProtocolOptions" [nzLabel]="option.display" [nzValue]="option.value" [nzDisabled]="option.type === 'disabled'"></nz-option>
+            </nz-select>
+        </div>
+        <app-filter-table [timeValueData]="filterConditionData.timeValueData"
+                          [controlArray]="filterConditionData.controlArray"
+                          [showTimePicker]="true"
+                          [isFuzzySearch]="true"
+                          (searchFilterTable)="searchFilterTable($event)">
+        </app-filter-table>
     <!-- 表格 -->
     <nz-table #tableDataTmp
               [nzData]="tableData"
@@ -26,7 +30,7 @@
               [nzShowTotal]="totalTemplate">
         <thead>
             <tr>
-                <th nzShowSort nzSortKey="packetTimestamp" >起始时间</th>
+                <th nzShowSort nzSortKey="packetTimestamp">起始时间</th>
                 <th nzShowSort nzSortKey="sourceIp" *ngIf="supportIpAndPort(filter)">源IP</th>
                 <th nzShowSort nzSortKey="destinationIp" *ngIf="supportIpAndPort(filter)">目的IP</th>
                 <th nzShowSort nzSortKey="sourceMac">源MAC</th>

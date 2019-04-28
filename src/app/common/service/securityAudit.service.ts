@@ -5,6 +5,7 @@ import {CommonService} from './common.service';
 @Injectable({
     providedIn: 'root'
 })
+
 export class SecurityAuditService {
 
     constructor(private http: HttpClient, private commonService: CommonService ) {
@@ -42,22 +43,22 @@ export class SecurityAuditService {
     getLogAudit(params, type, hasAdvanceSearch) {
         let factory = ['normal', 'http', 'ftp', 'pop3', 'smtp', 'telnet'].indexOf(type) <= -1;
         if (type && factory && hasAdvanceSearch) {
-            return this.http.get(this.baseUrl + '/detailinfo/type/' + type, {params: this.commonService.encodeURL(params)});
+            return this.http.get(this.baseUrl + '/auditlogs/detailinfo/type/' + type, {params: this.commonService.encodeURL(params)});
         }
-        return this.http.get(this.baseUrl + '/topology/' + this.topologyId + '/heads', {params: this.commonService.encodeURL(params)});
+        return this.http.get(this.baseUrl + '/auditlogs/topology/' + this.topologyId + '/heads', {params: this.commonService.encodeURL(params)});
     }
 
     getLogAuditCount(params, type, hasAdvanceSearch) {
         let factory = ['normal', 'http', 'ftp', 'pop3', 'smtp', 'telnet'].indexOf(type) <= -1;
         if (type && factory && hasAdvanceSearch) {
-            return this.http.get(this.baseUrl + '/detailinfo/type/' + type + '/count', {params: this.commonService.encodeURL(params)});
+            return this.http.get(this.baseUrl + '/auditlogs/detailinfo/type/' + type + '/count', {params: this.commonService.encodeURL(params)});
         }
-        return this.http.get(this.baseUrl + '/topology/' + this.topologyId + '/heads/count',{params: this.commonService.encodeURL(params)});
+        return this.http.get(this.baseUrl + '/auditlogs/topology/' + this.topologyId + '/heads/count', {params: this.commonService.encodeURL(params)});
     }
 
     // 切换协议
     getData(params) {
-        return this.http.get(this.baseUrl + 'policies/prompt', {params});
+        return this.http.get(this.baseUrl + '/policies/prompt', {params});
     }
 
     // 导出
@@ -80,7 +81,7 @@ export class SecurityAuditService {
             }
         }
         ppp = str.join('&');
-        return this.http.post(this.baseUrl + '/topology/' + this.topologyId + '/' + type.toLowerCase() + '/export?' + params, ppp, this.httpOptions);
+        return this.http.post(this.baseUrl + '/auditlogs/topology/' + this.topologyId + '/' + type.toLowerCase() + '/export?' + params, ppp, this.httpOptions);
     }
     get(id, type) {
         return this.http.get(this.baseUrl + '/head/' + id + '/type/' + type);
@@ -88,11 +89,11 @@ export class SecurityAuditService {
 
     // 详情列表
     getDetails(params, id, type) {
-        return this.http.get(this.baseUrl + '/head/' + id + '/type/' + type, {params: this.commonService.encodeURL(params)});
+        return this.http.get(this.baseUrl + '/auditlogs/head/' + id + '/type/' + type, {params: this.commonService.encodeURL(params)});
     }
 
     getDetailsCount(id, type) {
-        return this.http.get(this.baseUrl + '/head/' + id + '/type/' + type + '/count');
+        return this.http.get(this.baseUrl + '/auditlogs/head/' + id + '/type/' + type + '/count');
     }
 
 

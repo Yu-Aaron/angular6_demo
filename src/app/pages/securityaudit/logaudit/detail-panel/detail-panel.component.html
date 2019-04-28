@@ -33,7 +33,7 @@
     </div>
     <div class="panel_middle">
         <span class="txt-error">*</span><label>设置解压密码: </label>
-        <input nz-input [(ngModel)]="fileZipPsw" class="inline-block"/>
+        <input nz-input [(ngModel)]="fileZipPsw" class="inline-block" type="password"/>
         <button nz-button nzType="primary" class="mr-10" [disabled]="!trim(fileZipPsw).length" (click)="exportFile(auditDataDetail.flowdataHeadId)">
             <i nz-icon nzType="download" nzTheme="outline"></i>导出
         </button>

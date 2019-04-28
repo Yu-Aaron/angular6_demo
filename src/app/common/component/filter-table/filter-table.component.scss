@@ -42,9 +42,9 @@
             cursor: pointer;
         }
     }
-    .search {
-        position: absolute;
-        line-height: 45px;
+    .filter_others {
+        display: flex;
+        flex-wrap: wrap;
     }
 }
 
