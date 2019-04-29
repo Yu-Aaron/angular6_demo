@@ -27,6 +27,10 @@ export class CommonService {
         });
     }
 
+    sysbaseinfo() {
+        return this.http.get(this.baseUrl + 'sysbaseinfo/curtime');
+    }
+
     encodeURL(urlObj) {
         if (urlObj) {
             Object.keys(urlObj).forEach(function (key) {

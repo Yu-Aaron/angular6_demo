@@ -11,29 +11,51 @@
             margin-right: 10px;
         }
         .backup_btn {
-            background: #0151A7;
-            border-color: #0151A7;
+            background: $tab-active;
+            border-color: $tab-active;
             &:hover, &:active, &:focus {
-                background: #014690;
-                border-color: #014690;
+                background: $tab-active-hover;
+                border-color: $tab-active-hover;
             }
         }
         .backup_add_btn {
-            background: #148F90;
-            border-color: #148F90;
+            background: $btn-green;
+            border-color: $btn-green;
             &:hover, &:active, &:focus {
-                background: #10787D;
-                border-color: #10787D;
+                background: $btn-green-hover;
+                border-color: $btn-green-hover;
             }
         }
     }
     .backup_right {
         float: right;
         span {
-            color: #FF9933;
+            color: $txt-warning;
         }
     }
     .backup_table {
         margin-bottom: 20px;
+    }
+    .upgrade_package {
+        .upgrade_package_title {
+            .backup {
+                color: $txt-warning;
+                i {
+                    font-style: normal;
+                }
+                margin-right: 20px;
+            }
+            .start_backup {
+                height: 32px;
+                line-height: 32px;
+                padding: 0 10px;
+                background: $tab-active;
+                border-color: $tab-active;
+                &:hover, &:active, &:focus {
+                    background: $tab-active-hover;
+                    border-color: $tab-active-hover;
+                }
+            }
+        }
     }
 }

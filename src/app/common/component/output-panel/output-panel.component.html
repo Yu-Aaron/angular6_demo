@@ -1,0 +1,49 @@
+    <nz-modal [(nzVisible)]="outPutModal['isVisible']"
+              nzTitle="导出记录"
+              (nzOnCancel)="handleCancel()"
+              [nzCancelText]=null
+              [nzOkText]="'下载文件'"
+              [nzOkDisabled]="!addPsw && (!isPswValidate || !psw || !psw1 || psw!==psw1)"
+              (nzOnOk)="download(psw)"
+              nzClassName="output_modal"
+              [nzWidth]=600>
+        <div class="output_content">
+            <p class="mb-20">请为即将导出的记录设置密码。解压文件时，使用者必须输入相同密码。</p>
+            <div nz-row class="mb-20">
+                <div nz-col [nzSpan]="10">
+                    <nz-input-group [nzSuffix]="pwdIcon" nz-col [nzSpan]="10">
+                        <input nz-input type="password" [(ngModel)]="psw" (ngModelChange)="validatePsw(psw)" placeholder="{{!addPsw ? '输入解压密码' : ''}}" [disabled]="addPsw" maxlength="25">
+                    </nz-input-group>
+                    <ng-template #pwdIcon>
+                        <i nz-icon nzType="lock" nzTheme="outline"></i>
+                    </ng-template>
+                    <span class="txt-error" *ngIf="!addPsw && !isPswValidate">
+                    <i nz-icon nzType="exclamation-circle" nzTheme="fill"></i>解压密码不符合规则
+                </span>
+                </div>
+                <div nz-col [nzSpan]="14">
+                    <div *ngIf="!addPsw" class="txt-warning">
+                        <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>必须是字母加数字和符号，8位或以上，25位以下
+                    </div>
+                </div>
+            </div>
+            <div nz-row class="mb-20">
+                <div nz-col [nzSpan]="10">
+                    <nz-input-group [nzSuffix]="pwd1Icon">
+                        <input nz-input type="password" [(ngModel)]="psw1" placeholder="{{!addPsw ? '请确认密码' : ''}}" [disabled]="addPsw" maxlength="25"/>
+                    </nz-input-group>
+                    <ng-template #pwd1Icon>
+                        <i nz-icon nzType="lock" nzTheme="outline"></i>
+                    </ng-template>
+                </div>
+                <div nz-col [nzSpan]="14">
+                    <div *ngIf="!addPsw" class="txt-warning">
+                        <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>请再输入一次刚才设置的密码
+                    </div>
+                </div>
+            </div>
+            <div nz-row>
+                <label nz-checkbox [(ngModel)]="addPsw" (change)="isAddPsw()">不用加密</label>
+            </div>
+        </div>
+    </nz-modal>

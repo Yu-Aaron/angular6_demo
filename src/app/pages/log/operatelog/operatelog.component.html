@@ -7,7 +7,8 @@
                       (searchFilterTable)="searchFilterTable($event)">
     </app-filter-table>
     <div class="mb-10">
-        <button nz-button nzType="primary" class="mr-10"><i nz-icon nzType="download" nzTheme="outline"></i>导出</button>
+        <button nz-button nzType="primary" class="mr-10" (click)="outPutModal['isVisible']=true"><i nz-icon nzType="download" nzTheme="outline"></i>导出</button>
+        <app-output-panel [outPutModal]="outPutModal"></app-output-panel>
     </div>
     <!-- 表格 -->
     <nz-table #tableDataTmp
@@ -22,11 +23,11 @@
               [nzShowTotal]="totalTemplate">
         <thead>
             <tr>
-                <th>用户</th>
-                <th>IP</th>
-                <th>操作时间</th>
-                <th>操作记录</th>
-                <th>操作结果</th>
+                <th nzShowSort nzSortKey="user">用户</th>
+                <th nzShowSort nzSortKey="user_ip">IP</th>
+                <th nzShowSort nzSortKey="timestamp">操作时间</th>
+                <th nzShowSort nzSortKey="operationName">操作记录</th>
+                <th nzShowSort nzSortKey="operationStatus">操作结果</th>
             </tr>
         </thead>
         <tbody>

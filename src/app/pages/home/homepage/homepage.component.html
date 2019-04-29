@@ -38,14 +38,14 @@
         </ng-template>
     </nz-card>
 </div>
-<div nz-row class="device-bottom" nzGutter="16">
+<div nz-row class="device-bottom" nzGutter="10">
     <!--设备流量Top5-->
     <div nz-col [nzLg]="{span: 24}" [nzXl]="{span: 13}">
         <nz-card nzTitle="设备流量Top5" [nzExtra]="flowTemp">
             <div echarts [options]="flowOption" class="echartsStyle"></div>
             <!-- 表格 -->
-            <nz-table #tableDataTmp
-                      [nzData]="tableData"
+            <nz-table #deviceTrafficTmp
+                      [nzData]="deviceTrafficList"
                       [nzTotal]="tableCount"
                       [nzShowQuickJumper]="true"
                       [nzFrontPagination]="false"
@@ -62,26 +62,24 @@
                         <th>平均输入速率/小时</th>
                         <th>平均输出速率/小时</th>
                         <th>流量占比</th>
-                        <!--<th>更新时间</th>-->
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of tableDataTmp.data" (click)="clickIncRow(inc)">
-                        <td>{{item.name}}</td>
-                        <td>{{item.ip}}</td>
-                        <td>{{item.Mac}}</td>
-                        <td>{{item.input}}</td>
-                        <td>{{item.output}}</td>
-                        <td>{{item.percent}}</td>
-                        <!--<td>{{item.update | date: 'yyyy-MM-dd HH:mm:ss'}}</td>-->
-                        <td><i nz-icon nzType="search" nzTheme="outline"></i>详情</td>
+                    <tr *ngFor="let devicedata of deviceTrafficTmp.data">
+                        <td>{{devicedata.deviceName}}</td>
+                        <td>{{devicedata.ipAddr}}</td>
+                        <td title="{{devicedata.macAddr}}">{{devicedata.macAddr}}</td>
+                        <td>{{devicedata.avgRecvSpeed}}</td>
+                        <td>{{devicedata.avgSendSpeed}}</td>
+                        <td>{{devicedata.percent * 100}}%</td>
+                        <td routerLink="./icdevicedetail/{{devicedata.deviceId }} /deviceInfo/{{devicedata.deviceInfo}}"><span>...</span></td>
                     </tr>
                 </tbody>
             </nz-table>
             <ng-template #totalTemplate let-total>
-                <span>共 {{tableCount}} 条，</span>
-                <span>每页展示 {{pageSize}} 条，</span>
+                <span>一共 {{tableCount}} 台设备，</span>
+                <span>每页展示 {{pageSize}} 台设备，</span>
                 <span>共 {{pageTotalNumber}} 页</span>
             </ng-template>
         </nz-card>
@@ -114,7 +112,7 @@
             <nz-tabset (nzSelectedIndexChange)="changeTab($event)">
                 <nz-tab [nzTitle]="label.name" *ngFor="let label of tabLabel">
                     <div *ngFor="let item of tabLabelContent" class="label-content">
-                        <span>{{item.text}}</span>
+                        <label><span class="type">{{item.type}}</span>{{item.text}}</label>
                         <span style="color: #46C0FF; font-size: 16px">{{item.count}}</span>
                     </div>
                 </nz-tab>

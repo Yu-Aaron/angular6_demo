@@ -1,4 +1,4 @@
-<div class="content-right" [ngStyle]="{'left': currentState === 'home' ? '60px' : '160px'}">
+<div class="content-right" [ngClass]="{'index-content': currentState === 'home'}">
   <div class="content-title" *ngIf="isShowTitle">
     {{currentSubState || '审计概况' | transformTitle}}
   </div>

@@ -28,22 +28,6 @@ export class HomeService {
         return this.http.get(this.baseUrl + '/policies/topology/' + this.topologyId + '/securityarea', {params: this.commonService.encodeURL(params)});
     }
 
-    // 设备流量列表
-    getDeviceTrafficList(startTime, endTime, params) {
-        const endTimeStr = this.commonService.formatDate(endTime);
-        const startTimeStr = this.commonService.formatDate(startTime);
-        params = params || {};
-
-        return this.http.get(this.baseUrl + '/auditlogs/traffic/devicetype/ic/devices/starttime/' + startTimeStr + '/endtime/' + endTimeStr, {params: this.commonService.encodeURL(params)});
-    }
-
-    // 设备流量列表总数
-    getDeviceTrafficCount(startTime, endTime, params) {
-        const endTimeStr = this.commonService.formatDate(endTime);
-        const startTimeStr = this.commonService.formatDate(startTime);
-        return this.http.get(this.baseUrl + '/auditlogs/traffic/devicetype/ic/devices/count/starttime/' + startTimeStr + '/endtime/' + endTimeStr, {params: this.commonService.encodeURL(params)});
-    }
-
     // 使用规则、威胁、自定义总数
     getBaseTotal() {
         return this.http.get(this.baseUrl + '/incidents/deployrule/count');

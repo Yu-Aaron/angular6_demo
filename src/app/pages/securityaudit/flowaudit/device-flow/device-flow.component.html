@@ -1,0 +1,62 @@
+<div class="device_flow">
+    <span class="filter_note">默认按照流量大小排序</span>
+    <!-- 过滤条件 -->
+    <app-filter-table [timeValueData]="filterConditionData.timeValueData"
+                      [controlArray]="filterConditionData.controlArray"
+                      [isFuzzySearch]="true"
+                      (searchFilterTable)="searchFilterTable($event)">
+    </app-filter-table>
+    <!-- 设备类型筛选 -->
+    <div class="tab-label" *ngFor="let item of deviceType; let i =index" [ngClass]="{'active': item.active}"
+         (click)="checkDeviceType(i)">
+        {{item.label}}
+    </div>
+    <div echarts [options]="flowOption" class="echartsStyle"></div>
+    <!-- 表格数据 -->
+    <nz-table #deviceTrafficTmp
+              [nzData]="deviceTrafficList"
+              [nzTotal]="tableCount"
+              [nzShowQuickJumper]="true"
+              [nzFrontPagination]="false"
+              [(nzPageIndex)]="pageIndex"
+              [(nzPageSize)]="pageSize"
+              (nzPageIndexChange)="pageIndexChange()"
+              [nzLoading]="loading"
+              [nzShowTotal]="totalTemplate">
+        <thead>
+            <tr>
+            <th></th>
+            <th>设备名称</th>
+            <th>IP地址</th>
+            <th>MAC地址</th>
+            <th>平均输入速率/小时</th>
+            <th>平均输出速率/小时</th>
+            <th>平均流量百分比</th>
+            <th>更新时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let devicedata of deviceTrafficTmp.data">
+                <td>
+                    <span class="txt-error" *ngIf="devicedata.totalBytes === 0">无流量</span>
+                </td>
+                <td>{{devicedata.deviceName}}</td>
+                <td>{{devicedata.ipAddr}}</td>
+                <td title="{{devicedata.macAddr}}">{{devicedata.macAddr}}</td>
+                <td>{{devicedata.avgRecvSpeed}}</td>
+                <td>{{devicedata.avgSendSpeed}}</td>
+                <td>{{devicedata.percent * 100}}%</td>
+                <td title="{{devicedata.timestamp | date : 'yyyy-MM-dd HH:mm:ss'}}">{{devicedata.timestamp | date :
+                    'yyyy-MM-dd HH:mm:ss'}}
+                </td>
+                <td routerLink="./icdevicedetail/{{devicedata.deviceId }}/deviceInfo/{{devicedata.deviceInfo}}"><i nz-icon nzType="search" nzTheme="outline"></i>详情</td>
+            </tr>
+        </tbody>
+    </nz-table>
+    <ng-template #totalTemplate let-total>
+        <span>一共 {{tableCount}} 台设备，</span>
+        <span>每页展示 {{pageSize}} 台设备，</span>
+        <span>共 {{pageTotalNumber}} 页</span>
+    </ng-template>
+</div>

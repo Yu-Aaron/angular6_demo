@@ -21,19 +21,83 @@
   .ant-tabs .ant-tabs-top-content {
     position: relative;
   }
+  nz-card {
+    background: $bg-card-darker;
+    .ant-card-head {
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    &.ant-card-bordered {
+      border: none;
+    }
+  }
 }
 
-.flowaudit_content{
+//设备流量
+.device_flow {
   .echartsStyle {
     height: 256px;
     background: $table-bg;
     margin: 10px 0;
   }
-  .filter-note {
+  .filter_note {
     position: absolute;
     right: 10px;
     top: 16px;
     width: 145px;
     color: #FFCC33;
   }
+}
+
+.device_flow_detail {
+  .return_back {
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    padding: 10px 0 15px;
+    font-size: 16px;
+    i {
+      width: 19px;
+      height: 19px;
+      line-height: 22px;
+      margin-right: 5px;
+      border-radius: 50%;
+      background: #26BAFB;
+      color: #000;
+    }
+  }
+  .detail_title {
+    padding: 15px;
+    background: $bg-card;
+    margin-bottom: 10px;
+  }
+  .detail_content {
+    nz-card {
+      height: 356px;
+      .echartsStyle{
+        height: 256px;
+      }
+      .noData {
+        line-height: 256px;
+      }
+      .protocol_total {
+        position: absolute;
+        left: 45px;
+        top: 58px;
+        color: #fff;
+      }
+    }
+  }
+}
+
+//工控协议流量
+.industrial_flow {
+  color: #fff;
+}
+
+//安全协议流量
+.security_flow {
+  color: #fff;
 }

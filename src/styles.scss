@@ -4,13 +4,14 @@
 html, body {
   min-width: 1024px;
   color: #fff;
+  font-family: 'Microsoft YaHei';
 }
 
 /*** 更改第三方库默认样式 ***/
 .ant-layout {
   width: 100%;
   height: 100%;
-  background: $bg-base;
+  background: #000000;
   position: relative;
   overflow: hidden;
   .menu_ant-layout {
@@ -346,6 +347,12 @@ html, body {
     background: #2B639F;
   }
 }
+.noData{
+  text-align: center;
+  font-size: 15px;
+  color: #999;
+  font-weight: bold;
+}
 .text-right {
   text-align: right;
 }
@@ -459,6 +466,20 @@ html, body {
     label {
       color: #fff;
       font-size: 16px;
+    }
+  }
+}
+
+.output_modal {
+  .ant-modal-content .ant-modal-footer{
+    :first-child {
+      background: $btn-search;
+      border-color: $btn-search;
+      color: #fff;
+      &:disabled, &:disabled > span {
+        background: #999;
+        border-color: #999;
+      }
     }
   }
 }

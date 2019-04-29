@@ -18,7 +18,7 @@ registerLocaleData(zh);
   declarations: [
     AppComponent,
     LoginComponent,
-    LoginConfigComponent
+    LoginConfigComponent,
   ],
   imports: [
     BrowserModule,

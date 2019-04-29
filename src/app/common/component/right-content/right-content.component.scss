@@ -1,10 +1,22 @@
 .content-right {
-    padding: 10px;
     height: calc(100vh - 70px);
     overflow-y: auto;
+    padding: 10px;
+    left: 160px;
 }
 
 .content-title {
     padding: 10px 0 15px;
     font-size: 16px;
+}
+
+.index-content {
+    padding: 0 10px 10px 5px;
+    border-left: 10px solid #021C33;
+    border-top: 3px solid #021c33;
+    left: 60px;
+    > div {
+        padding: 15px 0 10px 14px;
+        color: #46c0ff;
+    }
 }

@@ -1,0 +1,29 @@
+@import '../../../../veriable.scss';
+
+.output_content {
+  font-size: 14px;
+  padding: 20px 20px 0;
+  .txt-warning{
+    font-size: 12px;
+    margin-left: 20px;
+    line-height: 30px;
+    i {
+      margin-right: 5px;
+    }
+  }
+  .txt-error {
+    font-size: 12px;
+    i {
+      margin-right: 5px;
+    }
+  }
+  .ant-checkbox-wrapper,
+  .anticon-lock {
+    color: #fff!important;
+  }
+}
+
+
+
+
+

@@ -1,0 +1,36 @@
+<div class="device_flow_detail">
+    <div class="return_back" [routerLink]="['/pages/securityaudit/flowaudit']">
+        <i nz-icon nzType="arrow-left" nzTheme="outline"></i>流量详情
+    </div>
+    <div class="detail_title" nz-row>
+        <div nz-col [nzSpan]="8">
+            <label>设备名称：<span>{{device.deviceName || '未知设备'}}</span></label>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <label>IP：<span>{{device.ipAddr || '未知设备'}}</span></label>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <label>MAC：<span>{{device.macAddr || '未知'}}</span></label>
+        </div>
+    </div>
+    <div class="detail_content" nz-row nzGutter="10">
+        <div nz-col [nzLg]="{span: 24}" [nzXl]="{span: 16}">
+            <nz-card nzTitle="1H实时流量趋势图">
+                <div *ngIf="protocols.length > 0" echarts [options]="protocolDeviceLineOptions" class="echartsStyle"></div>
+                <div *ngIf="protocols.length <= 0" class="noData">当前时间段内没有实时流量数据</div>
+            </nz-card>
+        </div>
+        <div nz-col [nzLg]="{span: 24}" [nzXl]="{span: 8}">
+            <nz-card nzTitle="协议分布图" [nzExtra]="distributionTemp">
+                <div *ngIf="trafficsStaticsData.length > 0" echarts [options]="statisticsPieOption" class="echartsStyle"></div>
+                <div *ngIf="trafficsStaticsData.length <= 0" class="noData">当前时间段没有汇总流量数据</div>
+            </nz-card>
+            <ng-template #distributionTemp>
+                <span class="protocol_total">协议流量总数: {{totalTraffics}}&nbsp;&nbsp;&nbsp; 协议总数: {{totalRuleNum}}</span>
+                <nz-select [(ngModel)]="protocolTime" (ngModelChange)="getProtocolTrafficStatistics()" name="time_range">
+                    <nz-option *ngFor="let item of protocolTimeRange" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+                </nz-select>
+            </ng-template>
+        </div>
+    </div>
+</div>

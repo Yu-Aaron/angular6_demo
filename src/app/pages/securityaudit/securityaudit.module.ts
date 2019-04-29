@@ -13,7 +13,10 @@ import {ReportdetailComponent} from './reportaudit/reportdetail/reportdetail.com
 import {IncidentAnalysisComponent} from './incidentaudit/incident-analysis/incident-analysis.component';
 import {IncidentDetailComponent} from './incidentaudit/incident-detail/incident-detail.component';
 import {DetailPanelComponent} from './logaudit/detail-panel/detail-panel.component';
-import {FlowDetailComponent} from './flowaudit/flow-detail/flow-detail.component';
+import {DeviceFlowDetailComponent} from './flowaudit/device-flow/device-flow-detail.component';
+import {DeviceFlowComponent } from './flowaudit/device-flow/device-flow.component';
+import { IndustrialFlowComponent } from './flowaudit/industrial-flow/industrial-flow.component';
+import { SecurityFlowComponent } from './flowaudit/security-flow/security-flow.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +29,10 @@ import {FlowDetailComponent} from './flowaudit/flow-detail/flow-detail.component
         IncidentAnalysisComponent,
         IncidentDetailComponent,
         DetailPanelComponent,
-        FlowDetailComponent,
+        DeviceFlowDetailComponent,
+        DeviceFlowComponent,
+        IndustrialFlowComponent,
+        SecurityFlowComponent,
     ],
     imports: [
         SharedModule,

@@ -7,7 +7,6 @@
   .ant-card-head-title {
     padding: 15px 0 8px;
     color: #46C0FF;
-    font-weight: bold;
   }
   .ant-card-body {
     padding: 5px 10px;
@@ -25,7 +24,7 @@
     top: -35px;
     color: #CACACA;
     .ant-tabs-bar {
-      border-bottom: 1px solid #DEDEDE;
+      border-bottom: 1px solid #4E5B68;
     }
     .ant-tabs-nav {
       float: right;
@@ -95,7 +94,7 @@
       .line {
         width: 300px;
         height: 8px;
-        background: #EFF4FA;
+        background: #000000;
         border-radius: 5px;
         margin-right: 10px;
         display: -webkit-inline-box;
@@ -104,7 +103,7 @@
       .progress {
         @extend .line;
         width: 100px;
-        background: #27BDFF;
+        background: #26bbfa;
         position: relative;
         top: -8px;
       }
@@ -114,7 +113,15 @@
       color: #fff;
       justify-content: space-between;
       margin: 10px;
+      .type {
+        color: #ffa65d;
+      }
     }
+  }
+
+  //今日事件监测
+  .tab-title {
+    color: #46C0FF;
   }
 }
 

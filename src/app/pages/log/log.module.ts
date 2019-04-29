@@ -6,11 +6,13 @@ import {AuthGuard} from 'src/app/shared/AuthGuard';
 import {RunninglogComponent} from './runninglog/runninglog.component';
 import {OperatelogComponent} from './operatelog/operatelog.component';
 import {FilterTableComponent} from '../../common/component/filter-table/filter-table.component';
+import {OutputPanelComponent} from '../../common/component/output-panel/output-panel.component';
 
 @NgModule({
     declarations: [
         RunninglogComponent,
-        OperatelogComponent
+        OperatelogComponent,
+        OutputPanelComponent
     ],
     imports: [
         SharedModule,
@@ -18,7 +20,7 @@ import {FilterTableComponent} from '../../common/component/filter-table/filter-t
     ],
     providers: [
         AuthGuard,
-        FilterTableComponent
+        FilterTableComponent,
     ]
 })
 export class LogModule {
