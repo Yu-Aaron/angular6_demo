@@ -8,9 +8,10 @@ import { NetworkdeviceComponent } from './networkdevice/networkdevice.component'
 import { AuthGuard } from 'src/app/shared/AuthGuard';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DevicedetailComponent } from './networkdevice/devicedetail/devicedetail.component';
+import { NewdeviceComponent } from './factorydevice/newdevice/newdevice.component';
 
 @NgModule({
-  declarations: [TopologyComponent, FactorydeviceComponent, NetworkdeviceComponent, DevicedetailComponent],
+  declarations: [TopologyComponent, FactorydeviceComponent, NetworkdeviceComponent, DevicedetailComponent, NewdeviceComponent],
   imports: [
     CommonModule,
     SharedModule,

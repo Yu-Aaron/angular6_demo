@@ -7,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FactorydeviceComponent implements OnInit {
 
+  networkDevice = {
+    data: [],
+    total: 0,
+    loading: false,
+    pageIndex: 1,
+    pageSize: 10,
+    pages: 1
+  };
+
   constructor() { }
 
   ngOnInit() {

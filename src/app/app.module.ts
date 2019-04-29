@@ -12,6 +12,7 @@ import { registerLocaleData } from '@angular/common';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginConfigComponent } from './pages/login/login-config/login-config.component';
+import { ValidatorDirective } from './common/directive/validator.directive';
 
 registerLocaleData(zh);
 @NgModule({
@@ -19,6 +20,7 @@ registerLocaleData(zh);
     AppComponent,
     LoginComponent,
     LoginConfigComponent,
+    ValidatorDirective
   ],
   imports: [
     BrowserModule,

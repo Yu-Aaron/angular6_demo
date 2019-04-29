@@ -1,0 +1,49 @@
+:host ::ng-deep {
+    .factorydevice_newdevice {
+        .return_back {
+            display: inline-block;
+            cursor: pointer;
+            outline: none;
+            :first-child {
+                width: 26px;
+                height: 26px;
+                display: inline-block;
+                border-radius: 13px;
+                background-color: #25B4F1;
+                text-align: center;
+                vertical-align: middle;
+                margin-right: 10px;
+                line-height: 26px;
+            }
+            :last-child {
+                font-size: 16px;
+                color: #F2F2F2;
+            }
+        }
+        .newdevice_content {
+            margin: 20px 0 0 20px;
+            >p {
+                color: #fff;
+            }
+            form {
+                width: 600px;
+                margin-top: 40px;
+                .ant-form-item-label {
+                    text-align: left;
+                    label {
+                        font-size: 16px;
+                        color: #25B4F1;
+                    }
+                }
+                .ant-form-item-control-wrapper {
+                    p {
+                        color: #fff;
+                    }
+                }
+            }
+            .select-base, .ant-select-selection, .ant-select-dropdown, .ant-input, .ant-select-dropdown-menu-item, .ant-select-dropdown-menu-item-selected, .ant-select-dropdown-menu-item:hover {
+                border-radius: 4px !important;
+            }
+        }
+    }
+}

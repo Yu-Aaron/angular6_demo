@@ -42,4 +42,29 @@
       <button nz-button nzType="primary" class="start_backup">开始升级</button>
     </div>
   </div>
+  <div class="backup_table">
+    <nz-table #businessTable
+      [nzData]="listOfData"
+      [nzShowQuickJumper]="true"
+      [nzLoading]="loading">
+      <thead>
+        <tr>
+          <th>版本名称</th>
+          <th>升级时间</th>
+          <th>操作用户</th>
+          <th>备注</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of businessTable.data">
+          <td>{{item.portName}}</td>
+          <td>{{item.linkState}}</td>
+          <td>{{item.txTotalTmp}}</td>
+          <td>{{item.txDroppedTmp}}</td>
+          <td>{{item.rxTotalTmp}}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
 </div>

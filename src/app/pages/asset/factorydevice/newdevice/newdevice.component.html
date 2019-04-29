@@ -1,0 +1,55 @@
+<div class="factorydevice_newdevice">
+  <div class="return_back" [routerLink]="['/pages/asset/factorydevice']">
+    <span>
+      <i nz-icon nzType="arrow-left" nzTheme="outline"></i>
+    </span>
+    <span>新增工控设备</span>
+  </div>
+  <div class="newdevice_content">
+    <p>填写设备信息</p>
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired>设备名称</nz-form-label>
+          <nz-form-control [nzSpan]="20">
+            <input nz-input type="text" formControlName="name">
+          </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired>设备类型</nz-form-label>
+        <nz-form-control [nzSpan]="20">
+            <nz-select formControlName="modeltype" (ngModelChange)="modelTypeChange($event)">
+                <nz-option [nzValue]="modeltype.value" [nzLabel]="modeltype.label" *ngFor="let modeltype of formsModelType"></nz-option>
+            </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired>设备型号</nz-form-label>
+        <nz-form-control [nzSpan]="20" class="model_name">
+            <nz-select formControlName="modelname" (ngModelChange)="modelNameChange($event)">
+                <nz-option [nzValue]="modelname.value" [nzLabel]="modelname.label" *ngFor="let modelname of formsModelName"></nz-option>
+            </nz-select>
+            <input nz-input class ="enter_device_modelName" type="text" *ngIf="enterDeviceModelName" placeholder="请输入设备型号名称" [(ngModel)]="deviceData.enterModelName" formControlName="modelnameInput" maxlength="255">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4">&nbsp;&nbsp;设备厂商</nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <p *ngIf="!enterDeviceModelName">未知</p>
+          <input nz-input type="text" *ngIf="enterDeviceModelName" [(ngModel)]="deviceData.enterModelMake" formControlName="modelmakeInput" maxlength="255">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4">&nbsp;&nbsp;标签</nz-form-label>
+          <nz-form-control [nzSpan]="20">  
+            <input nz-input type="text" formControlName="tag">
+          </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4">&nbsp;&nbsp;备注</nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <textarea nz-input rows="2" formControlName="commet"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</div>

@@ -23,7 +23,7 @@
       .ant-tabs-content {
         color: #fff;
         background: $table-bg;
-        padding: 10px 25px;
+        // padding: 10px 25px;
         font-size: 16px;
         .table-title {
           height: 45px;
@@ -42,6 +42,11 @@
           position: absolute;
           right: 0px;
           top: -45px;
+        }
+        >div{
+          &:first-child {
+            padding: 10px 25px;
+          }
         }
       }
     }

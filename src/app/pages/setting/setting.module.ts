@@ -10,6 +10,7 @@ import {BackupComponent} from './backup/backup.component';
 import {LoginComponent} from './login/login.component';
 import {BasicPipe} from '../../common/pipe/filter.pipe';
 import {ProtocolComponent} from './protocol/protocol.component';
+import { AddAgregateComponent } from './interface/add-agregate/add-agregate.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import {ProtocolComponent} from './protocol/protocol.component';
         BackupComponent,
         LoginComponent,
         ProtocolComponent,
-        BasicPipe
+        BasicPipe,
+        AddAgregateComponent
     ],
     imports: [
         SharedModule,
